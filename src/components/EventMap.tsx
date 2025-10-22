@@ -14,6 +14,7 @@ import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Key } from 'lucide-react';
 import { getWikipediaImage } from '@/utils/wikipediaImage';
+import { deduplicateEvents } from '@/utils/deduplicateEvents';
 
 const WORLD_BOUNDS = {
   north: 85,
@@ -48,12 +49,14 @@ export const EventMap = () => {
     fetch('/events.json')
       .then(res => res.json())
       .then(data => {
-        setEvents(data);
+        // Deduplicate events
+        const uniqueEvents = deduplicateEvents(data);
+        setEvents(uniqueEvents);
         setLoading(false);
-        if (data.length > 0) {
+        if (uniqueEvents.length > 0) {
           toast({
             title: "Events loaded",
-            description: `${data.length} historical events ready to explore`,
+            description: `${uniqueEvents.length} unique historical events ready to explore`,
           });
         }
       })
