@@ -135,34 +135,24 @@ export const SearchPanel = ({
       <div className="mb-2 md:mb-4">
         <label className="text-[10px] md:text-xs text-muted-foreground mb-1 md:mb-2 block font-medium">Categories</label>
         <div className="flex flex-wrap gap-1 md:gap-2">
-          {Object.entries(EVENT_COLORS).map(([type, { fill, label }]) => {
-            const eventType = type as EventType;
-            const isSelected = selectedTypes.has(eventType);
-            
-            return (
-              <button
-                key={type}
-                type="button"
-                onClick={() => onTypeToggle(eventType)}
-                role="checkbox"
-                aria-checked={isSelected}
-                aria-label={`Filter by ${label}`}
-                className={`inline-flex items-center rounded-full border px-2 md:px-3 py-1 text-[10px] md:text-xs
-                           font-semibold cursor-pointer transition-bounce border-glow
-                           focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 ${
-                  isSelected
-                    ? 'bg-primary/20 text-primary border-primary shadow-glow hover:shadow-glow-accent'
-                    : 'bg-secondary/30 text-secondary-foreground border-border/50 hover:bg-secondary/50 hover:border-primary/30'
-                }`}
-                style={{
-                  borderLeftColor: fill,
-                  borderLeftWidth: '3px',
-                }}
-              >
-                {label}
-              </button>
-            );
-          })}
+          {Object.entries(EVENT_COLORS).map(([type, { fill, label }]) => (
+            <Badge
+              key={type}
+              onClick={() => onTypeToggle(type as EventType)}
+              className={`cursor-pointer transition-bounce px-2 md:px-3 py-1 text-[10px] md:text-xs
+                         border-glow ${
+                selectedTypes.has(type as EventType)
+                  ? 'bg-primary/20 text-primary border-primary shadow-glow hover:shadow-glow-accent'
+                  : 'bg-secondary/30 text-secondary-foreground border-border/50 hover:bg-secondary/50 hover:border-primary/30'
+              }`}
+              style={{
+                borderLeftColor: fill,
+                borderLeftWidth: '3px',
+              }}
+            >
+              {label}
+            </Badge>
+          ))}
         </div>
       </div>
 

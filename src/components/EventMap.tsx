@@ -30,9 +30,6 @@ const WORLD_BOUNDS = {
   east: 170
 };
 
-// Event types that should always display polygons (impact zones)
-const POLYGON_EVENT_TYPES: Set<EventType> = new Set(['war', 'earthquake', 'tsunami', 'epidemic', 'fire', 'disaster']);
-
 export const EventMap = () => {
   const mapContainer = useRef<HTMLDivElement>(null);
   const map = useRef<mapboxgl.Map | null>(null);
@@ -298,81 +295,13 @@ export const EventMap = () => {
         if (map.current?.getLayer(polygonId)) {
           map.current.removeLayer(polygonId);
         }
-        if (map.current?.getLayer(`${polygonId}-outline`)) {
-          map.current.removeLayer(`${polygonId}-outline`);
-        }
         if (map.current?.getSource(polygonId)) {
           map.current.removeSource(polygonId);
         }
       });
     }
     polygonsRef.current = [];
-  }, []);
-
-  // Add permanent polygon for events that should always show impact zones
-  const addPermanentPolygon = useCallback((event: HistoricalEvent, index: number) => {
-    if (!map.current || !map.current.isStyleLoaded()) return;
-    if (!event.radiusKm) return;
-    
-    const color = getEventColor(event.type);
-    const polygonPath = circleToPolygon(event.pos, event.radiusKm);
-    const polygonId = `permanent-polygon-${event.id}-${index}`;
-    
-    // Skip if already exists
-    if (map.current.getSource(polygonId)) return;
-    
-    // Convert polygon path to GeoJSON format
-    const coordinates = polygonPath.map(point => [point.lng, point.lat]);
-    coordinates.push(coordinates[0]); // Close the polygon
-
-    map.current.addSource(polygonId, {
-      type: 'geojson',
-      data: {
-        type: 'Feature',
-        geometry: {
-          type: 'Polygon',
-          coordinates: [coordinates]
-        },
-        properties: {}
-      }
-    });
-
-    // Add fill layer with initial opacity 0 for fade-in
-    map.current.addLayer({
-      id: polygonId,
-      type: 'fill',
-      source: polygonId,
-      paint: {
-        'fill-color': color.fill,
-        'fill-opacity': 0
-      }
-    });
-
-    // Add outline layer with initial opacity 0
-    map.current.addLayer({
-      id: `${polygonId}-outline`,
-      type: 'line',
-      source: polygonId,
-      layout: {
-        'line-cap': 'round',
-        'line-join': 'round'
-      },
-      paint: {
-        'line-color': color.stroke,
-        'line-width': 2,
-        'line-opacity': 0
-      }
-    });
-
-    polygonsRef.current.push(polygonId);
-    
-    // Animate fade-in
-    setTimeout(() => {
-      if (map.current?.getLayer(polygonId)) {
-        map.current.setPaintProperty(polygonId, 'fill-opacity', 0.25);
-        map.current.setPaintProperty(`${polygonId}-outline`, 'line-opacity', 0.8);
-      }
-    }, index * 15);
+    activePolygonRef.current = null;
   }, []);
 
   const showPolygon = useCallback((event: HistoricalEvent, index: number) => {
@@ -455,11 +384,6 @@ export const EventMap = () => {
 
     limitedEvents.forEach((event, index) => {
       const color = getEventColor(event.type);
-      
-      // Automatically add polygon for specific event types
-      if (POLYGON_EVENT_TYPES.has(event.type) && event.radiusKm) {
-        addPermanentPolygon(event, index);
-      }
       
       // Create custom marker element
       const el = document.createElement('div');
@@ -613,7 +537,7 @@ export const EventMap = () => {
 
       markersRef.current.push(marker);
     });
-  }, [clearMarkers, toast, showPolygon, addPermanentPolygon]);
+  }, [clearMarkers, toast, showPolygon]);
 
   const handleEventSelect = useCallback((event: HistoricalEvent) => {
     if (!map.current) return;

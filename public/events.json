@@ -3030,10 +3030,8 @@
                 "lng": 61.41
             },
             "desc": "A superbolide exploded over Chelyabinsk Oblast.",
-            "desc_long": "On 15 February 2013 a superbolide exploded over Chelyabinsk Oblast, injuring around 1,500 people and damaging thousands of buildings.",
             "wiki": "https://en.wikipedia.org/wiki/Chelyabinsk_meteor",
-            "radiusKm": 50,
-            "year": "2013"
+            "radiusKm": 50
         },
         {
             "id": "tunguska_event_1908_area",
