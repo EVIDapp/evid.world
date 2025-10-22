@@ -59,7 +59,7 @@ export const SearchPanel = ({
   }, [searchQuery, events]);
 
   return (
-    <div className="absolute top-3 left-3 md:top-4 md:left-4 w-[calc(100vw-60px)] md:w-[360px] z-20 
+    <div className="absolute bottom-3 left-3 md:top-4 md:left-4 md:bottom-auto w-[calc(100vw-60px)] md:w-[360px] z-20 
                     gradient-card backdrop-blur-strong border border-border/50 rounded-xl md:rounded-2xl 
                     shadow-elevated animate-slide-in">
       {/* Brand Header with Toggle */}
@@ -90,7 +90,7 @@ export const SearchPanel = ({
 
       {/* Collapsible Content */}
       {isExpanded && (
-        <div className="px-2.5 pb-2.5 md:px-4 md:pb-4 animate-fade-in max-h-[calc(100vh-160px)] md:max-h-[calc(100vh-180px)] overflow-y-auto">
+        <div className="px-2.5 pb-2.5 md:px-4 md:pb-4 animate-fade-in max-h-[40vh] md:max-h-[calc(100vh-180px)] overflow-y-auto">
 
       {/* Search */}
       <div className="mb-2 md:mb-4 relative">
