@@ -87,7 +87,7 @@ export const EventMap = () => {
         container: mapContainer.current,
         style: mapStyle,
         center: [0, 20],
-        zoom: 1.2,
+        zoom: 2.2,
         projection: projection,
         maxBounds: [
           [WORLD_BOUNDS.west, WORLD_BOUNDS.south],

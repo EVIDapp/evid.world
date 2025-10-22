@@ -4,7 +4,6 @@ export const deduplicateEvents = (events: HistoricalEvent[]): HistoricalEvent[] 
   // IDs to remove (duplicates identified)
   const idsToRemove = new Set([
     // Remove _point versions (keep _area or base versions)
-    'chelyabinsk_meteor_2013_point',
     'tunguska_event_1908_point',
     'san_francisco_earthquake_1906_point',
     'alaska_earthquake_1964_point',
