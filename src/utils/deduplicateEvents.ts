@@ -1,16 +1,15 @@
 import { HistoricalEvent } from '@/types/event';
 
 export const deduplicateEvents = (events: HistoricalEvent[]): HistoricalEvent[] => {
-  // IDs to remove (duplicates identified)
+  // IDs to remove (duplicates identified) - explicitly remove only _point when _area exists
   const idsToRemove = new Set([
-    // Remove _point versions when _area exists (keep _area or base versions)
     'tunguska_event_1908_point',
-    'san_francisco_earthquake_1906_point',
+    'san_francisco_earthquake_1906_point', 
     'alaska_earthquake_1964_point',
     'beslan_school_siege_2004_point',
     'austerlitz_battle_1805_point',
     'gaugamela_battle_331bc_point',
-    // Note: chelyabinsk_meteor_2013_point is kept as primary since no better version exists
+    'chelyabinsk_meteor_2013_point', // Remove point, keep area version
   ]);
 
   // Track seen event titles (normalized)
@@ -29,7 +28,6 @@ export const deduplicateEvents = (events: HistoricalEvent[]): HistoricalEvent[] 
   events.forEach((event) => {
     // Skip if in removal list
     if (idsToRemove.has(event.id)) {
-      console.log('Removing duplicate:', event.id, event.title);
       return;
     }
 
@@ -51,10 +49,7 @@ export const deduplicateEvents = (events: HistoricalEvent[]): HistoricalEvent[] 
         (existingEvent.desc_long?.length || 0);
       
       if (currentScore > existingScore) {
-        console.log('Replacing duplicate:', existingEvent.id, 'with', event.id);
         uniqueEvents[existingIndex] = event;
-      } else {
-        console.log('Skipping duplicate:', event.id, '(keeping', existingEvent.id, ')');
       }
     } else {
       seenTitles.set(normalizedTitle, uniqueEvents.length);
@@ -62,7 +57,7 @@ export const deduplicateEvents = (events: HistoricalEvent[]): HistoricalEvent[] 
     }
   });
 
-  console.log(`Deduplication: ${events.length} -> ${uniqueEvents.length} events (removed ${events.length - uniqueEvents.length})`);
+  console.log(`Deduplication: ${events.length} -> ${uniqueEvents.length} events`);
   
   return uniqueEvents;
 };

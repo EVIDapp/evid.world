@@ -160,14 +160,13 @@ export const EventMap = () => {
         ]
       });
 
-      // Add navigation controls without compass
-      // Add navigation controls to bottom right to align with other buttons
+      // Add navigation controls (zoom buttons)
       map.current.addControl(
         new mapboxgl.NavigationControl({
           visualizePitch: true,
           showCompass: false
         }),
-        'bottom-right'
+        'top-right'
       );
 
       // Track zoom changes for clustering
