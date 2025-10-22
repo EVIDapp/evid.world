@@ -1,7 +1,7 @@
 import { HistoricalEvent } from '@/types/event';
 
 export const deduplicateEvents = (events: HistoricalEvent[]): HistoricalEvent[] => {
-  // IDs to remove (duplicates identified)
+  // IDs to remove (all duplicates - keep only ONE best version of each event)
   const idsToRemove = new Set([
     // Remove _point versions when _area exists
     'tunguska_event_1908_point',
@@ -10,10 +10,37 @@ export const deduplicateEvents = (events: HistoricalEvent[]): HistoricalEvent[] 
     'beslan_school_siege_2004_point',
     'austerlitz_battle_1805_point',
     'gaugamela_battle_331bc_point',
-    'chelyabinsk_meteor_2013_point', // Remove point, keep area version (radiusKm: 50)
-    // Remove duplicate Titanics
+    'chelyabinsk_meteor_2013_point',
+    
+    // Titanic duplicates - keep only titanic_sinking_1912
     'titanic_shipwreck_1912',
     'titanic_shipwreck_1912_chatgpt_v2',
+    
+    // Korean War duplicates - keep korean_war_1950_1953
+    'korean_war_1950_1953_new',
+    
+    // Dead Sea Scrolls duplicates - keep dead_sea_scrolls_1947
+    'dead_sea_scrolls_qumran_chatgpt',
+    
+    // Chernobyl duplicates - keep newest chernobyl_disaster_1986 with radiusKm 30
+    'chernobyl_disaster_1986_new',
+    'chernobyl_reactor_accident_1986',
+    'chernobyl_disaster_1986_chatgpt_v2',
+    
+    // Fukushima duplicates - keep newest fukushima_disaster_2011 with radiusKm 20
+    'fukushima_nuclear_disaster_2011_v2',
+    
+    // Iranian Embassy Siege duplicates
+    'iranian_embassy_siege_1980',
+    
+    // Algerian War duplicates
+    'algerian_war_1954_1962_new',
+    
+    // Iran-Iraq War duplicates  
+    'iran_iraq_war_1980_1988_new',
+    
+    // Terracotta Army duplicates - keep terracotta_army_1974
+    'terracotta_army_discovery',
   ]);
 
   // Track seen event titles (normalized)

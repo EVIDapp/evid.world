@@ -1375,16 +1375,6 @@
       "wiki": "https://en.wikipedia.org/wiki/Bhopal_disaster"
     },
     {
-      "id": "fukushima_disaster_2011",
-      "type": "man-made disaster",
-      "title": "Fukushima Daiichi nuclear disaster (2011)",
-      "country": "JP",
-      "pos": { "lat": 37.421, "lng": 141.032 },
-      "desc": "Nuclear accident at Fukushima Daiichi after earthquake and tsunami.",
-      "desc_long": "Following the 2011 Tōhoku earthquake and tsunami, the Fukushima Daiichi nuclear plant suffered core meltdowns, hydrogen explosions, and radioactive releases.",
-      "wiki": "https://en.wikipedia.org/wiki/Fukushima_Daiichi_nuclear_disaster"
-    },
-    {
       "id": "three_mile_island_1979",
       "type": "man-made disaster",
       "title": "Three Mile Island accident (1979)",
@@ -1965,20 +1955,6 @@
             "desc_long": "On 26 December 2004 a Mw 9.1–9.3 megathrust earthquake off Sumatra triggered massive tsunamis that struck the coasts of the Indian Ocean, causing more than 220,000 fatalities across 14 countries.",
             "wiki": "https://en.wikipedia.org/wiki/2004_Indian_Ocean_earthquake_and_tsunami",
             "radiusKm": 500
-        },
-        {
-            "id": "chernobyl_disaster_1986",
-            "type": "disaster",
-            "title": "Chernobyl disaster (1986)",
-            "country": "UA",
-            "pos": {
-                "lat": 51.389,
-                "lng": 30.099
-            },
-            "desc": "Nuclear accident at the Chernobyl Nuclear Power Plant.",
-            "desc_long": "On 26 April 1986 reactor No. 4 at the Chernobyl Nuclear Power Plant exploded during a safety test, releasing large quantities of radioactive contamination into the atmosphere.",
-            "wiki": "https://en.wikipedia.org/wiki/Chernobyl_disaster",
-            "radiusKm": 60
         },
         {
             "id": "great_fire_london_1666",
@@ -2727,45 +2703,6 @@
                         [
                             140.5,
                             36.5
-                        ]
-                    ]
-                ]
-            }
-        },
-        {
-            "id": "fukushima_disaster_2011",
-            "type": "disaster",
-            "title": "Fukushima nuclear disaster",
-            "country": "JP",
-            "pos": {
-                "lat": 37.421,
-                "lng": 141.032
-            },
-            "desc": "Nuclear accident at Fukushima Daiichi following the Tōhoku earthquake and tsunami.",
-            "wiki": "https://en.wikipedia.org/wiki/Fukushima_Daiichi_nuclear_disaster",
-            "geometry": {
-                "type": "Polygon",
-                "coordinates": [
-                    [
-                        [
-                            140.5,
-                            36.9
-                        ],
-                        [
-                            141.2,
-                            36.9
-                        ],
-                        [
-                            141.2,
-                            37.7
-                        ],
-                        [
-                            140.5,
-                            37.7
-                        ],
-                        [
-                            140.5,
-                            36.9
                         ]
                     ]
                 ]
