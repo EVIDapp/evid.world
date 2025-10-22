@@ -418,7 +418,7 @@ export const EventMap = () => {
       el.style.height = '40px';
       el.style.cursor = 'pointer';
       el.style.opacity = '0';
-      el.style.transition = 'opacity 0.4s ease-out';
+      el.style.transition = 'opacity 0.2s ease-out';
       el.setAttribute('role', 'button');
       el.setAttribute('aria-label', `${event.title} - ${event.type} event`);
       el.setAttribute('tabindex', '0');
@@ -430,10 +430,10 @@ export const EventMap = () => {
         </svg>
       `;
       
-      // Trigger fade-in animation after a slight delay based on index
+      // Fast fade-in animation
       setTimeout(() => {
         el.style.opacity = '1';
-      }, index * 20); // Staggered animation
+      }, Math.min(index * 2, 200)); // Much faster stagger, max 200ms delay
 
       // Create marker
       const marker = new mapboxgl.Marker(el)
@@ -465,20 +465,14 @@ export const EventMap = () => {
       popupContent.appendChild(closeBtn);
       popupContent.appendChild(title);
       
-      // Create image container for async loading
+      // Create image container for async loading (no loading spinner)
       const imgContainer = document.createElement('div');
-      imgContainer.style.cssText = 'min-height: 60px; display: flex; align-items: center; justify-content: center;';
-      
-      // Add loading spinner
-      const loadingDiv = document.createElement('div');
-      loadingDiv.style.cssText = 'width: 20px; height: 20px; border: 2px solid #ddd; border-top-color: #3b82f6; border-radius: 50%; animation: spin 1s linear infinite;';
-      imgContainer.appendChild(loadingDiv);
+      imgContainer.style.cssText = 'display: none;'; // Hidden until image loads
       popupContent.appendChild(imgContainer);
       
-      // Fetch and display Wikipedia image
+      // Fetch and display Wikipedia image asynchronously
       if (event.wiki) {
         getWikipediaImage(event.wiki).then(imageUrl => {
-          imgContainer.innerHTML = ''; // Clear loading spinner
           if (imageUrl) {
             const img = document.createElement('img');
             img.src = imageUrl;
@@ -489,15 +483,14 @@ export const EventMap = () => {
               this.style.display = 'none';
               imgContainer.style.display = 'none';
             };
+            img.onload = function() {
+              imgContainer.style.display = 'block';
+            };
             imgContainer.appendChild(img);
-          } else {
-            imgContainer.style.display = 'none';
           }
         }).catch(() => {
-          imgContainer.style.display = 'none';
+          // Silently fail - no image
         });
-      } else {
-        imgContainer.style.display = 'none';
       }
       
       const desc = document.createElement('p');
