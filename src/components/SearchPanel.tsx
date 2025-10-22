@@ -61,11 +61,7 @@ export const SearchPanel = ({
                     gradient-card backdrop-blur-strong border border-border/50 rounded-xl md:rounded-2xl 
                     p-2.5 md:p-4 shadow-elevated animate-slide-in max-h-[calc(100vh-6rem)] overflow-y-auto">
       {/* Brand */}
-      <div className="flex items-center gap-2 md:gap-3 mb-2 md:mb-4 animate-fade-in">
-        <div className="w-6 h-6 md:w-9 md:h-9 rounded-full gradient-cosmic shadow-glow-accent 
-                        flex items-center justify-center animate-pulse-glow">
-          <span className="text-sm md:text-lg font-bold text-white">E</span>
-        </div>
+      <div className="mb-2 md:mb-4 animate-fade-in">
         <h1 className="text-base md:text-xl font-bold tracking-tight bg-gradient-to-r from-primary via-accent to-primary-glow bg-clip-text text-transparent">
           EVID
         </h1>
