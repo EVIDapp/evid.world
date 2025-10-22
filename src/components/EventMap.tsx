@@ -1,14 +1,16 @@
 import { useEffect, useRef, useState, useCallback } from 'react';
-import { APIProvider, Map, useMap } from '@vis.gl/react-google-maps';
+import mapboxgl from 'mapbox-gl';
+import 'mapbox-gl/dist/mapbox-gl.css';
 import { HistoricalEvent, EventType } from '@/types/event';
-import { getEventColor, pinSvg, AREA_CATEGORIES } from '@/utils/eventColors';
+import { getEventColor, AREA_CATEGORIES } from '@/utils/eventColors';
 import { circleToPolygon } from '@/utils/geometry';
 import { SearchPanel } from './SearchPanel';
 import { MapControls } from './MapControls';
 import { EventLegend } from './EventLegend';
 import { useToast } from '@/hooks/use-toast';
-
-const API_KEY = 'AIzaSyBb23qNEkU_lpFTu80N-SAzkWLQN_YVV8A';
+import { Input } from '@/components/ui/input';
+import { Button } from '@/components/ui/button';
+import { Key } from 'lucide-react';
 
 const WORLD_BOUNDS = {
   north: 85,
@@ -17,26 +19,20 @@ const WORLD_BOUNDS = {
   east: 170
 };
 
-interface MapState {
-  markers: google.maps.Marker[];
-  polygons: google.maps.Polygon[];
-  infoWindow: google.maps.InfoWindow | null;
-}
-
-const MapContent = () => {
-  const map = useMap();
+export const EventMap = () => {
+  const mapContainer = useRef<HTMLDivElement>(null);
+  const map = useRef<mapboxgl.Map | null>(null);
+  const markersRef = useRef<mapboxgl.Marker[]>([]);
+  const polygonsRef = useRef<string[]>([]);
+  
   const [events, setEvents] = useState<HistoricalEvent[]>([]);
   const [filteredEvents, setFilteredEvents] = useState<HistoricalEvent[]>([]);
   const [selectedTypes, setSelectedTypes] = useState<Set<EventType>>(new Set());
   const [searchQuery, setSearchQuery] = useState('');
   const [onDemandMode, setOnDemandMode] = useState(true);
   const [loading, setLoading] = useState(true);
-  
-  const mapStateRef = useRef<MapState>({
-    markers: [],
-    polygons: [],
-    infoWindow: null
-  });
+  const [mapboxToken, setMapboxToken] = useState('');
+  const [tokenSubmitted, setTokenSubmitted] = useState(false);
   
   const { toast } = useToast();
 
@@ -65,6 +61,62 @@ const MapContent = () => {
       });
   }, [toast]);
 
+  // Initialize Mapbox map
+  useEffect(() => {
+    if (!mapContainer.current || !tokenSubmitted || !mapboxToken) return;
+    if (map.current) return; // Initialize only once
+
+    try {
+      mapboxgl.accessToken = mapboxToken;
+      
+      map.current = new mapboxgl.Map({
+        container: mapContainer.current,
+        style: 'mapbox://styles/mapbox/dark-v11',
+        center: [0, 20],
+        zoom: 2,
+        maxBounds: [
+          [WORLD_BOUNDS.west, WORLD_BOUNDS.south],
+          [WORLD_BOUNDS.east, WORLD_BOUNDS.north]
+        ]
+      });
+
+      // Add navigation controls
+      map.current.addControl(
+        new mapboxgl.NavigationControl({
+          visualizePitch: true
+        }),
+        'top-right'
+      );
+
+      // Add custom dark theme styling
+      map.current.on('load', () => {
+        if (!map.current) return;
+        
+        // Customize map colors for cosmic theme
+        map.current.setPaintProperty('water', 'fill-color', '#0d1425');
+        map.current.setPaintProperty('land', 'background-color', '#0a0f1e');
+      });
+
+      toast({
+        title: "Map initialized",
+        description: "Mapbox loaded successfully",
+      });
+    } catch (error) {
+      console.error('Error initializing Mapbox:', error);
+      toast({
+        variant: "destructive",
+        title: "Map error",
+        description: "Invalid Mapbox token. Please check and try again.",
+      });
+      setTokenSubmitted(false);
+    }
+
+    return () => {
+      map.current?.remove();
+      map.current = null;
+    };
+  }, [tokenSubmitted, mapboxToken, toast]);
+
   // Filter events based on search and selected types
   useEffect(() => {
     let filtered = events;
@@ -88,7 +140,7 @@ const MapContent = () => {
 
   // Render markers when filtered events change
   useEffect(() => {
-    if (!map || loading) return;
+    if (!map.current || loading || !tokenSubmitted) return;
     
     if (onDemandMode && !searchQuery && selectedTypes.size === 0) {
       clearMarkers();
@@ -96,21 +148,29 @@ const MapContent = () => {
     }
 
     renderMarkers(filteredEvents);
-  }, [filteredEvents, onDemandMode, searchQuery, selectedTypes, loading, map]);
+  }, [filteredEvents, onDemandMode, searchQuery, selectedTypes, loading, tokenSubmitted]);
 
   const clearMarkers = useCallback(() => {
-    mapStateRef.current.markers.forEach(m => m.setMap(null));
-    mapStateRef.current.polygons.forEach(p => p.setMap(null));
-    mapStateRef.current.infoWindow?.close();
-    mapStateRef.current = {
-      markers: [],
-      polygons: [],
-      infoWindow: mapStateRef.current.infoWindow
-    };
+    // Remove all markers
+    markersRef.current.forEach(marker => marker.remove());
+    markersRef.current = [];
+
+    // Remove all polygon layers
+    if (map.current) {
+      polygonsRef.current.forEach(polygonId => {
+        if (map.current?.getLayer(polygonId)) {
+          map.current.removeLayer(polygonId);
+        }
+        if (map.current?.getSource(polygonId)) {
+          map.current.removeSource(polygonId);
+        }
+      });
+    }
+    polygonsRef.current = [];
   }, []);
 
   const renderMarkers = useCallback((eventsToRender: HistoricalEvent[]) => {
-    if (!map) return;
+    if (!map.current) return;
     
     clearMarkers();
     
@@ -125,71 +185,98 @@ const MapContent = () => {
         variant: "default",
       });
     }
-    
-    const newMarkers: google.maps.Marker[] = [];
-    const newPolygons: google.maps.Polygon[] = [];
 
-    limitedEvents.forEach(event => {
+    limitedEvents.forEach((event, index) => {
       const color = getEventColor(event.type);
       
-      // Create marker with optimization
-      const marker = new google.maps.Marker({
-        position: event.pos,
-        map: map!,
-        title: event.title,
-        icon: {
-          url: pinSvg(color.fill),
-          scaledSize: new google.maps.Size(28, 40),
-          anchor: new google.maps.Point(14, 40)
-        },
-        optimized: true // Enable marker optimization for better performance
-      });
+      // Create custom marker element
+      const el = document.createElement('div');
+      el.className = 'custom-marker';
+      el.style.width = '28px';
+      el.style.height = '40px';
+      el.style.cursor = 'pointer';
+      el.innerHTML = `
+        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="40" viewBox="0 0 24 34">
+          <path d="M12 0c-5.3 0-9.5 4.2-9.5 9.5 0 7.1 9.5 24.5 9.5 24.5s9.5-17.4 9.5-24.5C21.5 4.2 17.3 0 12 0z" 
+                fill="${color.fill}" stroke="white" stroke-width="1.5"/>
+          <circle cx="12" cy="9.5" r="3.8" fill="white"/>
+        </svg>
+      `;
 
-      // Create info window content
-      marker.addListener('click', () => {
-        if (!mapStateRef.current.infoWindow) {
-          mapStateRef.current.infoWindow = new google.maps.InfoWindow();
-        }
-        
-        const content = `
-          <div class="info" style="max-width: 320px;">
-            <h3 style="margin: 0 0 8px 0; font-size: 16px; font-weight: 600; color: #1a1a1a;">
-              ${event.title}
-            </h3>
-            ${event.image ? `<img src="${event.image}" alt="${event.title}" style="width: 100%; border-radius: 8px; margin: 8px 0;" />` : ''}
-            <p style="color: #555; line-height: 1.5; margin: 8px 0; font-size: 14px;">
-              ${event.desc_long || event.desc}
-            </p>
-            ${event.wiki ? `<a href="${event.wiki}" target="_blank" rel="noopener" style="color: #3b82f6; text-decoration: none; font-size: 14px;">Read more on Wikipedia →</a>` : ''}
-          </div>
-        `;
-        
-        mapStateRef.current.infoWindow!.setContent(content);
-        mapStateRef.current.infoWindow!.open(map!, marker);
-      });
+      // Create marker
+      const marker = new mapboxgl.Marker(el)
+        .setLngLat([event.pos.lng, event.pos.lat])
+        .addTo(map.current!);
 
-      newMarkers.push(marker);
+      // Create popup
+      const popupContent = `
+        <div style="max-width: 320px; padding: 8px;">
+          <h3 style="margin: 0 0 8px 0; font-size: 16px; font-weight: 600; color: #1a1a1a;">
+            ${event.title}
+          </h3>
+          ${event.image ? `<img src="${event.image}" alt="${event.title}" style="width: 100%; border-radius: 8px; margin: 8px 0;" />` : ''}
+          <p style="color: #555; line-height: 1.5; margin: 8px 0; font-size: 14px;">
+            ${event.desc_long || event.desc}
+          </p>
+          ${event.wiki ? `<a href="${event.wiki}" target="_blank" rel="noopener" style="color: #3b82f6; text-decoration: none; font-size: 14px;">Read more on Wikipedia →</a>` : ''}
+        </div>
+      `;
+
+      const popup = new mapboxgl.Popup({ offset: 25 })
+        .setHTML(popupContent);
+
+      marker.setPopup(popup);
+      markersRef.current.push(marker);
 
       // Create area polygon if applicable
       if (event.radiusKm && AREA_CATEGORIES.has(event.type)) {
         const polygonPath = circleToPolygon(event.pos, event.radiusKm);
-        const polygon = new google.maps.Polygon({
-          paths: polygonPath,
-          strokeColor: color.stroke,
-          strokeOpacity: 0.8,
-          strokeWeight: 2,
-          fillColor: color.fill,
-          fillOpacity: 0.25,
-          map: map!
-        });
+        const polygonId = `polygon-${event.id}-${index}`;
         
-        newPolygons.push(polygon);
+        // Convert polygon path to GeoJSON format
+        const coordinates = polygonPath.map(point => [point.lng, point.lat]);
+        coordinates.push(coordinates[0]); // Close the polygon
+
+        if (map.current) {
+          map.current.addSource(polygonId, {
+            type: 'geojson',
+            data: {
+              type: 'Feature',
+              geometry: {
+                type: 'Polygon',
+                coordinates: [coordinates]
+              },
+              properties: {}
+            }
+          });
+
+          map.current.addLayer({
+            id: polygonId,
+            type: 'fill',
+            source: polygonId,
+            paint: {
+              'fill-color': color.fill,
+              'fill-opacity': 0.25
+            }
+          });
+
+          map.current.addLayer({
+            id: `${polygonId}-outline`,
+            type: 'line',
+            source: polygonId,
+            paint: {
+              'line-color': color.stroke,
+              'line-width': 2,
+              'line-opacity': 0.8
+            }
+          });
+
+          polygonsRef.current.push(polygonId);
+          polygonsRef.current.push(`${polygonId}-outline`);
+        }
       }
     });
-
-    mapStateRef.current.markers = newMarkers;
-    mapStateRef.current.polygons = newPolygons;
-  }, [clearMarkers, map, toast]);
+  }, [clearMarkers, toast]);
 
   const handleTypeToggle = (type: EventType) => {
     setSelectedTypes(prev => {
@@ -220,15 +307,84 @@ const MapContent = () => {
   };
 
   const handleResetView = () => {
-    if (map) {
-      map.fitBounds(WORLD_BOUNDS);
-      map.setZoom(3);
+    if (map.current) {
+      map.current.flyTo({
+        center: [0, 20],
+        zoom: 2,
+        duration: 1500
+      });
+    }
+  };
+
+  const handleTokenSubmit = () => {
+    if (mapboxToken.trim()) {
+      setTokenSubmitted(true);
+    } else {
+      toast({
+        variant: "destructive",
+        title: "Token required",
+        description: "Please enter a valid Mapbox token",
+      });
     }
   };
 
   return (
-    <>
-      {loading && (
+    <div className="relative w-full h-full">
+      {/* Token input overlay */}
+      {!tokenSubmitted && (
+        <div className="absolute inset-0 flex items-center justify-center bg-background/95 backdrop-blur-strong z-50 animate-fade-in">
+          <div className="max-w-md w-full mx-4 gradient-card backdrop-blur-strong border border-border/50 rounded-2xl p-6 shadow-elevated">
+            <div className="text-center mb-6">
+              <div className="w-16 h-16 mx-auto mb-4 rounded-full gradient-cosmic shadow-glow-accent flex items-center justify-center">
+                <Key className="w-8 h-8 text-white" />
+              </div>
+              <h2 className="text-2xl font-bold mb-2 bg-gradient-to-r from-primary via-accent to-primary-glow bg-clip-text text-transparent">
+                Mapbox Token Required
+              </h2>
+              <p className="text-sm text-muted-foreground">
+                Get your free token at{' '}
+                <a 
+                  href="https://account.mapbox.com/access-tokens/" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="text-primary hover:text-primary-glow transition-smooth underline"
+                >
+                  mapbox.com
+                </a>
+              </p>
+              <p className="text-xs text-muted-foreground mt-2">
+                50,000 free map loads per month
+              </p>
+            </div>
+
+            <div className="space-y-4">
+              <Input
+                type="text"
+                placeholder="pk.eyJ1IjoieW91cnVzZXJuYW1lIiwi..."
+                value={mapboxToken}
+                onChange={(e) => setMapboxToken(e.target.value)}
+                onKeyDown={(e) => e.key === 'Enter' && handleTokenSubmit()}
+                className="bg-input/80 border-border/50 focus:border-primary/50 focus:shadow-glow"
+              />
+              <Button 
+                onClick={handleTokenSubmit}
+                className="w-full gradient-accent shadow-glow-accent hover:shadow-glow transition-bounce"
+              >
+                Start Exploring
+              </Button>
+            </div>
+
+            <div className="mt-6 pt-6 border-t border-border/30">
+              <p className="text-xs text-muted-foreground text-center">
+                Your token is stored locally and never sent to our servers
+              </p>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Loading overlay */}
+      {loading && tokenSubmitted && (
         <div className="absolute inset-0 flex items-center justify-center bg-background/90 backdrop-blur-strong z-50 animate-fade-in">
           <div className="text-center">
             <div className="relative w-16 h-16 mx-auto mb-6">
@@ -245,64 +401,32 @@ const MapContent = () => {
         </div>
       )}
 
-      <SearchPanel
-        events={events}
-        selectedTypes={selectedTypes}
-        onTypeToggle={handleTypeToggle}
-        onSearch={setSearchQuery}
-        onDemandMode={onDemandMode}
-        onDemandToggle={() => setOnDemandMode(!onDemandMode)}
-        searchQuery={searchQuery}
-      />
+      {/* Map container */}
+      <div ref={mapContainer} className="absolute inset-0 w-full h-full" />
 
-      <MapControls
-        onShowAll={handleShowAll}
-        onClear={handleClear}
-        onResetView={handleResetView}
-        hasVisibleMarkers={mapStateRef.current.markers.length > 0}
-      />
+      {/* UI Components */}
+      {tokenSubmitted && !loading && (
+        <>
+          <SearchPanel
+            events={events}
+            selectedTypes={selectedTypes}
+            onTypeToggle={handleTypeToggle}
+            onSearch={setSearchQuery}
+            onDemandMode={onDemandMode}
+            onDemandToggle={() => setOnDemandMode(!onDemandMode)}
+            searchQuery={searchQuery}
+          />
 
-      <EventLegend />
-    </>
-  );
-};
+          <MapControls
+            onShowAll={handleShowAll}
+            onClear={handleClear}
+            onResetView={handleResetView}
+            hasVisibleMarkers={markersRef.current.length > 0}
+          />
 
-export const EventMap = () => {
-  return (
-    <div className="relative w-full h-full">
-      <APIProvider apiKey={API_KEY}>
-        <Map
-          mapId="evid-map"
-          defaultCenter={{ lat: 20, lng: 0 }}
-          defaultZoom={3}
-          gestureHandling="greedy"
-          disableDefaultUI={false}
-          clickableIcons={false}
-          restriction={{
-            latLngBounds: WORLD_BOUNDS,
-            strictBounds: false
-          }}
-          styles={[
-            {
-              featureType: 'all',
-              elementType: 'geometry',
-              stylers: [{ color: '#0a0f1e' }]
-            },
-            {
-              featureType: 'water',
-              elementType: 'geometry',
-              stylers: [{ color: '#0d1425' }]
-            },
-            {
-              featureType: 'administrative',
-              elementType: 'labels.text.fill',
-              stylers: [{ color: '#4b5563' }]
-            }
-          ]}
-        >
-          <MapContent />
-        </Map>
-      </APIProvider>
+          <EventLegend />
+        </>
+      )}
     </div>
   );
 };
