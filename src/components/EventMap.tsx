@@ -83,7 +83,7 @@ export const EventMap = () => {
         container: mapContainer.current,
         style: mapStyle,
         center: [0, 20],
-        zoom: 2,
+        zoom: 1.5,
         projection: projection,
         maxBounds: [
           [WORLD_BOUNDS.west, WORLD_BOUNDS.south],
@@ -341,8 +341,13 @@ export const EventMap = () => {
         const img = document.createElement('img');
         img.src = event.image;
         img.alt = event.title;
-        img.style.cssText = 'width: 100%; border-radius: 8px; margin: 8px 0;';
-        img.onerror = () => { img.style.display = 'none'; };
+        img.style.cssText = 'width: 100%; max-height: 200px; object-fit: cover; border-radius: 8px; margin: 8px 0;';
+        img.referrerPolicy = 'no-referrer';
+        img.loading = 'lazy';
+        img.onerror = function(this: HTMLImageElement) { 
+          this.style.display = 'none';
+          console.log('Failed to load image:', event.image);
+        };
         popupContent.appendChild(img);
       }
       
@@ -589,7 +594,7 @@ export const EventMap = () => {
 
           <EventLegend />
 
-          <div className="absolute top-3 right-3 md:top-[70px] md:right-4 z-[5] flex flex-col gap-2 animate-fade-in">
+          <div className="absolute top-3 right-3 md:top-[140px] md:right-4 z-[5] flex flex-col gap-2 animate-fade-in">
             <ThemeToggle />
             <Button
               onClick={() => {
