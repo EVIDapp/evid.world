@@ -35,6 +35,7 @@ export const EventMap = () => {
   const [loading, setLoading] = useState(true);
   const [mapboxToken, setMapboxToken] = useState('');
   const [tokenSubmitted, setTokenSubmitted] = useState(false);
+  const [mapLoaded, setMapLoaded] = useState(false);
   
   const { toast } = useToast();
   const { theme } = useTheme();
@@ -95,7 +96,7 @@ export const EventMap = () => {
         'top-right'
       );
 
-      // Add custom theme styling
+      // Add custom theme styling and mark map as loaded
       map.current.on('load', () => {
         if (!map.current) return;
         
@@ -104,6 +105,8 @@ export const EventMap = () => {
           map.current.setPaintProperty('water', 'fill-color', '#0d1425');
           map.current.setPaintProperty('land', 'background-color', '#0a0f1e');
         }
+        
+        setMapLoaded(true);
       });
 
       toast({
@@ -128,12 +131,14 @@ export const EventMap = () => {
 
   // Update map style when theme changes
   useEffect(() => {
-    if (!map.current || !tokenSubmitted) return;
+    if (!map.current || !tokenSubmitted || !mapLoaded) return;
     
     const mapStyle = theme === 'dark' 
       ? 'mapbox://styles/mapbox/dark-v11' 
       : 'mapbox://styles/mapbox/light-v11';
     
+    // Temporarily mark map as not loaded while changing style
+    setMapLoaded(false);
     map.current.setStyle(mapStyle);
     
     // Re-apply custom styling and re-render markers after style loads
@@ -145,12 +150,14 @@ export const EventMap = () => {
         map.current.setPaintProperty('land', 'background-color', '#0a0f1e');
       }
       
+      setMapLoaded(true);
+      
       // Re-render markers after style change
       if (filteredEvents.length > 0 && (!onDemandMode || searchQuery || selectedTypes.size > 0)) {
         renderMarkers(filteredEvents);
       }
     });
-  }, [theme, tokenSubmitted]);
+  }, [theme]);
 
   // Filter events based on search and selected types
   useEffect(() => {
@@ -175,7 +182,7 @@ export const EventMap = () => {
 
   // Render markers when filtered events change
   useEffect(() => {
-    if (!map.current || loading || !tokenSubmitted) return;
+    if (!map.current || loading || !tokenSubmitted || !mapLoaded) return;
     
     if (onDemandMode && !searchQuery && selectedTypes.size === 0) {
       clearMarkers();
@@ -183,7 +190,7 @@ export const EventMap = () => {
     }
 
     renderMarkers(filteredEvents);
-  }, [filteredEvents, onDemandMode, searchQuery, selectedTypes, loading, tokenSubmitted]);
+  }, [filteredEvents, onDemandMode, searchQuery, selectedTypes, loading, tokenSubmitted, mapLoaded]);
 
   const clearMarkers = useCallback(() => {
     // Remove all markers
@@ -205,7 +212,7 @@ export const EventMap = () => {
   }, []);
 
   const renderMarkers = useCallback((eventsToRender: HistoricalEvent[]) => {
-    if (!map.current) return;
+    if (!map.current || !map.current.isStyleLoaded()) return;
     
     clearMarkers();
     
