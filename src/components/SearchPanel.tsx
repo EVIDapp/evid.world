@@ -2,9 +2,10 @@ import { useState, useEffect } from 'react';
 import { Input } from '@/components/ui/input';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
 import { HistoricalEvent, EventType } from '@/types/event';
 import { EVENT_COLORS } from '@/utils/eventColors';
-import { Search, X } from 'lucide-react';
+import { Search, X, ChevronDown, ChevronUp } from 'lucide-react';
 
 interface SearchPanelProps {
   events: HistoricalEvent[];
@@ -31,6 +32,7 @@ export const SearchPanel = ({
 }: SearchPanelProps) => {
   const [suggestions, setSuggestions] = useState<HistoricalEvent[]>([]);
   const [showSuggestions, setShowSuggestions] = useState(false);
+  const [isExpanded, setIsExpanded] = useState(true);
 
   useEffect(() => {
     // Debounce search for better performance
@@ -59,9 +61,10 @@ export const SearchPanel = ({
   return (
     <div className="absolute top-3 left-3 md:top-4 md:left-4 w-[calc(100vw-60px)] md:w-[360px] z-20 
                     gradient-card backdrop-blur-strong border border-border/50 rounded-xl md:rounded-2xl 
-                    p-2.5 md:p-4 shadow-elevated animate-slide-in max-h-[calc(100vh-160px)] md:max-h-[calc(100vh-6rem)] overflow-y-auto">
-      {/* Brand */}
-      <div className="mb-2 md:mb-4 animate-fade-in">
+                    shadow-elevated animate-slide-in">
+      {/* Brand Header with Toggle */}
+      <div className="flex items-center justify-between p-2.5 md:p-4 cursor-pointer" 
+           onClick={() => setIsExpanded(!isExpanded)}>
         <h1 className="text-xl md:text-2xl font-bold tracking-wide" style={{
           backgroundImage: 'linear-gradient(90deg, #00D9FF 0%, #5B7FFF 35%, rgba(91, 127, 255, 0.6) 70%, rgba(100, 100, 100, 0.2) 100%)',
           WebkitBackgroundClip: 'text',
@@ -72,7 +75,22 @@ export const SearchPanel = ({
         }}>
           EVID
         </h1>
+        <Button 
+          variant="ghost" 
+          size="icon" 
+          className="h-7 w-7 hover:bg-primary/10"
+          onClick={(e) => {
+            e.stopPropagation();
+            setIsExpanded(!isExpanded);
+          }}
+        >
+          {isExpanded ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
+        </Button>
       </div>
+
+      {/* Collapsible Content */}
+      {isExpanded && (
+        <div className="px-2.5 pb-2.5 md:px-4 md:pb-4 animate-fade-in max-h-[calc(100vh-160px)] md:max-h-[calc(100vh-180px)] overflow-y-auto">
 
       {/* Search */}
       <div className="mb-2 md:mb-4 relative">
@@ -105,9 +123,9 @@ export const SearchPanel = ({
         
         {/* Suggestions */}
         {showSuggestions && (
-          <div className="absolute top-full left-0 right-0 mt-2 gradient-card backdrop-blur-strong 
-                          border border-border/50 rounded-xl max-h-[220px] overflow-auto shadow-elevated z-50 
-                          animate-fade-in-up">
+          <div className="absolute top-full left-0 right-0 mt-2 bg-popover border border-border/50 
+                          rounded-xl max-h-[220px] overflow-auto shadow-elevated z-50 
+                          animate-fade-in-up backdrop-blur-strong">
             {suggestions.map((event) => (
               <div
                 key={event.id}
@@ -156,19 +174,21 @@ export const SearchPanel = ({
         </div>
       </div>
 
-      {/* On-demand toggle */}
-      <div className="flex items-center gap-2 text-[10px] md:text-xs text-muted-foreground bg-muted/30 
-                      rounded-lg p-1.5 md:p-2 border border-border/30">
-        <Checkbox 
-          id="onDemand" 
-          checked={onDemandMode} 
-          onCheckedChange={onDemandToggle}
-          className="border-border data-[state=checked]:bg-primary data-[state=checked]:border-primary"
-        />
-        <label htmlFor="onDemand" className="cursor-pointer select-none leading-tight flex-1">
-          Show pins only after search
-        </label>
-      </div>
+          {/* On-demand toggle */}
+          <div className="flex items-center gap-2 text-[10px] md:text-xs text-muted-foreground bg-muted/30 
+                          rounded-lg p-1.5 md:p-2 border border-border/30 mt-2 md:mt-4">
+            <Checkbox 
+              id="onDemand" 
+              checked={onDemandMode} 
+              onCheckedChange={onDemandToggle}
+              className="border-border data-[state=checked]:bg-primary data-[state=checked]:border-primary"
+            />
+            <label htmlFor="onDemand" className="cursor-pointer select-none leading-tight flex-1">
+              Show pins only after search
+            </label>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
