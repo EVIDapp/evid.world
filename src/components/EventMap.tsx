@@ -172,14 +172,21 @@ export const EventMap = () => {
         if (!map.current) return;
         
         if (theme === 'dark') {
-          // Warm cosmic gradient theme
-          map.current.setPaintProperty('water', 'fill-color', '#0a0e1a');
-          map.current.setPaintProperty('land', 'background-color', '#0f1420');
+          // Brighter colors for better visibility in dark mode
+          map.current.setPaintProperty('water', 'fill-color', '#1a2332');
+          map.current.setPaintProperty('land', 'background-color', '#2a3447');
           
-          // Add warm glow to land areas
-          if (map.current.getLayer('land')) {
-            map.current.setPaintProperty('land', 'background-opacity', 0.9);
-          }
+          // Add atmosphere effect (fog)
+          map.current.setFog({
+            color: '#1a1f35',
+            'high-color': '#0a0e1a',
+            'horizon-blend': 0.1,
+            'space-color': '#000000',
+            'star-intensity': 0.6
+          });
+        } else {
+          // Clear fog for light mode
+          map.current.setFog(null);
         }
         
         setMapLoaded(true);
@@ -219,14 +226,21 @@ export const EventMap = () => {
       if (!map.current) return;
       
       if (theme === 'dark') {
-        // Warm cosmic gradient theme
-        map.current.setPaintProperty('water', 'fill-color', '#0a0e1a');
-        map.current.setPaintProperty('land', 'background-color', '#0f1420');
+        // Brighter colors for better visibility in dark mode
+        map.current.setPaintProperty('water', 'fill-color', '#1a2332');
+        map.current.setPaintProperty('land', 'background-color', '#2a3447');
         
-        // Add warm glow to land areas
-        if (map.current.getLayer('land')) {
-          map.current.setPaintProperty('land', 'background-opacity', 0.9);
-        }
+        // Add atmosphere effect (fog)
+        map.current.setFog({
+          color: '#1a1f35',
+          'high-color': '#0a0e1a',
+          'horizon-blend': 0.1,
+          'space-color': '#000000',
+          'star-intensity': 0.6
+        });
+      } else {
+        // Clear fog for light mode
+        map.current.setFog(null);
       }
       
       setMapLoaded(true);
