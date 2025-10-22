@@ -229,10 +229,18 @@ const MapContent = () => {
   return (
     <>
       {loading && (
-        <div className="absolute inset-0 flex items-center justify-center bg-background/80 backdrop-blur-sm z-50">
+        <div className="absolute inset-0 flex items-center justify-center bg-background/90 backdrop-blur-strong z-50 animate-fade-in">
           <div className="text-center">
-            <div className="w-12 h-12 border-4 border-primary border-t-transparent rounded-full animate-spin mx-auto mb-4" />
-            <p className="text-muted-foreground">Loading historical events...</p>
+            <div className="relative w-16 h-16 mx-auto mb-6">
+              <div className="absolute inset-0 border-4 border-primary/30 rounded-full"></div>
+              <div className="absolute inset-0 border-4 border-t-primary border-transparent rounded-full animate-spin"></div>
+              <div className="absolute inset-2 border-4 border-accent/30 rounded-full"></div>
+              <div className="absolute inset-2 border-4 border-t-accent border-transparent rounded-full animate-spin" style={{ animationDirection: 'reverse', animationDuration: '1s' }}></div>
+            </div>
+            <p className="text-lg font-semibold mb-2 bg-gradient-to-r from-primary via-accent to-primary-glow bg-clip-text text-transparent animate-pulse">
+              Loading EVID
+            </p>
+            <p className="text-sm text-muted-foreground">Preparing historical events...</p>
           </div>
         </div>
       )}

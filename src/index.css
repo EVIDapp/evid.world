@@ -8,61 +8,66 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    /* Dark space theme with vibrant accents */
-    --background: 220 35% 7%;
+    /* Dark cosmic space theme with vibrant neon accents */
+    --background: 225 40% 4%;
     --foreground: 210 40% 98%;
 
-    --card: 220 30% 10%;
+    --card: 225 35% 8%;
     --card-foreground: 210 40% 98%;
 
-    --popover: 220 32% 12%;
+    --popover: 225 38% 10%;
     --popover-foreground: 210 40% 98%;
 
-    --primary: 217 91% 60%;
+    --primary: 217 91% 65%;
     --primary-foreground: 210 40% 98%;
     
-    --primary-glow: 220 100% 70%;
+    --primary-glow: 220 100% 75%;
 
-    --secondary: 220 25% 18%;
+    --secondary: 225 30% 15%;
     --secondary-foreground: 210 40% 98%;
 
-    --muted: 220 20% 20%;
-    --muted-foreground: 215 20% 65%;
+    --muted: 225 25% 18%;
+    --muted-foreground: 215 25% 70%;
 
-    --accent: 280 65% 55%;
+    --accent: 280 70% 60%;
     --accent-foreground: 210 40% 98%;
 
     --destructive: 0 72% 51%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 220 25% 20%;
-    --input: 220 25% 16%;
-    --ring: 217 91% 60%;
+    --border: 225 30% 18%;
+    --input: 225 35% 12%;
+    --ring: 217 91% 65%;
 
-    --radius: 0.75rem;
+    --radius: 0.875rem;
     
-    /* Custom colors for event categories */
-    --war: 0 70% 55%;
-    --earthquake: 25 95% 53%;
-    --terror: 0 0% 10%;
-    --archaeology: 142 71% 45%;
-    --fire: 45 93% 47%;
-    --disaster: 188 70% 50%;
-    --tsunami: 221 83% 53%;
-    --meteorite: 271 81% 56%;
-    --epidemic: 300 76% 72%;
+    /* Vibrant event category colors */
+    --war: 0 75% 58%;
+    --earthquake: 25 95% 55%;
+    --terror: 0 0% 12%;
+    --archaeology: 142 75% 48%;
+    --fire: 45 95% 50%;
+    --disaster: 188 75% 55%;
+    --tsunami: 221 85% 58%;
+    --meteorite: 271 85% 60%;
+    --epidemic: 300 80% 75%;
     
-    /* Gradients */
-    --gradient-primary: linear-gradient(135deg, hsl(220 35% 12%), hsl(220 35% 7%));
-    --gradient-accent: linear-gradient(135deg, hsl(217 91% 60%), hsl(265 85% 58%));
-    --gradient-card: linear-gradient(145deg, hsl(220 30% 12%), hsl(220 30% 9%));
+    /* Cosmic gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(225 40% 10%), hsl(225 40% 4%));
+    --gradient-accent: linear-gradient(135deg, hsl(217 91% 65%), hsl(280 70% 60%), hsl(265 85% 58%));
+    --gradient-cosmic: linear-gradient(135deg, hsl(250 70% 15%), hsl(280 60% 20%), hsl(217 80% 25%));
+    --gradient-card: linear-gradient(145deg, hsl(225 35% 10%), hsl(225 35% 7%));
+    --gradient-glow: radial-gradient(circle at top, hsl(217 91% 65% / 0.15), transparent 60%);
     
-    /* Shadows */
-    --shadow-glow: 0 0 30px hsl(217 91% 60% / 0.2);
-    --shadow-card: 0 10px 40px -10px hsl(0 0% 0% / 0.5);
+    /* Enhanced shadows with glow */
+    --shadow-glow: 0 0 40px hsl(217 91% 65% / 0.3), 0 0 80px hsl(217 91% 65% / 0.15);
+    --shadow-glow-accent: 0 0 30px hsl(280 70% 60% / 0.4);
+    --shadow-card: 0 10px 50px -10px hsl(0 0% 0% / 0.6), 0 0 20px hsl(217 91% 65% / 0.1);
+    --shadow-elevated: 0 20px 60px -15px hsl(0 0% 0% / 0.7), 0 0 30px hsl(217 91% 65% / 0.15);
     
-    /* Transitions */
+    /* Smooth transitions */
     --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-bounce: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
   }
 }
 
@@ -74,12 +79,26 @@ All colors MUST be HSL.
   body {
     @apply bg-background text-foreground;
     font-feature-settings: "rlig" 1, "calt" 1;
+    background: linear-gradient(180deg, hsl(225 40% 4%), hsl(250 50% 6%));
   }
   
   html, body, #root {
     height: 100%;
     margin: 0;
     overflow: hidden;
+  }
+  
+  /* Cosmic background pattern */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background: 
+      radial-gradient(circle at 20% 30%, hsl(217 91% 65% / 0.08) 0%, transparent 50%),
+      radial-gradient(circle at 80% 70%, hsl(280 70% 60% / 0.08) 0%, transparent 50%),
+      radial-gradient(circle at 50% 50%, hsl(265 85% 58% / 0.05) 0%, transparent 60%);
+    pointer-events: none;
+    z-index: 0;
   }
 }
 
@@ -92,24 +111,72 @@ All colors MUST be HSL.
     background: var(--gradient-accent);
   }
   
+  .gradient-cosmic {
+    background: var(--gradient-cosmic);
+  }
+  
   .gradient-card {
     background: var(--gradient-card);
+  }
+  
+  .gradient-glow {
+    background: var(--gradient-glow);
   }
   
   .shadow-glow {
     box-shadow: var(--shadow-glow);
   }
   
+  .shadow-glow-accent {
+    box-shadow: var(--shadow-glow-accent);
+  }
+  
   .shadow-card {
     box-shadow: var(--shadow-card);
+  }
+  
+  .shadow-elevated {
+    box-shadow: var(--shadow-elevated);
   }
   
   .transition-smooth {
     transition: var(--transition-smooth);
   }
   
+  .transition-bounce {
+    transition: var(--transition-bounce);
+  }
+  
   .backdrop-blur-glass {
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+  }
+  
+  .backdrop-blur-strong {
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+  }
+  
+  /* Animated border glow */
+  .border-glow {
+    position: relative;
+  }
+  
+  .border-glow::before {
+    content: '';
+    position: absolute;
+    inset: -2px;
+    border-radius: inherit;
+    padding: 2px;
+    background: var(--gradient-accent);
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+  
+  .border-glow:hover::before {
+    opacity: 1;
   }
 }
