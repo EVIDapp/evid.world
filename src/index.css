@@ -358,4 +358,53 @@ All colors MUST be HSL.
   .dark .mapboxgl-canvas {
     opacity: 1 !important;
   }
+
+  /* Popup text styling for light and dark themes */
+  .popup-title {
+    color: #1a1a1a;
+  }
+
+  .dark .popup-title {
+    color: #f0f0f0;
+  }
+
+  .popup-desc {
+    color: #555;
+  }
+
+  .dark .popup-desc {
+    color: #d0d0d0;
+  }
+
+  .popup-link {
+    color: #3b82f6;
+  }
+
+  .dark .popup-link {
+    color: #60a5fa;
+  }
+
+  .popup-link:hover {
+    text-decoration: underline;
+  }
+
+  .popup-close-btn {
+    background: rgba(0, 0, 0, 0.1);
+    color: #666;
+  }
+
+  .dark .popup-close-btn {
+    background: rgba(255, 255, 255, 0.1);
+    color: #d0d0d0;
+  }
+
+  .popup-close-btn:hover {
+    background: rgba(0, 0, 0, 0.2);
+    color: #000;
+  }
+
+  .dark .popup-close-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+    color: #fff;
+  }
 }

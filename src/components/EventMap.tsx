@@ -446,19 +446,20 @@ export const EventMap = () => {
       };
       
       const popupContent = document.createElement('div');
+      popupContent.className = 'popup-content';
       popupContent.style.cssText = 'max-width: 320px; padding: 12px; position: relative;';
       
       const closeBtn = document.createElement('button');
+      closeBtn.className = 'popup-close-btn';
       closeBtn.innerHTML = '×';
       closeBtn.setAttribute('aria-label', 'Close popup');
       closeBtn.setAttribute('type', 'button');
-      closeBtn.style.cssText = 'position: absolute; top: 8px; right: 8px; background: rgba(0,0,0,0.1); border: none; border-radius: 4px; width: 24px; height: 24px; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 16px; color: #666; transition: all 0.2s;';
-      closeBtn.onmouseover = () => { closeBtn.style.background='rgba(0,0,0,0.2)'; closeBtn.style.color='#000'; };
-      closeBtn.onmouseout = () => { closeBtn.style.background='rgba(0,0,0,0.1)'; closeBtn.style.color='#666'; };
+      closeBtn.style.cssText = 'position: absolute; top: 8px; right: 8px; border: none; border-radius: 4px; width: 24px; height: 24px; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 16px; transition: all 0.2s;';
       closeBtn.onclick = closePopup;
       
       const title = document.createElement('h3');
-      title.style.cssText = 'margin: 0 24px 8px 0; font-size: 16px; font-weight: 600; color: #1a1a1a;';
+      title.className = 'popup-title';
+      title.style.cssText = 'margin: 0 24px 8px 0; font-size: 16px; font-weight: 600;';
       title.textContent = event.title;
       
       popupContent.appendChild(closeBtn);
@@ -500,17 +501,19 @@ export const EventMap = () => {
       }
       
       const desc = document.createElement('p');
-      desc.style.cssText = 'color: #555; line-height: 1.5; margin: 8px 0; font-size: 14px;';
+      desc.className = 'popup-desc';
+      desc.style.cssText = 'line-height: 1.5; margin: 8px 0; font-size: 14px;';
       desc.textContent = event.desc_long || event.desc;
       popupContent.appendChild(desc);
       
       if (event.wiki) {
         const link = document.createElement('a');
+        link.className = 'popup-link';
         link.href = event.wiki;
         link.target = '_blank';
         link.rel = 'noopener noreferrer';
         link.setAttribute('aria-label', `Read more about ${event.title} on Wikipedia`);
-        link.style.cssText = 'color: #3b82f6; text-decoration: none; font-size: 14px;';
+        link.style.cssText = 'text-decoration: none; font-size: 14px;';
         link.textContent = 'Read more on Wikipedia →';
         popupContent.appendChild(link);
       }
