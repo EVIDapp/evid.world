@@ -29,22 +29,27 @@ export const SearchPanel = ({
   const [showSuggestions, setShowSuggestions] = useState(false);
 
   useEffect(() => {
-    if (searchQuery.length > 1) {
-      const query = searchQuery.toLowerCase();
-      const filtered = events
-        .filter(e => 
-          e.title.toLowerCase().includes(query) ||
-          e.type.toLowerCase().includes(query) ||
-          e.country.toLowerCase().includes(query) ||
-          e.desc.toLowerCase().includes(query)
-        )
-        .slice(0, 10);
-      setSuggestions(filtered);
-      setShowSuggestions(filtered.length > 0);
-    } else {
-      setSuggestions([]);
-      setShowSuggestions(false);
-    }
+    // Debounce search for better performance
+    const timer = setTimeout(() => {
+      if (searchQuery.length > 1) {
+        const query = searchQuery.toLowerCase();
+        const filtered = events
+          .filter(e => 
+            e.title.toLowerCase().includes(query) ||
+            e.type.toLowerCase().includes(query) ||
+            e.country.toLowerCase().includes(query) ||
+            e.desc.toLowerCase().includes(query)
+          )
+          .slice(0, 8); // Reduced to 8 suggestions for faster rendering
+        setSuggestions(filtered);
+        setShowSuggestions(filtered.length > 0);
+      } else {
+        setSuggestions([]);
+        setShowSuggestions(false);
+      }
+    }, 150); // 150ms debounce
+
+    return () => clearTimeout(timer);
   }, [searchQuery, events]);
 
   return (

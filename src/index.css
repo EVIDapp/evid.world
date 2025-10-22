@@ -47,9 +47,9 @@ All colors MUST be HSL.
     --terror: 0 0% 10%;
     --archaeology: 142 71% 45%;
     --fire: 45 93% 47%;
-    --disaster: 188 94% 43%;
-    --tsunami: 217 91% 60%;
-    --meteorite: 265 85% 58%;
+    --disaster: 188 70% 50%;
+    --tsunami: 221 83% 53%;
+    --meteorite: 271 81% 56%;
     --epidemic: 300 76% 72%;
     
     /* Gradients */

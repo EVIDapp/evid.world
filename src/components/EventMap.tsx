@@ -47,10 +47,12 @@ const MapContent = () => {
       .then(data => {
         setEvents(data);
         setLoading(false);
-        toast({
-          title: "Events loaded",
-          description: `${data.length} historical events ready to explore`,
-        });
+        if (data.length > 0) {
+          toast({
+            title: "Events loaded",
+            description: `${data.length} historical events ready to explore`,
+          });
+        }
       })
       .catch(err => {
         console.error('Failed to load events:', err);
@@ -112,13 +114,25 @@ const MapContent = () => {
     
     clearMarkers();
     
+    // Limit markers for better performance (max 500 visible at once)
+    const limitedEvents = eventsToRender.slice(0, 500);
+    
+    // Show warning if events were limited
+    if (eventsToRender.length > 500) {
+      toast({
+        title: "Showing 500 events",
+        description: `${eventsToRender.length} events found. Use filters to see specific events.`,
+        variant: "default",
+      });
+    }
+    
     const newMarkers: google.maps.Marker[] = [];
     const newPolygons: google.maps.Polygon[] = [];
 
-    eventsToRender.forEach(event => {
+    limitedEvents.forEach(event => {
       const color = getEventColor(event.type);
       
-      // Create marker
+      // Create marker with optimization
       const marker = new google.maps.Marker({
         position: event.pos,
         map: map!,
@@ -127,7 +141,8 @@ const MapContent = () => {
           url: pinSvg(color.fill),
           scaledSize: new google.maps.Size(28, 40),
           anchor: new google.maps.Point(14, 40)
-        }
+        },
+        optimized: true // Enable marker optimization for better performance
       });
 
       // Create info window content
@@ -174,7 +189,7 @@ const MapContent = () => {
 
     mapStateRef.current.markers = newMarkers;
     mapStateRef.current.polygons = newPolygons;
-  }, [clearMarkers, map]);
+  }, [clearMarkers, map, toast]);
 
   const handleTypeToggle = (type: EventType) => {
     setSelectedTypes(prev => {
