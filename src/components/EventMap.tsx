@@ -17,7 +17,7 @@ import { useToast } from '@/hooks/use-toast';
 import { useTheme } from 'next-themes';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
-import { Key } from 'lucide-react';
+import { Key, Plus, Minus } from 'lucide-react';
 import { getWikipediaImage } from '@/utils/wikipediaImage';
 import { deduplicateEvents } from '@/utils/deduplicateEvents';
 import { useKeyboardShortcuts } from '@/hooks/useKeyboardShortcuts';
@@ -158,15 +158,6 @@ export const EventMap = () => {
           [WORLD_BOUNDS.east, WORLD_BOUNDS.north]
         ]
       });
-
-      // Add navigation controls (zoom buttons)
-      map.current.addControl(
-        new mapboxgl.NavigationControl({
-          visualizePitch: true,
-          showCompass: false
-        }),
-        'top-right'
-      );
 
       // Track zoom changes for clustering
       map.current.on('zoom', () => {
@@ -728,6 +719,24 @@ export const EventMap = () => {
           <EventLegend />
 
           <div className="absolute top-[88px] right-3 md:right-4 z-[5] flex flex-col gap-2 animate-fade-in">
+            <TooltipButton
+              onClick={() => {
+                if (map.current) {
+                  map.current.zoomIn();
+                }
+              }}
+              icon={<Plus className="w-4 h-4" />}
+              tooltip="Zoom in"
+            />
+            <TooltipButton
+              onClick={() => {
+                if (map.current) {
+                  map.current.zoomOut();
+                }
+              }}
+              icon={<Minus className="w-4 h-4" />}
+              tooltip="Zoom out"
+            />
             <ThemeToggle />
             <ShareButton 
               searchQuery={searchQuery}
