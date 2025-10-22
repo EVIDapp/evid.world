@@ -2,7 +2,6 @@ import { Button } from '@/components/ui/button';
 import {
   Tooltip,
   TooltipContent,
-  TooltipProvider,
   TooltipTrigger,
 } from '@/components/ui/tooltip';
 
@@ -22,23 +21,21 @@ export const TooltipButton = ({
   className = ''
 }: TooltipButtonProps) => {
   return (
-    <TooltipProvider>
-      <Tooltip>
-        <TooltipTrigger asChild>
-          <Button
-            onClick={onClick}
-            variant={variant}
-            size="icon"
-            className={`shadow-elevated backdrop-blur-strong gradient-card border-border/50 
-                       h-8 w-8 md:h-9 md:w-9 transition-bounce hover:shadow-glow hover:border-primary/30 hover:scale-105 ${className}`}
-          >
-            {icon}
-          </Button>
-        </TooltipTrigger>
-        <TooltipContent side="left">
-          <p>{tooltip}</p>
-        </TooltipContent>
-      </Tooltip>
-    </TooltipProvider>
+    <Tooltip>
+      <TooltipTrigger asChild>
+        <Button
+          onClick={onClick}
+          variant={variant}
+          size="icon"
+          className={`shadow-elevated backdrop-blur-strong gradient-card border-border/50 
+                     h-8 w-8 md:h-9 md:w-9 transition-bounce hover:shadow-glow hover:border-primary/30 hover:scale-105 ${className}`}
+        >
+          {icon}
+        </Button>
+      </TooltipTrigger>
+      <TooltipContent side="left">
+        <p>{tooltip}</p>
+      </TooltipContent>
+    </Tooltip>
   );
 };
