@@ -90,7 +90,7 @@ export const EventMap = () => {
           .map(parseYear)
           .filter(y => !isNaN(y));
         
-        const minYear = 1; // Start from 1 AD (year 1 of our era)
+        const minYear = Math.min(...years);
         const maxYear = Math.max(...years);
         
         setYearRange([minYear, maxYear]);

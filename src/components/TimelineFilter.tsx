@@ -5,15 +5,15 @@ import { Badge } from '@/components/ui/badge';
 import { Play, Pause, RotateCcw, ChevronDown, ChevronUp, Clock } from 'lucide-react';
 
 const TIME_PERIODS = [
-  { label: 'Античность', range: [1, 500] as [number, number] },
-  { label: 'Раннее СВ', range: [500, 1000] as [number, number] },
-  { label: 'Позднее СВ', range: [1000, 1500] as [number, number] },
-  { label: 'Ренессанс', range: [1500, 1700] as [number, number] },
-  { label: 'Просвещение', range: [1700, 1800] as [number, number] },
-  { label: '19 век', range: [1800, 1900] as [number, number] },
-  { label: 'Начало 20в', range: [1900, 1950] as [number, number] },
-  { label: 'Холодная война', range: [1950, 1990] as [number, number] },
-  { label: 'Современность', range: [1990, 2025] as [number, number] },
+  { label: 'Antiquity', range: [1, 500] as [number, number] },
+  { label: 'Early Middle Ages', range: [500, 1000] as [number, number] },
+  { label: 'Late Middle Ages', range: [1000, 1500] as [number, number] },
+  { label: 'Renaissance', range: [1500, 1700] as [number, number] },
+  { label: 'Enlightenment', range: [1700, 1800] as [number, number] },
+  { label: '19th Century', range: [1800, 1900] as [number, number] },
+  { label: 'Early 20th', range: [1900, 1950] as [number, number] },
+  { label: 'Cold War', range: [1950, 1990] as [number, number] },
+  { label: 'Modern Era', range: [1990, 2025] as [number, number] },
 ];
 
 interface TimelineFilterProps {
@@ -78,7 +78,7 @@ export const TimelineFilter = ({
               {localRange[0]} - {localRange[1]}
             </div>
             <div className="text-[10px] text-muted-foreground">
-              {eventCount} событий
+              {eventCount} events
             </div>
           </div>
         </div>
@@ -91,7 +91,7 @@ export const TimelineFilter = ({
             variant="ghost"
             size="icon"
             className="h-7 w-7 hover:bg-primary/10"
-            title="Сбросить"
+            title="Reset"
           >
             <RotateCcw className="w-3.5 h-3.5" />
           </Button>
@@ -111,7 +111,7 @@ export const TimelineFilter = ({
             variant="ghost"
             size="icon"
             className="h-7 w-7 hover:bg-destructive/10 text-muted-foreground hover:text-destructive"
-            title="Закрыть"
+            title="Close"
           >
             ×
           </Button>
@@ -124,7 +124,7 @@ export const TimelineFilter = ({
           {/* Period Presets */}
           <div>
             <label className="text-[10px] md:text-xs text-muted-foreground mb-2 block font-medium">
-              Быстрый выбор эпохи
+              Quick Era Selection
             </label>
             <div className="flex flex-wrap gap-1.5">
               {TIME_PERIODS.map((period) => {
@@ -149,7 +149,7 @@ export const TimelineFilter = ({
           {/* Range Slider */}
           <div>
             <label className="text-[10px] md:text-xs text-muted-foreground mb-2 block font-medium">
-              Точная настройка периода
+              Precise Period Adjustment
             </label>
             <Slider
               min={minYear}
