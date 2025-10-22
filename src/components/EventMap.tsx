@@ -17,6 +17,7 @@ import { useToast } from '@/hooks/use-toast';
 import { useTheme } from 'next-themes';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
+import { Progress } from '@/components/ui/progress';
 import { Key, Plus, Minus } from 'lucide-react';
 import { getWikipediaImage } from '@/utils/wikipediaImage';
 import { deduplicateEvents } from '@/utils/deduplicateEvents';
@@ -171,9 +172,14 @@ export const EventMap = () => {
         if (!map.current) return;
         
         if (theme === 'dark') {
-          // Customize map colors for cosmic theme
-          map.current.setPaintProperty('water', 'fill-color', '#0d1425');
-          map.current.setPaintProperty('land', 'background-color', '#0a0f1e');
+          // Warm cosmic gradient theme
+          map.current.setPaintProperty('water', 'fill-color', '#0a0e1a');
+          map.current.setPaintProperty('land', 'background-color', '#0f1420');
+          
+          // Add warm glow to land areas
+          if (map.current.getLayer('land')) {
+            map.current.setPaintProperty('land', 'background-opacity', 0.9);
+          }
         }
         
         setMapLoaded(true);
@@ -213,8 +219,14 @@ export const EventMap = () => {
       if (!map.current) return;
       
       if (theme === 'dark') {
-        map.current.setPaintProperty('water', 'fill-color', '#0d1425');
-        map.current.setPaintProperty('land', 'background-color', '#0a0f1e');
+        // Warm cosmic gradient theme
+        map.current.setPaintProperty('water', 'fill-color', '#0a0e1a');
+        map.current.setPaintProperty('land', 'background-color', '#0f1420');
+        
+        // Add warm glow to land areas
+        if (map.current.getLayer('land')) {
+          map.current.setPaintProperty('land', 'background-opacity', 0.9);
+        }
       }
       
       setMapLoaded(true);
@@ -493,7 +505,7 @@ export const EventMap = () => {
         offset: 25,
         closeButton: false,
         closeOnClick: true,
-        className: 'animate-scale-in'
+        className: 'event-popup'
       })
         .setDOMContent(popupContent)
         .on('close', () => {
@@ -689,8 +701,8 @@ export const EventMap = () => {
 
       {/* Loading overlay */}
       {loading && tokenSubmitted && (
-        <div className="absolute inset-0 flex items-center justify-center bg-background/90 backdrop-blur-strong z-50 animate-fade-in">
-          <div className="text-center">
+        <div className="absolute inset-0 flex flex-col items-center justify-center bg-background/90 backdrop-blur-strong z-50 animate-fade-in">
+          <div className="text-center max-w-md px-4">
             <div className="relative w-16 h-16 mx-auto mb-6">
               <div className="absolute inset-0 border-4 border-primary/30 rounded-full"></div>
               <div className="absolute inset-0 border-4 border-t-primary border-transparent rounded-full animate-spin"></div>
@@ -700,7 +712,26 @@ export const EventMap = () => {
             <p className="text-lg font-semibold mb-2 bg-gradient-to-r from-primary via-accent to-primary-glow bg-clip-text text-transparent animate-pulse">
               Loading EVID
             </p>
-            <p className="text-sm text-muted-foreground">Preparing historical events...</p>
+            <p className="text-sm text-muted-foreground mb-4">Preparing historical events...</p>
+          </div>
+        </div>
+      )}
+
+      {/* Map loading progress */}
+      {tokenSubmitted && !loading && !mapLoaded && (
+        <div className="absolute inset-0 flex flex-col items-center justify-center bg-background/90 backdrop-blur-strong z-50 animate-fade-in">
+          <div className="text-center max-w-md px-4 w-full">
+            <div className="relative w-16 h-16 mx-auto mb-6">
+              <div className="absolute inset-0 border-4 border-primary/30 rounded-full"></div>
+              <div className="absolute inset-0 border-4 border-t-primary border-transparent rounded-full animate-spin"></div>
+            </div>
+            <p className="text-lg font-semibold mb-4 bg-gradient-to-r from-primary via-accent to-primary-glow bg-clip-text text-transparent">
+              Loading Map
+            </p>
+            <div className="w-full max-w-xs mx-auto">
+              <Progress value={undefined} className="h-2 animate-pulse" />
+            </div>
+            <p className="text-xs text-muted-foreground mt-3">Initializing globe...</p>
           </div>
         </div>
       )}
