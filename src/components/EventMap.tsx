@@ -392,8 +392,7 @@ export const EventMap = () => {
       el.style.height = '40px';
       el.style.cursor = 'pointer';
       el.style.opacity = '0';
-      el.style.transform = 'scale(0.5) translateY(-20px)';
-      el.style.transition = 'all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1)';
+      el.style.transition = 'opacity 0.4s ease-out';
       el.setAttribute('role', 'button');
       el.setAttribute('aria-label', `${event.title} - ${event.type} event`);
       el.setAttribute('tabindex', '0');
@@ -405,11 +404,10 @@ export const EventMap = () => {
         </svg>
       `;
       
-      // Trigger animation after a slight delay based on index
+      // Trigger fade-in animation after a slight delay based on index
       setTimeout(() => {
         el.style.opacity = '1';
-        el.style.transform = 'scale(1) translateY(0)';
-      }, index * 30); // Staggered animation
+      }, index * 20); // Staggered animation
 
       // Create marker
       const marker = new mapboxgl.Marker(el)
