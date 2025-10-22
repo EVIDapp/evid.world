@@ -9,7 +9,6 @@ import { SearchPanel } from './SearchPanel';
 import { MapControls } from './MapControls';
 import { EventLegend } from './EventLegend';
 import { ThemeToggle } from './ThemeToggle';
-import { TimelineFilter } from './TimelineFilter';
 import { ShareButton } from './ShareButton';
 import { ExportButton } from './ExportButton';
 import { HistoryPanel } from './HistoryPanel';
@@ -727,15 +726,6 @@ export const EventMap = () => {
           />
 
           <EventLegend />
-
-          <TimelineFilter
-            minYear={yearRange[0]}
-            maxYear={yearRange[1]}
-            selectedRange={selectedYearRange}
-            onRangeChange={setSelectedYearRange}
-            onAnimate={setIsAnimating}
-            isAnimating={isAnimating}
-          />
 
           <div className="absolute top-[88px] right-3 md:right-4 z-[5] flex flex-col gap-2 animate-fade-in">
             <ThemeToggle />
