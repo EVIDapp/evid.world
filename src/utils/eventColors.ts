@@ -8,7 +8,7 @@ export const EVENT_COLORS: Record<EventType, EventColor> = {
   fire: { stroke: '#eab308', fill: '#fde047', label: 'Wildfire' },
   disaster: { stroke: '#8b6f47', fill: '#a98467', label: 'Disaster' },
   tsunami: { stroke: '#005f8a', fill: '#0077b6', label: 'Tsunami' },
-  meteorite: { stroke: '#e0e0e0', fill: '#ffffff', label: 'Meteorite' },
+  meteorite: { stroke: '#2d4a33', fill: '#3a5a40', label: 'Meteorite' },
   epidemic: { stroke: '#c026d3', fill: '#d946ef', label: 'Epidemic' },
   'man-made disaster': { stroke: '#64748b', fill: '#cbd5e1', label: 'Man-made Disaster' }
 };
