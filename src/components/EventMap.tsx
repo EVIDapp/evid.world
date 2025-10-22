@@ -7,7 +7,9 @@ import { circleToPolygon } from '@/utils/geometry';
 import { SearchPanel } from './SearchPanel';
 import { MapControls } from './MapControls';
 import { EventLegend } from './EventLegend';
+import { ThemeToggle } from './ThemeToggle';
 import { useToast } from '@/hooks/use-toast';
+import { useTheme } from 'next-themes';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Key } from 'lucide-react';
@@ -29,12 +31,13 @@ export const EventMap = () => {
   const [filteredEvents, setFilteredEvents] = useState<HistoricalEvent[]>([]);
   const [selectedTypes, setSelectedTypes] = useState<Set<EventType>>(new Set());
   const [searchQuery, setSearchQuery] = useState('');
-  const [onDemandMode, setOnDemandMode] = useState(true);
+  const [onDemandMode, setOnDemandMode] = useState(false);
   const [loading, setLoading] = useState(true);
   const [mapboxToken, setMapboxToken] = useState('');
   const [tokenSubmitted, setTokenSubmitted] = useState(false);
   
   const { toast } = useToast();
+  const { theme } = useTheme();
 
   // Load events data
   useEffect(() => {
@@ -69,9 +72,13 @@ export const EventMap = () => {
     try {
       mapboxgl.accessToken = mapboxToken;
       
+      const mapStyle = theme === 'dark' 
+        ? 'mapbox://styles/mapbox/dark-v11' 
+        : 'mapbox://styles/mapbox/light-v11';
+      
       map.current = new mapboxgl.Map({
         container: mapContainer.current,
-        style: 'mapbox://styles/mapbox/dark-v11',
+        style: mapStyle,
         center: [0, 20],
         zoom: 2,
         maxBounds: [
@@ -88,13 +95,15 @@ export const EventMap = () => {
         'top-right'
       );
 
-      // Add custom dark theme styling
+      // Add custom theme styling
       map.current.on('load', () => {
         if (!map.current) return;
         
-        // Customize map colors for cosmic theme
-        map.current.setPaintProperty('water', 'fill-color', '#0d1425');
-        map.current.setPaintProperty('land', 'background-color', '#0a0f1e');
+        if (theme === 'dark') {
+          // Customize map colors for cosmic theme
+          map.current.setPaintProperty('water', 'fill-color', '#0d1425');
+          map.current.setPaintProperty('land', 'background-color', '#0a0f1e');
+        }
       });
 
       toast({
@@ -115,7 +124,33 @@ export const EventMap = () => {
       map.current?.remove();
       map.current = null;
     };
-  }, [tokenSubmitted, mapboxToken, toast]);
+  }, [tokenSubmitted, mapboxToken, toast, theme]);
+
+  // Update map style when theme changes
+  useEffect(() => {
+    if (!map.current || !tokenSubmitted) return;
+    
+    const mapStyle = theme === 'dark' 
+      ? 'mapbox://styles/mapbox/dark-v11' 
+      : 'mapbox://styles/mapbox/light-v11';
+    
+    map.current.setStyle(mapStyle);
+    
+    // Re-apply custom styling and re-render markers after style loads
+    map.current.once('style.load', () => {
+      if (!map.current) return;
+      
+      if (theme === 'dark') {
+        map.current.setPaintProperty('water', 'fill-color', '#0d1425');
+        map.current.setPaintProperty('land', 'background-color', '#0a0f1e');
+      }
+      
+      // Re-render markers after style change
+      if (filteredEvents.length > 0 && (!onDemandMode || searchQuery || selectedTypes.size > 0)) {
+        renderMarkers(filteredEvents);
+      }
+    });
+  }, [theme, tokenSubmitted]);
 
   // Filter events based on search and selected types
   useEffect(() => {
@@ -425,6 +460,10 @@ export const EventMap = () => {
           />
 
           <EventLegend />
+
+          <div className="absolute top-3 right-3 md:top-4 md:right-4 z-20 animate-fade-in">
+            <ThemeToggle />
+          </div>
         </>
       )}
     </div>

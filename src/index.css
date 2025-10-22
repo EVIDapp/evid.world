@@ -8,6 +8,69 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
+    /* Light theme - clean and modern */
+    --background: 0 0% 100%;
+    --foreground: 222 47% 11%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 222 47% 11%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 222 47% 11%;
+
+    --primary: 217 91% 59%;
+    --primary-foreground: 0 0% 100%;
+    
+    --primary-glow: 220 100% 70%;
+
+    --secondary: 214 32% 91%;
+    --secondary-foreground: 222 47% 11%;
+
+    --muted: 214 32% 91%;
+    --muted-foreground: 215 16% 47%;
+
+    --accent: 280 70% 55%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 214 32% 91%;
+    --input: 214 32% 91%;
+    --ring: 217 91% 59%;
+
+    --radius: 0.875rem;
+    
+    /* Vibrant event category colors */
+    --war: 0 75% 58%;
+    --earthquake: 25 95% 55%;
+    --terror: 0 0% 12%;
+    --archaeology: 142 75% 48%;
+    --fire: 45 95% 50%;
+    --disaster: 188 75% 55%;
+    --tsunami: 221 85% 58%;
+    --meteorite: 271 85% 60%;
+    --epidemic: 300 80% 75%;
+    
+    /* Light gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(0 0% 100%), hsl(214 32% 95%));
+    --gradient-accent: linear-gradient(135deg, hsl(217 91% 59%), hsl(280 70% 55%), hsl(265 85% 58%));
+    --gradient-cosmic: linear-gradient(135deg, hsl(210 100% 97%), hsl(220 100% 96%), hsl(217 100% 95%));
+    --gradient-card: linear-gradient(145deg, hsl(0 0% 100%), hsl(214 32% 98%));
+    --gradient-glow: radial-gradient(circle at top, hsl(217 91% 59% / 0.1), transparent 60%);
+    
+    /* Light shadows */
+    --shadow-glow: 0 0 30px hsl(217 91% 59% / 0.15), 0 0 60px hsl(217 91% 59% / 0.08);
+    --shadow-glow-accent: 0 0 25px hsl(280 70% 55% / 0.2);
+    --shadow-card: 0 10px 40px -10px hsl(222 47% 11% / 0.08), 0 0 15px hsl(217 91% 59% / 0.05);
+    --shadow-elevated: 0 20px 50px -15px hsl(222 47% 11% / 0.1), 0 0 25px hsl(217 91% 59% / 0.08);
+    
+    /* Smooth transitions */
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-bounce: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  }
+
+  .dark {
     /* Dark cosmic space theme with vibrant neon accents */
     --background: 225 40% 4%;
     --foreground: 210 40% 98%;
@@ -38,8 +101,6 @@ All colors MUST be HSL.
     --border: 225 30% 18%;
     --input: 225 35% 12%;
     --ring: 217 91% 65%;
-
-    --radius: 0.875rem;
     
     /* Vibrant event category colors */
     --war: 0 75% 58%;
@@ -64,10 +125,6 @@ All colors MUST be HSL.
     --shadow-glow-accent: 0 0 30px hsl(280 70% 60% / 0.4);
     --shadow-card: 0 10px 50px -10px hsl(0 0% 0% / 0.6), 0 0 20px hsl(217 91% 65% / 0.1);
     --shadow-elevated: 0 20px 60px -15px hsl(0 0% 0% / 0.7), 0 0 30px hsl(217 91% 65% / 0.15);
-    
-    /* Smooth transitions */
-    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    --transition-bounce: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
   }
 }
 
@@ -79,6 +136,14 @@ All colors MUST be HSL.
   body {
     @apply bg-background text-foreground;
     font-feature-settings: "rlig" 1, "calt" 1;
+    transition: background 0.3s ease, color 0.3s ease;
+  }
+
+  body:not(.dark) {
+    background: linear-gradient(180deg, hsl(210 100% 98%), hsl(220 100% 96%));
+  }
+
+  .dark body {
     background: linear-gradient(180deg, hsl(225 40% 4%), hsl(250 50% 6%));
   }
   
@@ -88,17 +153,25 @@ All colors MUST be HSL.
     overflow: hidden;
   }
   
-  /* Cosmic background pattern */
+  /* Background pattern - light theme */
   body::before {
     content: '';
     position: fixed;
     inset: 0;
     background: 
+      radial-gradient(circle at 20% 30%, hsl(217 91% 59% / 0.05) 0%, transparent 50%),
+      radial-gradient(circle at 80% 70%, hsl(280 70% 55% / 0.05) 0%, transparent 50%),
+      radial-gradient(circle at 50% 50%, hsl(265 85% 58% / 0.03) 0%, transparent 60%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* Cosmic background pattern - dark theme */
+  .dark body::before {
+    background: 
       radial-gradient(circle at 20% 30%, hsl(217 91% 65% / 0.08) 0%, transparent 50%),
       radial-gradient(circle at 80% 70%, hsl(280 70% 60% / 0.08) 0%, transparent 50%),
       radial-gradient(circle at 50% 50%, hsl(265 85% 58% / 0.05) 0%, transparent 60%);
-    pointer-events: none;
-    z-index: 0;
   }
 }
 
