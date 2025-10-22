@@ -17,7 +17,7 @@ export const MapControls = ({
   onTimelineToggle
 }: MapControlsProps) => {
   return (
-    <div className="absolute right-3 bottom-3 md:left-4 md:right-auto md:bottom-4 z-20 
+    <div className="absolute right-3 bottom-3 md:left-4 md:right-auto md:bottom-4 z-40 
                     flex flex-wrap gap-1 md:gap-2 max-w-[calc(100vw-50%)] md:max-w-none animate-fade-in-up">
       <Button
         onClick={onTimelineToggle}

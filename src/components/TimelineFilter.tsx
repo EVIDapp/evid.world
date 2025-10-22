@@ -26,6 +26,7 @@ interface TimelineFilterProps {
   eventCount?: number;
   isOpen: boolean;
   onToggle: () => void;
+  onClose?: () => void;
 }
 
 export const TimelineFilter = ({
@@ -37,7 +38,8 @@ export const TimelineFilter = ({
   isAnimating,
   eventCount = 0,
   isOpen,
-  onToggle
+  onToggle,
+  onClose
 }: TimelineFilterProps) => {
   const [localRange, setLocalRange] = useState(selectedRange);
   const [isExpanded, setIsExpanded] = useState(true);
@@ -107,7 +109,7 @@ export const TimelineFilter = ({
             {isExpanded ? <ChevronUp className="w-3.5 h-3.5" /> : <ChevronDown className="w-3.5 h-3.5" />}
           </Button>
           <Button
-            onClick={onToggle}
+            onClick={onClose || onToggle}
             variant="ghost"
             size="icon"
             className="h-7 w-7 hover:bg-destructive/10 text-muted-foreground hover:text-destructive"

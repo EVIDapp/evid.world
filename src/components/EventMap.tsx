@@ -107,7 +107,7 @@ export const EventMap = () => {
           .map(parseYear)
           .filter(y => !isNaN(y));
         
-        const minYear = Math.min(...years);
+        const minYear = 1; // Start from year 1 CE
         const maxYear = Math.max(...years);
         
         setYearRange([minYear, maxYear]);
@@ -801,6 +801,10 @@ export const EventMap = () => {
             eventCount={filteredEvents.length}
             isOpen={isTimelineOpen}
             onToggle={() => setIsTimelineOpen(false)}
+            onClose={() => {
+              setIsTimelineOpen(false);
+              setSelectedYearRange([yearRange[0], yearRange[1]]);
+            }}
           />
 
           <EventLegend />
