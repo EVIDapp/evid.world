@@ -4831,7 +4831,8 @@
                 "lng": 8.68
             },
             "desc": "Pan-European religious and political conflict.",
-            "wiki": "https://en.wikipedia.org/wiki/Thirty_Years%27_War"
+            "wiki": "https://en.wikipedia.org/wiki/Thirty_Years%27_War",
+            "radiusKm": 1000
         },
         {
             "id": "seven_years_war_1756_1763",
@@ -4843,7 +4844,8 @@
                 "lng": 13.4
             },
             "desc": "Global conflict often considered the first 'world war'.",
-            "wiki": "https://en.wikipedia.org/wiki/Seven_Years%27_War"
+            "wiki": "https://en.wikipedia.org/wiki/Seven_Years%27_War",
+            "radiusKm": 1500
         },
         {
             "id": "franco_prussian_war_1870_1871",
@@ -4855,7 +4857,8 @@
                 "lng": 2.35
             },
             "desc": "War leading to German unification.",
-            "wiki": "https://en.wikipedia.org/wiki/Franco-Prussian_War"
+            "wiki": "https://en.wikipedia.org/wiki/Franco-Prussian_War",
+            "radiusKm": 400
         },
         {
             "id": "crimean_war_1853_1856",
@@ -4867,7 +4870,8 @@
                 "lng": 34.1
             },
             "desc": "Conflict on the Crimean Peninsula.",
-            "wiki": "https://en.wikipedia.org/wiki/Crimean_War"
+            "wiki": "https://en.wikipedia.org/wiki/Crimean_War",
+            "radiusKm": 300
         },
         {
             "id": "russo_japanese_war_1904_1905",
@@ -4879,7 +4883,8 @@
                 "lng": 140.72
             },
             "desc": "War over rival imperial ambitions in Manchuria and Korea.",
-            "wiki": "https://en.wikipedia.org/wiki/Russo-Japanese_War"
+            "wiki": "https://en.wikipedia.org/wiki/Russo-Japanese_War",
+            "radiusKm": 600
         },
         {
             "id": "russian_civil_war_1917_1923",
@@ -4891,7 +4896,8 @@
                 "lng": 37.62
             },
             "desc": "Multi-sided civil war after the Russian Revolution.",
-            "wiki": "https://en.wikipedia.org/wiki/Russian_Civil_War"
+            "wiki": "https://en.wikipedia.org/wiki/Russian_Civil_War",
+            "radiusKm": 2000
         },
         {
             "id": "chinese_civil_war_1927_1950",
@@ -4903,7 +4909,8 @@
                 "lng": 121.47
             },
             "desc": "Conflict between Nationalists and Communists.",
-            "wiki": "https://en.wikipedia.org/wiki/Chinese_Civil_War"
+            "wiki": "https://en.wikipedia.org/wiki/Chinese_Civil_War",
+            "radiusKm": 1500
         },
         {
             "id": "spanish_civil_war_1936_1939",
@@ -4915,7 +4922,8 @@
                 "lng": -3.7
             },
             "desc": "Precursor to WWII; Nationalist victory.",
-            "wiki": "https://en.wikipedia.org/wiki/Spanish_Civil_War"
+            "wiki": "https://en.wikipedia.org/wiki/Spanish_Civil_War",
+            "radiusKm": 600
         },
         {
             "id": "first_indochina_war_1946_1954",
@@ -4927,7 +4935,8 @@
                 "lng": 105.85
             },
             "desc": "War between French Union and Viet Minh.",
-            "wiki": "https://en.wikipedia.org/wiki/First_Indochina_War"
+            "wiki": "https://en.wikipedia.org/wiki/First_Indochina_War",
+            "radiusKm": 500
         },
         {
             "id": "algerian_war_1954_1962",
@@ -4939,7 +4948,8 @@
                 "lng": 3.06
             },
             "desc": "War for Algerian independence from France.",
-            "wiki": "https://en.wikipedia.org/wiki/Algerian_War"
+            "wiki": "https://en.wikipedia.org/wiki/Algerian_War",
+            "radiusKm": 700
         },
         {
             "id": "six_day_war_1967_overall",
@@ -4964,7 +4974,8 @@
                 "lng": 31.25
             },
             "desc": "Arab–Israeli War of 1973.",
-            "wiki": "https://en.wikipedia.org/wiki/Yom_Kippur_War"
+            "wiki": "https://en.wikipedia.org/wiki/Yom_Kippur_War",
+            "radiusKm": 400
         },
         {
             "id": "iran_iraq_war_1980_1988",
@@ -4976,7 +4987,8 @@
                 "lng": 44.4
             },
             "desc": "Prolonged conflict between Iran and Iraq.",
-            "wiki": "https://en.wikipedia.org/wiki/Iran%E2%80%93Iraq_War"
+            "wiki": "https://en.wikipedia.org/wiki/Iran%E2%80%93Iraq_War",
+            "radiusKm": 600
         },
         {
             "id": "gulf_war_1990_1991",
@@ -4988,7 +5000,8 @@
                 "lng": 47.98
             },
             "desc": "U.S.-led coalition expelled Iraqi forces from Kuwait.",
-            "wiki": "https://en.wikipedia.org/wiki/Gulf_War"
+            "wiki": "https://en.wikipedia.org/wiki/Gulf_War",
+            "radiusKm": 300
         },
         {
             "id": "bosnian_war_1992_1995",
@@ -5000,7 +5013,8 @@
                 "lng": 18.41
             },
             "desc": "Part of the Yugoslav Wars after breakup of Yugoslavia.",
-            "wiki": "https://en.wikipedia.org/wiki/Bosnian_War"
+            "wiki": "https://en.wikipedia.org/wiki/Bosnian_War",
+            "radiusKm": 200
         },
         {
             "id": "kosovo_war_1998_1999",
@@ -5012,7 +5026,8 @@
                 "lng": 21.16
             },
             "desc": "Conflict in Kosovo and NATO bombing of Yugoslavia.",
-            "wiki": "https://en.wikipedia.org/wiki/Kosovo_War"
+            "wiki": "https://en.wikipedia.org/wiki/Kosovo_War",
+            "radiusKm": 150
         },
         {
             "id": "soviet_afghan_war_1979_1989",
@@ -5024,7 +5039,8 @@
                 "lng": 69.17
             },
             "desc": "Soviet intervention against Afghan mujahideen.",
-            "wiki": "https://en.wikipedia.org/wiki/Soviet%E2%80%93Afghan_War"
+            "wiki": "https://en.wikipedia.org/wiki/Soviet%E2%80%93Afghan_War",
+            "radiusKm": 650
         },
         {
             "id": "war_in_afghanistan_2001_2021",
@@ -5036,7 +5052,8 @@
                 "lng": 69.17
             },
             "desc": "U.S.-led invasion and subsequent insurgency.",
-            "wiki": "https://en.wikipedia.org/wiki/War_in_Afghanistan_(2001%E2%80%932021)"
+            "wiki": "https://en.wikipedia.org/wiki/War_in_Afghanistan_(2001%E2%80%932021)",
+            "radiusKm": 650
         },
         {
             "id": "iraq_war_2003_2011",
@@ -5048,7 +5065,8 @@
                 "lng": 44.4
             },
             "desc": "U.S.-led invasion toppled Saddam Hussein.",
-            "wiki": "https://en.wikipedia.org/wiki/Iraq_War"
+            "wiki": "https://en.wikipedia.org/wiki/Iraq_War",
+            "radiusKm": 500
         },
         {
             "id": "syrian_civil_war_2011_present",
@@ -5060,7 +5078,8 @@
                 "lng": 36.29
             },
             "desc": "Multi-sided conflict in Syria.",
-            "wiki": "https://en.wikipedia.org/wiki/Syrian_civil_war"
+            "wiki": "https://en.wikipedia.org/wiki/Syrian_civil_war",
+            "radiusKm": 400
         },
         {
             "id": "tigray_war_2020_2022",
@@ -5072,7 +5091,8 @@
                 "lng": 38.72
             },
             "desc": "Conflict in Ethiopia's Tigray Region.",
-            "wiki": "https://en.wikipedia.org/wiki/Tigray_War"
+            "wiki": "https://en.wikipedia.org/wiki/Tigray_War",
+            "radiusKm": 300
         },
         {
             "id": "nagorno_karabakh_war_2020",
@@ -5084,7 +5104,8 @@
                 "lng": 46.3
             },
             "desc": "War between Azerbaijan and Armenia-backed forces.",
-            "wiki": "https://en.wikipedia.org/wiki/2020_Nagorno-Karabakh_war"
+            "wiki": "https://en.wikipedia.org/wiki/2020_Nagorno-Karabakh_war",
+            "radiusKm": 150
         },
         {
             "id": "russian_invasion_ukraine_2022",
@@ -5096,7 +5117,8 @@
                 "lng": 30.52
             },
             "desc": "Full-scale invasion launched by Russia.",
-            "wiki": "https://en.wikipedia.org/wiki/Russian_invasion_of_Ukraine"
+            "wiki": "https://en.wikipedia.org/wiki/Russian_invasion_of_Ukraine",
+            "radiusKm": 800
         },
         {
             "id": "first_gulf_war_battle_73_east",
@@ -5108,7 +5130,8 @@
                 "lng": 46.79
             },
             "desc": "Tank battle during the Gulf War.",
-            "wiki": "https://en.wikipedia.org/wiki/Battle_of_73_Easting"
+            "wiki": "https://en.wikipedia.org/wiki/Battle_of_73_Easting",
+            "radiusKm": 5
         },
         {
             "id": "battle_of_gettysburg_1863",
@@ -5120,7 +5143,8 @@
                 "lng": -77.23
             },
             "desc": "Turning point of the American Civil War.",
-            "wiki": "https://en.wikipedia.org/wiki/Battle_of_Gettysburg"
+            "wiki": "https://en.wikipedia.org/wiki/Battle_of_Gettysburg",
+            "radiusKm": 10
         },
         {
             "id": "battle_of_leb_britain_blitz",
@@ -5132,7 +5156,8 @@
                 "lng": -0.13
             },
             "desc": "German bombing campaign against the UK.",
-            "wiki": "https://en.wikipedia.org/wiki/The_Blitz"
+            "wiki": "https://en.wikipedia.org/wiki/The_Blitz",
+            "radiusKm": 250
         },
         {
             "id": "battle_of_el_alamein_1942",

@@ -1,15 +1,19 @@
 import { HistoricalEvent } from '@/types/event';
 
 export const deduplicateEvents = (events: HistoricalEvent[]): HistoricalEvent[] => {
-  // IDs to remove (duplicates identified) - explicitly remove only _point when _area exists
+  // IDs to remove (duplicates identified)
   const idsToRemove = new Set([
+    // Remove _point versions when _area exists
     'tunguska_event_1908_point',
     'san_francisco_earthquake_1906_point', 
     'alaska_earthquake_1964_point',
     'beslan_school_siege_2004_point',
     'austerlitz_battle_1805_point',
     'gaugamela_battle_331bc_point',
-    'chelyabinsk_meteor_2013_point', // Remove point, keep area version
+    'chelyabinsk_meteor_2013_point', // Remove point, keep area version (radiusKm: 50)
+    // Remove duplicate Titanics
+    'titanic_shipwreck_1912',
+    'titanic_shipwreck_1912_chatgpt_v2',
   ]);
 
   // Track seen event titles (normalized)
