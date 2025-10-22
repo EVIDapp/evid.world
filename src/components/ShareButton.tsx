@@ -7,6 +7,12 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from '@/components/ui/popover';
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from '@/components/ui/tooltip';
 
 interface ShareButtonProps {
   searchQuery?: string;
@@ -71,53 +77,62 @@ export const ShareButton = ({ searchQuery, selectedTypes, yearRange }: ShareButt
   };
 
   return (
-    <Popover>
-      <PopoverTrigger asChild>
-        <Button
-          variant="secondary"
-          size="icon"
-          className="shadow-elevated backdrop-blur-strong gradient-card border-border/50 
-                     h-9 w-9 transition-bounce hover:shadow-glow hover:border-primary/30 hover:scale-105"
-        >
-          <Share2 className="w-4 h-4" />
-        </Button>
-      </PopoverTrigger>
-      <PopoverContent className="w-64 p-3" align="end">
-        <div className="space-y-2">
-          <p className="text-xs text-muted-foreground mb-3">
-            Share this view with others
-          </p>
-          {navigator.share && (
-            <Button
-              onClick={handleNativeShare}
-              variant="secondary"
-              size="sm"
-              className="w-full justify-start"
-            >
-              <Share2 className="w-4 h-4 mr-2" />
-              Share
-            </Button>
-          )}
-          <Button
-            onClick={handleCopy}
-            variant="secondary"
-            size="sm"
-            className="w-full justify-start"
-          >
-            {copied ? (
-              <>
-                <Check className="w-4 h-4 mr-2 text-green-500" />
-                Copied!
-              </>
-            ) : (
-              <>
-                <Copy className="w-4 h-4 mr-2" />
-                Copy Link
-              </>
-            )}
-          </Button>
-        </div>
-      </PopoverContent>
-    </Popover>
+    <TooltipProvider>
+      <Tooltip>
+        <Popover>
+          <TooltipTrigger asChild>
+            <PopoverTrigger asChild>
+              <Button
+                variant="secondary"
+                size="icon"
+                className="shadow-elevated backdrop-blur-strong gradient-card border-border/50 
+                           h-9 w-9 transition-bounce hover:shadow-glow hover:border-primary/30 hover:scale-105"
+              >
+                <Share2 className="w-4 h-4" />
+              </Button>
+            </PopoverTrigger>
+          </TooltipTrigger>
+          <TooltipContent side="left">
+            <p>Share map with filters</p>
+          </TooltipContent>
+          <PopoverContent className="w-64 p-3" align="end">
+            <div className="space-y-2">
+              <p className="text-xs text-muted-foreground mb-3">
+                Share this view with others
+              </p>
+              {navigator.share && (
+                <Button
+                  onClick={handleNativeShare}
+                  variant="secondary"
+                  size="sm"
+                  className="w-full justify-start"
+                >
+                  <Share2 className="w-4 h-4 mr-2" />
+                  Share
+                </Button>
+              )}
+              <Button
+                onClick={handleCopy}
+                variant="secondary"
+                size="sm"
+                className="w-full justify-start"
+              >
+                {copied ? (
+                  <>
+                    <Check className="w-4 h-4 mr-2 text-green-500" />
+                    Copied!
+                  </>
+                ) : (
+                  <>
+                    <Copy className="w-4 h-4 mr-2" />
+                    Copy Link
+                  </>
+                )}
+              </Button>
+            </div>
+          </PopoverContent>
+        </Popover>
+      </Tooltip>
+    </TooltipProvider>
   );
 };

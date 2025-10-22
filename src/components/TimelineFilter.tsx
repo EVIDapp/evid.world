@@ -71,7 +71,7 @@ export const TimelineFilter = ({
         <Slider
           min={minYear}
           max={maxYear}
-          step={1}
+          step={100}
           value={localRange}
           onValueChange={handleSliderChange}
           onValueCommit={handleSliderCommit}

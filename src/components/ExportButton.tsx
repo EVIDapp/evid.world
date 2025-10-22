@@ -9,6 +9,12 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from '@/components/ui/tooltip';
 
 interface ExportButtonProps {
   events: HistoricalEvent[];
@@ -35,31 +41,40 @@ export const ExportButton = ({ events, filteredEvents }: ExportButtonProps) => {
   };
 
   return (
-    <DropdownMenu>
-      <DropdownMenuTrigger asChild>
-        <Button
-          variant="secondary"
-          size="icon"
-          className="shadow-elevated backdrop-blur-strong gradient-card border-border/50 
-                     h-9 w-9 transition-bounce hover:shadow-glow hover:border-primary/30 hover:scale-105"
-        >
-          <Download className="w-4 h-4" />
-        </Button>
-      </DropdownMenuTrigger>
-      <DropdownMenuContent align="end" className="w-56">
-        <DropdownMenuItem onClick={() => handleExport('csv', true)}>
-          Export Filtered as CSV
-        </DropdownMenuItem>
-        <DropdownMenuItem onClick={() => handleExport('json', true)}>
-          Export Filtered as JSON
-        </DropdownMenuItem>
-        <DropdownMenuItem onClick={() => handleExport('csv', false)}>
-          Export All as CSV
-        </DropdownMenuItem>
-        <DropdownMenuItem onClick={() => handleExport('json', false)}>
-          Export All as JSON
-        </DropdownMenuItem>
-      </DropdownMenuContent>
-    </DropdownMenu>
+    <TooltipProvider>
+      <Tooltip>
+        <DropdownMenu>
+          <TooltipTrigger asChild>
+            <DropdownMenuTrigger asChild>
+              <Button
+                variant="secondary"
+                size="icon"
+                className="shadow-elevated backdrop-blur-strong gradient-card border-border/50 
+                           h-9 w-9 transition-bounce hover:shadow-glow hover:border-primary/30 hover:scale-105"
+              >
+                <Download className="w-4 h-4" />
+              </Button>
+            </DropdownMenuTrigger>
+          </TooltipTrigger>
+          <TooltipContent side="left">
+            <p>Export data</p>
+          </TooltipContent>
+          <DropdownMenuContent align="end" className="w-56">
+            <DropdownMenuItem onClick={() => handleExport('csv', true)}>
+              Export Filtered as CSV
+            </DropdownMenuItem>
+            <DropdownMenuItem onClick={() => handleExport('json', true)}>
+              Export Filtered as JSON
+            </DropdownMenuItem>
+            <DropdownMenuItem onClick={() => handleExport('csv', false)}>
+              Export All as CSV
+            </DropdownMenuItem>
+            <DropdownMenuItem onClick={() => handleExport('json', false)}>
+              Export All as JSON
+            </DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
+      </Tooltip>
+    </TooltipProvider>
   );
 };

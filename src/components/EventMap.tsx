@@ -13,6 +13,7 @@ import { TimelineFilter } from './TimelineFilter';
 import { ShareButton } from './ShareButton';
 import { ExportButton } from './ExportButton';
 import { HistoryPanel } from './HistoryPanel';
+import { TooltipButton } from './TooltipButton';
 import { useToast } from '@/hooks/use-toast';
 import { useTheme } from 'next-themes';
 import { Input } from '@/components/ui/input';
@@ -60,10 +61,18 @@ export const EventMap = () => {
 
   // Parse year from event data
   const parseYear = (event: HistoricalEvent): number => {
-    if (!event.year) return 2024;
+    if (!event.year) return new Date().getFullYear();
     const yearStr = event.year.toString();
+    
+    // Handle BC years
+    if (yearStr.includes('BC') || yearStr.includes('bc')) {
+      const match = yearStr.match(/\d+/);
+      return match ? -parseInt(match[0]) : new Date().getFullYear();
+    }
+    
+    // Handle regular years
     const match = yearStr.match(/-?\d+/);
-    return match ? parseInt(match[0]) : 2024;
+    return match ? parseInt(match[0]) : new Date().getFullYear();
   };
 
   // Load events data
@@ -152,12 +161,13 @@ export const EventMap = () => {
       });
 
       // Add navigation controls without compass
+      // Add navigation controls to bottom right to align with other buttons
       map.current.addControl(
         new mapboxgl.NavigationControl({
           visualizePitch: true,
           showCompass: false
         }),
-        'top-right'
+        'bottom-right'
       );
 
       // Track zoom changes for clustering
@@ -180,10 +190,7 @@ export const EventMap = () => {
         setMapLoaded(true);
       });
 
-      toast({
-        title: "Map initialized",
-        description: "Mapbox loaded successfully",
-      });
+      // Map initialized silently
     } catch (error) {
       console.error('Error initializing Mapbox:', error);
       toast({
@@ -747,25 +754,17 @@ export const EventMap = () => {
               onEventSelect={handleEventSelect}
               onClearHistory={clearHistory}
             />
-            <Button
+            <TooltipButton
               onClick={() => {
                 const newProjection = projection === 'globe' ? 'mercator' : 'globe';
                 setProjection(newProjection);
                 if (map.current) {
                   map.current.setProjection(newProjection);
-                  toast({
-                    title: `Map projection: ${newProjection}`,
-                    description: newProjection === 'globe' ? 'Viewing 3D globe' : 'Viewing flat map',
-                  });
                 }
               }}
-              variant="secondary"
-              size="icon"
-              className="shadow-elevated backdrop-blur-strong gradient-card border-border/50 
-                         h-9 w-9 transition-bounce hover:shadow-glow hover:border-primary/30 hover:scale-105"
-            >
-              {projection === 'globe' ? '🗺️' : '🌐'}
-            </Button>
+              icon={projection === 'globe' ? '🗺️' : '🌐'}
+              tooltip={projection === 'globe' ? 'Flat map' : '3D Globe'}
+            />
           </div>
         </>
       )}
