@@ -15,6 +15,7 @@ interface SearchPanelProps {
   onDemandToggle: () => void;
   searchQuery: string;
   onEventSelect?: (event: HistoricalEvent) => void;
+  searchInputRef?: React.RefObject<HTMLInputElement>;
 }
 
 export const SearchPanel = ({
@@ -26,6 +27,7 @@ export const SearchPanel = ({
   onDemandToggle,
   searchQuery,
   onEventSelect,
+  searchInputRef,
 }: SearchPanelProps) => {
   const [suggestions, setSuggestions] = useState<HistoricalEvent[]>([]);
   const [showSuggestions, setShowSuggestions] = useState(false);
@@ -56,31 +58,32 @@ export const SearchPanel = ({
 
   return (
     <div className="absolute top-3 left-3 md:top-4 md:left-4 w-[calc(100vw-1.5rem)] md:w-[360px] z-20 
-                    gradient-card backdrop-blur-strong border border-border/50 rounded-2xl 
-                    p-3 md:p-4 shadow-elevated animate-slide-in">
+                    gradient-card backdrop-blur-strong border border-border/50 rounded-xl md:rounded-2xl 
+                    p-2.5 md:p-4 shadow-elevated animate-slide-in max-h-[calc(100vh-6rem)] overflow-y-auto">
       {/* Brand */}
-      <div className="flex items-center gap-2 md:gap-3 mb-3 md:mb-4 animate-fade-in">
-        <div className="w-7 h-7 md:w-9 md:h-9 rounded-full gradient-cosmic shadow-glow-accent 
+      <div className="flex items-center gap-2 md:gap-3 mb-2 md:mb-4 animate-fade-in">
+        <div className="w-6 h-6 md:w-9 md:h-9 rounded-full gradient-cosmic shadow-glow-accent 
                         flex items-center justify-center animate-pulse-glow">
-          <span className="text-base md:text-lg font-bold text-white">E</span>
+          <span className="text-sm md:text-lg font-bold text-white">E</span>
         </div>
-        <h1 className="text-lg md:text-xl font-bold tracking-tight bg-gradient-to-r from-primary via-accent to-primary-glow bg-clip-text text-transparent">
+        <h1 className="text-base md:text-xl font-bold tracking-tight bg-gradient-to-r from-primary via-accent to-primary-glow bg-clip-text text-transparent">
           EVID
         </h1>
       </div>
 
       {/* Search */}
-      <div className="mb-3 md:mb-4 relative">
-        <label className="text-xs text-muted-foreground mb-1.5 md:mb-2 block font-medium">Search Events</label>
+      <div className="mb-2 md:mb-4 relative">
+        <label className="text-[10px] md:text-xs text-muted-foreground mb-1 md:mb-2 block font-medium">Search Events</label>
         <div className="relative group">
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground 
                              group-focus-within:text-primary transition-smooth" />
           <Input
+            ref={searchInputRef}
             value={searchQuery}
             onChange={(e) => onSearch(e.target.value)}
             onFocus={() => suggestions.length > 0 && setShowSuggestions(true)}
             placeholder="Keyword, type or country..."
-            className="pl-10 pr-10 bg-input/80 border-border/50 transition-smooth h-9 md:h-10 text-sm
+            className="pl-9 pr-9 bg-input/80 border-border/50 transition-smooth h-8 md:h-10 text-xs md:text-sm
                        focus:border-primary/50 focus:shadow-glow hover:border-border"
           />
           {searchQuery && (
@@ -123,9 +126,9 @@ export const SearchPanel = ({
       </div>
 
       {/* Categories */}
-      <div className="mb-3 md:mb-4">
-        <label className="text-xs text-muted-foreground mb-1.5 md:mb-2 block font-medium">Categories</label>
-        <div className="flex flex-wrap gap-1.5 md:gap-2">
+      <div className="mb-2 md:mb-4">
+        <label className="text-[10px] md:text-xs text-muted-foreground mb-1 md:mb-2 block font-medium">Categories</label>
+        <div className="flex flex-wrap gap-1 md:gap-2">
           {Object.entries(EVENT_COLORS).map(([type, { fill, label }]) => (
             <Badge
               key={type}
@@ -148,8 +151,8 @@ export const SearchPanel = ({
       </div>
 
       {/* On-demand toggle */}
-      <div className="flex items-center gap-2 text-xs text-muted-foreground bg-muted/30 
-                      rounded-lg p-2 border border-border/30">
+      <div className="flex items-center gap-2 text-[10px] md:text-xs text-muted-foreground bg-muted/30 
+                      rounded-lg p-1.5 md:p-2 border border-border/30">
         <Checkbox 
           id="onDemand" 
           checked={onDemandMode} 

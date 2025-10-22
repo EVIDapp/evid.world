@@ -1,6 +1,7 @@
-import { useEffect, useRef, useState, useCallback } from 'react';
+import { useEffect, useRef, useState, useCallback, useMemo } from 'react';
 import mapboxgl from 'mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
+import Supercluster from 'supercluster';
 import { HistoricalEvent, EventType } from '@/types/event';
 import { getEventColor, AREA_CATEGORIES } from '@/utils/eventColors';
 import { circleToPolygon } from '@/utils/geometry';
@@ -8,6 +9,10 @@ import { SearchPanel } from './SearchPanel';
 import { MapControls } from './MapControls';
 import { EventLegend } from './EventLegend';
 import { ThemeToggle } from './ThemeToggle';
+import { TimelineFilter } from './TimelineFilter';
+import { ShareButton } from './ShareButton';
+import { ExportButton } from './ExportButton';
+import { HistoryPanel } from './HistoryPanel';
 import { useToast } from '@/hooks/use-toast';
 import { useTheme } from 'next-themes';
 import { Input } from '@/components/ui/input';
@@ -15,6 +20,8 @@ import { Button } from '@/components/ui/button';
 import { Key } from 'lucide-react';
 import { getWikipediaImage } from '@/utils/wikipediaImage';
 import { deduplicateEvents } from '@/utils/deduplicateEvents';
+import { useKeyboardShortcuts } from '@/hooks/useKeyboardShortcuts';
+import { useEventHistory } from '@/hooks/useEventHistory';
 
 const WORLD_BOUNDS = {
   north: 85,
@@ -27,8 +34,10 @@ export const EventMap = () => {
   const mapContainer = useRef<HTMLDivElement>(null);
   const map = useRef<mapboxgl.Map | null>(null);
   const markersRef = useRef<mapboxgl.Marker[]>([]);
+  const clusterMarkersRef = useRef<mapboxgl.Marker[]>([]);
   const polygonsRef = useRef<string[]>([]);
   const activePolygonRef = useRef<string | null>(null);
+  const searchInputRef = useRef<HTMLInputElement>(null);
   
   const [events, setEvents] = useState<HistoricalEvent[]>([]);
   const [filteredEvents, setFilteredEvents] = useState<HistoricalEvent[]>([]);
@@ -40,9 +49,22 @@ export const EventMap = () => {
   const [tokenSubmitted, setTokenSubmitted] = useState(true);
   const [mapLoaded, setMapLoaded] = useState(false);
   const [projection, setProjection] = useState<'globe' | 'mercator'>('globe');
+  const [yearRange, setYearRange] = useState<[number, number]>([0, 0]);
+  const [selectedYearRange, setSelectedYearRange] = useState<[number, number]>([0, 0]);
+  const [isAnimating, setIsAnimating] = useState(false);
+  const [currentZoom, setCurrentZoom] = useState(2.2);
+  const { history, addToHistory, clearHistory } = useEventHistory();
   
   const { toast } = useToast();
   const { theme } = useTheme();
+
+  // Parse year from event data
+  const parseYear = (event: HistoricalEvent): number => {
+    if (!event.year) return 2024;
+    const yearStr = event.year.toString();
+    const match = yearStr.match(/-?\d+/);
+    return match ? parseInt(match[0]) : 2024;
+  };
 
   // Load events data
   useEffect(() => {
@@ -51,8 +73,20 @@ export const EventMap = () => {
       .then(data => {
         // Deduplicate events
         const uniqueEvents = deduplicateEvents(data);
+        
+        // Calculate year range
+        const years = uniqueEvents
+          .map(parseYear)
+          .filter(y => !isNaN(y));
+        
+        const minYear = Math.min(...years);
+        const maxYear = Math.max(...years);
+        
+        setYearRange([minYear, maxYear]);
+        setSelectedYearRange([minYear, maxYear]);
         setEvents(uniqueEvents);
         setLoading(false);
+        
         if (uniqueEvents.length > 0) {
           toast({
             title: "Events loaded",
@@ -70,6 +104,28 @@ export const EventMap = () => {
         });
       });
   }, [toast]);
+
+  // Parse URL parameters on mount
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    
+    const query = params.get('q');
+    if (query) setSearchQuery(query);
+    
+    const types = params.get('types');
+    if (types) {
+      const typeArray = types.split(',') as EventType[];
+      setSelectedTypes(new Set(typeArray));
+    }
+    
+    const years = params.get('years');
+    if (years) {
+      const [start, end] = years.split('-').map(Number);
+      if (!isNaN(start) && !isNaN(end)) {
+        setSelectedYearRange([start, end]);
+      }
+    }
+  }, []);
 
   // Initialize Mapbox map
   useEffect(() => {
@@ -103,6 +159,13 @@ export const EventMap = () => {
         }),
         'top-right'
       );
+
+      // Track zoom changes for clustering
+      map.current.on('zoom', () => {
+        if (map.current) {
+          setCurrentZoom(map.current.getZoom());
+        }
+      });
 
       // Add custom theme styling and mark map as loaded
       map.current.on('load', () => {
@@ -167,7 +230,7 @@ export const EventMap = () => {
     });
   }, [theme]);
 
-  // Filter events based on search and selected types
+  // Filter events based on search, selected types, and year range
   useEffect(() => {
     let filtered = events;
 
@@ -185,8 +248,33 @@ export const EventMap = () => {
       filtered = filtered.filter(e => selectedTypes.has(e.type));
     }
 
+    // Filter by year range
+    filtered = filtered.filter(e => {
+      const eventYear = parseYear(e);
+      return eventYear >= selectedYearRange[0] && eventYear <= selectedYearRange[1];
+    });
+
     setFilteredEvents(filtered);
-  }, [events, searchQuery, selectedTypes]);
+  }, [events, searchQuery, selectedTypes, selectedYearRange]);
+
+  // Timeline animation
+  useEffect(() => {
+    if (!isAnimating || yearRange[0] === yearRange[1]) return;
+    
+    const yearStep = Math.ceil((yearRange[1] - yearRange[0]) / 100);
+    const interval = setInterval(() => {
+      setSelectedYearRange(prev => {
+        const newEnd = prev[1] + yearStep;
+        if (newEnd >= yearRange[1]) {
+          setIsAnimating(false);
+          return [yearRange[0], yearRange[1]];
+        }
+        return [yearRange[0], newEnd];
+      });
+    }, 100);
+
+    return () => clearInterval(interval);
+  }, [isAnimating, yearRange]);
 
   // Render markers when filtered events change
   useEffect(() => {
@@ -444,6 +532,9 @@ export const EventMap = () => {
   const handleEventSelect = useCallback((event: HistoricalEvent) => {
     if (!map.current) return;
     
+    // Add to history
+    addToHistory(event);
+    
     const zoomLevel = event.radiusKm && AREA_CATEGORIES.has(event.type) 
       ? Math.min(9, Math.max(5, 11 - Math.log2(event.radiusKm / 10)))
       : 10;
@@ -472,7 +563,7 @@ export const EventMap = () => {
         }
       }
     }, 1600);
-  }, [filteredEvents, showPolygon]);
+  }, [filteredEvents, showPolygon, addToHistory]);
 
   const handleTypeToggle = (type: EventType) => {
     setSelectedTypes(prev => {
@@ -502,11 +593,23 @@ export const EventMap = () => {
     if (map.current) {
       map.current.flyTo({
         center: [0, 20],
-        zoom: 1.2,
+        zoom: 2.2,
         duration: 1500
       });
     }
   };
+
+  const handleToggleSearch = useCallback(() => {
+    searchInputRef.current?.focus();
+  }, []);
+
+  // Keyboard shortcuts
+  useKeyboardShortcuts({
+    onShowAll: handleShowAll,
+    onClear: handleClear,
+    onResetView: handleResetView,
+    onToggleSearch: handleToggleSearch,
+  });
 
   const handleTokenSubmit = () => {
     if (mapboxToken.trim()) {
@@ -607,6 +710,7 @@ export const EventMap = () => {
             onDemandToggle={() => setOnDemandMode(!onDemandMode)}
             searchQuery={searchQuery}
             onEventSelect={handleEventSelect}
+            searchInputRef={searchInputRef}
           />
 
           <MapControls
@@ -618,8 +722,31 @@ export const EventMap = () => {
 
           <EventLegend />
 
+          <TimelineFilter
+            minYear={yearRange[0]}
+            maxYear={yearRange[1]}
+            selectedRange={selectedYearRange}
+            onRangeChange={setSelectedYearRange}
+            onAnimate={setIsAnimating}
+            isAnimating={isAnimating}
+          />
+
           <div className="absolute top-[88px] right-3 md:right-4 z-[5] flex flex-col gap-2 animate-fade-in">
             <ThemeToggle />
+            <ShareButton 
+              searchQuery={searchQuery}
+              selectedTypes={Array.from(selectedTypes)}
+              yearRange={selectedYearRange}
+            />
+            <ExportButton 
+              events={events}
+              filteredEvents={filteredEvents}
+            />
+            <HistoryPanel
+              history={history}
+              onEventSelect={handleEventSelect}
+              onClearHistory={clearHistory}
+            />
             <Button
               onClick={() => {
                 const newProjection = projection === 'globe' ? 'mercator' : 'globe';

@@ -16,18 +16,18 @@ export const MapControls = ({
 }: MapControlsProps) => {
   return (
     <div className="absolute left-3 bottom-3 md:left-4 md:bottom-4 z-20 
-                    flex flex-wrap gap-2 max-w-[calc(100vw-50%)] md:max-w-none animate-fade-in-up">
+                    flex flex-wrap gap-1.5 md:gap-2 max-w-[calc(100vw-50%)] md:max-w-none animate-fade-in-up">
       <Button
         onClick={onShowAll}
         variant="secondary"
         size="sm"
         className="shadow-elevated backdrop-blur-strong gradient-card border-border/50 
-                   h-8 md:h-9 text-xs md:text-sm px-2 md:px-3 transition-bounce
+                   h-7 md:h-9 text-[10px] md:text-sm px-1.5 md:px-3 transition-bounce
                    hover:shadow-glow hover:border-primary/30 hover:scale-105"
       >
-        <Eye className="w-3 h-3 md:w-4 md:h-4 mr-1 md:mr-2" />
-        <span className="hidden md:inline">Show all</span>
-        <span className="md:hidden">Show</span>
+        <Eye className="w-3 h-3 md:w-4 md:h-4 mr-0.5 md:mr-2" />
+        <span className="hidden sm:inline">Show all</span>
+        <span className="sm:hidden">Show</span>
       </Button>
       
       <Button
@@ -35,11 +35,12 @@ export const MapControls = ({
         variant="secondary"
         size="sm"
         className="shadow-elevated backdrop-blur-strong gradient-card border-border/50 
-                   h-8 md:h-9 text-xs md:text-sm px-2 md:px-3 transition-bounce
+                   h-7 md:h-9 text-[10px] md:text-sm px-1.5 md:px-3 transition-bounce
                    hover:shadow-glow hover:border-destructive/30 hover:scale-105"
       >
-        <EyeOff className="w-3 h-3 md:w-4 md:h-4 mr-1 md:mr-2" />
-        Clear
+        <EyeOff className="w-3 h-3 md:w-4 md:h-4 mr-0.5 md:mr-2" />
+        <span className="hidden sm:inline">Clear</span>
+        <span className="sm:hidden">C</span>
       </Button>
       
       <Button
@@ -47,11 +48,12 @@ export const MapControls = ({
         variant="ghost"
         size="sm"
         className="shadow-card backdrop-blur-strong bg-card/50 border border-border/30 
-                   opacity-70 hover:opacity-100 h-8 md:h-9 text-xs md:text-sm px-2 md:px-3
+                   opacity-70 hover:opacity-100 h-7 md:h-9 text-[10px] md:text-sm px-1.5 md:px-3
                    transition-bounce hover:border-accent/30 hover:scale-105"
       >
-        <RotateCcw className="w-3 h-3 md:w-4 md:h-4 mr-1 md:mr-2" />
-        <span className="hidden md:inline">Reset</span>
+        <RotateCcw className="w-3 h-3 md:w-4 md:h-4 mr-0.5 md:mr-2" />
+        <span className="hidden sm:inline">Reset</span>
+        <span className="sm:hidden">R</span>
       </Button>
     </div>
   );
