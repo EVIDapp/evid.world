@@ -49,10 +49,8 @@ export const TimelineFilter = ({
   const handleSliderChange = (value: number[]) => {
     const newRange: [number, number] = [value[0], value[1]];
     setLocalRange(newRange);
-  };
-
-  const handleSliderCommit = () => {
-    onRangeChange(localRange);
+    // Обновляем события в реальном времени
+    onRangeChange(newRange);
   };
 
   const handleReset = () => {
@@ -156,10 +154,9 @@ export const TimelineFilter = ({
             <Slider
               min={minYear}
               max={maxYear}
-              step={10}
+              step={100}
               value={localRange}
               onValueChange={handleSliderChange}
-              onValueCommit={handleSliderCommit}
               className="w-full"
             />
             
