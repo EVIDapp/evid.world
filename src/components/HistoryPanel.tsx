@@ -33,9 +33,9 @@ export const HistoryPanel = ({ history, onEventSelect, onClearHistory }: History
                 variant="secondary"
                 size="icon"
                 className="shadow-elevated backdrop-blur-strong gradient-card border-border/50 
-                           h-9 w-9 transition-bounce hover:shadow-glow hover:border-primary/30 hover:scale-105 relative"
+                           h-8 w-8 md:h-9 md:w-9 transition-bounce hover:shadow-glow hover:border-primary/30 hover:scale-105 relative"
               >
-                <Clock className="w-4 h-4" />
+                <Clock className="w-3.5 h-3.5 md:w-4 md:h-4" />
                 {history.length > 0 && (
                   <span className="absolute -top-1 -right-1 bg-primary text-primary-foreground text-[10px] 
                                font-bold rounded-full w-4 h-4 flex items-center justify-center">

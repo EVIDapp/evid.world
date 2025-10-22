@@ -42,7 +42,7 @@ export const TimelineFilter = ({
   };
 
   return (
-    <div className="absolute bottom-20 md:bottom-16 left-3 right-3 md:left-4 md:right-auto md:w-[400px] z-20 
+    <div className="absolute bottom-[60px] md:bottom-16 left-3 right-[50%] md:left-4 md:right-auto md:w-[400px] z-20 
                     gradient-card backdrop-blur-strong border border-border/50 rounded-xl md:rounded-2xl 
                     p-2.5 md:p-4 shadow-elevated animate-fade-in-up">
       <div className="flex items-center justify-between mb-2 md:mb-3">

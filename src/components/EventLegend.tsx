@@ -2,7 +2,7 @@ import { EVENT_COLORS } from '@/utils/eventColors';
 
 export const EventLegend = () => {
   return (
-    <div className="absolute right-3 bottom-3 md:right-4 md:bottom-4 z-20 
+    <div className="hidden md:block absolute right-3 bottom-3 md:right-4 md:bottom-4 z-20 
                     gradient-card backdrop-blur-strong border border-border/50 rounded-xl 
                     p-3 md:p-4 shadow-elevated animate-fade-in-up max-w-[200px] md:max-w-none">
       <h3 className="text-xs md:text-sm font-semibold mb-2 md:mb-3 text-foreground 

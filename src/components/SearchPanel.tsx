@@ -57,9 +57,9 @@ export const SearchPanel = ({
   }, [searchQuery, events]);
 
   return (
-    <div className="absolute top-3 left-3 md:top-4 md:left-4 w-[calc(100vw-1.5rem)] md:w-[360px] z-20 
+    <div className="absolute top-3 left-3 md:top-4 md:left-4 w-[calc(100vw-60px)] md:w-[360px] z-20 
                     gradient-card backdrop-blur-strong border border-border/50 rounded-xl md:rounded-2xl 
-                    p-2.5 md:p-4 shadow-elevated animate-slide-in max-h-[calc(100vh-6rem)] overflow-y-auto">
+                    p-2.5 md:p-4 shadow-elevated animate-slide-in max-h-[calc(100vh-160px)] md:max-h-[calc(100vh-6rem)] overflow-y-auto">
       {/* Brand */}
       <div className="mb-2 md:mb-4 animate-fade-in">
         <h1 className="text-xl md:text-2xl font-bold tracking-wide" style={{
