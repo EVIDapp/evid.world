@@ -391,13 +391,25 @@ export const EventMap = () => {
       el.style.width = '28px';
       el.style.height = '40px';
       el.style.cursor = 'pointer';
+      el.style.opacity = '0';
+      el.style.transform = 'scale(0.5) translateY(-20px)';
+      el.style.transition = 'all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1)';
+      el.setAttribute('role', 'button');
+      el.setAttribute('aria-label', `${event.title} - ${event.type} event`);
+      el.setAttribute('tabindex', '0');
       el.innerHTML = `
-        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="40" viewBox="0 0 24 34">
+        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="40" viewBox="0 0 24 34" aria-hidden="true">
           <path d="M12 0c-5.3 0-9.5 4.2-9.5 9.5 0 7.1 9.5 24.5 9.5 24.5s9.5-17.4 9.5-24.5C21.5 4.2 17.3 0 12 0z" 
                 fill="${color.fill}" stroke="white" stroke-width="1.5"/>
           <circle cx="12" cy="9.5" r="3.8" fill="white"/>
         </svg>
       `;
+      
+      // Trigger animation after a slight delay based on index
+      setTimeout(() => {
+        el.style.opacity = '1';
+        el.style.transform = 'scale(1) translateY(0)';
+      }, index * 30); // Staggered animation
 
       // Create marker
       const marker = new mapboxgl.Marker(el)
@@ -414,6 +426,8 @@ export const EventMap = () => {
       
       const closeBtn = document.createElement('button');
       closeBtn.innerHTML = '×';
+      closeBtn.setAttribute('aria-label', 'Close popup');
+      closeBtn.setAttribute('type', 'button');
       closeBtn.style.cssText = 'position: absolute; top: 8px; right: 8px; background: rgba(0,0,0,0.1); border: none; border-radius: 4px; width: 24px; height: 24px; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 16px; color: #666; transition: all 0.2s;';
       closeBtn.onmouseover = () => { closeBtn.style.background='rgba(0,0,0,0.2)'; closeBtn.style.color='#000'; };
       closeBtn.onmouseout = () => { closeBtn.style.background='rgba(0,0,0,0.1)'; closeBtn.style.color='#666'; };
@@ -443,7 +457,8 @@ export const EventMap = () => {
           if (imageUrl) {
             const img = document.createElement('img');
             img.src = imageUrl;
-            img.alt = event.title;
+            img.alt = `Historical image of ${event.title} in ${event.country}`;
+            img.loading = 'lazy';
             img.style.cssText = 'width: 100%; max-height: 200px; object-fit: cover; border-radius: 8px; margin: 8px 0;';
             img.onerror = function(this: HTMLImageElement) { 
               this.style.display = 'none';
@@ -469,7 +484,8 @@ export const EventMap = () => {
         const link = document.createElement('a');
         link.href = event.wiki;
         link.target = '_blank';
-        link.rel = 'noopener';
+        link.rel = 'noopener noreferrer';
+        link.setAttribute('aria-label', `Read more about ${event.title} on Wikipedia`);
         link.style.cssText = 'color: #3b82f6; text-decoration: none; font-size: 14px;';
         link.textContent = 'Read more on Wikipedia →';
         popupContent.appendChild(link);

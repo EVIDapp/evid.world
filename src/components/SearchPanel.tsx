@@ -79,23 +79,26 @@ export const SearchPanel = ({
         <label className="text-[10px] md:text-xs text-muted-foreground mb-1 md:mb-2 block font-medium">Search Events</label>
         <div className="relative group">
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground 
-                             group-focus-within:text-primary transition-smooth" />
+                             group-focus-within:text-primary transition-smooth" aria-hidden="true" />
           <Input
             ref={searchInputRef}
             value={searchQuery}
             onChange={(e) => onSearch(e.target.value)}
             onFocus={() => suggestions.length > 0 && setShowSuggestions(true)}
             placeholder="Keyword, type or country..."
+            aria-label="Search historical events"
             className="pl-9 pr-9 bg-input/80 border-border/50 transition-smooth h-8 md:h-10 text-xs md:text-sm
                        focus:border-primary/50 focus:shadow-glow hover:border-border"
           />
           {searchQuery && (
             <button
               onClick={() => onSearch('')}
+              aria-label="Clear search"
+              type="button"
               className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground 
                          hover:text-foreground transition-smooth hover:scale-110"
             >
-              <X className="w-4 h-4" />
+              <X className="w-4 h-4" aria-hidden="true" />
             </button>
           )}
         </div>
