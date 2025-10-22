@@ -77,7 +77,7 @@ export const EventMap = () => {
       
       const mapStyle = theme === 'dark' 
         ? 'mapbox://styles/mapbox/dark-v11' 
-        : 'mapbox://styles/mapbox/light-v11';
+        : 'mapbox://styles/mapbox/streets-v12';
       
       map.current = new mapboxgl.Map({
         container: mapContainer.current,
@@ -138,7 +138,7 @@ export const EventMap = () => {
     
     const mapStyle = theme === 'dark' 
       ? 'mapbox://styles/mapbox/dark-v11' 
-      : 'mapbox://styles/mapbox/light-v11';
+      : 'mapbox://styles/mapbox/streets-v12';
     
     // Temporarily mark map as not loaded while changing style
     setMapLoaded(false);
@@ -316,24 +316,50 @@ export const EventMap = () => {
         .addTo(map.current!);
 
       // Create popup with close button
-      const popupContent = `
-        <div style="max-width: 320px; padding: 12px; position: relative;">
-          <button 
-            onclick="this.closest('.mapboxgl-popup').remove()" 
-            style="position: absolute; top: 8px; right: 8px; background: rgba(0,0,0,0.1); border: none; border-radius: 4px; width: 24px; height: 24px; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 16px; color: #666; transition: all 0.2s;"
-            onmouseover="this.style.background='rgba(0,0,0,0.2)'; this.style.color='#000';"
-            onmouseout="this.style.background='rgba(0,0,0,0.1)'; this.style.color='#666';"
-          >×</button>
-          <h3 style="margin: 0 24px 8px 0; font-size: 16px; font-weight: 600; color: #1a1a1a;">
-            ${event.title}
-          </h3>
-          ${event.image ? `<img src="${event.image}" alt="${event.title}" style="width: 100%; border-radius: 8px; margin: 8px 0;" onerror="this.style.display='none'" crossorigin="anonymous" />` : ''}
-          <p style="color: #555; line-height: 1.5; margin: 8px 0; font-size: 14px;">
-            ${event.desc_long || event.desc}
-          </p>
-          ${event.wiki ? `<a href="${event.wiki}" target="_blank" rel="noopener" style="color: #3b82f6; text-decoration: none; font-size: 14px;">Read more on Wikipedia →</a>` : ''}
-        </div>
-      `;
+      const closePopup = () => {
+        marker.getPopup()?.remove();
+      };
+      
+      const popupContent = document.createElement('div');
+      popupContent.style.cssText = 'max-width: 320px; padding: 12px; position: relative;';
+      
+      const closeBtn = document.createElement('button');
+      closeBtn.innerHTML = '×';
+      closeBtn.style.cssText = 'position: absolute; top: 8px; right: 8px; background: rgba(0,0,0,0.1); border: none; border-radius: 4px; width: 24px; height: 24px; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 16px; color: #666; transition: all 0.2s;';
+      closeBtn.onmouseover = () => { closeBtn.style.background='rgba(0,0,0,0.2)'; closeBtn.style.color='#000'; };
+      closeBtn.onmouseout = () => { closeBtn.style.background='rgba(0,0,0,0.1)'; closeBtn.style.color='#666'; };
+      closeBtn.onclick = closePopup;
+      
+      const title = document.createElement('h3');
+      title.style.cssText = 'margin: 0 24px 8px 0; font-size: 16px; font-weight: 600; color: #1a1a1a;';
+      title.textContent = event.title;
+      
+      popupContent.appendChild(closeBtn);
+      popupContent.appendChild(title);
+      
+      if (event.image) {
+        const img = document.createElement('img');
+        img.src = event.image;
+        img.alt = event.title;
+        img.style.cssText = 'width: 100%; border-radius: 8px; margin: 8px 0;';
+        img.onerror = () => { img.style.display = 'none'; };
+        popupContent.appendChild(img);
+      }
+      
+      const desc = document.createElement('p');
+      desc.style.cssText = 'color: #555; line-height: 1.5; margin: 8px 0; font-size: 14px;';
+      desc.textContent = event.desc_long || event.desc;
+      popupContent.appendChild(desc);
+      
+      if (event.wiki) {
+        const link = document.createElement('a');
+        link.href = event.wiki;
+        link.target = '_blank';
+        link.rel = 'noopener';
+        link.style.cssText = 'color: #3b82f6; text-decoration: none; font-size: 14px;';
+        link.textContent = 'Read more on Wikipedia →';
+        popupContent.appendChild(link);
+      }
 
       const popup = new mapboxgl.Popup({ 
         offset: 25,
@@ -341,7 +367,7 @@ export const EventMap = () => {
         closeOnClick: true,
         className: 'animate-scale-in'
       })
-        .setHTML(popupContent)
+        .setDOMContent(popupContent)
         .on('close', () => {
           // Remove polygon when popup closes
           if (activePolygonRef.current) {
@@ -403,7 +429,7 @@ export const EventMap = () => {
     setTimeout(() => {
       const marker = markersRef.current.find((m) => {
         const lngLat = m.getLngLat();
-        return lngLat.lng === event.pos.lng && lngLat.lat === event.pos.lat;
+        return Math.abs(lngLat.lng - event.pos.lng) < 0.001 && Math.abs(lngLat.lat - event.pos.lat) < 0.001;
       });
       
       if (marker) {
@@ -434,13 +460,12 @@ export const EventMap = () => {
     setOnDemandMode(false);
     setSearchQuery('');
     setSelectedTypes(new Set());
-    renderMarkers(events);
   };
 
   const handleClear = () => {
+    setOnDemandMode(true);
     setSearchQuery('');
     setSelectedTypes(new Set());
-    clearMarkers();
   };
 
   const handleResetView = () => {
@@ -564,7 +589,7 @@ export const EventMap = () => {
 
           <EventLegend />
 
-          <div className="absolute top-3 right-3 md:top-4 md:right-4 z-10 flex flex-col gap-2 animate-fade-in">
+          <div className="absolute top-3 right-3 md:top-[70px] md:right-4 z-[5] flex flex-col gap-2 animate-fade-in">
             <ThemeToggle />
             <Button
               onClick={() => {
