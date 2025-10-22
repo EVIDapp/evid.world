@@ -8,6 +8,7 @@ import { circleToPolygon } from '@/utils/geometry';
 import { SearchPanel } from './SearchPanel';
 import { MapControls } from './MapControls';
 import { EventLegend } from './EventLegend';
+import { TimelineFilter } from './TimelineFilter';
 import { ThemeToggle } from './ThemeToggle';
 import { ShareButton } from './ShareButton';
 import { ExportButton } from './ExportButton';
@@ -54,6 +55,7 @@ export const EventMap = () => {
   const [selectedYearRange, setSelectedYearRange] = useState<[number, number]>([0, 0]);
   const [isAnimating, setIsAnimating] = useState(false);
   const [currentZoom, setCurrentZoom] = useState(2.2);
+  const [isTimelineOpen, setIsTimelineOpen] = useState(false);
   const { history, addToHistory, clearHistory } = useEventHistory();
   
   const { toast } = useToast();
@@ -769,6 +771,19 @@ export const EventMap = () => {
             onClear={handleClear}
             onResetView={handleResetView}
             hasVisibleMarkers={markersRef.current.length > 0}
+            onTimelineToggle={() => setIsTimelineOpen(!isTimelineOpen)}
+          />
+
+          <TimelineFilter
+            minYear={yearRange[0]}
+            maxYear={yearRange[1]}
+            selectedRange={selectedYearRange}
+            onRangeChange={setSelectedYearRange}
+            onAnimate={setIsAnimating}
+            isAnimating={isAnimating}
+            eventCount={filteredEvents.length}
+            isOpen={isTimelineOpen}
+            onToggle={() => setIsTimelineOpen(false)}
           />
 
           <EventLegend />
