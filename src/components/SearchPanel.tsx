@@ -140,14 +140,16 @@ export const SearchPanel = ({
             const isSelected = selectedTypes.has(eventType);
             
             return (
-              <Badge
+              <button
                 key={type}
-                onClick={(e) => {
-                  e.stopPropagation();
-                  onTypeToggle(eventType);
-                }}
-                className={`cursor-pointer transition-bounce px-2 md:px-3 py-1 text-[10px] md:text-xs
-                           border-glow ${
+                type="button"
+                onClick={() => onTypeToggle(eventType)}
+                role="checkbox"
+                aria-checked={isSelected}
+                aria-label={`Filter by ${label}`}
+                className={`inline-flex items-center rounded-full border px-2 md:px-3 py-1 text-[10px] md:text-xs
+                           font-semibold cursor-pointer transition-bounce border-glow
+                           focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 ${
                   isSelected
                     ? 'bg-primary/20 text-primary border-primary shadow-glow hover:shadow-glow-accent'
                     : 'bg-secondary/30 text-secondary-foreground border-border/50 hover:bg-secondary/50 hover:border-primary/30'
@@ -158,7 +160,7 @@ export const SearchPanel = ({
                 }}
               >
                 {label}
-              </Badge>
+              </button>
             );
           })}
         </div>
