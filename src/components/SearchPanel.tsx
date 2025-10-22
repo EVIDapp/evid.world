@@ -62,7 +62,7 @@ export const SearchPanel = ({
                     p-2.5 md:p-4 shadow-elevated animate-slide-in max-h-[calc(100vh-6rem)] overflow-y-auto">
       {/* Brand */}
       <div className="mb-2 md:mb-4 animate-fade-in">
-        <h1 className="text-xl md:text-2xl font-bold tracking-wide bg-gradient-to-r from-blue-400 via-purple-500 to-transparent bg-clip-text text-transparent">
+        <h1 className="text-xl md:text-2xl font-bold tracking-wide bg-gradient-to-r from-[#5B7FFF] via-[#5B7FFF]/70 to-[#5B7FFF]/20 bg-clip-text text-transparent">
           EVID
         </h1>
       </div>
