@@ -63,18 +63,35 @@ export const EventMap = () => {
 
   // Parse year from event data
   const parseYear = (event: HistoricalEvent): number => {
-    if (!event.year) return new Date().getFullYear();
-    const yearStr = event.year.toString();
+    // Try to extract year from title or year field
+    const source = event.year?.toString() || event.title || '';
     
-    // Handle BC years
-    if (yearStr.includes('BC') || yearStr.includes('bc')) {
-      const match = yearStr.match(/\d+/);
-      return match ? -parseInt(match[0]) : new Date().getFullYear();
+    // Handle BC years (e.g., "31 BC" or "31bc")
+    if (source.toLowerCase().includes('bc')) {
+      const match = source.match(/(\d+)\s*(bc|BC)/);
+      if (match) return -parseInt(match[1]);
     }
     
-    // Handle regular years
-    const match = yearStr.match(/-?\d+/);
-    return match ? parseInt(match[0]) : new Date().getFullYear();
+    // Handle year ranges (e.g., "1337–1453" or "132-136")
+    // Take the start year of the range
+    const rangeMatch = source.match(/(\d{1,4})[–\-—](\d{1,4})/);
+    if (rangeMatch) {
+      return parseInt(rangeMatch[1]);
+    }
+    
+    // Handle single years (e.g., "1945" or "7th century" -> extract 7)
+    const yearMatch = source.match(/(\d{1,4})/);
+    if (yearMatch) {
+      const year = parseInt(yearMatch[1]);
+      // If it's a century number (e.g., 7 from "7th century"), convert to year
+      if (year < 100 && source.toLowerCase().includes('century')) {
+        return (year - 1) * 100 + 1; // 7th century = year 601
+      }
+      return year;
+    }
+    
+    // Default to current year if no year found
+    return new Date().getFullYear();
   };
 
   // Load events data
