@@ -63,11 +63,12 @@ export const SearchPanel = ({
       {/* Brand */}
       <div className="mb-2 md:mb-4 animate-fade-in">
         <h1 className="text-xl md:text-2xl font-bold tracking-wide" style={{
-          backgroundImage: 'linear-gradient(90deg, rgb(91, 127, 255) 0%, rgb(91, 127, 255) 30%, rgba(91, 127, 255, 0.5) 70%, rgba(91, 127, 255, 0.1) 100%)',
+          backgroundImage: 'linear-gradient(90deg, #00D9FF 0%, #5B7FFF 35%, rgba(91, 127, 255, 0.6) 70%, rgba(100, 100, 100, 0.2) 100%)',
           WebkitBackgroundClip: 'text',
           backgroundClip: 'text',
           color: 'transparent',
-          WebkitTextFillColor: 'transparent'
+          WebkitTextFillColor: 'transparent',
+          textShadow: '0 0 20px rgba(0, 217, 255, 0.3)'
         }}>
           EVID
         </h1>
