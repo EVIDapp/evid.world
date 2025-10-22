@@ -13,6 +13,7 @@ import { useTheme } from 'next-themes';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Key } from 'lucide-react';
+import { getWikipediaImage } from '@/utils/wikipediaImage';
 
 const WORLD_BOUNDS = {
   north: 85,
@@ -338,16 +339,38 @@ export const EventMap = () => {
       popupContent.appendChild(closeBtn);
       popupContent.appendChild(title);
       
-      if (event.image) {
-        const img = document.createElement('img');
-        img.crossOrigin = 'anonymous';
-        img.src = event.image;
-        img.alt = event.title;
-        img.style.cssText = 'width: 100%; max-height: 200px; object-fit: cover; border-radius: 8px; margin: 8px 0;';
-        img.onerror = function(this: HTMLImageElement) { 
-          this.style.display = 'none';
-        };
-        popupContent.appendChild(img);
+      // Create image container for async loading
+      const imgContainer = document.createElement('div');
+      imgContainer.style.cssText = 'min-height: 60px; display: flex; align-items: center; justify-content: center;';
+      
+      // Add loading spinner
+      const loadingDiv = document.createElement('div');
+      loadingDiv.style.cssText = 'width: 20px; height: 20px; border: 2px solid #ddd; border-top-color: #3b82f6; border-radius: 50%; animation: spin 1s linear infinite;';
+      imgContainer.appendChild(loadingDiv);
+      popupContent.appendChild(imgContainer);
+      
+      // Fetch and display Wikipedia image
+      if (event.wiki) {
+        getWikipediaImage(event.wiki).then(imageUrl => {
+          imgContainer.innerHTML = ''; // Clear loading spinner
+          if (imageUrl) {
+            const img = document.createElement('img');
+            img.src = imageUrl;
+            img.alt = event.title;
+            img.style.cssText = 'width: 100%; max-height: 200px; object-fit: cover; border-radius: 8px; margin: 8px 0;';
+            img.onerror = function(this: HTMLImageElement) { 
+              this.style.display = 'none';
+              imgContainer.style.display = 'none';
+            };
+            imgContainer.appendChild(img);
+          } else {
+            imgContainer.style.display = 'none';
+          }
+        }).catch(() => {
+          imgContainer.style.display = 'none';
+        });
+      } else {
+        imgContainer.style.display = 'none';
       }
       
       const desc = document.createElement('p');
