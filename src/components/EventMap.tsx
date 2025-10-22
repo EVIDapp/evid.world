@@ -26,6 +26,7 @@ export const EventMap = () => {
   const map = useRef<mapboxgl.Map | null>(null);
   const markersRef = useRef<mapboxgl.Marker[]>([]);
   const polygonsRef = useRef<string[]>([]);
+  const activePolygonRef = useRef<string | null>(null);
   
   const [events, setEvents] = useState<HistoricalEvent[]>([]);
   const [filteredEvents, setFilteredEvents] = useState<HistoricalEvent[]>([]);
@@ -209,6 +210,68 @@ export const EventMap = () => {
       });
     }
     polygonsRef.current = [];
+    activePolygonRef.current = null;
+  }, []);
+
+  const showPolygon = useCallback((event: HistoricalEvent, index: number) => {
+    if (!map.current || !map.current.isStyleLoaded()) return;
+    
+    const color = getEventColor(event.type);
+    const polygonPath = circleToPolygon(event.pos, event.radiusKm!);
+    const polygonId = `polygon-${event.id}-${index}`;
+    
+    // Remove previous active polygon if exists
+    if (activePolygonRef.current) {
+      const prevPolygonId = activePolygonRef.current;
+      if (map.current.getLayer(prevPolygonId)) {
+        map.current.removeLayer(prevPolygonId);
+      }
+      if (map.current.getLayer(`${prevPolygonId}-outline`)) {
+        map.current.removeLayer(`${prevPolygonId}-outline`);
+      }
+      if (map.current.getSource(prevPolygonId)) {
+        map.current.removeSource(prevPolygonId);
+      }
+    }
+    
+    // Convert polygon path to GeoJSON format
+    const coordinates = polygonPath.map(point => [point.lng, point.lat]);
+    coordinates.push(coordinates[0]); // Close the polygon
+
+    map.current.addSource(polygonId, {
+      type: 'geojson',
+      data: {
+        type: 'Feature',
+        geometry: {
+          type: 'Polygon',
+          coordinates: [coordinates]
+        },
+        properties: {}
+      }
+    });
+
+    map.current.addLayer({
+      id: polygonId,
+      type: 'fill',
+      source: polygonId,
+      paint: {
+        'fill-color': color.fill,
+        'fill-opacity': 0.25
+      }
+    });
+
+    map.current.addLayer({
+      id: `${polygonId}-outline`,
+      type: 'line',
+      source: polygonId,
+      paint: {
+        'line-color': color.stroke,
+        'line-width': 2,
+        'line-opacity': 0.8
+      }
+    });
+
+    activePolygonRef.current = polygonId;
   }, []);
 
   const renderMarkers = useCallback((eventsToRender: HistoricalEvent[]) => {
@@ -268,57 +331,30 @@ export const EventMap = () => {
         .setHTML(popupContent);
 
       marker.setPopup(popup);
-      markersRef.current.push(marker);
 
-      // Create area polygon if applicable
-      if (event.radiusKm && AREA_CATEGORIES.has(event.type)) {
-        const polygonPath = circleToPolygon(event.pos, event.radiusKm);
-        const polygonId = `polygon-${event.id}-${index}`;
+      // Add click handler to show polygon and zoom
+      el.addEventListener('click', () => {
+        // Zoom to event location
+        const zoomLevel = event.radiusKm && AREA_CATEGORIES.has(event.type) 
+          ? Math.min(12, Math.max(6, 14 - Math.log2(event.radiusKm / 10)))
+          : 10;
         
-        // Convert polygon path to GeoJSON format
-        const coordinates = polygonPath.map(point => [point.lng, point.lat]);
-        coordinates.push(coordinates[0]); // Close the polygon
+        map.current?.flyTo({
+          center: [event.pos.lng, event.pos.lat],
+          zoom: zoomLevel,
+          duration: 1500,
+          essential: true
+        });
 
-        if (map.current) {
-          map.current.addSource(polygonId, {
-            type: 'geojson',
-            data: {
-              type: 'Feature',
-              geometry: {
-                type: 'Polygon',
-                coordinates: [coordinates]
-              },
-              properties: {}
-            }
-          });
-
-          map.current.addLayer({
-            id: polygonId,
-            type: 'fill',
-            source: polygonId,
-            paint: {
-              'fill-color': color.fill,
-              'fill-opacity': 0.25
-            }
-          });
-
-          map.current.addLayer({
-            id: `${polygonId}-outline`,
-            type: 'line',
-            source: polygonId,
-            paint: {
-              'line-color': color.stroke,
-              'line-width': 2,
-              'line-opacity': 0.8
-            }
-          });
-
-          polygonsRef.current.push(polygonId);
-          polygonsRef.current.push(`${polygonId}-outline`);
+        // Show polygon if event has area coverage
+        if (event.radiusKm && AREA_CATEGORIES.has(event.type)) {
+          showPolygon(event, index);
         }
-      }
+      });
+
+      markersRef.current.push(marker);
     });
-  }, [clearMarkers, toast]);
+  }, [clearMarkers, toast, showPolygon]);
 
   const handleTypeToggle = (type: EventType) => {
     setSelectedTypes(prev => {
