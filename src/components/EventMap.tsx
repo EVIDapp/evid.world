@@ -37,6 +37,7 @@ export const EventMap = () => {
   const [mapboxToken, setMapboxToken] = useState('');
   const [tokenSubmitted, setTokenSubmitted] = useState(false);
   const [mapLoaded, setMapLoaded] = useState(false);
+  const [projection, setProjection] = useState<'globe' | 'mercator'>('globe');
   
   const { toast } = useToast();
   const { theme } = useTheme();
@@ -83,6 +84,7 @@ export const EventMap = () => {
         style: mapStyle,
         center: [0, 20],
         zoom: 2,
+        projection: projection,
         maxBounds: [
           [WORLD_BOUNDS.west, WORLD_BOUNDS.south],
           [WORLD_BOUNDS.east, WORLD_BOUNDS.north]
@@ -313,13 +315,19 @@ export const EventMap = () => {
         .setLngLat([event.pos.lng, event.pos.lat])
         .addTo(map.current!);
 
-      // Create popup
+      // Create popup with close button
       const popupContent = `
-        <div style="max-width: 320px; padding: 8px;">
-          <h3 style="margin: 0 0 8px 0; font-size: 16px; font-weight: 600; color: #1a1a1a;">
+        <div style="max-width: 320px; padding: 12px; position: relative;">
+          <button 
+            onclick="this.closest('.mapboxgl-popup').remove()" 
+            style="position: absolute; top: 8px; right: 8px; background: rgba(0,0,0,0.1); border: none; border-radius: 4px; width: 24px; height: 24px; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 16px; color: #666; transition: all 0.2s;"
+            onmouseover="this.style.background='rgba(0,0,0,0.2)'; this.style.color='#000';"
+            onmouseout="this.style.background='rgba(0,0,0,0.1)'; this.style.color='#666';"
+          >×</button>
+          <h3 style="margin: 0 24px 8px 0; font-size: 16px; font-weight: 600; color: #1a1a1a;">
             ${event.title}
           </h3>
-          ${event.image ? `<img src="${event.image}" alt="${event.title}" style="width: 100%; border-radius: 8px; margin: 8px 0;" />` : ''}
+          ${event.image ? `<img src="${event.image}" alt="${event.title}" style="width: 100%; border-radius: 8px; margin: 8px 0;" onerror="this.style.display='none'" crossorigin="anonymous" />` : ''}
           <p style="color: #555; line-height: 1.5; margin: 8px 0; font-size: 14px;">
             ${event.desc_long || event.desc}
           </p>
@@ -327,8 +335,29 @@ export const EventMap = () => {
         </div>
       `;
 
-      const popup = new mapboxgl.Popup({ offset: 25 })
-        .setHTML(popupContent);
+      const popup = new mapboxgl.Popup({ 
+        offset: 25,
+        closeButton: false,
+        closeOnClick: true,
+        className: 'animate-scale-in'
+      })
+        .setHTML(popupContent)
+        .on('close', () => {
+          // Remove polygon when popup closes
+          if (activePolygonRef.current) {
+            const prevPolygonId = activePolygonRef.current;
+            if (map.current?.getLayer(prevPolygonId)) {
+              map.current.removeLayer(prevPolygonId);
+            }
+            if (map.current?.getLayer(`${prevPolygonId}-outline`)) {
+              map.current.removeLayer(`${prevPolygonId}-outline`);
+            }
+            if (map.current?.getSource(prevPolygonId)) {
+              map.current.removeSource(prevPolygonId);
+            }
+            activePolygonRef.current = null;
+          }
+        });
 
       marker.setPopup(popup);
 
@@ -336,7 +365,7 @@ export const EventMap = () => {
       el.addEventListener('click', () => {
         // Zoom to event location
         const zoomLevel = event.radiusKm && AREA_CATEGORIES.has(event.type) 
-          ? Math.min(12, Math.max(6, 14 - Math.log2(event.radiusKm / 10)))
+          ? Math.min(9, Math.max(5, 11 - Math.log2(event.radiusKm / 10)))
           : 10;
         
         map.current?.flyTo({
@@ -355,6 +384,39 @@ export const EventMap = () => {
       markersRef.current.push(marker);
     });
   }, [clearMarkers, toast, showPolygon]);
+
+  const handleEventSelect = useCallback((event: HistoricalEvent) => {
+    if (!map.current) return;
+    
+    const zoomLevel = event.radiusKm && AREA_CATEGORIES.has(event.type) 
+      ? Math.min(9, Math.max(5, 11 - Math.log2(event.radiusKm / 10)))
+      : 10;
+    
+    map.current.flyTo({
+      center: [event.pos.lng, event.pos.lat],
+      zoom: zoomLevel,
+      duration: 1500,
+      essential: true
+    });
+    
+    // Find and open the marker's popup
+    setTimeout(() => {
+      const marker = markersRef.current.find((m) => {
+        const lngLat = m.getLngLat();
+        return lngLat.lng === event.pos.lng && lngLat.lat === event.pos.lat;
+      });
+      
+      if (marker) {
+        marker.togglePopup();
+        
+        // Show polygon if event has area coverage
+        const eventIndex = filteredEvents.findIndex(e => e.id === event.id);
+        if (event.radiusKm && AREA_CATEGORIES.has(event.type) && eventIndex !== -1) {
+          showPolygon(event, eventIndex);
+        }
+      }
+    }, 1600);
+  }, [filteredEvents, showPolygon]);
 
   const handleTypeToggle = (type: EventType) => {
     setSelectedTypes(prev => {
@@ -379,9 +441,6 @@ export const EventMap = () => {
     setSearchQuery('');
     setSelectedTypes(new Set());
     clearMarkers();
-    if (onDemandMode) {
-      setOnDemandMode(true);
-    }
   };
 
   const handleResetView = () => {
@@ -493,6 +552,7 @@ export const EventMap = () => {
             onDemandMode={onDemandMode}
             onDemandToggle={() => setOnDemandMode(!onDemandMode)}
             searchQuery={searchQuery}
+            onEventSelect={handleEventSelect}
           />
 
           <MapControls
@@ -504,8 +564,27 @@ export const EventMap = () => {
 
           <EventLegend />
 
-          <div className="absolute top-3 right-3 md:top-4 md:right-4 z-20 animate-fade-in">
+          <div className="absolute top-3 right-3 md:top-4 md:right-4 z-10 flex flex-col gap-2 animate-fade-in">
             <ThemeToggle />
+            <Button
+              onClick={() => {
+                const newProjection = projection === 'globe' ? 'mercator' : 'globe';
+                setProjection(newProjection);
+                if (map.current) {
+                  map.current.setProjection(newProjection);
+                  toast({
+                    title: `Map projection: ${newProjection}`,
+                    description: newProjection === 'globe' ? 'Viewing 3D globe' : 'Viewing flat map',
+                  });
+                }
+              }}
+              variant="secondary"
+              size="icon"
+              className="shadow-elevated backdrop-blur-strong gradient-card border-border/50 
+                         h-9 w-9 transition-bounce hover:shadow-glow hover:border-primary/30 hover:scale-105"
+            >
+              {projection === 'globe' ? '🗺️' : '🌐'}
+            </Button>
           </div>
         </>
       )}

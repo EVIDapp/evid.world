@@ -4,11 +4,11 @@ export function circleToPolygon(
   center: EventPosition, 
   radiusKm: number, 
   numSegments: number = 32
-): google.maps.LatLngLiteral[] {
+): EventPosition[] {
   const R = 6371; // Earth radius in km
   const lat = center.lat;
   const lng = center.lng;
-  const poly: google.maps.LatLngLiteral[] = [];
+  const poly: EventPosition[] = [];
   
   for (let i = 0; i < numSegments; i++) {
     const angle = (i / numSegments) * 2 * Math.PI;

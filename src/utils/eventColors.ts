@@ -7,14 +7,14 @@ export const EVENT_COLORS: Record<EventType, EventColor> = {
   archaeology: { stroke: '#16a34a', fill: '#22c55e', label: 'Archaeology' },
   fire: { stroke: '#eab308', fill: '#fde047', label: 'Wildfire' },
   disaster: { stroke: '#059669', fill: '#10b981', label: 'Disaster' },
-  tsunami: { stroke: '#1e40af', fill: '#3b82f6', label: 'Tsunami' },
-  meteorite: { stroke: '#7c3aed', fill: '#a78bfa', label: 'Meteorite' },
+  tsunami: { stroke: '#0891b2', fill: '#06b6d4', label: 'Tsunami' },
+  meteorite: { stroke: '#db2777', fill: '#ec4899', label: 'Meteorite' },
   epidemic: { stroke: '#ec4899', fill: '#f472b6', label: 'Epidemic' },
   'man-made disaster': { stroke: '#64748b', fill: '#cbd5e1', label: 'Man-made Disaster' }
 };
 
 export const AREA_CATEGORIES = new Set<EventType>([
-  'war', 'earthquake', 'fire', 'tsunami', 'epidemic'
+  'war', 'earthquake', 'fire', 'tsunami'
 ]);
 
 export const getEventColor = (type: EventType): EventColor => {

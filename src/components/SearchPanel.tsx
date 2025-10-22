@@ -14,6 +14,7 @@ interface SearchPanelProps {
   onDemandMode: boolean;
   onDemandToggle: () => void;
   searchQuery: string;
+  onEventSelect?: (event: HistoricalEvent) => void;
 }
 
 export const SearchPanel = ({
@@ -24,6 +25,7 @@ export const SearchPanel = ({
   onDemandMode,
   onDemandToggle,
   searchQuery,
+  onEventSelect,
 }: SearchPanelProps) => {
   const [suggestions, setSuggestions] = useState<HistoricalEvent[]>([]);
   const [showSuggestions, setShowSuggestions] = useState(false);
@@ -103,6 +105,7 @@ export const SearchPanel = ({
                 onClick={() => {
                   onSearch(event.title);
                   setShowSuggestions(false);
+                  onEventSelect?.(event);
                 }}
                 className="px-3 py-2.5 hover:bg-primary/10 cursor-pointer border-b border-border/30 
                            last:border-0 transition-smooth text-sm group"
