@@ -34,8 +34,8 @@ export const EventMap = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [onDemandMode, setOnDemandMode] = useState(false);
   const [loading, setLoading] = useState(true);
-  const [mapboxToken, setMapboxToken] = useState('');
-  const [tokenSubmitted, setTokenSubmitted] = useState(false);
+  const [mapboxToken] = useState('pk.eyJ1IjoiZXZpZCIsImEiOiJjbWgyN3prbGUwZ3p6MmxzaDNlb2Vxa3BqIn0._6oUJJJYhV1oHzidr5AWgw');
+  const [tokenSubmitted, setTokenSubmitted] = useState(true);
   const [mapLoaded, setMapLoaded] = useState(false);
   const [projection, setProjection] = useState<'globe' | 'mercator'>('globe');
   
@@ -83,7 +83,7 @@ export const EventMap = () => {
         container: mapContainer.current,
         style: mapStyle,
         center: [0, 20],
-        zoom: 1.5,
+        zoom: 1.2,
         projection: projection,
         maxBounds: [
           [WORLD_BOUNDS.west, WORLD_BOUNDS.south],
@@ -91,10 +91,11 @@ export const EventMap = () => {
         ]
       });
 
-      // Add navigation controls
+      // Add navigation controls without compass
       map.current.addControl(
         new mapboxgl.NavigationControl({
-          visualizePitch: true
+          visualizePitch: true,
+          showCompass: false
         }),
         'top-right'
       );
@@ -339,14 +340,12 @@ export const EventMap = () => {
       
       if (event.image) {
         const img = document.createElement('img');
+        img.crossOrigin = 'anonymous';
         img.src = event.image;
         img.alt = event.title;
         img.style.cssText = 'width: 100%; max-height: 200px; object-fit: cover; border-radius: 8px; margin: 8px 0;';
-        img.referrerPolicy = 'no-referrer';
-        img.loading = 'lazy';
         img.onerror = function(this: HTMLImageElement) { 
           this.style.display = 'none';
-          console.log('Failed to load image:', event.image);
         };
         popupContent.appendChild(img);
       }
@@ -477,7 +476,7 @@ export const EventMap = () => {
     if (map.current) {
       map.current.flyTo({
         center: [0, 20],
-        zoom: 2,
+        zoom: 1.2,
         duration: 1500
       });
     }
@@ -529,8 +528,7 @@ export const EventMap = () => {
                 type="text"
                 placeholder="pk.eyJ1IjoieW91cnVzZXJuYW1lIiwi..."
                 value={mapboxToken}
-                onChange={(e) => setMapboxToken(e.target.value)}
-                onKeyDown={(e) => e.key === 'Enter' && handleTokenSubmit()}
+                disabled
                 className="bg-input/80 border-border/50 focus:border-primary/50 focus:shadow-glow"
               />
               <Button 
@@ -594,7 +592,7 @@ export const EventMap = () => {
 
           <EventLegend />
 
-          <div className="absolute top-3 right-3 md:top-[140px] md:right-4 z-[5] flex flex-col gap-2 animate-fade-in">
+          <div className="absolute top-[88px] right-3 md:right-4 z-[5] flex flex-col gap-2 animate-fade-in">
             <ThemeToggle />
             <Button
               onClick={() => {
