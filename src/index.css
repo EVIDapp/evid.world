@@ -407,4 +407,13 @@ All colors MUST be HSL.
     background: rgba(255, 255, 255, 0.2);
     color: #fff;
   }
+
+  /* Hide Mapbox logo and attribution */
+  .mapboxgl-ctrl-logo {
+    display: none !important;
+  }
+
+  .mapboxgl-ctrl-attrib {
+    display: none !important;
+  }
 }
