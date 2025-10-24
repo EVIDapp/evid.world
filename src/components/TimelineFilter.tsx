@@ -5,8 +5,8 @@ import { Badge } from '@/components/ui/badge';
 import { Play, Pause, RotateCcw, ChevronDown, ChevronUp, Clock } from 'lucide-react';
 
 const TIME_PERIODS = [
-  { label: 'Antiquity', range: [-500, 476] as [number, number] },
-  { label: 'Early Middle Ages', range: [476, 1000] as [number, number] },
+  { label: 'Antiquity', range: [1, 500] as [number, number] },
+  { label: 'Early Middle Ages', range: [500, 1000] as [number, number] },
   { label: 'Late Middle Ages', range: [1000, 1500] as [number, number] },
   { label: 'Renaissance', range: [1500, 1700] as [number, number] },
   { label: 'Enlightenment', range: [1700, 1800] as [number, number] },
