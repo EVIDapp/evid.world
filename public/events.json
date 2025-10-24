@@ -2797,6 +2797,7 @@
             },
             "desc": "Suicide bombings targeting London transport.",
             "wiki": "https://en.wikipedia.org/wiki/7_July_2005_London_bombings",
+            "year": "2005",
             "geometry": {
                 "type": "Polygon",
                 "coordinates": [
@@ -5068,7 +5069,8 @@
             },
             "desc": "Tank battle during the Gulf War.",
             "wiki": "https://en.wikipedia.org/wiki/Battle_of_73_Easting",
-            "radiusKm": 5
+            "radiusKm": 5,
+            "year": "1991"
         },
         {
             "id": "battle_of_gettysburg_1863",
@@ -5202,7 +5204,8 @@
                 "lng": -3.36
             },
             "desc": "Bombing of Pan Am Flight 103 over Lockerbie.",
-            "wiki": "https://en.wikipedia.org/wiki/Pan_Am_Flight_103"
+            "wiki": "https://en.wikipedia.org/wiki/Pan_Am_Flight_103",
+            "year": "1988"
         },
         {
             "id": "air_india_182_1985",
@@ -5214,7 +5217,8 @@
                 "lng": -15.0
             },
             "desc": "Mid-air bombing of Boeing 747 off Ireland.",
-            "wiki": "https://en.wikipedia.org/wiki/Air_India_Flight_182"
+            "wiki": "https://en.wikipedia.org/wiki/Air_India_Flight_182",
+            "year": "1985"
         },
         {
             "id": "beirut_barracks_bombings_1983",
@@ -7954,7 +7958,8 @@
             "desc": "Protestant Reformation begins.",
             "desc_long": "Martin Luther's challenge to Catholic Church practices sparked the Protestant Reformation.",
             "wiki": "https://en.wikipedia.org/wiki/Ninety-five_Theses",
-            "radiusKm": 300
+            "radiusKm": 300,
+            "year": "1517"
         },
         {
             "id": "magellan_circumnavigation_1519",

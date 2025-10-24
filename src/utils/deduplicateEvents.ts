@@ -12,6 +12,10 @@ export const deduplicateEvents = (events: HistoricalEvent[]): HistoricalEvent[] 
     'gaugamela_battle_331bc_point',
     'chelyabinsk_meteor_2013_point',
     
+    // Mount Vesuvius duplicates - keep eruption_vesuvius_79 (radiusKm 50)
+    'pompeii_eruption_79ad',
+    'pompeii_eruption_79',
+    
     // Titanic duplicates - keep only titanic_sinking_1912
     'titanic_shipwreck_1912',
     'titanic_shipwreck_1912_chatgpt_v2',
@@ -41,6 +45,10 @@ export const deduplicateEvents = (events: HistoricalEvent[]): HistoricalEvent[] 
     
     // Terracotta Army duplicates - keep terracotta_army_1974
     'terracotta_army_discovery',
+    
+    // Mount Vesuvius duplicates - keep eruption_vesuvius_79
+    'pompeii_eruption_79ad',
+    'pompeii_eruption_79',
   ]);
 
   // Track seen event titles (normalized)
