@@ -439,7 +439,8 @@ export const EventMap = () => {
       el.style.opacity = '0';
       el.style.transition = 'opacity 0.2s ease-out';
       el.setAttribute('role', 'button');
-      el.setAttribute('aria-label', `${event.title} - ${event.type} event`);
+      const eventYear = parseYear(event);
+      el.setAttribute('aria-label', `${event.title} - ${event.type} event in ${event.country}, year ${eventYear}`);
       el.setAttribute('tabindex', '0');
       el.innerHTML = `
         <svg xmlns="http://www.w3.org/2000/svg" width="28" height="40" viewBox="0 0 24 34" aria-hidden="true">
@@ -495,7 +496,8 @@ export const EventMap = () => {
           if (imageUrl) {
             const img = document.createElement('img');
             img.src = imageUrl;
-            img.alt = `Historical image of ${event.title} in ${event.country}`;
+            const eventYear = parseYear(event);
+            img.alt = `${event.title} ${event.type} map, ${event.country}, year ${eventYear} - historical event visualization`;
             img.loading = 'lazy';
             img.style.cssText = 'width: 100%; max-height: 200px; object-fit: cover; border-radius: 8px; margin: 8px 0;';
             img.onerror = function(this: HTMLImageElement) { 
