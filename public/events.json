@@ -2719,6 +2719,7 @@
             },
             "desc": "Coordinated terrorist attacks in the United States.",
             "wiki": "https://en.wikipedia.org/wiki/September_11_attacks",
+            "year": "2001",
             "geometry": {
                 "type": "Polygon",
                 "coordinates": [
@@ -8740,6 +8741,7 @@
             "desc": "Humans walk on the Moon for first time.",
             "desc_long": "Neil Armstrong and Buzz Aldrin fulfilled Kennedy's promise and won the Space Race for America.",
             "wiki": "https://en.wikipedia.org/wiki/Apollo_11",
-            "radiusKm": 100
+            "radiusKm": 100,
+            "year": "1969"
         }
     ]
