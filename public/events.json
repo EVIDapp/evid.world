@@ -6601,7 +6601,8 @@
             "pos": {"lat": 51.2, "lng": -8.5},
             "desc": "Bomb destroyed plane off Irish coast, 329 deaths.",
             "desc_long": "Sikh extremist bombing of Air India Flight 182, deadliest aviation terrorist attack before 9/11.",
-            "wiki": "https://en.wikipedia.org/wiki/Air_India_Flight_182"
+            "wiki": "https://en.wikipedia.org/wiki/Air_India_Flight_182",
+            "year": "1985"
         },
         {
             "id": "tokyo_sarin_attack_1995",
@@ -6691,7 +6692,8 @@
             "pos": {"lat": 51.52, "lng": -0.09},
             "desc": "Suicide bombings on London transport, 52 deaths.",
             "desc_long": "Four Islamist suicide bombers attacked London's public transport system during morning rush hour.",
-            "wiki": "https://en.wikipedia.org/wiki/7_July_2005_London_bombings"
+            "wiki": "https://en.wikipedia.org/wiki/7_July_2005_London_bombings",
+            "year": "2005"
         },
         {
             "id": "mumbai_attacks_2008",
