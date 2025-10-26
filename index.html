@@ -12,11 +12,18 @@
     </script>
     
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes, viewport-fit=cover" />
     <title>Global Event Map — Disasters, Wars & Discoveries | EVID.WORLD</title>
     <meta name="description" content="Explore an interactive world map of major historical events — wars, earthquakes, tsunamis, epidemics, fires, and archaeological discoveries. Updated continuously with verified global data." />
     <meta name="keywords" content="world events map, global disaster tracker, historical events world map, war map, earthquake data, tsunami map, epidemic tracker, wildfire tracker, meteorite impacts, archaeological discoveries map, evid world" />
     <meta name="author" content="EVID.WORLD" />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+    <meta name="googlebot" content="index, follow" />
+    <link rel="preconnect" href="https://api.mapbox.com" />
+    <link rel="dns-prefetch" href="https://en.wikipedia.org" />
+    
+    <!-- Performance optimizations -->
+    <link rel="preload" href="/events.json" as="fetch" crossorigin />
     
     <!-- PWA Configuration -->
     <link rel="manifest" href="/manifest.webmanifest">
@@ -54,9 +61,10 @@
       "@type": "WebApplication",
       "name": "EVID.WORLD",
       "url": "https://evid.world",
-      "description": "Interactive world map showcasing major historical events including wars, natural disasters, epidemics, and archaeological discoveries",
+      "description": "Interactive world map showcasing major historical events including wars, natural disasters, epidemics, and archaeological discoveries from ancient times to present day",
       "applicationCategory": "EducationalApplication",
       "operatingSystem": "Any",
+      "browserRequirements": "Requires JavaScript. Requires HTML5.",
       "offers": {
         "@type": "Offer",
         "price": "0",
@@ -67,7 +75,29 @@
         "ratingValue": "4.8",
         "ratingCount": "1250"
       },
-      "keywords": "world events, global map, disaster tracker, war history, earthquake data, tsunami map, epidemic tracker, archaeological discoveries"
+      "featureList": [
+        "Interactive 3D globe visualization",
+        "Historical event timeline from year 1 CE to present",
+        "Category filtering for wars, disasters, epidemics",
+        "Searchable database of 500+ verified events",
+        "Real-time map exploration",
+        "Dark and light theme support"
+      ],
+      "keywords": "world events, global map, disaster tracker, war history, earthquake data, tsunami map, epidemic tracker, archaeological discoveries, historical timeline"
+    }
+    </script>
+    
+    <!-- Breadcrumb Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [{
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://evid.world"
+      }]
     }
     </script>
     

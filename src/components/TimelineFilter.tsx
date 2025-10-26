@@ -69,10 +69,10 @@ export const TimelineFilter = ({
   if (!isOpen) return null;
 
   return (
-    <div className="absolute bottom-[60px] md:bottom-16 left-3 right-3 md:left-4 md:right-auto md:w-[480px] z-30 
-                    gradient-card backdrop-blur-strong border border-border/50 rounded-xl md:rounded-2xl 
+    <div className="absolute bottom-14 md:bottom-16 left-3 right-3 md:left-4 md:right-auto md:max-w-[420px] z-30 
+                    gradient-card backdrop-blur-strong border border-border/50 rounded-xl 
                     shadow-elevated animate-fade-in-up">
-      <div className="flex items-center justify-between p-2.5 md:p-3 border-b border-border/30">
+      <div className="flex items-center justify-between p-2 md:p-2.5 border-b border-border/30">
         <div className="flex items-center gap-2">
           <Clock className="w-4 h-4 text-primary" />
           <div>
@@ -121,7 +121,7 @@ export const TimelineFilter = ({
       </div>
       
       {isExpanded && (
-        <div className="px-2.5 pb-2.5 md:px-4 md:pb-4 animate-fade-in space-y-3 md:space-y-4 max-h-[50vh] overflow-y-auto">
+        <div className="px-2.5 pb-2.5 md:px-3 md:pb-3 animate-fade-in space-y-2.5 md:space-y-3 max-h-[45vh] overflow-y-auto">
           
           {/* Period Presets */}
           <div>

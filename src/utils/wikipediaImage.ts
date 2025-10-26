@@ -20,7 +20,13 @@ export const getWikipediaImage = async (wikiUrl: string): Promise<string | null>
     // Use Wikipedia REST API to get page summary with image
     const apiUrl = `https://en.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(title)}`;
     
-    const response = await fetch(apiUrl);
+    // Fetch with timeout for faster failures
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 5000); // 5 second timeout
+    
+    const response = await fetch(apiUrl, { signal: controller.signal });
+    clearTimeout(timeoutId);
+    
     if (!response.ok) {
       setCachedImage(wikiUrl, null);
       return null;
@@ -28,19 +34,23 @@ export const getWikipediaImage = async (wikiUrl: string): Promise<string | null>
     
     const data = await response.json();
     
-    // Return the original image URL (not thumbnail)
+    // Prefer thumbnail for faster loading (smaller file size)
     let imageUrl: string | null = null;
-    if (data.originalimage?.source) {
+    if (data.thumbnail?.source) {
+      // Use high-res thumbnail instead of original to save bandwidth
+      imageUrl = data.thumbnail.source.replace(/\/\d+px-/, '/400px-');
+    } else if (data.originalimage?.source) {
       imageUrl = data.originalimage.source;
-    } else if (data.thumbnail?.source) {
-      imageUrl = data.thumbnail.source;
     }
     
     // Cache the result
     setCachedImage(wikiUrl, imageUrl);
     return imageUrl;
   } catch (error) {
-    console.error('Error fetching Wikipedia image:', error);
+    // Silent fail for aborted requests (timeout)
+    if (error instanceof Error && error.name !== 'AbortError') {
+      console.error('Error fetching Wikipedia image:', error);
+    }
     setCachedImage(wikiUrl, null);
     return null;
   }

@@ -59,11 +59,11 @@ export const SearchPanel = ({
   }, [searchQuery, events]);
 
   return (
-    <div className="absolute bottom-3 left-3 md:top-4 md:left-4 md:bottom-auto w-[calc(100vw-60px)] md:w-[360px] z-20 
-                    gradient-card backdrop-blur-strong border border-border/50 rounded-xl md:rounded-2xl 
+    <div className="absolute top-3 left-3 md:top-4 md:left-4 w-[calc(100%-1.5rem)] md:w-[420px] z-20 
+                    gradient-card backdrop-blur-strong border border-border/50 rounded-xl 
                     shadow-elevated animate-slide-in">
       {/* Brand Header with Toggle */}
-      <div className="flex items-center justify-between p-2.5 md:p-4 cursor-pointer" 
+      <div className="flex items-center justify-between p-2.5 md:p-3 cursor-pointer" 
            onClick={() => setIsExpanded(!isExpanded)}>
         <h1 className="text-xl md:text-2xl font-bold tracking-wide" style={{
           backgroundImage: 'linear-gradient(90deg, #00D9FF 0%, #5B7FFF 35%, rgba(91, 127, 255, 0.6) 70%, rgba(100, 100, 100, 0.2) 100%)',
@@ -90,11 +90,11 @@ export const SearchPanel = ({
 
       {/* Collapsible Content */}
       {isExpanded && (
-        <div className="px-2.5 pb-2.5 md:px-4 md:pb-4 animate-fade-in max-h-[40vh] md:max-h-[calc(100vh-180px)] overflow-y-auto">
+        <div className="px-2.5 pb-2.5 md:px-3 md:pb-3 animate-fade-in max-h-[50vh] md:max-h-[calc(100vh-180px)] overflow-y-auto">
 
       {/* Search */}
-      <div className="mb-2 md:mb-4 relative">
-        <label className="text-[10px] md:text-xs text-muted-foreground mb-1 md:mb-2 block font-medium">Search Events</label>
+      <div className="mb-2.5 md:mb-3 relative">
+        <label className="text-[10px] md:text-xs text-muted-foreground mb-1.5 md:mb-2 block font-medium">Search Events</label>
         <div className="relative group">
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground 
                              group-focus-within:text-primary transition-smooth" aria-hidden="true" />
@@ -105,7 +105,7 @@ export const SearchPanel = ({
             onFocus={() => suggestions.length > 0 && setShowSuggestions(true)}
             placeholder="Keyword, type or country..."
             aria-label="Search historical events"
-            className="pl-9 pr-9 bg-input/80 border-border/50 transition-smooth h-8 md:h-10 text-xs md:text-sm
+            className="pl-9 pr-9 bg-input/80 border-border/50 transition-smooth h-9 md:h-10 text-xs md:text-sm
                        focus:border-primary/50 focus:shadow-glow hover:border-border"
           />
           {searchQuery && (
@@ -150,9 +150,9 @@ export const SearchPanel = ({
       </div>
 
       {/* Categories */}
-      <div className="mb-2 md:mb-4">
-        <label className="text-[10px] md:text-xs text-muted-foreground mb-1 md:mb-2 block font-medium">Categories</label>
-        <div className="flex flex-wrap gap-1 md:gap-2">
+      <div className="mb-2.5 md:mb-3">
+        <label className="text-[10px] md:text-xs text-muted-foreground mb-1.5 md:mb-2 block font-medium">Categories</label>
+        <div className="flex flex-wrap gap-1.5 md:gap-2">
           {Object.entries(EVENT_COLORS).map(([type, { fill, label }]) => (
             <Badge
               key={type}
@@ -176,7 +176,7 @@ export const SearchPanel = ({
 
           {/* On-demand toggle */}
           <div className="flex items-center gap-2 text-[10px] md:text-xs text-muted-foreground bg-muted/30 
-                          rounded-lg p-1.5 md:p-2 border border-border/30 mt-2 md:mt-4">
+                          rounded-lg p-2 md:p-2.5 border border-border/30 mt-2.5 md:mt-3">
             <Checkbox 
               id="onDemand" 
               checked={onDemandMode} 

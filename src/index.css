@@ -153,15 +153,16 @@ All colors MUST be HSL.
     overflow: hidden;
   }
   
-  /* Background pattern - light theme */
+  /* Background pattern - light theme with enhanced globe backdrop */
   body::before {
     content: '';
     position: fixed;
     inset: 0;
     background: 
-      radial-gradient(circle at 20% 30%, hsl(217 91% 59% / 0.05) 0%, transparent 50%),
-      radial-gradient(circle at 80% 70%, hsl(280 70% 55% / 0.05) 0%, transparent 50%),
-      radial-gradient(circle at 50% 50%, hsl(265 85% 58% / 0.03) 0%, transparent 60%);
+      radial-gradient(circle at 50% 50%, hsl(210 100% 98%) 0%, hsl(220 100% 96%) 40%, hsl(217 100% 95%) 100%),
+      radial-gradient(circle at 20% 30%, hsl(217 91% 59% / 0.08) 0%, transparent 50%),
+      radial-gradient(circle at 80% 70%, hsl(280 70% 55% / 0.08) 0%, transparent 50%),
+      radial-gradient(circle at 50% 50%, hsl(265 85% 58% / 0.05) 0%, transparent 60%);
     pointer-events: none;
     z-index: 0;
   }
@@ -409,12 +410,14 @@ All colors MUST be HSL.
   }
 
   /* Hide Mapbox logo and attribution */
-  .mapboxgl-ctrl-logo {
+  .mapboxgl-ctrl-logo,
+  .mapboxgl-ctrl.mapboxgl-ctrl-attrib,
+  .mapboxgl-ctrl-bottom-left,
+  .mapboxgl-ctrl-bottom-right {
     display: none !important;
-  }
-
-  .mapboxgl-ctrl-attrib {
-    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
   }
 
   /* Screen reader only - for SEO H1 */
