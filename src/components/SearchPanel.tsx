@@ -59,13 +59,13 @@ export const SearchPanel = ({
   }, [searchQuery, events]);
 
   return (
-    <div className="absolute bottom-3 left-3 md:top-4 md:left-4 md:bottom-auto w-[calc(100vw-60px)] md:w-[360px] z-20 
-                    gradient-card backdrop-blur-strong border border-border/50 rounded-xl md:rounded-2xl 
+    <div className="absolute top-3 left-3 md:top-4 md:left-4 w-[calc(100vw-24px)] sm:w-[380px] md:w-[400px] z-20 
+                    gradient-card backdrop-blur-strong border border-border/50 rounded-2xl 
                     shadow-elevated animate-slide-in">
       {/* Brand Header with Toggle */}
-      <div className="flex items-center justify-between p-2.5 md:p-4 cursor-pointer" 
+      <div className="flex items-center justify-between p-3 md:p-4 cursor-pointer" 
            onClick={() => setIsExpanded(!isExpanded)}>
-        <h1 className="text-xl md:text-2xl font-bold tracking-wide" style={{
+        <h1 className="text-2xl md:text-3xl font-bold tracking-wide" style={{
           backgroundImage: 'linear-gradient(90deg, #00D9FF 0%, #5B7FFF 35%, rgba(91, 127, 255, 0.6) 70%, rgba(100, 100, 100, 0.2) 100%)',
           WebkitBackgroundClip: 'text',
           backgroundClip: 'text',
@@ -78,25 +78,25 @@ export const SearchPanel = ({
         <Button 
           variant="ghost" 
           size="icon" 
-          className="h-7 w-7 hover:bg-primary/10"
+          className="h-8 w-8 md:h-9 md:w-9 hover:bg-primary/10 transition-bounce"
           onClick={(e) => {
             e.stopPropagation();
             setIsExpanded(!isExpanded);
           }}
         >
-          {isExpanded ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
+          {isExpanded ? <ChevronUp className="w-5 h-5" /> : <ChevronDown className="w-5 h-5" />}
         </Button>
       </div>
 
       {/* Collapsible Content */}
       {isExpanded && (
-        <div className="px-2.5 pb-2.5 md:px-4 md:pb-4 animate-fade-in max-h-[40vh] md:max-h-[calc(100vh-180px)] overflow-y-auto">
+        <div className="px-3 pb-3 md:px-4 md:pb-4 animate-fade-in max-h-[calc(100vh-120px)] md:max-h-[calc(100vh-180px)] overflow-y-auto">
 
       {/* Search */}
-      <div className="mb-2 md:mb-4 relative">
-        <label className="text-[10px] md:text-xs text-muted-foreground mb-1 md:mb-2 block font-medium">Search Events</label>
+      <div className="mb-3 md:mb-4 relative">
+        <label className="text-xs md:text-sm text-muted-foreground mb-2 block font-medium">Search Events</label>
         <div className="relative group">
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground 
+          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground 
                              group-focus-within:text-primary transition-smooth" aria-hidden="true" />
           <Input
             ref={searchInputRef}
@@ -105,8 +105,8 @@ export const SearchPanel = ({
             onFocus={() => suggestions.length > 0 && setShowSuggestions(true)}
             placeholder="Keyword, type or country..."
             aria-label="Search historical events"
-            className="pl-9 pr-9 bg-input/80 border-border/50 transition-smooth h-8 md:h-10 text-xs md:text-sm
-                       focus:border-primary/50 focus:shadow-glow hover:border-border"
+            className="pl-10 pr-10 bg-input/80 border-border/50 transition-smooth h-11 md:h-12 text-sm md:text-base
+                       focus:border-primary/50 focus:shadow-glow hover:border-border rounded-xl"
           />
           {searchQuery && (
             <button
@@ -116,7 +116,7 @@ export const SearchPanel = ({
               className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground 
                          hover:text-foreground transition-smooth hover:scale-110"
             >
-              <X className="w-4 h-4" aria-hidden="true" />
+              <X className="w-5 h-5" aria-hidden="true" />
             </button>
           )}
         </div>
@@ -150,14 +150,14 @@ export const SearchPanel = ({
       </div>
 
       {/* Categories */}
-      <div className="mb-2 md:mb-4">
-        <label className="text-[10px] md:text-xs text-muted-foreground mb-1 md:mb-2 block font-medium">Categories</label>
-        <div className="flex flex-wrap gap-1 md:gap-2">
+      <div className="mb-3 md:mb-4">
+        <label className="text-xs md:text-sm text-muted-foreground mb-2 block font-medium">Categories</label>
+        <div className="flex flex-wrap gap-2">
           {Object.entries(EVENT_COLORS).map(([type, { fill, label }]) => (
             <Badge
               key={type}
               onClick={() => onTypeToggle(type as EventType)}
-              className={`cursor-pointer transition-bounce px-2 md:px-3 py-1 text-[10px] md:text-xs
+              className={`cursor-pointer transition-bounce px-3 py-1.5 text-xs md:text-sm
                          border-glow ${
                 selectedTypes.has(type as EventType)
                   ? 'bg-primary/20 text-primary border-primary shadow-glow hover:shadow-glow-accent'
@@ -175,15 +175,15 @@ export const SearchPanel = ({
       </div>
 
           {/* On-demand toggle */}
-          <div className="flex items-center gap-2 text-[10px] md:text-xs text-muted-foreground bg-muted/30 
-                          rounded-lg p-1.5 md:p-2 border border-border/30 mt-2 md:mt-4">
+          <div className="flex items-center gap-2.5 text-xs md:text-sm text-muted-foreground bg-muted/30 
+                          rounded-xl p-2.5 md:p-3 border border-border/30 mt-3 md:mt-4">
             <Checkbox 
               id="onDemand" 
               checked={onDemandMode} 
               onCheckedChange={onDemandToggle}
-              className="border-border data-[state=checked]:bg-primary data-[state=checked]:border-primary"
+              className="border-border data-[state=checked]:bg-primary data-[state=checked]:border-primary h-5 w-5"
             />
-            <label htmlFor="onDemand" className="cursor-pointer select-none leading-tight flex-1">
+            <label htmlFor="onDemand" className="cursor-pointer select-none leading-snug flex-1">
               Show pins only after search
             </label>
           </div>
