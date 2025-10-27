@@ -153,81 +153,60 @@ All colors MUST be HSL.
     overflow: hidden;
   }
   
-  /* Background pattern - light theme with sun rays and clouds */
+  /* Background pattern - light theme with sun rays effect */
   body::before {
     content: '';
     position: fixed;
     inset: 0;
     background: 
-      /* Sky gradient - soft blue */
-      linear-gradient(to bottom, 
-        hsl(200 80% 85%) 0%, 
-        hsl(205 75% 88%) 30%,
-        hsl(210 70% 90%) 60%,
-        hsl(215 75% 92%) 100%
-      );
+      /* Soft blue sky gradient */
+      linear-gradient(135deg, 
+        hsl(210 70% 92%) 0%, 
+        hsl(200 65% 90%) 25%,
+        hsl(195 60% 88%) 50%,
+        hsl(205 70% 91%) 75%,
+        hsl(215 65% 93%) 100%
+      ),
+      /* Sun rays from top right corner */
+      conic-gradient(from 135deg at 85% 15%, 
+        hsl(50 100% 85% / 0.4) 0deg,
+        transparent 30deg,
+        hsl(55 100% 88% / 0.35) 60deg,
+        transparent 90deg,
+        hsl(45 100% 86% / 0.3) 120deg,
+        transparent 150deg,
+        hsl(52 100% 87% / 0.25) 180deg,
+        transparent 210deg,
+        hsl(48 100% 85% / 0.2) 240deg,
+        transparent 270deg
+      ),
+      /* Ambient glow around sun position */
+      radial-gradient(circle at 85% 15%, 
+        hsl(50 100% 90% / 0.6) 0%, 
+        hsl(55 100% 92% / 0.4) 15%,
+        hsl(45 100% 88% / 0.25) 25%,
+        transparent 45%
+      ),
+      /* Additional atmospheric glows */
+      radial-gradient(circle at 20% 40%, hsl(217 91% 70% / 0.08) 0%, transparent 50%),
+      radial-gradient(circle at 60% 70%, hsl(200 80% 75% / 0.06) 0%, transparent 45%);
     pointer-events: none;
     z-index: 0;
+    animation: sun-shift 25s ease-in-out infinite alternate;
   }
   
-  /* Sun rays - dramatic beams from top right */
-  body::after {
-    content: '';
-    position: fixed;
-    inset: 0;
-    background: 
-      /* Strong sun rays */
-      repeating-conic-gradient(from 45deg at 90% 10%,
-        hsl(45 100% 75% / 0.5) 0deg,
-        hsl(50 100% 80% / 0.3) 2deg,
-        transparent 3deg,
-        transparent 8deg
-      ),
-      /* Sun glow */
-      radial-gradient(circle at 90% 10%, 
-        hsl(50 100% 85% / 0.8) 0%, 
-        hsl(45 100% 80% / 0.5) 5%,
-        hsl(55 100% 75% / 0.3) 10%,
-        transparent 20%
-      ),
-      /* Soft clouds */
-      radial-gradient(ellipse 800px 200px at 25% 30%, 
-        hsl(0 0% 100% / 0.6) 0%, 
-        hsl(0 0% 100% / 0.3) 40%,
-        transparent 70%
-      ),
-      radial-gradient(ellipse 600px 150px at 70% 50%, 
-        hsl(0 0% 100% / 0.5) 0%, 
-        hsl(0 0% 100% / 0.25) 45%,
-        transparent 75%
-      ),
-      radial-gradient(ellipse 500px 120px at 40% 70%, 
-        hsl(0 0% 100% / 0.45) 0%, 
-        hsl(0 0% 100% / 0.2) 50%,
-        transparent 80%
-      ),
-      /* Atmospheric light */
-      radial-gradient(ellipse at 90% 10%,
-        hsl(50 100% 90% / 0.4) 0%,
-        transparent 60%
-      );
-    pointer-events: none;
-    z-index: 0;
-    animation: clouds-drift 60s ease-in-out infinite alternate;
-  }
-  
-  @keyframes clouds-drift {
+  @keyframes sun-shift {
     0% {
-      transform: translateX(0) scale(1);
       opacity: 0.9;
+      filter: brightness(1);
     }
     50% {
-      transform: translateX(-20px) scale(1.02);
       opacity: 1;
+      filter: brightness(1.05);
     }
     100% {
-      transform: translateX(0) scale(1);
       opacity: 0.9;
+      filter: brightness(1);
     }
   }
 
