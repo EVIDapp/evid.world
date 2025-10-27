@@ -232,6 +232,17 @@ export const EventMap = () => {
     }
 
     return () => {
+      // Close all popups and remove all markers before removing map
+      markersRef.current.forEach(marker => {
+        if (marker.getPopup()) {
+          marker.getPopup().remove();
+        }
+        marker.remove();
+      });
+      markersRef.current = [];
+      polygonsRef.current = [];
+      activePolygonRef.current = null;
+      
       map.current?.remove();
       map.current = null;
     };
@@ -344,13 +355,17 @@ export const EventMap = () => {
     markersRef.current = [];
 
     // Remove all polygon layers
-    if (map.current) {
+    if (map.current && map.current.isStyleLoaded()) {
       polygonsRef.current.forEach(polygonId => {
-        if (map.current?.getLayer(polygonId)) {
-          map.current.removeLayer(polygonId);
-        }
-        if (map.current?.getSource(polygonId)) {
-          map.current.removeSource(polygonId);
+        try {
+          if (map.current?.getLayer(polygonId)) {
+            map.current.removeLayer(polygonId);
+          }
+          if (map.current?.getSource(polygonId)) {
+            map.current.removeSource(polygonId);
+          }
+        } catch (error) {
+          // Silently handle errors if style is being changed
         }
       });
     }
@@ -366,16 +381,20 @@ export const EventMap = () => {
     const polygonId = `polygon-${event.id}-${index}`;
     
     // Remove previous active polygon if exists
-    if (activePolygonRef.current) {
+    if (activePolygonRef.current && map.current.isStyleLoaded()) {
       const prevPolygonId = activePolygonRef.current;
-      if (map.current.getLayer(prevPolygonId)) {
-        map.current.removeLayer(prevPolygonId);
-      }
-      if (map.current.getLayer(`${prevPolygonId}-outline`)) {
-        map.current.removeLayer(`${prevPolygonId}-outline`);
-      }
-      if (map.current.getSource(prevPolygonId)) {
-        map.current.removeSource(prevPolygonId);
+      try {
+        if (map.current.getLayer(prevPolygonId)) {
+          map.current.removeLayer(prevPolygonId);
+        }
+        if (map.current.getLayer(`${prevPolygonId}-outline`)) {
+          map.current.removeLayer(`${prevPolygonId}-outline`);
+        }
+        if (map.current.getSource(prevPolygonId)) {
+          map.current.removeSource(prevPolygonId);
+        }
+      } catch (error) {
+        // Silently handle errors if style is being changed
       }
     }
     
@@ -563,18 +582,22 @@ export const EventMap = () => {
         .setDOMContent(popupContent)
         .on('close', () => {
           // Remove polygon when popup closes
-          if (activePolygonRef.current) {
+          if (activePolygonRef.current && map.current?.isStyleLoaded()) {
             const prevPolygonId = activePolygonRef.current;
-            if (map.current?.getLayer(prevPolygonId)) {
-              map.current.removeLayer(prevPolygonId);
+            try {
+              if (map.current?.getLayer(prevPolygonId)) {
+                map.current.removeLayer(prevPolygonId);
+              }
+              if (map.current?.getLayer(`${prevPolygonId}-outline`)) {
+                map.current.removeLayer(`${prevPolygonId}-outline`);
+              }
+              if (map.current?.getSource(prevPolygonId)) {
+                map.current.removeSource(prevPolygonId);
+              }
+              activePolygonRef.current = null;
+            } catch (error) {
+              // Silently handle errors if map/style is being removed
             }
-            if (map.current?.getLayer(`${prevPolygonId}-outline`)) {
-              map.current.removeLayer(`${prevPolygonId}-outline`);
-            }
-            if (map.current?.getSource(prevPolygonId)) {
-              map.current.removeSource(prevPolygonId);
-            }
-            activePolygonRef.current = null;
           }
         });
 
