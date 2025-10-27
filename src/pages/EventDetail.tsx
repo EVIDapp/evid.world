@@ -90,7 +90,7 @@ const EventDetail = () => {
   const eventColor = getEventColor(event.type);
 
   return (
-    <div className="min-h-screen bg-background flex flex-col">
+    <div className="h-screen bg-background flex flex-col overflow-hidden">
       <EventMeta event={event} />
       
       {/* Header */}
@@ -141,8 +141,8 @@ const EventDetail = () => {
       </div>
 
       {/* Main Content - Scrollable */}
-      <div className="flex-1 overflow-y-auto scroll-smooth">
-        <article className="container max-w-6xl mx-auto px-4 py-6">
+      <main className="flex-1 overflow-y-auto scroll-smooth">
+        <div className="container max-w-6xl mx-auto px-4 py-6">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 animate-fade-in">
             {/* Main Content */}
             <div className="lg:col-span-2 space-y-6">
@@ -296,8 +296,8 @@ const EventDetail = () => {
             )}
           </aside>
         </div>
-      </article>
-    </div>
+      </div>
+    </main>
   </div>
   );
 };
