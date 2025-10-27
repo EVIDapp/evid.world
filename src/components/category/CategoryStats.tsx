@@ -30,49 +30,46 @@ export const CategoryStats = ({ events }: CategoryStatsProps) => {
     .sort((a, b) => (b.casualties || 0) - (a.casualties || 0))[0];
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
-      <Card className="hover:shadow-lg transition-shadow">
-        <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-          <CardTitle className="text-sm font-medium">Total Events</CardTitle>
-          <TrendingUp className="h-4 w-4 text-muted-foreground" />
+    <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+      <Card className="hover:shadow-md transition-shadow">
+        <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-1 p-3">
+          <CardTitle className="text-xs font-medium">Total Events</CardTitle>
+          <TrendingUp className="h-3 w-3 text-muted-foreground" />
         </CardHeader>
-        <CardContent>
-          <div className="text-3xl font-bold">{totalEvents}</div>
-          <p className="text-xs text-muted-foreground mt-1">documented incidents</p>
+        <CardContent className="p-3 pt-0">
+          <div className="text-2xl font-bold">{totalEvents}</div>
         </CardContent>
       </Card>
 
-      <Card className="hover:shadow-lg transition-shadow">
-        <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-          <CardTitle className="text-sm font-medium">Total Casualties</CardTitle>
-          <Users className="h-4 w-4 text-muted-foreground" />
+      <Card className="hover:shadow-md transition-shadow">
+        <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-1 p-3">
+          <CardTitle className="text-xs font-medium">Casualties</CardTitle>
+          <Users className="h-3 w-3 text-muted-foreground" />
         </CardHeader>
-        <CardContent>
-          <div className="text-3xl font-bold">{totalCasualties.toLocaleString()}</div>
-          <p className="text-xs text-muted-foreground mt-1">victims recorded</p>
+        <CardContent className="p-3 pt-0">
+          <div className="text-2xl font-bold">{totalCasualties.toLocaleString()}</div>
         </CardContent>
       </Card>
 
-      <Card className="hover:shadow-lg transition-shadow">
-        <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-          <CardTitle className="text-sm font-medium">Time Range</CardTitle>
-          <Calendar className="h-4 w-4 text-muted-foreground" />
+      <Card className="hover:shadow-md transition-shadow">
+        <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-1 p-3">
+          <CardTitle className="text-xs font-medium">Time Range</CardTitle>
+          <Calendar className="h-3 w-3 text-muted-foreground" />
         </CardHeader>
-        <CardContent>
-          <div className="text-2xl font-bold">{timeRange}</div>
-          <p className="text-xs text-muted-foreground mt-1">historical span</p>
+        <CardContent className="p-3 pt-0">
+          <div className="text-lg font-bold">{timeRange}</div>
         </CardContent>
       </Card>
 
-      <Card className="hover:shadow-lg transition-shadow">
-        <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-          <CardTitle className="text-sm font-medium">Top Countries</CardTitle>
-          <MapPin className="h-4 w-4 text-muted-foreground" />
+      <Card className="hover:shadow-md transition-shadow">
+        <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-1 p-3">
+          <CardTitle className="text-xs font-medium">Top Countries</CardTitle>
+          <MapPin className="h-3 w-3 text-muted-foreground" />
         </CardHeader>
-        <CardContent>
-          <div className="space-y-1">
-            {topCountries.slice(0, 3).map(([country, count]) => (
-              <div key={country} className="flex justify-between text-sm">
+        <CardContent className="p-3 pt-0">
+          <div className="space-y-0.5">
+            {topCountries.slice(0, 2).map(([country, count]) => (
+              <div key={country} className="flex justify-between text-xs">
                 <span className="truncate">{country}</span>
                 <span className="font-medium">{count}</span>
               </div>

@@ -29,13 +29,13 @@ export const CategoryTimeline = ({ events, color }: CategoryTimelineProps) => {
     });
 
   return (
-    <Card className="mb-8">
-      <CardHeader>
-        <CardTitle>Timeline Distribution</CardTitle>
-        <CardDescription>Events by century</CardDescription>
+    <Card>
+      <CardHeader className="p-4">
+        <CardTitle className="text-base">Timeline Distribution</CardTitle>
+        <CardDescription className="text-xs">Events by century</CardDescription>
       </CardHeader>
-      <CardContent>
-        <ResponsiveContainer width="100%" height={300}>
+      <CardContent className="p-4 pt-0">
+        <ResponsiveContainer width="100%" height={200}>
           <BarChart data={chartData}>
             <CartesianGrid strokeDasharray="3 3" className="stroke-muted" />
             <XAxis 

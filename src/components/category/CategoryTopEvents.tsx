@@ -21,32 +21,32 @@ export const CategoryTopEvents = ({ events, color }: CategoryTopEventsProps) => 
   if (topEvents.length === 0) return null;
 
   return (
-    <Card className="mb-8">
-      <CardHeader>
-        <CardTitle>Top 10 Deadliest Events</CardTitle>
-        <CardDescription>By casualty count</CardDescription>
+    <Card>
+      <CardHeader className="p-4">
+        <CardTitle className="text-base">Top 10 Deadliest Events</CardTitle>
+        <CardDescription className="text-xs">By casualty count</CardDescription>
       </CardHeader>
-      <CardContent>
-        <div className="space-y-3">
+      <CardContent className="p-4 pt-0">
+        <div className="space-y-2 max-h-96 overflow-y-auto">
           {topEvents.map((event, index) => {
             const slug = generateEventSlug(event.title, event.year);
             return (
               <div
                 key={event.id}
-                className="flex items-start gap-4 p-4 rounded-lg hover:bg-accent/50 transition-colors cursor-pointer group"
+                className="flex items-start gap-2 p-2 rounded-lg hover:bg-accent/50 transition-colors cursor-pointer group"
                 onClick={() => navigate(`/event/${slug}`)}
               >
                 <div 
-                  className="flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold"
+                  className="flex-shrink-0 w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold"
                   style={{ backgroundColor: color, color: 'white' }}
                 >
                   {index + 1}
                 </div>
                 <div className="flex-1 min-w-0">
-                  <h3 className="font-semibold group-hover:text-primary transition-colors line-clamp-2">
+                  <h3 className="text-sm font-semibold group-hover:text-primary transition-colors line-clamp-1">
                     {event.title}
                   </h3>
-                  <div className="flex flex-wrap gap-3 mt-2 text-xs text-muted-foreground">
+                  <div className="flex flex-wrap gap-2 mt-1 text-xs text-muted-foreground">
                     {event.year && (
                       <span className="flex items-center gap-1">
                         <Calendar className="h-3 w-3" />
@@ -57,9 +57,9 @@ export const CategoryTopEvents = ({ events, color }: CategoryTopEventsProps) => 
                       <MapPin className="h-3 w-3" />
                       {event.country}
                     </span>
-                    <Badge variant="secondary" className="flex items-center gap-1">
+                    <Badge variant="secondary" className="flex items-center gap-1 text-xs h-5">
                       <Users className="h-3 w-3" />
-                      {event.casualties?.toLocaleString()} casualties
+                      {event.casualties?.toLocaleString()}
                     </Badge>
                   </div>
                 </div>

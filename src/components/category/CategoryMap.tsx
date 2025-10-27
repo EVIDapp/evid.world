@@ -85,12 +85,12 @@ export const CategoryMap = ({ events, color }: CategoryMapProps) => {
   }, [events, color, navigate, mapboxToken]);
 
   return (
-    <Card className="mb-8">
-      <CardHeader>
-        <CardTitle>Event Locations</CardTitle>
+    <Card>
+      <CardHeader className="p-4">
+        <CardTitle className="text-base">Event Locations</CardTitle>
       </CardHeader>
-      <CardContent>
-        <div ref={mapContainer} className="w-full h-[400px] rounded-lg" />
+      <CardContent className="p-4 pt-0">
+        <div ref={mapContainer} className="w-full h-[250px] rounded-lg" />
       </CardContent>
     </Card>
   );
