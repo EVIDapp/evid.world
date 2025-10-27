@@ -429,13 +429,26 @@ All colors MUST be HSL.
 
   /* Hide Mapbox logo and attribution */
   .mapboxgl-ctrl-logo,
+  .mapboxgl-ctrl-attrib,
   .mapboxgl-ctrl.mapboxgl-ctrl-attrib,
   .mapboxgl-ctrl-bottom-left,
-  .mapboxgl-ctrl-bottom-right {
+  .mapboxgl-ctrl-bottom-right,
+  .mapboxgl-ctrl-attrib.mapboxgl-compact,
+  a.mapboxgl-ctrl-logo,
+  .mapboxgl-compact-show {
     display: none !important;
     visibility: hidden !important;
     opacity: 0 !important;
     pointer-events: none !important;
+    width: 0 !important;
+    height: 0 !important;
+    overflow: hidden !important;
+  }
+  
+  /* Force hide all bottom controls */
+  .mapboxgl-canvas-container + .mapboxgl-control-container .mapboxgl-ctrl-bottom-left,
+  .mapboxgl-canvas-container + .mapboxgl-control-container .mapboxgl-ctrl-bottom-right {
+    display: none !important;
   }
 
   /* Screen reader only - for SEO H1 */
