@@ -174,7 +174,7 @@ export const EventMap = () => {
         : 'mapbox://styles/mapbox/streets-v12';
       
       // Adaptive zoom for mobile devices
-      const initialZoom = isMobile ? 0.9 : 2.2;
+      const initialZoom = isMobile ? 0.6 : 2.2;
       
       map.current = new mapboxgl.Map({
         container: mapContainer.current,
