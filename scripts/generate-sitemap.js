@@ -6,7 +6,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 // Read events data
-const eventsPath = path.join(__dirname, '../public/events-clean.json');
+const eventsPath = path.join(__dirname, '../public/events.json');
 const events = JSON.parse(fs.readFileSync(eventsPath, 'utf-8'));
 
 // Generate slugs for each event

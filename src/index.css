@@ -440,6 +440,51 @@ All colors MUST be HSL.
     color: #fff;
   }
 
+  /* Popup action buttons */
+  .popup-details-btn {
+    background: hsl(217 91% 59%);
+    color: white;
+  }
+
+  .dark .popup-details-btn {
+    background: hsl(217 91% 65%);
+    color: hsl(210 40% 98%);
+  }
+
+  .popup-details-btn:hover {
+    background: hsl(217 91% 55%);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px hsl(217 91% 59% / 0.3);
+  }
+
+  .dark .popup-details-btn:hover {
+    background: hsl(217 91% 70%);
+    box-shadow: 0 4px 12px hsl(217 91% 65% / 0.4);
+  }
+
+  .popup-link {
+    background: hsl(214 32% 91%);
+    color: hsl(217 91% 59%) !important;
+    display: inline-block;
+  }
+
+  .dark .popup-link {
+    background: hsl(225 30% 15%);
+    color: hsl(217 91% 65%) !important;
+  }
+
+  .popup-link:hover {
+    background: hsl(214 32% 85%);
+    transform: translateY(-1px);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    text-decoration: none !important;
+  }
+
+  .dark .popup-link:hover {
+    background: hsl(225 30% 20%);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  }
+
   /* Hide Mapbox logo and attribution */
   .mapboxgl-ctrl-logo,
   .mapboxgl-ctrl-attrib,

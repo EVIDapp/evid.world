@@ -523,6 +523,23 @@ export const EventMap = () => {
       desc.textContent = event.desc_long || event.desc;
       popupContent.appendChild(desc);
       
+      // Add button container with View Details and Wikipedia link
+      const buttonContainer = document.createElement('div');
+      buttonContainer.style.cssText = 'display: flex; gap: 8px; margin-top: 12px; flex-wrap: wrap;';
+      
+      // View Details button
+      const detailsBtn = document.createElement('button');
+      detailsBtn.className = 'popup-details-btn';
+      detailsBtn.textContent = 'View Details';
+      detailsBtn.setAttribute('aria-label', `View full details for ${event.title}`);
+      detailsBtn.style.cssText = 'flex: 1; min-width: 120px; padding: 8px 16px; border-radius: 6px; font-size: 14px; font-weight: 500; cursor: pointer; transition: all 0.2s; border: none;';
+      detailsBtn.onclick = (e) => {
+        e.preventDefault();
+        const slug = generateEventSlug(event.title, event.year);
+        navigate(`/event/${slug}`);
+      };
+      buttonContainer.appendChild(detailsBtn);
+      
       if (event.wiki) {
         const link = document.createElement('a');
         link.className = 'popup-link';
@@ -530,10 +547,12 @@ export const EventMap = () => {
         link.target = '_blank';
         link.rel = 'noopener noreferrer';
         link.setAttribute('aria-label', `Read more about ${event.title} on Wikipedia`);
-        link.style.cssText = 'text-decoration: none; font-size: 14px;';
-        link.textContent = 'Read more on Wikipedia →';
-        popupContent.appendChild(link);
+        link.style.cssText = 'flex: 1; min-width: 120px; padding: 8px 16px; text-align: center; text-decoration: none; font-size: 14px; font-weight: 500; border-radius: 6px; transition: all 0.2s;';
+        link.textContent = 'Wikipedia →';
+        buttonContainer.appendChild(link);
       }
+      
+      popupContent.appendChild(buttonContainer);
 
       const popup = new mapboxgl.Popup({ 
         offset: 25,
