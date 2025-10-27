@@ -63,7 +63,7 @@ export const SearchPanel = ({
       {/* Brand Header with Toggle */}
       <div className="flex items-center justify-between p-1.5 cursor-pointer border-b border-border/30" 
            onClick={() => setIsExpanded(!isExpanded)}>
-        <h1 className="text-[13px] font-bold tracking-wide" style={{
+        <h1 className="text-lg font-bold tracking-wide" style={{
           backgroundImage: 'linear-gradient(90deg, #00D9FF 0%, #5B7FFF 35%, rgba(91, 127, 255, 0.6) 70%, rgba(100, 100, 100, 0.2) 100%)',
           WebkitBackgroundClip: 'text',
           backgroundClip: 'text',
