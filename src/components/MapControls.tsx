@@ -11,7 +11,18 @@ interface MapControlsProps {
 export const MapControls = ({ onShowAll, onClear, onReset, onTimelineToggle }: MapControlsProps) => {
   return (
     <div className="absolute bottom-3 left-3 md:bottom-4 md:left-4 z-10 
-                    flex flex-wrap gap-1.5 animate-fade-in max-w-[280px]">
+                    flex gap-1.5 animate-fade-in">
+      <Button
+        onClick={onTimelineToggle}
+        size="sm"
+        variant="secondary"
+        className="gradient-card backdrop-blur-strong border border-border/50 
+                   hover:border-primary/50 text-[10px] px-2.5 py-1.5 h-auto gap-1"
+      >
+        <Clock className="w-3 h-3" />
+        Timeline
+      </Button>
+      
       <Button
         onClick={onShowAll}
         size="sm"
@@ -44,17 +55,6 @@ export const MapControls = ({ onShowAll, onClear, onReset, onTimelineToggle }: M
       >
         <RotateCcw className="w-3 h-3" />
         Reset
-      </Button>
-      
-      <Button
-        onClick={onTimelineToggle}
-        size="sm"
-        variant="secondary"
-        className="gradient-card backdrop-blur-strong border border-border/50 
-                   hover:border-primary/50 text-[10px] px-2.5 py-1.5 h-auto gap-1"
-      >
-        <Clock className="w-3 h-3" />
-        Timeline
       </Button>
     </div>
   );

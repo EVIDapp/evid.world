@@ -70,13 +70,13 @@ export const TimelineFilter = ({
 
   return (
     <div className="absolute left-3 bottom-[60px] md:left-4 md:bottom-[70px] w-[280px] md:w-[300px] z-30 
-                    gradient-card backdrop-blur-strong border border-border/50 rounded-xl 
+                    gradient-card backdrop-blur-strong border border-border/50 rounded-lg 
                     shadow-elevated animate-fade-in-up">
-      <div className="flex items-center justify-between p-1.5 md:p-2 border-b border-border/30">
+      <div className="flex items-center justify-between p-1.5 border-b border-border/30">
         <div className="flex items-center gap-1.5">
-          <Clock className="w-3.5 h-3.5 text-primary" />
+          <Clock className="w-3 h-3 text-primary" />
           <div>
-            <div className="text-xs font-semibold text-foreground">
+            <div className="text-[10px] font-semibold text-foreground">
               {localRange[0]} - {localRange[1]}
             </div>
             <div className="text-[9px] text-muted-foreground">
@@ -92,7 +92,7 @@ export const TimelineFilter = ({
             }}
             variant="ghost"
             size="icon"
-            className="h-6 w-6 hover:bg-primary/10"
+            className="h-5 w-5 hover:bg-primary/10"
             title="Reset"
           >
             <RotateCcw className="w-3 h-3" />
@@ -104,7 +104,7 @@ export const TimelineFilter = ({
             }}
             variant="ghost"
             size="icon"
-            className="h-6 w-6 hover:bg-primary/10"
+            className="h-5 w-5 hover:bg-primary/10"
           >
             {isExpanded ? <ChevronUp className="w-3 h-3" /> : <ChevronDown className="w-3 h-3" />}
           </Button>
@@ -112,7 +112,7 @@ export const TimelineFilter = ({
             onClick={onClose || onToggle}
             variant="ghost"
             size="icon"
-            className="h-6 w-6 hover:bg-destructive/10 text-muted-foreground hover:text-destructive"
+            className="h-5 w-5 hover:bg-destructive/10 text-muted-foreground hover:text-destructive text-[14px]"
             title="Close"
           >
             ×
@@ -135,7 +135,7 @@ export const TimelineFilter = ({
                   <Badge
                     key={period.label}
                     onClick={() => handlePeriodSelect(period.range)}
-                    className={`cursor-pointer transition-all text-[9px] px-1 py-0 ${
+                    className={`cursor-pointer transition-all text-[9px] px-1.5 py-0.5 ${
                       isActive
                         ? 'bg-primary text-primary-foreground border-primary shadow-glow'
                         : 'bg-secondary/30 text-secondary-foreground border-border/50 hover:bg-secondary/50 hover:border-primary/30'

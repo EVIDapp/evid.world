@@ -28,13 +28,13 @@ export const TooltipButton = ({
           variant={variant}
           size="icon"
           className={`shadow-elevated backdrop-blur-strong gradient-card border-border/50 
-                     h-8 w-8 md:h-9 md:w-9 transition-bounce hover:shadow-glow hover:border-primary/30 hover:scale-105 ${className}`}
+                     h-7 w-7 transition-bounce hover:shadow-glow hover:border-primary/30 hover:scale-105 ${className}`}
         >
           {icon}
         </Button>
       </TooltipTrigger>
       <TooltipContent side="left">
-        <p>{tooltip}</p>
+        <p className="text-[10px]">{tooltip}</p>
       </TooltipContent>
     </Tooltip>
   );
