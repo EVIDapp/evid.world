@@ -5,9 +5,11 @@ import { EventMeta } from '@/components/EventMeta';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { ArrowLeft, MapPin, Calendar, Users, ExternalLink } from 'lucide-react';
+import { Separator } from '@/components/ui/separator';
+import { ArrowLeft, MapPin, Calendar, Users, ExternalLink, Globe, Flame, AlertTriangle } from 'lucide-react';
 import { getEventColor } from '@/utils/eventColors';
 import { generateEventSlug } from '@/utils/slugify';
+import { getWikipediaImage } from '@/utils/wikipediaImage';
 
 const EventDetail = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -15,6 +17,7 @@ const EventDetail = () => {
   const [event, setEvent] = useState<HistoricalEvent | null>(null);
   const [relatedEvents, setRelatedEvents] = useState<HistoricalEvent[]>([]);
   const [loading, setLoading] = useState(true);
+  const [wikiImage, setWikiImage] = useState<string | null>(null);
 
   useEffect(() => {
     const loadEvent = async () => {
@@ -30,6 +33,13 @@ const EventDetail = () => {
         
         if (foundEvent) {
           setEvent(foundEvent);
+          
+          // Load Wikipedia image if available
+          if (foundEvent.wiki) {
+            getWikipediaImage(foundEvent.wiki).then(imageUrl => {
+              if (imageUrl) setWikiImage(imageUrl);
+            }).catch(() => {});
+          }
           
           // Find related events (same type or country)
           const related = events
@@ -93,70 +103,147 @@ const EventDetail = () => {
         </div>
       </header>
 
+      {/* Hero Section */}
+      <div className="relative bg-gradient-to-b from-muted/50 to-background border-b">
+        <div className="container max-w-6xl mx-auto px-4 py-12">
+          <Badge className="mb-4" style={{ backgroundColor: eventColor.fill, color: 'white' }}>
+            {eventColor.label}
+          </Badge>
+          <h1 className="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-foreground to-foreground/70 bg-clip-text text-transparent">
+            {event.title}
+          </h1>
+          
+          <div className="flex flex-wrap gap-6 text-lg">
+            {event.year && (
+              <div className="flex items-center gap-2 text-muted-foreground">
+                <Calendar className="h-5 w-5" />
+                <span className="font-medium">{event.year}</span>
+              </div>
+            )}
+            <div className="flex items-center gap-2 text-muted-foreground">
+              <MapPin className="h-5 w-5" />
+              <span className="font-medium">{event.country}</span>
+            </div>
+            {event.casualties && (
+              <div className="flex items-center gap-2 text-destructive">
+                <Users className="h-5 w-5" />
+                <span className="font-semibold">{event.casualties.toLocaleString()} casualties</span>
+              </div>
+            )}
+            {event.radiusKm && (
+              <div className="flex items-center gap-2 text-muted-foreground">
+                <Globe className="h-5 w-5" />
+                <span className="font-medium">{event.radiusKm} km radius</span>
+              </div>
+            )}
+          </div>
+        </div>
+      </div>
+
       {/* Main Content */}
       <article className="container max-w-6xl mx-auto px-4 py-8">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {/* Main Content */}
-          <div className="lg:col-span-2 space-y-6">
-            <div>
-              <Badge className="mb-4" style={{ backgroundColor: eventColor.fill }}>
-                {eventColor.label}
-              </Badge>
-              <h1 className="text-4xl font-bold mb-4">{event.title}</h1>
-              
-              <div className="flex flex-wrap gap-4 text-muted-foreground mb-6">
-                {event.year && (
-                  <div className="flex items-center gap-2">
-                    <Calendar className="h-4 w-4" />
-                    <span>{event.year}</span>
-                  </div>
-                )}
-                <div className="flex items-center gap-2">
-                  <MapPin className="h-4 w-4" />
-                  <span>{event.country}</span>
-                </div>
-                {event.casualties && (
-                  <div className="flex items-center gap-2">
-                    <Users className="h-4 w-4" />
-                    <span>{event.casualties.toLocaleString()} casualties</span>
-                  </div>
-                )}
-              </div>
-            </div>
-
-            {event.image && (
-              <img 
-                src={event.image} 
-                alt={`${event.title} ${event.type} map, ${event.country}, year ${event.year || 'unknown'} - historical event visualization`}
-                className="w-full rounded-lg shadow-lg"
-                loading="eager"
-              />
+          <div className="lg:col-span-2 space-y-8">
+            
+            {/* Hero Image */}
+            {(wikiImage || event.image) && (
+              <Card className="overflow-hidden shadow-elevated">
+                <img 
+                  src={wikiImage || event.image} 
+                  alt={`${event.title} ${event.type} map, ${event.country}, year ${event.year || 'unknown'} - historical event visualization`}
+                  className="w-full h-[400px] object-cover"
+                  loading="eager"
+                />
+              </Card>
             )}
 
-            <Card>
+            {/* Overview */}
+            <Card className="shadow-card">
               <CardHeader>
-                <CardTitle>Description</CardTitle>
+                <CardTitle className="text-2xl flex items-center gap-2">
+                  <AlertTriangle className="h-6 w-6 text-primary" />
+                  Overview
+                </CardTitle>
               </CardHeader>
-              <CardContent className="prose dark:prose-invert max-w-none">
-                <p className="text-lg">{event.desc}</p>
+              <CardContent className="space-y-4">
+                <p className="text-lg leading-relaxed">{event.desc}</p>
                 {event.desc_long && (
-                  <p className="mt-4 text-muted-foreground">{event.desc_long}</p>
+                  <>
+                    <Separator />
+                    <p className="text-base leading-relaxed text-muted-foreground">
+                      {event.desc_long}
+                    </p>
+                  </>
                 )}
               </CardContent>
             </Card>
 
+            {/* Historical Context */}
+            <Card className="shadow-card">
+              <CardHeader>
+                <CardTitle className="text-2xl flex items-center gap-2">
+                  <Flame className="h-6 w-6 text-accent" />
+                  Historical Context
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div className="space-y-3">
+                  <div className="p-4 rounded-lg bg-muted/50">
+                    <h4 className="font-semibold mb-2">Event Classification</h4>
+                    <p className="text-sm text-muted-foreground">
+                      This {event.type} event occurred in {event.year || 'ancient times'} and had significant 
+                      {event.casualties ? ` human impact with ${event.casualties.toLocaleString()} casualties` : ' historical importance'}.
+                      {event.radiusKm && ` The affected area spanned approximately ${event.radiusKm} kilometers.`}
+                    </p>
+                  </div>
+                  
+                  {event.casualties && event.casualties > 1000 && (
+                    <div className="p-4 rounded-lg bg-destructive/10 border border-destructive/20">
+                      <h4 className="font-semibold mb-2 text-destructive">Major Impact Event</h4>
+                      <p className="text-sm">
+                        This event resulted in significant loss of life and is considered one of the major 
+                        {event.type} incidents in recorded history.
+                      </p>
+                    </div>
+                  )}
+                  
+                  <div className="p-4 rounded-lg bg-primary/5 border border-primary/20">
+                    <h4 className="font-semibold mb-2">Geographic Location</h4>
+                    <p className="text-sm text-muted-foreground">
+                      The event took place at coordinates {event.pos.lat.toFixed(4)}°, {event.pos.lng.toFixed(4)}° 
+                      in {event.country}. This location played a crucial role in the event's development and impact.
+                    </p>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Learn More */}
             {event.wiki && (
-              <Card>
+              <Card className="shadow-card bg-gradient-to-br from-primary/5 to-accent/5">
                 <CardContent className="pt-6">
-                  <a 
-                    href={event.wiki} 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    className="flex items-center gap-2 text-primary hover:underline"
-                  >
-                    <ExternalLink className="h-4 w-4" />
-                    Read more on Wikipedia
-                  </a>
+                  <div className="flex items-start gap-4">
+                    <div className="p-3 rounded-lg bg-primary/10">
+                      <ExternalLink className="h-6 w-6 text-primary" />
+                    </div>
+                    <div className="flex-1">
+                      <h3 className="font-semibold text-lg mb-2">Want to Learn More?</h3>
+                      <p className="text-sm text-muted-foreground mb-4">
+                        Explore comprehensive historical details, sources, and related information about this event on Wikipedia.
+                      </p>
+                      <Button asChild variant="default">
+                        <a 
+                          href={event.wiki} 
+                          target="_blank" 
+                          rel="noopener noreferrer"
+                        >
+                          Read Full Article on Wikipedia
+                          <ExternalLink className="ml-2 h-4 w-4" />
+                        </a>
+                      </Button>
+                    </div>
+                  </div>
                 </CardContent>
               </Card>
             )}
