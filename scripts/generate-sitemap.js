@@ -7,7 +7,16 @@ const __dirname = path.dirname(__filename);
 
 // Read events data
 const eventsPath = path.join(__dirname, '../public/events.json');
-const events = JSON.parse(fs.readFileSync(eventsPath, 'utf-8'));
+let events = JSON.parse(fs.readFileSync(eventsPath, 'utf-8'));
+
+// Remove duplicates by ID
+const uniqueEvents = new Map();
+events.forEach(event => {
+  if (!uniqueEvents.has(event.id)) {
+    uniqueEvents.set(event.id, event);
+  }
+});
+events = Array.from(uniqueEvents.values());
 
 // Generate slugs for each event
 const generateSlug = (title, year) => {
