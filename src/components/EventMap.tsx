@@ -114,13 +114,6 @@ export const EventMap = () => {
         setSelectedYearRange([minYear, maxYear]);
         setEvents(uniqueEvents);
         setLoading(false);
-        
-        if (uniqueEvents.length > 0) {
-          toast({
-            title: "Events loaded",
-            description: `${uniqueEvents.length} unique historical events ready to explore`,
-          });
-        }
       })
       .catch(err => {
         console.error('Failed to load events:', err);
