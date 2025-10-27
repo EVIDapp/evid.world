@@ -7,11 +7,17 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { ArrowLeft, MapPin, Calendar, Users } from 'lucide-react';
 import { getEventColor } from '@/utils/eventColors';
 import { generateEventSlug } from '@/utils/slugify';
+import { CategoryStats } from '@/components/category/CategoryStats';
+import { CategoryTimeline } from '@/components/category/CategoryTimeline';
+import { CategoryTopEvents } from '@/components/category/CategoryTopEvents';
+import { CategoryMap } from '@/components/category/CategoryMap';
+import { CategoryFilters } from '@/components/category/CategoryFilters';
 
 const CategoryPage = () => {
   const { category } = useParams<{ category: string }>();
   const navigate = useNavigate();
-  const [events, setEvents] = useState<HistoricalEvent[]>([]);
+  const [allEvents, setAllEvents] = useState<HistoricalEvent[]>([]);
+  const [filteredEvents, setFilteredEvents] = useState<HistoricalEvent[]>([]);
   const [loading, setLoading] = useState(true);
 
   const categoryMap: Record<string, EventType> = {
@@ -49,7 +55,8 @@ const CategoryPage = () => {
             const yearB = parseInt(b.year || '0');
             return yearB - yearA;
           });
-          setEvents(filtered);
+          setAllEvents(filtered);
+          setFilteredEvents(filtered);
         }
       } catch (error) {
         console.error('Error loading events:', error);
@@ -79,7 +86,7 @@ const CategoryPage = () => {
     );
   }
 
-  if (!eventType || events.length === 0) {
+  if (!eventType || allEvents.length === 0) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-background">
         <Card className="max-w-md">
@@ -116,17 +123,41 @@ const CategoryPage = () => {
             <div>
               <h1 className="text-4xl font-bold">{categoryTitle} Events</h1>
               <p className="text-muted-foreground mt-2">
-                {events.length} historical {categoryTitle.toLowerCase()} events documented
+                {filteredEvents.length} of {allEvents.length} events displayed
               </p>
             </div>
           </div>
         </div>
       </header>
 
-      {/* Events Grid */}
+      {/* Content */}
       <article className="container max-w-7xl mx-auto px-4 py-8">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {events.map(event => {
+        {/* Stats Cards */}
+        <CategoryStats events={allEvents} />
+
+        {/* Map */}
+        <CategoryMap events={allEvents} color={eventColor.fill} />
+
+        {/* Timeline */}
+        <CategoryTimeline events={allEvents} color={eventColor.fill} />
+
+        {/* Top Events */}
+        <CategoryTopEvents events={allEvents} color={eventColor.fill} />
+
+        <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
+          {/* Filters Sidebar */}
+          <div className="lg:col-span-1">
+            <CategoryFilters 
+              events={allEvents} 
+              onFilterChange={setFilteredEvents}
+            />
+          </div>
+
+          {/* Events Grid */}
+          <div className="lg:col-span-3">
+            <h2 className="text-2xl font-bold mb-4">All Events</h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {filteredEvents.map(event => {
             const slug = generateEventSlug(event.title, event.year);
             return (
               <Card 
@@ -172,7 +203,9 @@ const CategoryPage = () => {
                 </CardContent>
               </Card>
             );
-          })}
+              })}
+            </div>
+          </div>
         </div>
       </article>
     </main>
