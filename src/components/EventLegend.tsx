@@ -1,10 +1,16 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { EVENT_COLORS } from '@/utils/eventColors';
 import { Button } from '@/components/ui/button';
 import { ChevronDown, ChevronUp } from 'lucide-react';
 
 export const EventLegend = () => {
   const [isExpanded, setIsExpanded] = useState(true);
+  const navigate = useNavigate();
+
+  const getCategorySlug = (type: string) => {
+    return type.toLowerCase().replace(/\s+/g, '-');
+  };
 
   return (
     <div className="hidden md:block absolute right-3 bottom-3 md:right-4 md:bottom-4 z-20 
@@ -30,8 +36,11 @@ export const EventLegend = () => {
         {Object.entries(EVENT_COLORS).map(([type, { fill, label }]) => (
           <div 
             key={type} 
+            onClick={() => navigate(`/category/${getCategorySlug(type)}`)}
             className="flex items-center gap-2 md:gap-3 group cursor-pointer
-                       transition-all duration-300 hover:translate-x-1"
+                       transition-all duration-300 hover:translate-x-1
+                       px-2 py-1 rounded-lg hover:bg-primary/10"
+            title={`View all ${label} events`}
           >
             <div 
               className="category-badge w-3 h-3 md:w-4 md:h-4 rounded-sm border border-white/40 
