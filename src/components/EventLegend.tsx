@@ -18,8 +18,15 @@ export const EventLegend = ({ selectedTypes, onTypeToggle }: EventLegendProps) =
                     gradient-card backdrop-blur-strong border border-border/50 rounded-lg 
                     shadow-elevated animate-fade-in-up w-[160px]">
       <div className="flex items-center justify-between p-1.5 border-b border-border/30">
-        <h3 className="text-[10px] font-semibold text-foreground 
-                       bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+        <h3 className="text-sm font-bold tracking-wide" 
+            style={{
+              backgroundImage: 'linear-gradient(90deg, #00D9FF 0%, #5B7FFF 35%, rgba(91, 127, 255, 0.6) 70%, rgba(100, 100, 100, 0.2) 100%)',
+              WebkitBackgroundClip: 'text',
+              backgroundClip: 'text',
+              color: 'transparent',
+              WebkitTextFillColor: 'transparent',
+              textShadow: '0 0 20px rgba(0, 217, 255, 0.3)'
+            }}>
           Categories
         </h3>
         <Button

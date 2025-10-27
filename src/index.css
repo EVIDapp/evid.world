@@ -451,6 +451,13 @@ All colors MUST be HSL.
     display: none !important;
   }
 
+  /* Hide Lovable badge */
+  [class*="lovable"],
+  [id*="lovable"],
+  a[href*="lovable"] {
+    display: none !important;
+  }
+
   /* Screen reader only - for SEO H1 */
   .sr-only {
     position: absolute;
