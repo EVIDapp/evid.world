@@ -64,7 +64,7 @@ export const SearchPanel = ({
     <div className={`absolute top-3 left-3 md:top-4 md:left-4 z-20 
                     gradient-card backdrop-blur-strong border border-border/50 rounded-xl 
                     shadow-elevated animate-slide-in
-                    ${isMobile ? 'w-[calc(100vw-6rem)]' : 'w-[280px] md:w-[300px]'}`}>
+                    ${isMobile ? 'w-[calc(100vw-8rem)]' : 'w-[280px] md:w-[300px]'}`}>
       {/* Brand Header with Toggle */}
       <div className="flex items-center justify-between p-1.5 cursor-pointer border-b border-border/30" 
            onClick={() => setIsExpanded(!isExpanded)}>
