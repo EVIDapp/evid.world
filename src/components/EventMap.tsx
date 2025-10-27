@@ -108,7 +108,7 @@ export const EventMap = () => {
           .filter(y => !isNaN(y));
         
         const minYear = 1; // Start from year 1 CE
-        const maxYear = Math.max(...years);
+        const maxYear = Math.min(Math.max(...years), 2025); // Cap at 2025
         
         setYearRange([minYear, maxYear]);
         setSelectedYearRange([minYear, maxYear]);

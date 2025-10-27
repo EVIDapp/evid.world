@@ -69,22 +69,22 @@ export const TimelineFilter = ({
   if (!isOpen) return null;
 
   return (
-    <div className="absolute bottom-14 md:bottom-16 left-3 right-3 md:left-4 md:right-auto md:max-w-[420px] z-30 
+    <div className="absolute bottom-14 md:bottom-16 left-3 right-3 md:left-4 md:right-auto md:max-w-[360px] z-30 
                     gradient-card backdrop-blur-strong border border-border/50 rounded-xl 
                     shadow-elevated animate-fade-in-up">
-      <div className="flex items-center justify-between p-2 md:p-2.5 border-b border-border/30">
-        <div className="flex items-center gap-2">
-          <Clock className="w-4 h-4 text-primary" />
+      <div className="flex items-center justify-between p-1.5 md:p-2 border-b border-border/30">
+        <div className="flex items-center gap-1.5">
+          <Clock className="w-3.5 h-3.5 text-primary" />
           <div>
-            <div className="text-xs md:text-sm font-semibold text-foreground">
+            <div className="text-xs font-semibold text-foreground">
               {localRange[0]} - {localRange[1]}
             </div>
-            <div className="text-[10px] text-muted-foreground">
+            <div className="text-[9px] text-muted-foreground">
               {eventCount} events
             </div>
           </div>
         </div>
-        <div className="flex items-center gap-1">
+        <div className="flex items-center gap-0.5">
           <Button
             onClick={(e) => {
               e.stopPropagation();
@@ -92,10 +92,10 @@ export const TimelineFilter = ({
             }}
             variant="ghost"
             size="icon"
-            className="h-7 w-7 hover:bg-primary/10"
+            className="h-6 w-6 hover:bg-primary/10"
             title="Reset"
           >
-            <RotateCcw className="w-3.5 h-3.5" />
+            <RotateCcw className="w-3 h-3" />
           </Button>
           <Button
             onClick={(e) => {
@@ -104,15 +104,15 @@ export const TimelineFilter = ({
             }}
             variant="ghost"
             size="icon"
-            className="h-7 w-7 hover:bg-primary/10"
+            className="h-6 w-6 hover:bg-primary/10"
           >
-            {isExpanded ? <ChevronUp className="w-3.5 h-3.5" /> : <ChevronDown className="w-3.5 h-3.5" />}
+            {isExpanded ? <ChevronUp className="w-3 h-3" /> : <ChevronDown className="w-3 h-3" />}
           </Button>
           <Button
             onClick={onClose || onToggle}
             variant="ghost"
             size="icon"
-            className="h-7 w-7 hover:bg-destructive/10 text-muted-foreground hover:text-destructive"
+            className="h-6 w-6 hover:bg-destructive/10 text-muted-foreground hover:text-destructive"
             title="Close"
           >
             ×
@@ -121,21 +121,21 @@ export const TimelineFilter = ({
       </div>
       
       {isExpanded && (
-        <div className="px-2.5 pb-2.5 md:px-3 md:pb-3 animate-fade-in space-y-2.5 md:space-y-3 max-h-[45vh] overflow-y-auto">
+        <div className="p-2 md:p-2.5 animate-fade-in space-y-2 max-h-[40vh] overflow-y-auto">
           
           {/* Period Presets */}
           <div>
-            <label className="text-[10px] md:text-xs text-muted-foreground mb-2 block font-medium">
+            <label className="text-[10px] text-muted-foreground mb-1.5 block font-medium">
               Quick Era Selection
             </label>
-            <div className="flex flex-wrap gap-1.5">
+            <div className="flex flex-wrap gap-1">
               {TIME_PERIODS.map((period) => {
                 const isActive = localRange[0] === period.range[0] && localRange[1] === period.range[1];
                 return (
                   <Badge
                     key={period.label}
                     onClick={() => handlePeriodSelect(period.range)}
-                    className={`cursor-pointer transition-all text-[10px] md:text-xs px-2 py-1 ${
+                    className={`cursor-pointer transition-all text-[9px] md:text-[10px] px-1.5 py-0.5 ${
                       isActive
                         ? 'bg-primary text-primary-foreground border-primary shadow-glow'
                         : 'bg-secondary/30 text-secondary-foreground border-border/50 hover:bg-secondary/50 hover:border-primary/30'
@@ -150,7 +150,7 @@ export const TimelineFilter = ({
 
           {/* Range Slider */}
           <div>
-            <label className="text-[10px] md:text-xs text-muted-foreground mb-2 block font-medium">
+            <label className="text-[10px] text-muted-foreground mb-1.5 block font-medium">
               Precise Period Adjustment
             </label>
             <Slider
@@ -162,11 +162,11 @@ export const TimelineFilter = ({
               className="w-full"
             />
             
-            <div className="flex items-center justify-between text-xs md:text-sm mt-2">
+            <div className="flex items-center justify-between text-xs mt-1.5">
               <div className="font-semibold text-foreground">
                 {localRange[0]}
               </div>
-              <div className="text-[10px] md:text-xs text-muted-foreground">→</div>
+              <div className="text-[9px] text-muted-foreground">→</div>
               <div className="font-semibold text-foreground">
                 {localRange[1]}
               </div>
