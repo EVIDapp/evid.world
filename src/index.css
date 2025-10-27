@@ -153,35 +153,60 @@ All colors MUST be HSL.
     overflow: hidden;
   }
   
-  /* Background pattern - light theme with enhanced globe backdrop */
+  /* Background pattern - light theme with sun rays effect */
   body::before {
     content: '';
     position: fixed;
     inset: 0;
     background: 
+      /* Soft blue sky gradient */
       linear-gradient(135deg, 
-        hsl(210 100% 98%) 0%, 
-        hsl(200 100% 96%) 20%,
-        hsl(210 90% 94%) 40%,
-        hsl(220 100% 96%) 60%,
-        hsl(230 90% 95%) 80%,
-        hsl(217 100% 95%) 100%
+        hsl(210 70% 92%) 0%, 
+        hsl(200 65% 90%) 25%,
+        hsl(195 60% 88%) 50%,
+        hsl(205 70% 91%) 75%,
+        hsl(215 65% 93%) 100%
       ),
-      radial-gradient(circle at 20% 30%, hsl(217 91% 59% / 0.12) 0%, transparent 40%),
-      radial-gradient(circle at 80% 20%, hsl(280 70% 55% / 0.1) 0%, transparent 45%),
-      radial-gradient(circle at 50% 80%, hsl(190 80% 60% / 0.08) 0%, transparent 50%),
-      radial-gradient(ellipse at 30% 60%, hsl(265 85% 58% / 0.06) 0%, transparent 55%);
+      /* Sun rays from top right corner */
+      conic-gradient(from 135deg at 85% 15%, 
+        hsl(50 100% 85% / 0.4) 0deg,
+        transparent 30deg,
+        hsl(55 100% 88% / 0.35) 60deg,
+        transparent 90deg,
+        hsl(45 100% 86% / 0.3) 120deg,
+        transparent 150deg,
+        hsl(52 100% 87% / 0.25) 180deg,
+        transparent 210deg,
+        hsl(48 100% 85% / 0.2) 240deg,
+        transparent 270deg
+      ),
+      /* Ambient glow around sun position */
+      radial-gradient(circle at 85% 15%, 
+        hsl(50 100% 90% / 0.6) 0%, 
+        hsl(55 100% 92% / 0.4) 15%,
+        hsl(45 100% 88% / 0.25) 25%,
+        transparent 45%
+      ),
+      /* Additional atmospheric glows */
+      radial-gradient(circle at 20% 40%, hsl(217 91% 70% / 0.08) 0%, transparent 50%),
+      radial-gradient(circle at 60% 70%, hsl(200 80% 75% / 0.06) 0%, transparent 45%);
     pointer-events: none;
     z-index: 0;
-    animation: subtle-shift 20s ease-in-out infinite alternate;
+    animation: sun-shift 25s ease-in-out infinite alternate;
   }
   
-  @keyframes subtle-shift {
+  @keyframes sun-shift {
     0% {
-      background-position: 0% 0%, 20% 30%, 80% 20%, 50% 80%, 30% 60%;
+      opacity: 0.9;
+      filter: brightness(1);
+    }
+    50% {
+      opacity: 1;
+      filter: brightness(1.05);
     }
     100% {
-      background-position: 5% 5%, 25% 35%, 75% 25%, 55% 75%, 35% 55%;
+      opacity: 0.9;
+      filter: brightness(1);
     }
   }
 
@@ -380,10 +405,18 @@ All colors MUST be HSL.
       0 4px 8px rgba(0, 0, 0, 0.2);
   }
 
+  /* Globe container effects - enhanced borders */
+  .mapboxgl-canvas-container {
+    filter: drop-shadow(0 4px 20px rgba(0, 0, 0, 0.15))
+            drop-shadow(0 8px 40px rgba(0, 0, 0, 0.08));
+    border-radius: 8px;
+  }
+  
   /* Globe container glow effect for dark mode */
   .dark .mapboxgl-canvas-container {
     filter: drop-shadow(0 0 80px rgba(59, 130, 246, 0.2))
-            drop-shadow(0 0 40px rgba(139, 92, 246, 0.15));
+            drop-shadow(0 0 40px rgba(139, 92, 246, 0.15))
+            drop-shadow(0 4px 20px rgba(0, 0, 0, 0.4));
   }
 
   /* Enhance map visibility */
