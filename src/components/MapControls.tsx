@@ -10,7 +10,7 @@ interface MapControlsProps {
 
 export const MapControls = ({ onShowAll, onClear, onReset, onTimelineToggle }: MapControlsProps) => {
   return (
-    <div className="absolute bottom-16 left-3 md:bottom-20 md:left-4 z-10 
+    <div className="absolute bottom-6 left-3 md:bottom-8 md:left-4 z-10 
                     flex gap-1.5 animate-fade-in">
       <Button
         onClick={onTimelineToggle}
@@ -26,12 +26,10 @@ export const MapControls = ({ onShowAll, onClear, onReset, onTimelineToggle }: M
       <Button
         onClick={onShowAll}
         size="sm"
-        className="gradient-card backdrop-blur-strong border-2 
-                   bg-primary hover:bg-primary/90 text-primary-foreground
-                   border-primary/70 hover:border-primary
-                   dark:bg-primary dark:hover:bg-primary/80
-                   dark:shadow-glow dark:hover:shadow-glow-accent
-                   shadow-md hover:shadow-lg font-semibold
+        className="gradient-card backdrop-blur-strong border border-border/50 
+                   bg-primary/90 hover:bg-primary text-foreground
+                   dark:bg-primary dark:text-primary-foreground
+                   hover:border-primary/70 font-semibold
                    text-[10px] px-2.5 py-1.5 h-auto gap-1"
       >
         <Globe className="w-3 h-3" />
