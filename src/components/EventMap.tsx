@@ -418,14 +418,7 @@ export const EventMap = () => {
     // Limit markers for better performance (max 500 visible at once)
     const limitedEvents = eventsToRender.slice(0, 500);
     
-    // Show warning if events were limited
-    if (eventsToRender.length > 500) {
-      toast({
-        title: "Showing 500 events",
-        description: `${eventsToRender.length} events found. Use filters to see specific events.`,
-        variant: "default",
-      });
-    }
+    // Limit applied silently for performance
 
     limitedEvents.forEach((event, index) => {
       const color = getEventColor(event.type);
