@@ -193,7 +193,7 @@ All colors MUST be HSL.
       radial-gradient(circle at 50% 50%, hsl(265 85% 58% / 0.08) 0%, transparent 60%);
   }
 
-  /* Stars background for dark mode */
+  /* Stars background for dark mode - only for globe projection */
   .dark body::after {
     content: '';
     position: fixed;
@@ -212,9 +212,14 @@ All colors MUST be HSL.
     background-position: 0 0, 40px 60px, 130px 270px, 70px 100px,
                          50px 150px, 120px 220px, 90px 30px, 160px 180px;
     pointer-events: none;
-    z-index: 0;
+    z-index: -1;
     opacity: 0.6;
     animation: twinkle 8s ease-in-out infinite;
+  }
+  
+  /* Hide stars when using flat map projection */
+  .dark body[data-projection="mercator"]::after {
+    display: none;
   }
 
   @keyframes twinkle {

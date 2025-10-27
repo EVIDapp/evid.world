@@ -14,7 +14,7 @@ export const EventLegend = ({ selectedTypes, onTypeToggle }: EventLegendProps) =
   const [isExpanded, setIsExpanded] = useState(true);
 
   return (
-    <div className="hidden md:block absolute right-3 bottom-3 md:right-4 md:bottom-4 z-20 
+    <div className="hidden md:block absolute right-3 bottom-16 md:right-4 md:bottom-20 z-20 
                     gradient-card backdrop-blur-strong border border-border/50 rounded-lg 
                     shadow-elevated animate-fade-in-up w-[160px]">
       <div className="flex items-center justify-between p-1.5 border-b border-border/30">

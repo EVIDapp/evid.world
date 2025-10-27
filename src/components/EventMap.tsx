@@ -151,6 +151,14 @@ export const EventMap = () => {
     }
   }, []);
 
+  // Update body attribute for projection-based styling
+  useEffect(() => {
+    document.body.setAttribute('data-projection', projection);
+    return () => {
+      document.body.removeAttribute('data-projection');
+    };
+  }, [projection]);
+
   // Initialize Mapbox map
   useEffect(() => {
     if (!mapContainer.current || !tokenSubmitted || !mapboxToken) return;
