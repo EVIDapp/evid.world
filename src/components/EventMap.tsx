@@ -561,12 +561,6 @@ export const EventMap = () => {
 
       marker.setPopup(popup);
 
-      // Add click handler to navigate to event page
-      el.addEventListener('click', () => {
-        const slug = generateEventSlug(event.title, event.year);
-        navigate(`/event/${slug}`);
-      });
-
       markersRef.current.push(marker);
     });
   }, [clearMarkers, toast, showPolygon]);
