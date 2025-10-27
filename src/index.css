@@ -461,11 +461,14 @@ All colors MUST be HSL.
   .mapboxgl-ctrl-attrib,
   .mapboxgl-ctrl-bottom-left,
   .mapboxgl-ctrl-bottom-right,
-  .mapbox-improve-map {
+  .mapbox-improve-map,
+  .mapboxgl-control-container a.mapboxgl-ctrl-logo {
     display: none !important;
     opacity: 0 !important;
     visibility: hidden !important;
     pointer-events: none !important;
+    position: absolute !important;
+    left: -9999px !important;
   }
 
   /* Hide Lovable badge */
