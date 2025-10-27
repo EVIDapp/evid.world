@@ -33,12 +33,12 @@ export const HistoryPanel = ({ history, onEventSelect, onClearHistory }: History
                 variant="secondary"
                 size="icon"
                 className="shadow-elevated backdrop-blur-strong gradient-card border-border/50 
-                           h-8 w-8 md:h-9 md:w-9 transition-bounce hover:shadow-glow hover:border-primary/30 hover:scale-105 relative"
+                           h-7 w-7 transition-bounce hover:shadow-glow hover:border-primary/30 hover:scale-105 relative"
               >
-                <Clock className="w-3.5 h-3.5 md:w-4 md:h-4" />
+                <Clock className="w-3.5 h-3.5" />
                 {history.length > 0 && (
-                  <span className="absolute -top-1 -right-1 bg-primary text-primary-foreground text-[10px] 
-                               font-bold rounded-full w-4 h-4 flex items-center justify-center">
+                  <span className="absolute -top-1 -right-1 bg-primary text-primary-foreground text-[9px] 
+                               font-bold rounded-full w-3.5 h-3.5 flex items-center justify-center">
                     {history.length}
                   </span>
                 )}
@@ -46,7 +46,7 @@ export const HistoryPanel = ({ history, onEventSelect, onClearHistory }: History
             </PopoverTrigger>
           </TooltipTrigger>
           <TooltipContent side="left">
-            <p>Recently viewed events</p>
+            <p className="text-[10px]">Recently viewed events</p>
           </TooltipContent>
           <PopoverContent className="w-80 p-3" align="end">
             <div className="flex items-center justify-between mb-3">

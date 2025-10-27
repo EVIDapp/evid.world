@@ -50,14 +50,14 @@ export const ExportButton = ({ events, filteredEvents }: ExportButtonProps) => {
                 variant="secondary"
                 size="icon"
                 className="shadow-elevated backdrop-blur-strong gradient-card border-border/50 
-                           h-8 w-8 md:h-9 md:w-9 transition-bounce hover:shadow-glow hover:border-primary/30 hover:scale-105"
+                           h-7 w-7 transition-bounce hover:shadow-glow hover:border-primary/30 hover:scale-105"
               >
-                <Download className="w-3.5 h-3.5 md:w-4 md:h-4" />
+                <Download className="w-3.5 h-3.5" />
               </Button>
             </DropdownMenuTrigger>
           </TooltipTrigger>
           <TooltipContent side="left">
-            <p>Export data</p>
+            <p className="text-[10px]">Export data</p>
           </TooltipContent>
           <DropdownMenuContent align="end" className="w-56">
             <DropdownMenuItem onClick={() => handleExport('csv', true)}>

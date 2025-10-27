@@ -19,7 +19,7 @@ import { useTheme } from 'next-themes';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Progress } from '@/components/ui/progress';
-import { Key, Plus, Minus } from 'lucide-react';
+import { Key, Plus, Minus, Globe as GlobeIcon, Map } from 'lucide-react';
 import { getWikipediaImage } from '@/utils/wikipediaImage';
 import { deduplicateEvents } from '@/utils/deduplicateEvents';
 import { useKeyboardShortcuts } from '@/hooks/useKeyboardShortcuts';
@@ -849,8 +849,8 @@ export const EventMap = () => {
                   map.current.setProjection(newProjection);
                 }
               }}
-              icon={projection === 'globe' ? '🗺️' : '🌐'}
-              tooltip={projection === 'globe' ? 'Flat map' : '3D Globe'}
+              icon={projection === 'globe' ? <Map className="w-3.5 h-3.5" /> : <GlobeIcon className="w-3.5 h-3.5" />}
+              tooltip={projection === 'globe' ? 'Switch to flat map' : 'Switch to 3D globe'}
             />
           </div>
         </>

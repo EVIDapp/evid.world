@@ -18,15 +18,15 @@ export const ThemeToggle = () => {
   return (
     <Button
       variant="secondary"
-      size="sm"
+      size="icon"
       onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
       className="shadow-elevated backdrop-blur-strong gradient-card border-border/50 
-                 h-8 w-8 md:h-9 md:w-9 p-0 transition-bounce hover:shadow-glow hover:border-primary/30 hover:scale-105"
+                 h-7 w-7 transition-bounce hover:shadow-glow hover:border-primary/30 hover:scale-105"
     >
       {theme === 'dark' ? (
-        <Sun className="w-3.5 h-3.5 md:w-4 md:h-4" />
+        <Sun className="w-3.5 h-3.5" />
       ) : (
-        <Moon className="w-3.5 h-3.5 md:w-4 md:h-4" />
+        <Moon className="w-3.5 h-3.5" />
       )}
       <span className="sr-only">Toggle theme</span>
     </Button>
