@@ -34,7 +34,13 @@ const CategoryPage = () => {
     const loadEvents = async () => {
       try {
         const response = await fetch('/events-clean.json');
-        const allEvents: HistoricalEvent[] = await response.json();
+        
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        
+        const text = await response.text();
+        const allEvents: HistoricalEvent[] = JSON.parse(text);
         
         if (eventType) {
           const filtered = allEvents.filter(e => e.type === eventType);

@@ -1,10 +1,8 @@
 import { useState, useEffect } from 'react';
 import { Input } from '@/components/ui/input';
 import { Checkbox } from '@/components/ui/checkbox';
-import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { HistoricalEvent, EventType } from '@/types/event';
-import { EVENT_COLORS } from '@/utils/eventColors';
 import { Search, X, ChevronDown, ChevronUp } from 'lucide-react';
 
 interface SearchPanelProps {
@@ -149,30 +147,6 @@ export const SearchPanel = ({
         )}
       </div>
 
-      {/* Categories */}
-      <div className="mb-2">
-        <label className="text-[9px] text-muted-foreground mb-1 block font-medium">Categories</label>
-        <div className="flex flex-wrap gap-1">
-          {Object.entries(EVENT_COLORS).map(([type, { fill, label }]) => (
-            <Badge
-              key={type}
-              onClick={() => onTypeToggle(type as EventType)}
-              className={`cursor-pointer transition-bounce px-1.5 py-0.5 text-[9px]
-                         border-glow ${
-                selectedTypes.has(type as EventType)
-                  ? 'bg-primary/20 text-primary border-primary shadow-glow hover:shadow-glow-accent'
-                  : 'bg-secondary/30 text-secondary-foreground border-border/50 hover:bg-secondary/50 hover:border-primary/30'
-              }`}
-              style={{
-                borderLeftColor: fill,
-                borderLeftWidth: '3px',
-              }}
-            >
-              {label}
-            </Badge>
-          ))}
-        </div>
-      </div>
 
           {/* On-demand toggle */}
           <div className="flex items-center gap-2 text-[9px] text-muted-foreground bg-muted/30 
