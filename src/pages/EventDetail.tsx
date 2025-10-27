@@ -104,23 +104,23 @@ const EventDetail = () => {
       </header>
 
       {/* Hero Section */}
-      <div className="relative bg-gradient-to-b from-muted/30 to-background border-b">
+      <div className="relative bg-card border-b">
         <div className="container max-w-6xl mx-auto px-4 py-8">
-          <Badge className="mb-3" style={{ backgroundColor: eventColor.fill, color: 'white' }}>
+          <Badge className="mb-3 text-white" style={{ backgroundColor: eventColor.fill }}>
             {eventColor.label}
           </Badge>
-          <h1 className="text-3xl md:text-4xl font-bold mb-4 text-foreground">
+          <h1 className="text-3xl md:text-4xl font-bold mb-4">
             {event.title}
           </h1>
           
           <div className="flex flex-wrap gap-4 text-sm md:text-base">
             {event.year && (
-              <div className="flex items-center gap-2 text-muted-foreground">
+              <div className="flex items-center gap-2">
                 <Calendar className="h-4 w-4" />
                 <span className="font-medium">{event.year}</span>
               </div>
             )}
-            <div className="flex items-center gap-2 text-muted-foreground">
+            <div className="flex items-center gap-2">
               <MapPin className="h-4 w-4" />
               <span className="font-medium">{event.country}</span>
             </div>
@@ -131,7 +131,7 @@ const EventDetail = () => {
               </div>
             )}
             {event.radiusKm && (
-              <div className="flex items-center gap-2 text-muted-foreground">
+              <div className="flex items-center gap-2">
                 <Globe className="h-4 w-4" />
                 <span className="font-medium">{event.radiusKm} km radius</span>
               </div>
@@ -167,11 +167,11 @@ const EventDetail = () => {
                 </CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
-                <p className="text-base leading-relaxed text-foreground">{event.desc}</p>
+                <p className="text-base leading-relaxed">{event.desc}</p>
                 {event.desc_long && (
                   <>
                     <Separator className="my-4" />
-                    <p className="text-sm leading-relaxed text-muted-foreground">
+                    <p className="text-sm leading-relaxed">
                       {event.desc_long}
                     </p>
                   </>
@@ -191,7 +191,7 @@ const EventDetail = () => {
                 <div className="space-y-3">
                   <div className="p-3 rounded-lg bg-muted/50">
                     <h4 className="font-semibold text-sm mb-2">Event Classification</h4>
-                    <p className="text-sm text-foreground leading-relaxed">
+                    <p className="text-sm leading-relaxed">
                       This {event.type} event occurred in {event.year || 'ancient times'} and had significant 
                       {event.casualties ? ` human impact with ${event.casualties.toLocaleString()} casualties` : ' historical importance'}.
                       {event.radiusKm && ` The affected area spanned approximately ${event.radiusKm} kilometers.`}
@@ -201,7 +201,7 @@ const EventDetail = () => {
                   {event.casualties && event.casualties > 1000 && (
                     <div className="p-3 rounded-lg bg-destructive/10 border border-destructive/20">
                       <h4 className="font-semibold text-sm mb-2 text-destructive">Major Impact Event</h4>
-                      <p className="text-sm text-foreground leading-relaxed">
+                      <p className="text-sm leading-relaxed">
                         This event resulted in significant loss of life and is considered one of the major 
                         {event.type} incidents in recorded history.
                       </p>
@@ -210,7 +210,7 @@ const EventDetail = () => {
                   
                   <div className="p-3 rounded-lg bg-primary/5 border border-primary/20">
                     <h4 className="font-semibold text-sm mb-2">Geographic Location</h4>
-                    <p className="text-sm text-foreground leading-relaxed">
+                    <p className="text-sm leading-relaxed">
                       The event took place at coordinates {event.pos.lat.toFixed(4)}°, {event.pos.lng.toFixed(4)}° 
                       in {event.country}. This location played a crucial role in the event's development and impact.
                     </p>
