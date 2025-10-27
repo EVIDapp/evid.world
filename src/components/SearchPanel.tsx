@@ -91,7 +91,7 @@ export const SearchPanel = ({
 
       {/* Collapsible Content */}
       {isExpanded && (
-        <div className={`p-2 animate-fade-in overflow-y-auto ${isMobile ? 'max-h-[30vh]' : 'max-h-[40vh]'}`}>
+        <div className={`p-2 animate-fade-in overflow-y-auto ${isMobile ? 'max-h-[20vh]' : 'max-h-[40vh]'}`}>
 
       {/* Search */}
       <div className="mb-2 relative">
@@ -152,18 +152,20 @@ export const SearchPanel = ({
 
 
           {/* On-demand toggle */}
-          <div className="flex items-center gap-2 text-[9px] text-muted-foreground bg-muted/30 
-                          rounded-lg p-1.5 border border-border/30 mt-2">
-            <Checkbox 
-              id="onDemand" 
-              checked={onDemandMode} 
-              onCheckedChange={onDemandToggle}
-              className="border-border data-[state=checked]:bg-primary data-[state=checked]:border-primary h-3 w-3"
-            />
-            <label htmlFor="onDemand" className="cursor-pointer select-none leading-tight flex-1">
-              Show pins only after search
-            </label>
-          </div>
+          {!isMobile && (
+            <div className="flex items-center gap-2 text-[9px] text-muted-foreground bg-muted/30 
+                            rounded-lg p-1.5 border border-border/30 mt-2">
+              <Checkbox 
+                id="onDemand" 
+                checked={onDemandMode} 
+                onCheckedChange={onDemandToggle}
+                className="border-border data-[state=checked]:bg-primary data-[state=checked]:border-primary h-3 w-3"
+              />
+              <label htmlFor="onDemand" className="cursor-pointer select-none leading-tight flex-1">
+                Show pins only after search
+              </label>
+            </div>
+          )}
         </div>
       )}
     </div>

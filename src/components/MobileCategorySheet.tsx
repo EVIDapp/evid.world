@@ -15,26 +15,28 @@ export const MobileCategorySheet = ({ selectedTypes, onTypeToggle }: MobileCateg
   const totalCount = Object.keys(EVENT_COLORS).length;
 
   return (
-    <Sheet>
-      <SheetTrigger asChild>
-        <Button
-          size="sm"
-          variant="secondary"
-          className="gradient-card backdrop-blur-strong border border-border/50 
-                     hover:border-primary/50 text-[10px] px-2.5 py-1.5 h-auto gap-1.5
-                     relative"
-        >
-          <Filter className="w-3 h-3" />
-          <span>Categories</span>
-          {selectedCount > 0 && (
-            <span className="absolute -top-1 -right-1 bg-primary text-primary-foreground 
-                           text-[8px] rounded-full w-4 h-4 flex items-center justify-center
-                           font-bold shadow-sm">
-              {selectedCount}
-            </span>
-          )}
-        </Button>
-      </SheetTrigger>
+    <div className="absolute top-3 right-3 z-20 animate-fade-in">
+      <Sheet>
+        <SheetTrigger asChild>
+          <Button
+            size="sm"
+            variant="secondary"
+            className="gradient-card backdrop-blur-strong border border-border/50 
+                       hover:border-primary/50 text-[10px] px-2.5 py-1.5 h-auto gap-1.5
+                       relative shadow-lg"
+            aria-label="Filter by category"
+          >
+            <Filter className="w-3 h-3" />
+            <span>Categories</span>
+            {selectedCount > 0 && (
+              <span className="absolute -top-1 -right-1 bg-primary text-primary-foreground 
+                             text-[8px] rounded-full w-4 h-4 flex items-center justify-center
+                             font-bold shadow-sm">
+                {selectedCount}
+              </span>
+            )}
+          </Button>
+        </SheetTrigger>
       
       <SheetContent 
         side="bottom" 
@@ -109,5 +111,6 @@ export const MobileCategorySheet = ({ selectedTypes, onTypeToggle }: MobileCateg
         </div>
       </SheetContent>
     </Sheet>
+    </div>
   );
 };
