@@ -307,6 +307,14 @@ All colors MUST be HSL.
   }
 
   /* Mapbox popup styling with blur background and micro-shadows */
+  .custom-marker {
+    cursor: pointer !important;
+  }
+  
+  .custom-marker:hover {
+    cursor: pointer !important;
+  }
+  
   .mapboxgl-popup-content {
     background: rgba(255, 255, 255, 0.95) !important;
     backdrop-filter: blur(12px) !important;

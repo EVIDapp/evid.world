@@ -438,7 +438,7 @@ export const EventMap = () => {
       el.className = 'custom-marker';
       el.style.width = '28px';
       el.style.height = '40px';
-      el.style.cursor = 'default';
+      el.style.cursor = 'pointer';
       el.style.opacity = '0';
       el.style.transition = 'opacity 0.2s ease-out';
       el.setAttribute('role', 'button');
