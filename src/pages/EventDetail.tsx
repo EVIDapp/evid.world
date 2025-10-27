@@ -90,13 +90,13 @@ const EventDetail = () => {
   const eventColor = getEventColor(event.type);
 
   return (
-    <main className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background overflow-y-auto">
       <EventMeta event={event} />
       
       {/* Header */}
-      <header className="border-b bg-card/50 backdrop-blur">
-        <div className="container max-w-6xl mx-auto px-4 py-4">
-          <Button variant="ghost" onClick={() => navigate('/')} className="mb-4">
+      <header className="sticky top-0 z-10 border-b bg-card/95 backdrop-blur-md shadow-sm">
+        <div className="container max-w-6xl mx-auto px-4 py-3">
+          <Button variant="ghost" size="sm" onClick={() => navigate('/')}>
             <ArrowLeft className="mr-2 h-4 w-4" />
             Back to Map
           </Button>
@@ -104,35 +104,35 @@ const EventDetail = () => {
       </header>
 
       {/* Hero Section */}
-      <div className="relative bg-gradient-to-b from-muted/50 to-background border-b">
-        <div className="container max-w-6xl mx-auto px-4 py-12">
-          <Badge className="mb-4" style={{ backgroundColor: eventColor.fill, color: 'white' }}>
+      <div className="relative bg-gradient-to-b from-muted/30 to-background border-b">
+        <div className="container max-w-6xl mx-auto px-4 py-8">
+          <Badge className="mb-3" style={{ backgroundColor: eventColor.fill, color: 'white' }}>
             {eventColor.label}
           </Badge>
-          <h1 className="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-foreground to-foreground/70 bg-clip-text text-transparent">
+          <h1 className="text-3xl md:text-4xl font-bold mb-4 text-foreground">
             {event.title}
           </h1>
           
-          <div className="flex flex-wrap gap-6 text-lg">
+          <div className="flex flex-wrap gap-4 text-sm md:text-base">
             {event.year && (
               <div className="flex items-center gap-2 text-muted-foreground">
-                <Calendar className="h-5 w-5" />
+                <Calendar className="h-4 w-4" />
                 <span className="font-medium">{event.year}</span>
               </div>
             )}
             <div className="flex items-center gap-2 text-muted-foreground">
-              <MapPin className="h-5 w-5" />
+              <MapPin className="h-4 w-4" />
               <span className="font-medium">{event.country}</span>
             </div>
             {event.casualties && (
               <div className="flex items-center gap-2 text-destructive">
-                <Users className="h-5 w-5" />
+                <Users className="h-4 w-4" />
                 <span className="font-semibold">{event.casualties.toLocaleString()} casualties</span>
               </div>
             )}
             {event.radiusKm && (
               <div className="flex items-center gap-2 text-muted-foreground">
-                <Globe className="h-5 w-5" />
+                <Globe className="h-4 w-4" />
                 <span className="font-medium">{event.radiusKm} km radius</span>
               </div>
             )}
@@ -148,11 +148,11 @@ const EventDetail = () => {
             
             {/* Hero Image */}
             {(wikiImage || event.image) && (
-              <Card className="overflow-hidden shadow-elevated">
+              <Card className="overflow-hidden shadow-card">
                 <img 
                   src={wikiImage || event.image} 
                   alt={`${event.title} ${event.type} map, ${event.country}, year ${event.year || 'unknown'} - historical event visualization`}
-                  className="w-full h-[400px] object-cover"
+                  className="w-full h-[250px] md:h-[350px] object-cover"
                   loading="eager"
                 />
               </Card>
@@ -161,17 +161,17 @@ const EventDetail = () => {
             {/* Overview */}
             <Card className="shadow-card">
               <CardHeader>
-                <CardTitle className="text-2xl flex items-center gap-2">
-                  <AlertTriangle className="h-6 w-6 text-primary" />
+                <CardTitle className="text-xl flex items-center gap-2">
+                  <AlertTriangle className="h-5 w-5 text-primary" />
                   Overview
                 </CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
-                <p className="text-lg leading-relaxed">{event.desc}</p>
+                <p className="text-base leading-relaxed text-foreground">{event.desc}</p>
                 {event.desc_long && (
                   <>
-                    <Separator />
-                    <p className="text-base leading-relaxed text-muted-foreground">
+                    <Separator className="my-4" />
+                    <p className="text-sm leading-relaxed text-muted-foreground">
                       {event.desc_long}
                     </p>
                   </>
@@ -182,16 +182,16 @@ const EventDetail = () => {
             {/* Historical Context */}
             <Card className="shadow-card">
               <CardHeader>
-                <CardTitle className="text-2xl flex items-center gap-2">
-                  <Flame className="h-6 w-6 text-accent" />
+                <CardTitle className="text-xl flex items-center gap-2">
+                  <Flame className="h-5 w-5 text-accent" />
                   Historical Context
                 </CardTitle>
               </CardHeader>
-              <CardContent className="space-y-4">
+              <CardContent className="space-y-3">
                 <div className="space-y-3">
-                  <div className="p-4 rounded-lg bg-muted/50">
-                    <h4 className="font-semibold mb-2">Event Classification</h4>
-                    <p className="text-sm text-muted-foreground">
+                  <div className="p-3 rounded-lg bg-muted/50">
+                    <h4 className="font-semibold text-sm mb-2">Event Classification</h4>
+                    <p className="text-sm text-foreground leading-relaxed">
                       This {event.type} event occurred in {event.year || 'ancient times'} and had significant 
                       {event.casualties ? ` human impact with ${event.casualties.toLocaleString()} casualties` : ' historical importance'}.
                       {event.radiusKm && ` The affected area spanned approximately ${event.radiusKm} kilometers.`}
@@ -199,18 +199,18 @@ const EventDetail = () => {
                   </div>
                   
                   {event.casualties && event.casualties > 1000 && (
-                    <div className="p-4 rounded-lg bg-destructive/10 border border-destructive/20">
-                      <h4 className="font-semibold mb-2 text-destructive">Major Impact Event</h4>
-                      <p className="text-sm">
+                    <div className="p-3 rounded-lg bg-destructive/10 border border-destructive/20">
+                      <h4 className="font-semibold text-sm mb-2 text-destructive">Major Impact Event</h4>
+                      <p className="text-sm text-foreground leading-relaxed">
                         This event resulted in significant loss of life and is considered one of the major 
                         {event.type} incidents in recorded history.
                       </p>
                     </div>
                   )}
                   
-                  <div className="p-4 rounded-lg bg-primary/5 border border-primary/20">
-                    <h4 className="font-semibold mb-2">Geographic Location</h4>
-                    <p className="text-sm text-muted-foreground">
+                  <div className="p-3 rounded-lg bg-primary/5 border border-primary/20">
+                    <h4 className="font-semibold text-sm mb-2">Geographic Location</h4>
+                    <p className="text-sm text-foreground leading-relaxed">
                       The event took place at coordinates {event.pos.lat.toFixed(4)}°, {event.pos.lng.toFixed(4)}° 
                       in {event.country}. This location played a crucial role in the event's development and impact.
                     </p>
@@ -307,7 +307,7 @@ const EventDetail = () => {
           </aside>
         </div>
       </article>
-    </main>
+    </div>
   );
 };
 
