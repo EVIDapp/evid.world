@@ -90,7 +90,7 @@ const EventDetail = () => {
   const eventColor = getEventColor(event.type);
 
   return (
-    <div className="min-h-screen bg-background overflow-y-auto">
+    <div className="min-h-screen bg-background flex flex-col">
       <EventMeta event={event} />
       
       {/* Header */}
@@ -105,34 +105,34 @@ const EventDetail = () => {
 
       {/* Hero Section */}
       <div className="relative bg-card border-b">
-        <div className="container max-w-6xl mx-auto px-4 py-8">
-          <Badge className="mb-3 text-white" style={{ backgroundColor: eventColor.fill }}>
+        <div className="container max-w-6xl mx-auto px-4 py-6">
+          <Badge className="mb-2 text-white" style={{ backgroundColor: eventColor.fill }}>
             {eventColor.label}
           </Badge>
-          <h1 className="text-3xl md:text-4xl font-bold mb-4">
+          <h1 className="text-2xl md:text-3xl font-bold mb-3">
             {event.title}
           </h1>
           
-          <div className="flex flex-wrap gap-4 text-sm md:text-base">
+          <div className="flex flex-wrap gap-3 text-xs md:text-sm">
             {event.year && (
-              <div className="flex items-center gap-2">
-                <Calendar className="h-4 w-4" />
+              <div className="flex items-center gap-1.5">
+                <Calendar className="h-3.5 w-3.5" />
                 <span className="font-medium">{event.year}</span>
               </div>
             )}
-            <div className="flex items-center gap-2">
-              <MapPin className="h-4 w-4" />
+            <div className="flex items-center gap-1.5">
+              <MapPin className="h-3.5 w-3.5" />
               <span className="font-medium">{event.country}</span>
             </div>
             {event.casualties && (
-              <div className="flex items-center gap-2 text-destructive">
-                <Users className="h-4 w-4" />
+              <div className="flex items-center gap-1.5 text-destructive">
+                <Users className="h-3.5 w-3.5" />
                 <span className="font-semibold">{event.casualties.toLocaleString()} casualties</span>
               </div>
             )}
             {event.radiusKm && (
-              <div className="flex items-center gap-2">
-                <Globe className="h-4 w-4" />
+              <div className="flex items-center gap-1.5">
+                <Globe className="h-3.5 w-3.5" />
                 <span className="font-medium">{event.radiusKm} km radius</span>
               </div>
             )}
@@ -140,120 +140,121 @@ const EventDetail = () => {
         </div>
       </div>
 
-      {/* Main Content */}
-      <article className="container max-w-6xl mx-auto px-4 py-8">
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          {/* Main Content */}
-          <div className="lg:col-span-2 space-y-8">
-            
-            {/* Hero Image */}
-            {(wikiImage || event.image) && (
-              <Card className="overflow-hidden shadow-card">
-                <img 
-                  src={wikiImage || event.image} 
-                  alt={`${event.title} ${event.type} map, ${event.country}, year ${event.year || 'unknown'} - historical event visualization`}
-                  className="w-full h-[150px] md:h-[200px] object-cover"
-                  loading="eager"
-                />
-              </Card>
-            )}
-
-            {/* Overview */}
-            <Card className="shadow-card">
-              <CardHeader>
-                <CardTitle className="text-xl flex items-center gap-2">
-                  <AlertTriangle className="h-5 w-5 text-primary" />
-                  Overview
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                <p className="text-base leading-relaxed">{event.desc}</p>
-                {event.desc_long && (
-                  <>
-                    <Separator className="my-4" />
-                    <p className="text-sm leading-relaxed">
-                      {event.desc_long}
-                    </p>
-                  </>
-                )}
-              </CardContent>
-            </Card>
-
-            {/* Historical Context */}
-            <Card className="shadow-card">
-              <CardHeader>
-                <CardTitle className="text-xl flex items-center gap-2">
-                  <Flame className="h-5 w-5 text-accent" />
-                  Historical Context
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-3">
-                <div className="space-y-3">
-                  <div className="p-3 rounded-lg bg-muted/50">
-                    <h4 className="font-semibold text-sm mb-2">Event Classification</h4>
-                    <p className="text-sm leading-relaxed">
-                      This {event.type} event occurred in {event.year || 'ancient times'} and had significant 
-                      {event.casualties ? ` human impact with ${event.casualties.toLocaleString()} casualties` : ' historical importance'}.
-                      {event.radiusKm && ` The affected area spanned approximately ${event.radiusKm} kilometers.`}
-                    </p>
-                  </div>
-                  
-                  {event.casualties && event.casualties > 1000 && (
-                    <div className="p-3 rounded-lg bg-destructive/10 border border-destructive/20">
-                      <h4 className="font-semibold text-sm mb-2 text-destructive">Major Impact Event</h4>
+      {/* Main Content - Scrollable */}
+      <div className="flex-1 overflow-y-auto">
+        <article className="container max-w-6xl mx-auto px-4 py-6">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            {/* Main Content */}
+            <div className="lg:col-span-2 space-y-6">
+              
+              {/* Overview */}
+              <Card className="shadow-card">
+                <CardHeader>
+                  <CardTitle className="text-lg flex items-center gap-2">
+                    <AlertTriangle className="h-4 w-4 text-primary" />
+                    Overview
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-3">
+                  <p className="text-base leading-relaxed">{event.desc}</p>
+                  {event.desc_long && (
+                    <>
+                      <Separator className="my-3" />
                       <p className="text-sm leading-relaxed">
-                        This event resulted in significant loss of life and is considered one of the major 
-                        {event.type} incidents in recorded history.
+                        {event.desc_long}
                       </p>
-                    </div>
+                    </>
                   )}
-                  
-                  <div className="p-3 rounded-lg bg-primary/5 border border-primary/20">
-                    <h4 className="font-semibold text-sm mb-2">Geographic Location</h4>
-                    <p className="text-sm leading-relaxed">
-                      The event took place at coordinates {event.pos.lat.toFixed(4)}°, {event.pos.lng.toFixed(4)}° 
-                      in {event.country}. This location played a crucial role in the event's development and impact.
-                    </p>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
+                </CardContent>
+              </Card>
 
-            {/* Learn More */}
-            {event.wiki && (
-              <Card className="shadow-card bg-gradient-to-br from-primary/5 to-accent/5">
-                <CardContent className="pt-6">
-                  <div className="flex items-start gap-4">
-                    <div className="p-3 rounded-lg bg-primary/10">
-                      <ExternalLink className="h-6 w-6 text-primary" />
-                    </div>
-                    <div className="flex-1">
-                      <h3 className="font-semibold text-lg mb-2">Want to Learn More?</h3>
-                      <p className="text-sm text-muted-foreground mb-4">
-                        Explore comprehensive historical details, sources, and related information about this event on Wikipedia.
+              {/* Historical Context */}
+              <Card className="shadow-card">
+                <CardHeader>
+                  <CardTitle className="text-lg flex items-center gap-2">
+                    <Flame className="h-4 w-4 text-accent" />
+                    Historical Context
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-3">
+                  <div className="space-y-3">
+                    <div className="p-3 rounded-lg bg-muted/50">
+                      <h4 className="font-semibold text-sm mb-1.5">Event Classification</h4>
+                      <p className="text-sm leading-relaxed">
+                        This {event.type} event occurred in {event.year || 'ancient times'} and had significant 
+                        {event.casualties ? ` human impact with ${event.casualties.toLocaleString()} casualties` : ' historical importance'}.
+                        {event.radiusKm && ` The affected area spanned approximately ${event.radiusKm} kilometers.`}
                       </p>
-                      <Button asChild variant="default">
-                        <a 
-                          href={event.wiki} 
-                          target="_blank" 
-                          rel="noopener noreferrer"
-                        >
-                          Read Full Article on Wikipedia
-                          <ExternalLink className="ml-2 h-4 w-4" />
-                        </a>
-                      </Button>
+                    </div>
+                    
+                    {event.casualties && event.casualties > 100 && (
+                      <div className="p-3 rounded-lg bg-destructive/10 border border-destructive/20">
+                        <h4 className="font-semibold text-sm mb-1.5 text-destructive">Major Impact Event</h4>
+                        <p className="text-sm leading-relaxed">
+                          This event resulted in significant loss of life and is considered one of the major 
+                          {event.type} incidents in recorded history.
+                        </p>
+                      </div>
+                    )}
+                    
+                    <div className="p-3 rounded-lg bg-primary/5 border border-primary/20">
+                      <h4 className="font-semibold text-sm mb-1.5">Geographic Location</h4>
+                      <p className="text-sm leading-relaxed">
+                        The event took place at coordinates {event.pos.lat.toFixed(4)}°, {event.pos.lng.toFixed(4)}° 
+                        in {event.country}. This location played a crucial role in the event's development and impact.
+                      </p>
                     </div>
                   </div>
                 </CardContent>
               </Card>
-            )}
-          </div>
+
+              {/* Learn More */}
+              {event.wiki && (
+                <Card className="shadow-card bg-gradient-to-br from-primary/5 to-accent/5">
+                  <CardContent className="pt-6">
+                    <div className="flex items-start gap-3">
+                      <div className="p-2 rounded-lg bg-primary/10">
+                        <ExternalLink className="h-5 w-5 text-primary" />
+                      </div>
+                      <div className="flex-1">
+                        <h3 className="font-semibold text-base mb-1">Want to Learn More?</h3>
+                        <p className="text-xs text-muted-foreground mb-3">
+                          Explore comprehensive historical details and sources about this event on Wikipedia.
+                        </p>
+                        <Button asChild variant="default" size="sm">
+                          <a 
+                            href={event.wiki} 
+                            target="_blank" 
+                            rel="noopener noreferrer"
+                          >
+                            Read on Wikipedia
+                            <ExternalLink className="ml-2 h-3.5 w-3.5" />
+                          </a>
+                        </Button>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              )}
+            </div>
 
           {/* Sidebar */}
-          <aside className="space-y-6">
+          <aside className="space-y-4">
+            {/* Image Thumbnail */}
+            {(wikiImage || event.image) && (
+              <Card className="overflow-hidden shadow-card">
+                <img 
+                  src={wikiImage || event.image} 
+                  alt={`${event.title} visualization`}
+                  className="w-full h-[120px] object-cover"
+                  loading="lazy"
+                />
+              </Card>
+            )}
+            
             <Card>
               <CardHeader>
-                <CardTitle>Location</CardTitle>
+                <CardTitle className="text-base">Location</CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="space-y-2 text-sm">
@@ -272,6 +273,7 @@ const EventDetail = () => {
                 </div>
                 <Button 
                   className="w-full mt-4" 
+                  size="sm"
                   onClick={() => navigate(`/?event=${event.id}`)}
                 >
                   View on Map
@@ -282,19 +284,19 @@ const EventDetail = () => {
             {relatedEvents.length > 0 && (
               <Card>
                 <CardHeader>
-                  <CardTitle>Related Events</CardTitle>
-                  <CardDescription>Similar events in history</CardDescription>
+                  <CardTitle className="text-base">Related Events</CardTitle>
+                  <CardDescription className="text-xs">Similar events in history</CardDescription>
                 </CardHeader>
-                <CardContent className="space-y-3">
+                <CardContent className="space-y-2">
                   {relatedEvents.map(relatedEvent => {
                     const relatedSlug = generateEventSlug(relatedEvent.title, relatedEvent.year);
                     return (
                       <a
                         key={relatedEvent.id}
                         href={`/event/${relatedSlug}`}
-                        className="block p-3 rounded-lg border hover:bg-accent transition-colors"
+                        className="block p-2 rounded-lg border hover:bg-accent transition-colors"
                       >
-                        <div className="font-semibold text-sm">{relatedEvent.title}</div>
+                        <div className="font-semibold text-xs">{relatedEvent.title}</div>
                         <div className="text-xs text-muted-foreground mt-1">
                           {relatedEvent.year} • {relatedEvent.country}
                         </div>
@@ -308,6 +310,7 @@ const EventDetail = () => {
         </div>
       </article>
     </div>
+  </div>
   );
 };
 
