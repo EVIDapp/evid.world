@@ -774,8 +774,7 @@ export const EventMap = () => {
           <MapControls
             onShowAll={handleShowAll}
             onClear={handleClear}
-            onResetView={handleResetView}
-            hasVisibleMarkers={markersRef.current.length > 0}
+            onReset={handleResetView}
             onTimelineToggle={() => setIsTimelineOpen(!isTimelineOpen)}
           />
 

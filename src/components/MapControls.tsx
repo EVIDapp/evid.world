@@ -1,70 +1,60 @@
 import { Button } from '@/components/ui/button';
-import { Eye, EyeOff, RotateCcw, Clock } from 'lucide-react';
+import { Globe, X, RotateCcw, Clock } from 'lucide-react';
 
 interface MapControlsProps {
   onShowAll: () => void;
   onClear: () => void;
-  onResetView: () => void;
-  hasVisibleMarkers: boolean;
+  onReset: () => void;
   onTimelineToggle: () => void;
 }
 
-export const MapControls = ({ 
-  onShowAll, 
-  onClear, 
-  onResetView,
-  hasVisibleMarkers,
-  onTimelineToggle
-}: MapControlsProps) => {
+export const MapControls = ({ onShowAll, onClear, onReset, onTimelineToggle }: MapControlsProps) => {
   return (
-    <div className="absolute left-3 bottom-3 md:left-4 md:bottom-4 z-40 
-                    flex flex-wrap gap-1.5 md:gap-2 max-w-[calc(100vw-1.5rem)] md:max-w-none animate-fade-in-up">
-      <Button
-        onClick={onTimelineToggle}
-        variant="secondary"
-        size="sm"
-        className="shadow-elevated backdrop-blur-strong gradient-card border-border/50 
-                   h-9 md:h-10 text-xs md:text-sm px-2.5 md:px-3 transition-bounce
-                   hover:shadow-glow hover:border-accent/30 hover:scale-105"
-      >
-        <Clock className="w-4 h-4 md:mr-2" />
-        <span className="hidden sm:inline">Timeline</span>
-      </Button>
-      
+    <div className="absolute bottom-3 left-3 md:bottom-4 md:left-4 z-10 
+                    flex flex-wrap gap-1.5 animate-fade-in max-w-[280px]">
       <Button
         onClick={onShowAll}
-        variant="secondary"
         size="sm"
-        className="shadow-elevated backdrop-blur-strong gradient-card border-border/50 
-                   h-9 md:h-10 text-xs md:text-sm px-2.5 md:px-3 transition-bounce
-                   hover:shadow-glow hover:border-primary/30 hover:scale-105"
+        className="gradient-card backdrop-blur-strong border border-border/50 
+                   bg-primary hover:bg-primary/90 text-primary-foreground
+                   shadow-glow hover:shadow-glow-accent font-semibold
+                   text-[10px] px-2.5 py-1.5 h-auto gap-1"
       >
-        <Eye className="w-4 h-4 md:mr-2" />
-        <span className="hidden sm:inline">Show all</span>
+        <Globe className="w-3 h-3" />
+        Show All
       </Button>
       
       <Button
         onClick={onClear}
-        variant="secondary"
         size="sm"
-        className="shadow-elevated backdrop-blur-strong gradient-card border-border/50 
-                   h-9 md:h-10 text-xs md:text-sm px-2.5 md:px-3 transition-bounce
-                   hover:shadow-glow hover:border-destructive/30 hover:scale-105"
+        variant="secondary"
+        className="gradient-card backdrop-blur-strong border border-border/50 
+                   hover:border-primary/50 text-[10px] px-2.5 py-1.5 h-auto gap-1"
       >
-        <EyeOff className="w-4 h-4 md:mr-2" />
-        <span className="hidden sm:inline">Clear</span>
+        <X className="w-3 h-3" />
+        Clear
       </Button>
       
       <Button
-        onClick={onResetView}
-        variant="ghost"
+        onClick={onReset}
         size="sm"
-        className="shadow-card backdrop-blur-strong bg-card/50 border border-border/30 
-                   opacity-70 hover:opacity-100 h-9 md:h-10 text-xs md:text-sm px-2.5 md:px-3
-                   transition-bounce hover:border-accent/30 hover:scale-105"
+        variant="secondary"
+        className="gradient-card backdrop-blur-strong border border-border/50 
+                   hover:border-primary/50 text-[10px] px-2.5 py-1.5 h-auto gap-1"
       >
-        <RotateCcw className="w-4 h-4 md:mr-2" />
-        <span className="hidden sm:inline">Reset</span>
+        <RotateCcw className="w-3 h-3" />
+        Reset
+      </Button>
+      
+      <Button
+        onClick={onTimelineToggle}
+        size="sm"
+        variant="secondary"
+        className="gradient-card backdrop-blur-strong border border-border/50 
+                   hover:border-primary/50 text-[10px] px-2.5 py-1.5 h-auto gap-1"
+      >
+        <Clock className="w-3 h-3" />
+        Timeline
       </Button>
     </div>
   );
