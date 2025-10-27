@@ -100,6 +100,10 @@ export const deduplicateEvents = (events: HistoricalEvent[]): HistoricalEvent[] 
     'fukushima_nuclear_disaster_2011_v2',
     'iranian_embassy_siege_1980',
     'terracotta_army_discovery',
+    
+    // Rosetta Stone duplicates (keep best one)
+    'rosetta_stone_discovery_1799',
+    'rosetta_stone_1799',
   ]);
 
   // Track seen event titles (normalized)
@@ -108,11 +112,14 @@ export const deduplicateEvents = (events: HistoricalEvent[]): HistoricalEvent[] 
 
   const normalizeTitle = (title: string): string => {
     return title
-      .replace(/\([\d–-\s]+\)/g, '') // Remove date ranges
-      .replace(/[\d]+/g, '') // Remove standalone numbers
+      .replace(/\([\d–-\s]+\)/g, '') // Remove date ranges like (1799) or (1950-1953)
+      .replace(/[\d]+/g, '') // Remove all numbers
+      .replace(/CE|AD|BC/gi, '') // Remove era markers
+      .replace(/discovery|discovered|findspot|site|found|excavation/gi, '') // Remove archaeological terms
       .toLowerCase()
       .trim()
-      .replace(/\s+/g, ' ');
+      .replace(/\s+/g, ' ') // Normalize spaces
+      .replace(/[^\w\s]/g, ''); // Remove punctuation
   };
 
   events.forEach((event) => {
@@ -127,16 +134,32 @@ export const deduplicateEvents = (events: HistoricalEvent[]): HistoricalEvent[] 
       const existingIndex = seenTitles.get(normalizedTitle)!;
       const existingEvent = uniqueEvents[existingIndex];
       
-      // Prefer events with _area suffix or better descriptions
+      // Score events (higher = better)
       const currentScore = 
-        (event.id.includes('_area') ? 100 : 0) +
-        (event.radiusKm ? 50 : 0) +
-        (event.desc_long?.length || 0);
+        (event.id.includes('_area') ? 1000 : 0) +
+        (event.radiusKm ? 500 : 0) +
+        (event.desc_long?.length || 0) +
+        (event.desc?.length || 0) * 0.5 +
+        (event.year ? 100 : 0) +
+        (event.casualties ? 100 : 0) +
+        (event.image ? 200 : 0) -
+        (event.id.includes('_new') ? 800 : 0) -
+        (event.id.includes('_point') ? 900 : 0) -
+        (event.id.includes('_chatgpt') ? 900 : 0) -
+        (event.id.includes('_v2') ? 850 : 0);
       
       const existingScore = 
-        (existingEvent.id.includes('_area') ? 100 : 0) +
-        (existingEvent.radiusKm ? 50 : 0) +
-        (existingEvent.desc_long?.length || 0);
+        (existingEvent.id.includes('_area') ? 1000 : 0) +
+        (existingEvent.radiusKm ? 500 : 0) +
+        (existingEvent.desc_long?.length || 0) +
+        (existingEvent.desc?.length || 0) * 0.5 +
+        (existingEvent.year ? 100 : 0) +
+        (existingEvent.casualties ? 100 : 0) +
+        (existingEvent.image ? 200 : 0) -
+        (existingEvent.id.includes('_new') ? 800 : 0) -
+        (existingEvent.id.includes('_point') ? 900 : 0) -
+        (existingEvent.id.includes('_chatgpt') ? 900 : 0) -
+        (existingEvent.id.includes('_v2') ? 850 : 0);
       
       if (currentScore > existingScore) {
         uniqueEvents[existingIndex] = event;
