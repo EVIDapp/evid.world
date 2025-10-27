@@ -1,0 +1,24 @@
+{
+  "name": "EVID.WORLD - Global Event Map",
+  "short_name": "EVID.WORLD",
+  "description": "Interactive map of historical events: wars, earthquakes, disasters, archaeological discoveries",
+  "start_url": "/",
+  "display": "standalone",
+  "theme_color": "#5B7FFF",
+  "background_color": "#0A0E1A",
+  "orientation": "any",
+  "icons": [
+    {
+      "src": "/icons/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icons/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

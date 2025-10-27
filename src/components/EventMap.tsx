@@ -9,6 +9,7 @@ import { circleToPolygon } from '@/utils/geometry';
 import { SearchPanel } from './SearchPanel';
 import { MapControls } from './MapControls';
 import { EventLegend } from './EventLegend';
+import { MobileCategorySheet } from './MobileCategorySheet';
 import { TimelineFilter } from './TimelineFilter';
 import { ThemeToggle } from './ThemeToggle';
 import { ShareButton } from './ShareButton';
@@ -17,6 +18,7 @@ import { HistoryPanel } from './HistoryPanel';
 import { TooltipButton } from './TooltipButton';
 import { useToast } from '@/hooks/use-toast';
 import { useTheme } from 'next-themes';
+import { useIsMobile } from '@/hooks/use-mobile';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Progress } from '@/components/ui/progress';
@@ -36,6 +38,7 @@ const WORLD_BOUNDS = {
 
 export const EventMap = () => {
   const navigate = useNavigate();
+  const isMobile = useIsMobile();
   const mapContainer = useRef<HTMLDivElement>(null);
   const map = useRef<mapboxgl.Map | null>(null);
   const markersRef = useRef<mapboxgl.Marker[]>([]);
@@ -171,11 +174,14 @@ export const EventMap = () => {
         ? 'mapbox://styles/mapbox/dark-v11' 
         : 'mapbox://styles/mapbox/streets-v12';
       
+      // Adaptive zoom for mobile devices
+      const initialZoom = isMobile ? 1.5 : 2.2;
+      
       map.current = new mapboxgl.Map({
         container: mapContainer.current,
         style: mapStyle,
         center: [0, 20],
-        zoom: 2.2,
+        zoom: initialZoom,
         projection: projection,
         maxBounds: [
           [WORLD_BOUNDS.west, WORLD_BOUNDS.south],
@@ -419,8 +425,9 @@ export const EventMap = () => {
     
     clearMarkers();
     
-    // Limit markers for better performance (max 500 visible at once)
-    const limitedEvents = eventsToRender.slice(0, 500);
+    // Adaptive marker limit for better mobile performance
+    const markerLimit = isMobile ? 300 : 500;
+    const limitedEvents = eventsToRender.slice(0, markerLimit);
     
     // Limit applied silently for performance
 
@@ -803,6 +810,24 @@ export const EventMap = () => {
               setSelectedTypes(newTypes);
             }}
           />
+
+          {/* Mobile Category Sheet */}
+          {isMobile && (
+            <div className="absolute bottom-16 right-3 z-20 animate-fade-in">
+              <MobileCategorySheet
+                selectedTypes={selectedTypes}
+                onTypeToggle={(type) => {
+                  const newTypes = new Set(selectedTypes);
+                  if (newTypes.has(type)) {
+                    newTypes.delete(type);
+                  } else {
+                    newTypes.add(type);
+                  }
+                  setSelectedTypes(newTypes);
+                }}
+              />
+            </div>
+          )}
 
           <div className="absolute top-3 right-3 md:top-4 md:right-4 z-[5] flex flex-col gap-1.5 animate-fade-in">
             <TooltipButton

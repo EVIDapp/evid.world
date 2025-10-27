@@ -4,6 +4,7 @@ import { Checkbox } from '@/components/ui/checkbox';
 import { Button } from '@/components/ui/button';
 import { HistoricalEvent, EventType } from '@/types/event';
 import { Search, X, ChevronDown, ChevronUp } from 'lucide-react';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 interface SearchPanelProps {
   events: HistoricalEvent[];
@@ -28,6 +29,7 @@ export const SearchPanel = ({
   onEventSelect,
   searchInputRef,
 }: SearchPanelProps) => {
+  const isMobile = useIsMobile();
   const [suggestions, setSuggestions] = useState<HistoricalEvent[]>([]);
   const [showSuggestions, setShowSuggestions] = useState(false);
   const [isExpanded, setIsExpanded] = useState(true);
@@ -57,9 +59,10 @@ export const SearchPanel = ({
   }, [searchQuery, events]);
 
   return (
-    <div className="absolute top-3 left-3 md:top-4 md:left-4 w-[280px] md:w-[300px] z-20 
+    <div className={`absolute top-3 left-3 md:top-4 md:left-4 z-20 
                     gradient-card backdrop-blur-strong border border-border/50 rounded-xl 
-                    shadow-elevated animate-slide-in">
+                    shadow-elevated animate-slide-in
+                    ${isMobile ? 'w-[calc(100vw-6rem)]' : 'w-[280px] md:w-[300px]'}`}>
       {/* Brand Header with Toggle */}
       <div className="flex items-center justify-between p-1.5 cursor-pointer border-b border-border/30" 
            onClick={() => setIsExpanded(!isExpanded)}>
@@ -88,7 +91,7 @@ export const SearchPanel = ({
 
       {/* Collapsible Content */}
       {isExpanded && (
-        <div className="p-2 animate-fade-in max-h-[40vh] overflow-y-auto">
+        <div className={`p-2 animate-fade-in overflow-y-auto ${isMobile ? 'max-h-[30vh]' : 'max-h-[40vh]'}`}>
 
       {/* Search */}
       <div className="mb-2 relative">

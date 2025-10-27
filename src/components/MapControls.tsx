@@ -1,5 +1,6 @@
 import { Button } from '@/components/ui/button';
 import { Globe, X, RotateCcw, Clock } from 'lucide-react';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 interface MapControlsProps {
   onShowAll: () => void;
@@ -9,18 +10,24 @@ interface MapControlsProps {
 }
 
 export const MapControls = ({ onShowAll, onClear, onReset, onTimelineToggle }: MapControlsProps) => {
+  const isMobile = useIsMobile();
+  
   return (
-    <div className="absolute bottom-6 left-3 md:bottom-8 md:left-4 z-10 
-                    flex gap-1.5 animate-fade-in">
+    <div className={`absolute z-10 flex gap-1.5 animate-fade-in ${
+      isMobile 
+        ? 'bottom-3 left-1/2 -translate-x-1/2 flex-row' 
+        : 'bottom-6 left-3 md:bottom-8 md:left-4'
+    }`}>
       <Button
         onClick={onTimelineToggle}
         size="sm"
         variant="secondary"
         className="gradient-card backdrop-blur-strong border border-border/50 
                    hover:border-primary/50 text-[10px] px-2.5 py-1.5 h-auto gap-1"
+        aria-label="Toggle timeline"
       >
         <Clock className="w-3 h-3" />
-        Timeline
+        {!isMobile && <span>Timeline</span>}
       </Button>
       
       <Button
@@ -31,9 +38,10 @@ export const MapControls = ({ onShowAll, onClear, onReset, onTimelineToggle }: M
                    dark:bg-primary dark:text-primary-foreground
                    hover:border-primary/70 font-semibold
                    text-[10px] px-2.5 py-1.5 h-auto gap-1"
+        aria-label="Show all events"
       >
         <Globe className="w-3 h-3" />
-        Show All
+        {!isMobile && <span>Show All</span>}
       </Button>
       
       <Button
@@ -42,9 +50,10 @@ export const MapControls = ({ onShowAll, onClear, onReset, onTimelineToggle }: M
         variant="secondary"
         className="gradient-card backdrop-blur-strong border border-border/50 
                    hover:border-primary/50 text-[10px] px-2.5 py-1.5 h-auto gap-1"
+        aria-label="Clear selection"
       >
         <X className="w-3 h-3" />
-        Clear
+        {!isMobile && <span>Clear</span>}
       </Button>
       
       <Button
@@ -53,9 +62,10 @@ export const MapControls = ({ onShowAll, onClear, onReset, onTimelineToggle }: M
         variant="secondary"
         className="gradient-card backdrop-blur-strong border border-border/50 
                    hover:border-primary/50 text-[10px] px-2.5 py-1.5 h-auto gap-1"
+        aria-label="Reset view"
       >
         <RotateCcw className="w-3 h-3" />
-        Reset
+        {!isMobile && <span>Reset</span>}
       </Button>
     </div>
   );
