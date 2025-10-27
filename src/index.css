@@ -451,6 +451,18 @@ All colors MUST be HSL.
     display: none !important;
   }
 
+  /* Hide all Mapbox attribution and controls */
+  .mapboxgl-ctrl-logo,
+  .mapboxgl-ctrl-attrib,
+  .mapboxgl-ctrl-bottom-left,
+  .mapboxgl-ctrl-bottom-right,
+  .mapbox-improve-map {
+    display: none !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+  }
+
   /* Hide Lovable badge */
   [class*="lovable"],
   [id*="lovable"],
