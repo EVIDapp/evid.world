@@ -561,9 +561,36 @@ export const EventMap = () => {
 
       marker.setPopup(popup);
 
+      // Add click handler to zoom to event
+      el.addEventListener('click', () => {
+        if (!map.current) return;
+        
+        // Add to history
+        addToHistory(event);
+        
+        const zoomLevel = event.radiusKm && AREA_CATEGORIES.has(event.type) 
+          ? Math.min(9, Math.max(5, 11 - Math.log2(event.radiusKm / 10)))
+          : 10;
+        
+        map.current.flyTo({
+          center: [event.pos.lng, event.pos.lat],
+          zoom: zoomLevel,
+          duration: 1500,
+          essential: true
+        });
+        
+        // Show polygon if event has area coverage
+        if (event.radiusKm && AREA_CATEGORIES.has(event.type)) {
+          const eventIndex = limitedEvents.indexOf(event);
+          if (eventIndex !== -1) {
+            showPolygon(event, eventIndex);
+          }
+        }
+      });
+
       markersRef.current.push(marker);
     });
-  }, [clearMarkers, toast, showPolygon]);
+  }, [clearMarkers, toast, showPolygon, addToHistory]);
 
   const handleEventSelect = useCallback((event: HistoricalEvent) => {
     if (!map.current) return;
