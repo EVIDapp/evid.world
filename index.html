@@ -19,11 +19,22 @@
     <meta name="author" content="EVID.WORLD" />
     <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
     <meta name="googlebot" content="index, follow" />
-    <link rel="preconnect" href="https://api.mapbox.com" />
-    <link rel="dns-prefetch" href="https://en.wikipedia.org" />
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/icons/icon-192x192.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/icons/icon-192x192.png" />
+    <link rel="apple-touch-icon" href="/icons/icon-192x192.png" />
     
     <!-- Performance optimizations -->
-    <link rel="preload" href="/events.json" as="fetch" crossorigin />
+    <link rel="preconnect" href="https://api.mapbox.com" />
+    <link rel="dns-prefetch" href="https://en.wikipedia.org" />
+    <link rel="dns-prefetch" href="https://maps.googleapis.com" />
+    <link rel="preload" href="/events-clean.json" as="fetch" crossorigin />
+    
+    <!-- Core Web Vitals optimization -->
+    <link rel="preload" as="style" href="/src/index.css" />
+    <link rel="modulepreload" href="/src/main.tsx" />
     
     <!-- PWA Configuration -->
     <link rel="manifest" href="/manifest.webmanifest">
@@ -31,6 +42,7 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="EVID">
+    <meta name="format-detection" content="telephone=no" />
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
