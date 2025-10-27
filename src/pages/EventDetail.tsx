@@ -152,7 +152,7 @@ const EventDetail = () => {
                 <img 
                   src={wikiImage || event.image} 
                   alt={`${event.title} ${event.type} map, ${event.country}, year ${event.year || 'unknown'} - historical event visualization`}
-                  className="w-full h-[250px] md:h-[350px] object-cover"
+                  className="w-full h-[150px] md:h-[200px] object-cover"
                   loading="eager"
                 />
               </Card>
