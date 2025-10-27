@@ -1,5 +1,56 @@
 import { getCachedImage, setCachedImage } from './imageCache';
 
+const wikiTextCache = new Map<string, string | null>();
+
+export const getWikipediaText = async (wikiUrl: string): Promise<string | null> => {
+  // Check cache first
+  const cached = wikiTextCache.get(wikiUrl);
+  if (cached !== undefined) {
+    return cached;
+  }
+  
+  try {
+    // Extract article title from Wikipedia URL
+    const match = wikiUrl.match(/\/wiki\/(.+)$/);
+    if (!match) {
+      wikiTextCache.set(wikiUrl, null);
+      return null;
+    }
+    
+    const title = decodeURIComponent(match[1]);
+    
+    // Use Wikipedia REST API to get page summary
+    const apiUrl = `https://en.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(title)}`;
+    
+    // Fetch with timeout
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 5000);
+    
+    const response = await fetch(apiUrl, { signal: controller.signal });
+    clearTimeout(timeoutId);
+    
+    if (!response.ok) {
+      wikiTextCache.set(wikiUrl, null);
+      return null;
+    }
+    
+    const data = await response.json();
+    
+    // Get extract (summary text)
+    const text = data.extract || null;
+    
+    // Cache the result
+    wikiTextCache.set(wikiUrl, text);
+    return text;
+  } catch (error) {
+    if (error instanceof Error && error.name !== 'AbortError') {
+      console.error('Error fetching Wikipedia text:', error);
+    }
+    wikiTextCache.set(wikiUrl, null);
+    return null;
+  }
+};
+
 export const getWikipediaImage = async (wikiUrl: string): Promise<string | null> => {
   // Check cache first
   const cached = getCachedImage(wikiUrl);

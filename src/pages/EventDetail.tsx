@@ -9,7 +9,7 @@ import { Separator } from '@/components/ui/separator';
 import { ArrowLeft, MapPin, Calendar, Users, ExternalLink, Globe, Flame, AlertTriangle } from 'lucide-react';
 import { getEventColor } from '@/utils/eventColors';
 import { generateEventSlug } from '@/utils/slugify';
-import { getWikipediaImage } from '@/utils/wikipediaImage';
+import { getWikipediaImage, getWikipediaText } from '@/utils/wikipediaImage';
 
 const EventDetail = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -18,6 +18,7 @@ const EventDetail = () => {
   const [relatedEvents, setRelatedEvents] = useState<HistoricalEvent[]>([]);
   const [loading, setLoading] = useState(true);
   const [wikiImage, setWikiImage] = useState<string | null>(null);
+  const [wikiText, setWikiText] = useState<string | null>(null);
 
   useEffect(() => {
     const loadEvent = async () => {
@@ -34,10 +35,14 @@ const EventDetail = () => {
         if (foundEvent) {
           setEvent(foundEvent);
           
-          // Load Wikipedia image if available
+          // Load Wikipedia data if available
           if (foundEvent.wiki) {
             getWikipediaImage(foundEvent.wiki).then(imageUrl => {
               if (imageUrl) setWikiImage(imageUrl);
+            }).catch(() => {});
+            
+            getWikipediaText(foundEvent.wiki).then(text => {
+              if (text) setWikiText(text);
             }).catch(() => {});
           }
           
@@ -105,11 +110,11 @@ const EventDetail = () => {
 
       {/* Hero Section */}
       <div className="relative bg-gradient-to-br from-card via-card to-primary/5 border-b animate-fade-in">
-        <div className="container max-w-6xl mx-auto px-4 py-3">
-          <Badge className="mb-1.5 text-white animate-scale-in text-xs" style={{ backgroundColor: eventColor.fill }}>
+        <div className="container max-w-6xl mx-auto px-4 py-2">
+          <Badge className="mb-1 text-white animate-scale-in text-xs" style={{ backgroundColor: eventColor.fill }}>
             {eventColor.label}
           </Badge>
-          <h1 className="text-xl md:text-2xl font-bold mb-2 animate-fade-in">
+          <h1 className="text-lg md:text-xl font-bold mb-1.5 animate-fade-in">
             {event.title}
           </h1>
           
@@ -150,124 +155,54 @@ const EventDetail = () => {
               {/* Overview */}
               <Card className="shadow-card hover-scale transition-all duration-300 border-primary/20">
                 <CardHeader>
-                  <CardTitle className="text-lg flex items-center gap-2">
+                  <CardTitle className="text-base flex items-center gap-2">
                     <AlertTriangle className="h-4 w-4 text-primary animate-pulse" />
                     Overview
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-4">
-                  <p className="text-base leading-relaxed">{event.desc}</p>
-                  {event.desc_long && (
+                  <p className="text-sm leading-relaxed">{event.desc}</p>
+                  
+                  {wikiText && (
                     <>
                       <Separator className="my-3" />
                       <div className="space-y-3">
-                        <p className="text-sm leading-relaxed">{event.desc_long}</p>
-                        
-                        {event.casualties && (
-                          <div className="p-3 rounded-lg bg-destructive/5 border border-destructive/10">
-                            <h4 className="font-semibold text-sm mb-2 text-destructive flex items-center gap-2">
-                              <Users className="h-4 w-4" />
-                              Human Impact
-                            </h4>
-                            <p className="text-sm leading-relaxed">
-                              This event resulted in approximately <strong>{event.casualties.toLocaleString()}</strong> casualties, 
-                              making it one of the significant incidents in recorded history. The human toll of this event 
-                              had lasting effects on the affected populations and communities.
-                            </p>
-                          </div>
-                        )}
-                        
-                        {event.radiusKm && event.radiusKm > 50 && (
-                          <div className="p-3 rounded-lg bg-primary/5 border border-primary/10">
-                            <h4 className="font-semibold text-sm mb-2 flex items-center gap-2">
-                              <Globe className="h-4 w-4" />
-                              Geographic Scope
-                            </h4>
-                            <p className="text-sm leading-relaxed">
-                              The event's impact extended across a radius of approximately <strong>{event.radiusKm} kilometers</strong>, 
-                              affecting a significant geographic area and multiple communities within this zone.
-                            </p>
-                          </div>
-                        )}
+                        <p className="text-sm leading-relaxed">{wikiText}</p>
                       </div>
                     </>
                   )}
-                </CardContent>
-              </Card>
-
-              {/* Historical Context */}
-              <Card className="shadow-card hover-scale transition-all duration-300 border-accent/20">
-                <CardHeader>
-                  <CardTitle className="text-lg flex items-center gap-2">
-                    <Flame className="h-4 w-4 text-accent" />
-                    Historical Context
-                  </CardTitle>
-                </CardHeader>
-                <CardContent className="space-y-3">
-                  <div className="space-y-3">
-                    <div className="p-3 rounded-lg bg-muted/50">
-                      <h4 className="font-semibold text-sm mb-2">Event Classification</h4>
-                      <p className="text-sm leading-relaxed mb-2">
-                        This <strong>{event.type}</strong> event occurred in <strong>{event.year || 'ancient times'}</strong> and 
-                        represents a significant moment in history. 
-                        {event.casualties ? ` The human cost was substantial, with ${event.casualties.toLocaleString()} casualties reported.` : ' Its historical importance continues to be studied today.'}
-                      </p>
-                      <p className="text-sm leading-relaxed">
-                        Events of this type have shaped the course of human civilization and left lasting impacts 
-                        on societies, cultures, and international relations. The study of such events helps us 
-                        understand patterns in history and learn from past experiences.
-                      </p>
-                    </div>
-                    
-                    {event.casualties && event.casualties > 100 && (
-                      <div className="p-3 rounded-lg bg-destructive/10 border border-destructive/20">
-                        <h4 className="font-semibold text-sm mb-2 text-destructive flex items-center gap-2">
-                          <AlertTriangle className="h-4 w-4" />
-                          Major Impact Event
-                        </h4>
-                        <p className="text-sm leading-relaxed mb-2">
-                          This event resulted in significant loss of life and is considered one of the major 
-                          {event.type} incidents in recorded history. The scale of casualties indicates the 
-                          severity and widespread impact of this event.
-                        </p>
-                        <p className="text-sm leading-relaxed">
-                          Historical records document the profound effects on affected communities, including 
-                          demographic changes, economic disruption, and social transformations that persisted 
-                          for generations.
-                        </p>
-                      </div>
-                    )}
-                    
-                    <div className="p-3 rounded-lg bg-primary/5 border border-primary/20">
-                      <h4 className="font-semibold text-sm mb-2 flex items-center gap-2">
-                        <MapPin className="h-4 w-4" />
-                        Geographic Location
+                  
+                  {event.desc_long && !wikiText && (
+                    <>
+                      <Separator className="my-3" />
+                      <p className="text-sm leading-relaxed">{event.desc_long}</p>
+                    </>
+                  )}
+                  
+                  {event.casualties && (
+                    <div className="p-3 rounded-lg bg-destructive/5 border border-destructive/10">
+                      <h4 className="font-semibold text-sm mb-2 text-destructive flex items-center gap-2">
+                        <Users className="h-4 w-4" />
+                        Human Impact
                       </h4>
-                      <p className="text-sm leading-relaxed mb-2">
-                        The event took place at coordinates <strong>{event.pos.lat.toFixed(4)}°, {event.pos.lng.toFixed(4)}°</strong> in <strong>{event.country}</strong>. 
-                        This specific geographic location played a crucial role in how the event unfolded and its subsequent impact.
-                      </p>
                       <p className="text-sm leading-relaxed">
-                        The region's geographic features, climate, population density, and political situation at the time 
-                        all contributed to the nature and scale of this historical event. Understanding the geographic 
-                        context helps explain why this event occurred where and when it did.
+                        This event resulted in approximately <strong>{event.casualties.toLocaleString()}</strong> casualties, 
+                        making it one of the significant incidents in recorded history.
                       </p>
                     </div>
-                    
-                    {event.year && (
-                      <div className="p-3 rounded-lg bg-accent/10 border border-accent/20">
-                        <h4 className="font-semibold text-sm mb-2 flex items-center gap-2">
-                          <Calendar className="h-4 w-4" />
-                          Historical Timeline
-                        </h4>
-                        <p className="text-sm leading-relaxed">
-                          Taking place in <strong>{event.year}</strong>, this event occurred during a period of significant 
-                          historical development. The early {event.year ? `${Math.floor(parseInt(event.year) / 100) * 100}s` : 'period'} were marked by 
-                          various political, social, and technological changes that shaped the context in which this event unfolded.
-                        </p>
-                      </div>
-                    )}
-                  </div>
+                  )}
+                  
+                  {event.radiusKm && event.radiusKm > 50 && (
+                    <div className="p-3 rounded-lg bg-primary/5 border border-primary/10">
+                      <h4 className="font-semibold text-sm mb-2 flex items-center gap-2">
+                        <Globe className="h-4 w-4" />
+                        Geographic Scope
+                      </h4>
+                      <p className="text-sm leading-relaxed">
+                        The event affected an area with a radius of approximately <strong>{event.radiusKm} kilometers</strong>.
+                      </p>
+                    </div>
+                  )}
                 </CardContent>
               </Card>
 
