@@ -59,13 +59,13 @@ export const SearchPanel = ({
   }, [searchQuery, events]);
 
   return (
-    <div className="absolute top-3 left-3 md:top-4 md:left-4 w-[calc(100%-1.5rem)] md:w-[360px] z-20 
+    <div className="absolute top-3 left-3 md:top-4 md:left-4 w-[280px] md:w-[300px] z-20 
                     gradient-card backdrop-blur-strong border border-border/50 rounded-xl 
                     shadow-elevated animate-slide-in">
       {/* Brand Header with Toggle */}
-      <div className="flex items-center justify-between p-2 md:p-2.5 cursor-pointer border-b border-border/30" 
+      <div className="flex items-center justify-between p-1.5 cursor-pointer border-b border-border/30" 
            onClick={() => setIsExpanded(!isExpanded)}>
-        <h1 className="text-lg md:text-xl font-bold tracking-wide" style={{
+        <h1 className="text-base font-bold tracking-wide" style={{
           backgroundImage: 'linear-gradient(90deg, #00D9FF 0%, #5B7FFF 35%, rgba(91, 127, 255, 0.6) 70%, rgba(100, 100, 100, 0.2) 100%)',
           WebkitBackgroundClip: 'text',
           backgroundClip: 'text',
@@ -78,25 +78,25 @@ export const SearchPanel = ({
         <Button 
           variant="ghost" 
           size="icon" 
-          className="h-7 w-7 hover:bg-primary/10"
+          className="h-6 w-6 hover:bg-primary/10"
           onClick={(e) => {
             e.stopPropagation();
             setIsExpanded(!isExpanded);
           }}
         >
-          {isExpanded ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
+          {isExpanded ? <ChevronUp className="w-3.5 h-3.5" /> : <ChevronDown className="w-3.5 h-3.5" />}
         </Button>
       </div>
 
       {/* Collapsible Content */}
       {isExpanded && (
-        <div className="p-2 md:p-2.5 animate-fade-in max-h-[50vh] md:max-h-[calc(100vh-180px)] overflow-y-auto">
+        <div className="p-2 animate-fade-in max-h-[40vh] overflow-y-auto">
 
       {/* Search */}
-      <div className="mb-2 md:mb-2.5 relative">
-        <label className="text-[10px] text-muted-foreground mb-1.5 block font-medium">Search Events</label>
+      <div className="mb-2 relative">
+        <label className="text-[9px] text-muted-foreground mb-1 block font-medium">Search Events</label>
         <div className="relative group">
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground 
+          <Search className="absolute left-2.5 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-muted-foreground 
                              group-focus-within:text-primary transition-smooth" aria-hidden="true" />
           <Input
             ref={searchInputRef}
@@ -105,7 +105,7 @@ export const SearchPanel = ({
             onFocus={() => suggestions.length > 0 && setShowSuggestions(true)}
             placeholder="Keyword, type or country..."
             aria-label="Search historical events"
-            className="pl-9 pr-9 bg-input/80 border-border/50 transition-smooth h-8 md:h-9 text-xs
+            className="pl-8 pr-8 bg-input/80 border-border/50 transition-smooth h-8 text-[11px]
                        focus:border-primary/50 focus:shadow-glow hover:border-border"
           />
           {searchQuery && (
@@ -116,7 +116,7 @@ export const SearchPanel = ({
               className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground 
                          hover:text-foreground transition-smooth hover:scale-110"
             >
-              <X className="w-4 h-4" aria-hidden="true" />
+              <X className="w-3.5 h-3.5" aria-hidden="true" />
             </button>
           )}
         </div>
@@ -150,14 +150,14 @@ export const SearchPanel = ({
       </div>
 
       {/* Categories */}
-      <div className="mb-2 md:mb-2.5">
-        <label className="text-[10px] text-muted-foreground mb-1.5 block font-medium">Categories</label>
-        <div className="flex flex-wrap gap-1.5">
+      <div className="mb-2">
+        <label className="text-[9px] text-muted-foreground mb-1 block font-medium">Categories</label>
+        <div className="flex flex-wrap gap-1">
           {Object.entries(EVENT_COLORS).map(([type, { fill, label }]) => (
             <Badge
               key={type}
               onClick={() => onTypeToggle(type as EventType)}
-              className={`cursor-pointer transition-bounce px-2 py-0.5 text-[10px]
+              className={`cursor-pointer transition-bounce px-1.5 py-0.5 text-[9px]
                          border-glow ${
                 selectedTypes.has(type as EventType)
                   ? 'bg-primary/20 text-primary border-primary shadow-glow hover:shadow-glow-accent'
@@ -175,8 +175,8 @@ export const SearchPanel = ({
       </div>
 
           {/* On-demand toggle */}
-          <div className="flex items-center gap-2 text-[10px] text-muted-foreground bg-muted/30 
-                          rounded-lg p-1.5 md:p-2 border border-border/30 mt-2">
+          <div className="flex items-center gap-2 text-[9px] text-muted-foreground bg-muted/30 
+                          rounded-lg p-1.5 border border-border/30 mt-2">
             <Checkbox 
               id="onDemand" 
               checked={onDemandMode} 

@@ -69,7 +69,7 @@ export const TimelineFilter = ({
   if (!isOpen) return null;
 
   return (
-    <div className="absolute bottom-14 md:bottom-16 left-3 right-3 md:left-4 md:right-auto md:max-w-[360px] z-30 
+    <div className="absolute bottom-3 left-3 md:bottom-4 md:left-[320px] w-[280px] md:w-[300px] z-30 
                     gradient-card backdrop-blur-strong border border-border/50 rounded-xl 
                     shadow-elevated animate-fade-in-up">
       <div className="flex items-center justify-between p-1.5 md:p-2 border-b border-border/30">
@@ -121,21 +121,21 @@ export const TimelineFilter = ({
       </div>
       
       {isExpanded && (
-        <div className="p-2 md:p-2.5 animate-fade-in space-y-2 max-h-[40vh] overflow-y-auto">
+        <div className="p-2 animate-fade-in space-y-1.5 max-h-[30vh] overflow-y-auto">
           
           {/* Period Presets */}
           <div>
-            <label className="text-[10px] text-muted-foreground mb-1.5 block font-medium">
+            <label className="text-[9px] text-muted-foreground mb-1 block font-medium">
               Quick Era Selection
             </label>
-            <div className="flex flex-wrap gap-1">
+            <div className="flex flex-wrap gap-0.5">
               {TIME_PERIODS.map((period) => {
                 const isActive = localRange[0] === period.range[0] && localRange[1] === period.range[1];
                 return (
                   <Badge
                     key={period.label}
                     onClick={() => handlePeriodSelect(period.range)}
-                    className={`cursor-pointer transition-all text-[9px] md:text-[10px] px-1.5 py-0.5 ${
+                    className={`cursor-pointer transition-all text-[9px] px-1 py-0 ${
                       isActive
                         ? 'bg-primary text-primary-foreground border-primary shadow-glow'
                         : 'bg-secondary/30 text-secondary-foreground border-border/50 hover:bg-secondary/50 hover:border-primary/30'
@@ -150,7 +150,7 @@ export const TimelineFilter = ({
 
           {/* Range Slider */}
           <div>
-            <label className="text-[10px] text-muted-foreground mb-1.5 block font-medium">
+            <label className="text-[9px] text-muted-foreground mb-1 block font-medium">
               Precise Period Adjustment
             </label>
             <Slider
@@ -162,7 +162,7 @@ export const TimelineFilter = ({
               className="w-full"
             />
             
-            <div className="flex items-center justify-between text-xs mt-1.5">
+            <div className="flex items-center justify-between text-[10px] mt-1">
               <div className="font-semibold text-foreground">
                 {localRange[0]}
               </div>
