@@ -94,9 +94,9 @@ const EventDetail = () => {
       <EventMeta event={event} />
       
       {/* Header */}
-      <header className="sticky top-0 z-10 border-b bg-card/95 backdrop-blur-md shadow-sm">
+      <header className="sticky top-0 z-10 border-b bg-card/95 backdrop-blur-md shadow-sm animate-fade-in">
         <div className="container max-w-6xl mx-auto px-4 py-3">
-          <Button variant="ghost" size="sm" onClick={() => navigate('/')}>
+          <Button variant="ghost" size="sm" onClick={() => navigate('/')} className="hover-scale">
             <ArrowLeft className="mr-2 h-4 w-4" />
             Back to Map
           </Button>
@@ -104,12 +104,12 @@ const EventDetail = () => {
       </header>
 
       {/* Hero Section */}
-      <div className="relative bg-card border-b">
+      <div className="relative bg-gradient-to-br from-card via-card to-primary/5 border-b animate-fade-in">
         <div className="container max-w-6xl mx-auto px-4 py-6">
-          <Badge className="mb-2 text-white" style={{ backgroundColor: eventColor.fill }}>
+          <Badge className="mb-2 text-white animate-scale-in" style={{ backgroundColor: eventColor.fill }}>
             {eventColor.label}
           </Badge>
-          <h1 className="text-2xl md:text-3xl font-bold mb-3">
+          <h1 className="text-2xl md:text-3xl font-bold mb-3 animate-fade-in">
             {event.title}
           </h1>
           
@@ -141,17 +141,17 @@ const EventDetail = () => {
       </div>
 
       {/* Main Content - Scrollable */}
-      <div className="flex-1 overflow-y-auto">
+      <div className="flex-1 overflow-y-auto scroll-smooth">
         <article className="container max-w-6xl mx-auto px-4 py-6">
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 animate-fade-in">
             {/* Main Content */}
             <div className="lg:col-span-2 space-y-6">
               
               {/* Overview */}
-              <Card className="shadow-card">
+              <Card className="shadow-card hover-scale transition-all duration-300 border-primary/20">
                 <CardHeader>
                   <CardTitle className="text-lg flex items-center gap-2">
-                    <AlertTriangle className="h-4 w-4 text-primary" />
+                    <AlertTriangle className="h-4 w-4 text-primary animate-pulse" />
                     Overview
                   </CardTitle>
                 </CardHeader>
@@ -169,7 +169,7 @@ const EventDetail = () => {
               </Card>
 
               {/* Historical Context */}
-              <Card className="shadow-card">
+              <Card className="shadow-card hover-scale transition-all duration-300 border-accent/20">
                 <CardHeader>
                   <CardTitle className="text-lg flex items-center gap-2">
                     <Flame className="h-4 w-4 text-accent" />
@@ -210,18 +210,18 @@ const EventDetail = () => {
 
               {/* Learn More */}
               {event.wiki && (
-                <Card className="shadow-card bg-gradient-to-br from-primary/5 to-accent/5">
+                <Card className="shadow-card bg-gradient-to-br from-primary/10 via-primary/5 to-accent/10 border-primary/30 hover-scale transition-all duration-300">
                   <CardContent className="pt-6">
                     <div className="flex items-start gap-3">
-                      <div className="p-2 rounded-lg bg-primary/10">
+                      <div className="p-2 rounded-lg bg-primary/20 animate-pulse">
                         <ExternalLink className="h-5 w-5 text-primary" />
                       </div>
                       <div className="flex-1">
                         <h3 className="font-semibold text-base mb-1">Want to Learn More?</h3>
-                        <p className="text-xs text-muted-foreground mb-3">
+                        <p className="text-xs mb-3">
                           Explore comprehensive historical details and sources about this event on Wikipedia.
                         </p>
-                        <Button asChild variant="default" size="sm">
+                        <Button asChild variant="default" size="sm" className="hover-scale">
                           <a 
                             href={event.wiki} 
                             target="_blank" 
@@ -239,20 +239,8 @@ const EventDetail = () => {
             </div>
 
           {/* Sidebar */}
-          <aside className="space-y-4">
-            {/* Image Thumbnail */}
-            {(wikiImage || event.image) && (
-              <Card className="overflow-hidden shadow-card">
-                <img 
-                  src={wikiImage || event.image} 
-                  alt={`${event.title} visualization`}
-                  className="w-full h-[120px] object-cover"
-                  loading="lazy"
-                />
-              </Card>
-            )}
-            
-            <Card>
+          <aside className="space-y-4 animate-fade-in">
+            <Card className="hover-scale transition-all duration-300 border-primary/20">
               <CardHeader>
                 <CardTitle className="text-base">Location</CardTitle>
               </CardHeader>
@@ -282,7 +270,7 @@ const EventDetail = () => {
             </Card>
 
             {relatedEvents.length > 0 && (
-              <Card>
+              <Card className="hover-scale transition-all duration-300 border-accent/20">
                 <CardHeader>
                   <CardTitle className="text-base">Related Events</CardTitle>
                   <CardDescription className="text-xs">Similar events in history</CardDescription>
@@ -294,10 +282,10 @@ const EventDetail = () => {
                       <a
                         key={relatedEvent.id}
                         href={`/event/${relatedSlug}`}
-                        className="block p-2 rounded-lg border hover:bg-accent transition-colors"
+                        className="block p-2 rounded-lg border hover:bg-accent hover:border-primary transition-all duration-200 hover-scale"
                       >
                         <div className="font-semibold text-xs">{relatedEvent.title}</div>
-                        <div className="text-xs text-muted-foreground mt-1">
+                        <div className="text-xs mt-1">
                           {relatedEvent.year} • {relatedEvent.country}
                         </div>
                       </a>
