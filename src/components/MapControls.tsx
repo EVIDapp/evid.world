@@ -114,7 +114,7 @@ export const MapControls = ({ onShowAll, onClear, onReset, onTimelineToggle }: M
   return (
     <div className={`absolute z-10 animate-fade-in ${
       isMobile 
-        ? 'bottom-3 left-1/2 -translate-x-1/2' 
+        ? 'bottom-6 left-1/2 -translate-x-1/2' 
         : 'bottom-6 left-3 md:bottom-8 md:left-4'
     }`}>
       {isMobile ? (

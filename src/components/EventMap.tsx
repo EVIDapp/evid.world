@@ -9,7 +9,6 @@ import { circleToPolygon } from '@/utils/geometry';
 import { SearchPanel } from './SearchPanel';
 import { MapControls } from './MapControls';
 import { EventLegend } from './EventLegend';
-import { MobileCategorySheet } from './MobileCategorySheet';
 import { TimelineFilter } from './TimelineFilter';
 import { ThemeToggle } from './ThemeToggle';
 import { ShareButton } from './ShareButton';
@@ -175,7 +174,7 @@ export const EventMap = () => {
         : 'mapbox://styles/mapbox/streets-v12';
       
       // Adaptive zoom for mobile devices
-      const initialZoom = isMobile ? 1.5 : 2.2;
+      const initialZoom = isMobile ? 0.9 : 2.2;
       
       map.current = new mapboxgl.Map({
         container: mapContainer.current,
@@ -810,24 +809,6 @@ export const EventMap = () => {
               setSelectedTypes(newTypes);
             }}
           />
-
-          {/* Mobile Category Sheet */}
-          {isMobile && (
-            <div className="absolute bottom-16 right-3 z-20 animate-fade-in">
-              <MobileCategorySheet
-                selectedTypes={selectedTypes}
-                onTypeToggle={(type) => {
-                  const newTypes = new Set(selectedTypes);
-                  if (newTypes.has(type)) {
-                    newTypes.delete(type);
-                  } else {
-                    newTypes.add(type);
-                  }
-                  setSelectedTypes(newTypes);
-                }}
-              />
-            </div>
-          )}
 
           <div className="absolute top-3 right-3 md:top-4 md:right-4 z-[5] flex flex-col gap-1.5 animate-fade-in">
             <TooltipButton

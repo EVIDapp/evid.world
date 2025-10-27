@@ -2,9 +2,11 @@ import { useState, useEffect } from 'react';
 import { Input } from '@/components/ui/input';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Button } from '@/components/ui/button';
+import { Badge } from '@/components/ui/badge';
 import { HistoricalEvent, EventType } from '@/types/event';
 import { Search, X, ChevronDown, ChevronUp } from 'lucide-react';
 import { useIsMobile } from '@/hooks/use-mobile';
+import { EVENT_COLORS } from '@/utils/eventColors';
 
 interface SearchPanelProps {
   events: HistoricalEvent[];
@@ -91,7 +93,7 @@ export const SearchPanel = ({
 
       {/* Collapsible Content */}
       {isExpanded && (
-        <div className={`p-2 animate-fade-in overflow-y-auto ${isMobile ? 'max-h-[20vh]' : 'max-h-[40vh]'}`}>
+        <div className={`p-2 animate-fade-in overflow-y-auto ${isMobile ? 'max-h-[45vh]' : 'max-h-[40vh]'}`}>
 
       {/* Search */}
       <div className="mb-2 relative">
@@ -149,6 +151,55 @@ export const SearchPanel = ({
           </div>
         )}
       </div>
+
+          {/* Mobile Categories */}
+          {isMobile && (
+            <div className="mt-2">
+              <label className="text-[9px] text-muted-foreground mb-1.5 block font-medium">Filter by Category</label>
+              <div className="grid grid-cols-2 gap-1.5 max-h-[150px] overflow-y-auto">
+                {Object.entries(EVENT_COLORS).map(([type, { fill, label }]) => (
+                  <Badge
+                    key={type}
+                    onClick={() => onTypeToggle(type as EventType)}
+                    className={`flex items-center gap-1.5 cursor-pointer justify-start
+                               transition-all duration-200 px-2 py-1.5 text-[9px] h-auto
+                               ${selectedTypes.has(type as EventType)
+                                 ? 'bg-primary/20 text-primary border-primary'
+                                 : 'bg-secondary/30 text-secondary-foreground border-border/50 hover:bg-secondary/50'
+                               }`}
+                    style={{
+                      borderLeftColor: fill,
+                      borderLeftWidth: '2px',
+                    }}
+                  >
+                    <div 
+                      className="w-2.5 h-2.5 rounded-sm shrink-0"
+                      style={{ backgroundColor: fill }}
+                    />
+                    <span className="whitespace-nowrap leading-tight text-[9px]">
+                      {label}
+                    </span>
+                  </Badge>
+                ))}
+              </div>
+              {selectedTypes.size > 0 && (
+                <Button
+                  onClick={() => {
+                    Object.keys(EVENT_COLORS).forEach(type => {
+                      if (selectedTypes.has(type as EventType)) {
+                        onTypeToggle(type as EventType);
+                      }
+                    });
+                  }}
+                  variant="outline"
+                  size="sm"
+                  className="w-full text-[9px] mt-1.5 h-6"
+                >
+                  Clear All ({selectedTypes.size})
+                </Button>
+              )}
+            </div>
+          )}
 
 
           {/* On-demand toggle */}
