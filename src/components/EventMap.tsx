@@ -795,7 +795,18 @@ export const EventMap = () => {
             }}
           />
 
-          <EventLegend />
+          <EventLegend 
+            selectedTypes={selectedTypes}
+            onTypeToggle={(type) => {
+              const newTypes = new Set(selectedTypes);
+              if (newTypes.has(type)) {
+                newTypes.delete(type);
+              } else {
+                newTypes.add(type);
+              }
+              setSelectedTypes(newTypes);
+            }}
+          />
 
           <div className="absolute top-3 right-3 md:top-[88px] md:right-4 z-[5] flex flex-col gap-1.5 md:gap-2 animate-fade-in">
             <TooltipButton
