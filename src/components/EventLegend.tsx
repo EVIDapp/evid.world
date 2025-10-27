@@ -1,15 +1,32 @@
+import { useState } from 'react';
 import { EVENT_COLORS } from '@/utils/eventColors';
+import { Button } from '@/components/ui/button';
+import { ChevronDown, ChevronUp } from 'lucide-react';
 
 export const EventLegend = () => {
+  const [isExpanded, setIsExpanded] = useState(true);
+
   return (
     <div className="hidden md:block absolute right-3 bottom-3 md:right-4 md:bottom-4 z-20 
                     gradient-card backdrop-blur-strong border border-border/50 rounded-xl 
-                    p-3 md:p-4 shadow-elevated animate-fade-in-up max-w-[200px] md:max-w-none">
-      <h3 className="text-xs md:text-sm font-semibold mb-2 md:mb-3 text-foreground 
-                     bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-        Categories
-      </h3>
-      <div className="space-y-1.5 md:space-y-2">
+                    shadow-elevated animate-fade-in-up max-w-[200px] md:max-w-none">
+      <div className="flex items-center justify-between p-2 border-b border-border/30">
+        <h3 className="text-xs md:text-sm font-semibold text-foreground 
+                       bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+          Categories
+        </h3>
+        <Button
+          onClick={() => setIsExpanded(!isExpanded)}
+          variant="ghost"
+          size="icon"
+          className="h-6 w-6 hover:bg-primary/10"
+        >
+          {isExpanded ? <ChevronUp className="w-3.5 h-3.5" /> : <ChevronDown className="w-3.5 h-3.5" />}
+        </Button>
+      </div>
+      
+      {isExpanded && (
+        <div className="p-2 md:p-3 animate-fade-in space-y-1.5 md:space-y-2">
         {Object.entries(EVENT_COLORS).map(([type, { fill, label }]) => (
           <div 
             key={type} 
@@ -30,7 +47,8 @@ export const EventLegend = () => {
             </span>
           </div>
         ))}
-      </div>
+        </div>
+      )}
     </div>
   );
 };
