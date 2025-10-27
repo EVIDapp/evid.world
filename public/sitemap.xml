@@ -206,6 +206,8 @@
     <priority>0.7</priority>
   </url>
   
+  <!-- Note: To generate complete sitemap with ALL events from events-clean.json, run: node scripts/generate-sitemap.js -->
+  
   <!-- Popular event searches -->
   <url>
     <loc>https://evid.world/?q=titanic</loc>

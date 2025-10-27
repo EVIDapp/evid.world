@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState, useCallback, useMemo } from 'react';
+import { useNavigate } from 'react-router-dom';
 import mapboxgl from 'mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import Supercluster from 'supercluster';
@@ -24,6 +25,7 @@ import { getWikipediaImage } from '@/utils/wikipediaImage';
 import { deduplicateEvents } from '@/utils/deduplicateEvents';
 import { useKeyboardShortcuts } from '@/hooks/useKeyboardShortcuts';
 import { useEventHistory } from '@/hooks/useEventHistory';
+import { generateEventSlug } from '@/utils/slugify';
 
 const WORLD_BOUNDS = {
   north: 85,
@@ -33,6 +35,7 @@ const WORLD_BOUNDS = {
 };
 
 export const EventMap = () => {
+  const navigate = useNavigate();
   const mapContainer = useRef<HTMLDivElement>(null);
   const map = useRef<mapboxgl.Map | null>(null);
   const markersRef = useRef<mapboxgl.Marker[]>([]);
@@ -544,24 +547,10 @@ export const EventMap = () => {
 
       marker.setPopup(popup);
 
-      // Add click handler to show polygon and zoom
+      // Add click handler to navigate to event page
       el.addEventListener('click', () => {
-        // Zoom to event location
-        const zoomLevel = event.radiusKm && AREA_CATEGORIES.has(event.type) 
-          ? Math.min(9, Math.max(5, 11 - Math.log2(event.radiusKm / 10)))
-          : 10;
-        
-        map.current?.flyTo({
-          center: [event.pos.lng, event.pos.lat],
-          zoom: zoomLevel,
-          duration: 1500,
-          essential: true
-        });
-
-        // Show polygon if event has area coverage
-        if (event.radiusKm && AREA_CATEGORIES.has(event.type)) {
-          showPolygon(event, index);
-        }
+        const slug = generateEventSlug(event.title, event.year);
+        navigate(`/event/${slug}`);
       });
 
       markersRef.current.push(marker);
