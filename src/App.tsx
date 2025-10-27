@@ -9,9 +9,8 @@ import EventDetail from "./pages/EventDetail";
 import CategoryPage from "./pages/CategoryPage";
 import NotFound from "./pages/NotFound";
 
-const queryClient = new QueryClient();
-
 const App = () => {
+  const queryClient = new QueryClient();
 
   return (
     <QueryClientProvider client={queryClient}>
