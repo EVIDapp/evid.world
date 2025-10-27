@@ -7,6 +7,7 @@ import { Badge } from '@/components/ui/badge';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { ArrowLeft, MapPin, Calendar, Users, ExternalLink } from 'lucide-react';
 import { getEventColor } from '@/utils/eventColors';
+import { generateEventSlug } from '@/utils/slugify';
 
 const EventDetail = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -23,7 +24,7 @@ const EventDetail = () => {
         
         // Find event by slug match
         const foundEvent = events.find(e => {
-          const eventSlug = `${e.title.toLowerCase().replace(/[^\w\s-]/g, '').replace(/\s+/g, '-')}-${e.year || ''}`;
+          const eventSlug = generateEventSlug(e.title, e.year);
           return eventSlug === slug || e.id === slug;
         });
         
@@ -199,7 +200,7 @@ const EventDetail = () => {
                 </CardHeader>
                 <CardContent className="space-y-3">
                   {relatedEvents.map(relatedEvent => {
-                    const relatedSlug = `${relatedEvent.title.toLowerCase().replace(/[^\w\s-]/g, '').replace(/\s+/g, '-')}-${relatedEvent.year || ''}`;
+                    const relatedSlug = generateEventSlug(relatedEvent.title, relatedEvent.year);
                     return (
                       <a
                         key={relatedEvent.id}
