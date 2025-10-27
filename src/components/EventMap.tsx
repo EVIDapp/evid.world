@@ -152,6 +152,49 @@ export const EventMap = () => {
       }
     }
   }, []);
+  
+  // Focus on specific event from URL parameter
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const eventId = params.get('event');
+    
+    if (eventId && events.length > 0 && map.current && mapLoaded) {
+      const targetEvent = events.find(e => e.id === eventId);
+      
+      if (targetEvent) {
+        // Wait a bit for markers to render
+        setTimeout(() => {
+          if (!map.current) return;
+          
+          const zoomLevel = targetEvent.radiusKm && AREA_CATEGORIES.has(targetEvent.type) 
+            ? Math.min(9, Math.max(5, 11 - Math.log2(targetEvent.radiusKm / 10)))
+            : 10;
+          
+          map.current.flyTo({
+            center: [targetEvent.pos.lng, targetEvent.pos.lat],
+            zoom: zoomLevel,
+            duration: 2000,
+            essential: true
+          });
+          
+          // Find and open the marker's popup
+          setTimeout(() => {
+            const marker = markersRef.current.find((m) => {
+              const markerElement = m.getElement();
+              return markerElement.dataset.eventId === eventId;
+            });
+            
+            if (marker) {
+              const popup = marker.getPopup();
+              if (popup) {
+                marker.togglePopup();
+              }
+            }
+          }, 2200);
+        }, 500);
+      }
+    }
+  }, [events, mapLoaded]);
 
   // Update body attribute for projection-based styling
   useEffect(() => {
