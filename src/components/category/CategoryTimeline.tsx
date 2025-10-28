@@ -30,27 +30,28 @@ export const CategoryTimeline = ({ events, color }: CategoryTimelineProps) => {
 
   return (
     <Card>
-      <CardHeader className="p-4">
-        <CardTitle className="text-base">Timeline Distribution</CardTitle>
+      <CardHeader className="p-3 md:p-4">
+        <CardTitle className="text-sm md:text-base">Timeline Distribution</CardTitle>
         <CardDescription className="text-xs">Events by century</CardDescription>
       </CardHeader>
-      <CardContent className="p-4 pt-0">
-        <ResponsiveContainer width="100%" height={200}>
+      <CardContent className="p-3 md:p-4 pt-0">
+        <ResponsiveContainer width="100%" height={180}>
           <BarChart data={chartData}>
             <CartesianGrid strokeDasharray="3 3" className="stroke-muted" />
             <XAxis 
               dataKey="period" 
-              className="text-xs"
+              className="text-[10px] md:text-xs"
               angle={-45}
               textAnchor="end"
-              height={80}
+              height={60}
             />
-            <YAxis className="text-xs" />
+            <YAxis className="text-[10px] md:text-xs" />
             <Tooltip 
               contentStyle={{ 
                 backgroundColor: 'hsl(var(--card))',
                 border: '1px solid hsl(var(--border))',
-                borderRadius: '8px'
+                borderRadius: '8px',
+                fontSize: '12px'
               }}
             />
             <Bar 

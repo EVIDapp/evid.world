@@ -10,7 +10,7 @@ import { generateEventSlug } from '@/utils/slugify';
 import { CategoryStats } from '@/components/category/CategoryStats';
 import { CategoryTimeline } from '@/components/category/CategoryTimeline';
 import { CategoryTopEvents } from '@/components/category/CategoryTopEvents';
-import { CategoryMap } from '@/components/category/CategoryMap';
+import { CategoryMapEnhanced } from '@/components/category/CategoryMapEnhanced';
 import { CategoryFilters } from '@/components/category/CategoryFilters';
 
 const CategoryPage = () => {
@@ -109,20 +109,20 @@ const CategoryPage = () => {
 
   return (
     <main className="h-screen bg-background flex flex-col overflow-hidden">
-      {/* Header */}
+      {/* Header - Mobile Optimized */}
       <header className="border-b bg-card/50 backdrop-blur sticky top-0 z-10 flex-shrink-0">
-        <div className="container max-w-7xl mx-auto px-4 py-3">
-          <Button variant="ghost" size="sm" onClick={() => navigate('/')} className="mb-2">
-            <ArrowLeft className="mr-2 h-3 w-3" />
-            Back to Map
+        <div className="container max-w-7xl mx-auto px-3 md:px-4 py-2 md:py-3">
+          <Button variant="ghost" size="sm" onClick={() => navigate('/')} className="mb-2 text-xs md:text-sm">
+            <ArrowLeft className="mr-1 md:mr-2 h-3 w-3" />
+            Back
           </Button>
-          <div className="flex items-center gap-3">
-            <Badge className="text-sm px-3 py-1" style={{ backgroundColor: eventColor.fill }}>
+          <div className="flex items-center gap-2 md:gap-3">
+            <Badge className="text-xs md:text-sm px-2 md:px-3 py-0.5 md:py-1" style={{ backgroundColor: eventColor.fill }}>
               {eventColor.label}
             </Badge>
             <div>
-              <h1 className="text-2xl font-bold">{categoryTitle} Events</h1>
-              <p className="text-sm text-muted-foreground">
+              <h1 className="text-lg md:text-2xl font-bold">{categoryTitle}</h1>
+              <p className="text-xs md:text-sm text-muted-foreground">
                 {filteredEvents.length} of {allEvents.length} events
               </p>
             </div>
@@ -130,28 +130,28 @@ const CategoryPage = () => {
         </div>
       </header>
 
-      {/* Content - Scrollable */}
+      {/* Content - Scrollable - Mobile Optimized */}
       <div className="flex-1 overflow-y-auto">
-        <article className="container max-w-7xl mx-auto px-4 py-4">
+        <article className="container max-w-7xl mx-auto px-3 md:px-4 py-3 md:py-4">
           {/* Stats Cards - Compact */}
           <div className="mb-4">
             <CategoryStats events={filteredEvents} />
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-4 gap-4">
+          <div className="grid grid-cols-1 lg:grid-cols-4 gap-3 md:gap-4">
             {/* Filters Sidebar */}
-            <div className="lg:col-span-1 space-y-4">
+            <div className="lg:col-span-1 space-y-3 md:space-y-4">
               <CategoryFilters 
                 events={allEvents} 
                 onFilterChange={setFilteredEvents}
               />
               
-              {/* Map - Compact */}
-              <CategoryMap events={filteredEvents} color={eventColor.fill} />
+              {/* Enhanced Map */}
+              <CategoryMapEnhanced events={filteredEvents} color={eventColor.fill} />
             </div>
 
             {/* Main Content */}
-            <div className="lg:col-span-3 space-y-4">
+            <div className="lg:col-span-3 space-y-3 md:space-y-4">
               {/* Timeline */}
               <CategoryTimeline events={filteredEvents} color={eventColor.fill} />
 

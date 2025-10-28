@@ -64,19 +64,19 @@ export const CategoryFilters = ({ events, onFilterChange }: CategoryFiltersProps
   };
 
   return (
-    <Card className="sticky top-24">
-      <CardHeader className="p-4">
-        <CardTitle className="flex items-center justify-between text-base">
+    <Card className="sticky top-20 md:top-24">
+      <CardHeader className="p-3 md:p-4">
+        <CardTitle className="flex items-center justify-between text-sm md:text-base">
           <span>Filters</span>
-          <Button variant="ghost" size="sm" onClick={resetFilters} className="h-7 text-xs">
+          <Button variant="ghost" size="sm" onClick={resetFilters} className="h-6 md:h-7 text-[10px] md:text-xs">
             Reset
           </Button>
         </CardTitle>
       </CardHeader>
-      <CardContent className="space-y-4 p-4 pt-0">
+      <CardContent className="space-y-3 md:space-y-4 p-3 md:p-4 pt-0">
         {/* Year Range */}
         <div>
-          <Label className="text-xs">Year: {yearRange[0]} - {yearRange[1]}</Label>
+          <Label className="text-[10px] md:text-xs">Year: {yearRange[0]} - {yearRange[1]}</Label>
           <Slider
             min={minYear}
             max={maxYear}
@@ -89,25 +89,25 @@ export const CategoryFilters = ({ events, onFilterChange }: CategoryFiltersProps
 
         {/* Countries */}
         <div>
-          <Label className="text-xs">Countries ({selectedCountries.size})</Label>
-          <div className="flex flex-wrap gap-1.5 mt-2 max-h-40 overflow-y-auto">
+          <Label className="text-[10px] md:text-xs">Countries ({selectedCountries.size})</Label>
+          <div className="flex flex-wrap gap-1 md:gap-1.5 mt-2 max-h-32 md:max-h-40 overflow-y-auto">
             {countries.map(country => (
               <Badge
                 key={country}
                 variant={selectedCountries.has(country) ? "default" : "outline"}
-                className="cursor-pointer hover:opacity-80 text-xs h-6"
+                className="cursor-pointer hover:opacity-80 text-[10px] md:text-xs h-5 md:h-6 px-1.5 md:px-2"
                 onClick={() => toggleCountry(country)}
               >
                 {country}
                 {selectedCountries.has(country) && (
-                  <X className="ml-1 h-2.5 w-2.5" />
+                  <X className="ml-0.5 md:ml-1 h-2 w-2 md:h-2.5 md:w-2.5" />
                 )}
               </Badge>
             ))}
           </div>
         </div>
 
-        <Button onClick={applyFilters} size="sm" className="w-full">
+        <Button onClick={applyFilters} size="sm" className="w-full text-xs md:text-sm">
           Apply Filters
         </Button>
       </CardContent>

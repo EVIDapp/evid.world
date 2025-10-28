@@ -94,40 +94,42 @@ const Categories = () => {
   }
 
   return (
-    <div className="min-h-screen bg-background">
-      {/* Header */}
-      <header className="border-b bg-card/50 backdrop-blur sticky top-0 z-10">
-        <div className="container max-w-7xl mx-auto px-4 py-4">
-          <Button variant="ghost" size="sm" onClick={() => navigate('/')} className="mb-3">
-            <ArrowLeft className="mr-2 h-4 w-4" />
-            Back to Map
+    <div className="h-screen bg-background flex flex-col overflow-hidden">
+      {/* Header - Mobile Optimized */}
+      <header className="border-b bg-card/50 backdrop-blur flex-shrink-0 z-10">
+        <div className="container max-w-7xl mx-auto px-3 md:px-4 py-3 md:py-4">
+          <Button variant="ghost" size="sm" onClick={() => navigate('/')} className="mb-2 md:mb-3 text-xs md:text-sm">
+            <ArrowLeft className="mr-1 md:mr-2 h-3 md:h-4 w-3 md:w-4" />
+            Back
           </Button>
           <div>
-            <h1 className="text-3xl font-bold mb-2">Event Categories</h1>
-            <p className="text-muted-foreground">
-              Explore historical events organized by category
+            <h1 className="text-2xl md:text-3xl font-bold mb-1 md:mb-2">Event Categories</h1>
+            <p className="text-sm md:text-base text-muted-foreground">
+              Explore historical events by category
             </p>
           </div>
         </div>
       </header>
 
-      {/* Categories Grid */}
-      <main className="container max-w-7xl mx-auto px-4 py-8">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {categories.map((category) => {
-            const eventColor = getEventColor(category.type);
-            const categorySlug = category.type.replace(/ /g, '-');
-            
-            return (
-              <CategoryCard
-                key={category.type}
-                category={category}
-                eventColor={eventColor}
-                categorySlug={categorySlug}
-                onClick={() => navigate(`/category/${categorySlug}`)}
-              />
-            );
-          })}
+      {/* Categories Grid - Scrollable */}
+      <main className="flex-1 overflow-y-auto">
+        <div className="container max-w-7xl mx-auto px-4 py-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
+            {categories.map((category) => {
+              const eventColor = getEventColor(category.type);
+              const categorySlug = category.type.replace(/ /g, '-');
+              
+              return (
+                <CategoryCard
+                  key={category.type}
+                  category={category}
+                  eventColor={eventColor}
+                  categorySlug={categorySlug}
+                  onClick={() => navigate(`/category/${categorySlug}`)}
+                />
+              );
+            })}
+          </div>
         </div>
       </main>
     </div>
@@ -158,76 +160,76 @@ const CategoryCard = ({ category, eventColor, categorySlug, onClick }: CategoryC
     >
       {/* Color Bar */}
       <div 
-        className="h-2 w-full transition-all duration-300"
+        className="h-1.5 md:h-2 w-full transition-all duration-300"
         style={{ 
           backgroundColor: eventColor.fill,
           opacity: isHovered ? 1 : 0.7
         }}
       />
       
-      <CardHeader className="pb-3">
+      <CardHeader className="pb-2 md:pb-3 p-3 md:p-6">
         <div className="flex items-start justify-between">
           <Badge 
-            className="text-white font-semibold mb-2 animate-scale-in"
+            className="text-white font-semibold mb-1 md:mb-2 animate-scale-in text-xs md:text-sm"
             style={{ backgroundColor: eventColor.fill }}
           >
             {eventColor.label}
           </Badge>
           <TrendingUp 
-            className="h-5 w-5 text-muted-foreground transition-transform duration-300 group-hover:scale-110 group-hover:text-primary" 
+            className="h-4 w-4 md:h-5 md:w-5 text-muted-foreground transition-transform duration-300 group-hover:scale-110 group-hover:text-primary" 
           />
         </div>
-        <CardTitle className="text-xl group-hover:text-primary transition-colors">
+        <CardTitle className="text-lg md:text-xl group-hover:text-primary transition-colors">
           {eventColor.label}
         </CardTitle>
-        <CardDescription className="text-sm">
+        <CardDescription className="text-xs md:text-sm">
           Historical {eventColor.label.toLowerCase()} events database
         </CardDescription>
       </CardHeader>
       
-      <CardContent className="space-y-4">
+      <CardContent className="space-y-3 md:space-y-4 p-3 md:p-6 pt-0">
         {/* Stats Grid */}
-        <div className="grid grid-cols-2 gap-3">
+        <div className="grid grid-cols-2 gap-2 md:gap-3">
           <div className="space-y-1">
-            <div className="flex items-center gap-1.5 text-muted-foreground">
-              <TrendingUp className="h-3.5 w-3.5" />
+            <div className="flex items-center gap-1 md:gap-1.5 text-muted-foreground">
+              <TrendingUp className="h-3 w-3 md:h-3.5 md:w-3.5" />
               <span className="text-xs font-medium">Events</span>
             </div>
-            <div className="text-2xl font-bold">{animatedCount.toLocaleString()}</div>
+            <div className="text-xl md:text-2xl font-bold">{animatedCount.toLocaleString()}</div>
           </div>
           
           <div className="space-y-1">
-            <div className="flex items-center gap-1.5 text-muted-foreground">
-              <Users className="h-3.5 w-3.5" />
+            <div className="flex items-center gap-1 md:gap-1.5 text-muted-foreground">
+              <Users className="h-3 w-3 md:h-3.5 md:w-3.5" />
               <span className="text-xs font-medium">Casualties</span>
             </div>
-            <div className="text-2xl font-bold text-destructive">
+            <div className="text-xl md:text-2xl font-bold text-destructive">
               {animatedCasualties.toLocaleString()}
             </div>
           </div>
         </div>
 
         {/* Additional Info */}
-        <div className="space-y-2 pt-2 border-t">
-          <div className="flex items-center justify-between text-sm">
-            <div className="flex items-center gap-1.5 text-muted-foreground">
-              <MapPin className="h-3.5 w-3.5" />
+        <div className="space-y-1.5 md:space-y-2 pt-2 border-t">
+          <div className="flex items-center justify-between text-xs md:text-sm">
+            <div className="flex items-center gap-1 md:gap-1.5 text-muted-foreground">
+              <MapPin className="h-3 w-3 md:h-3.5 md:w-3.5" />
               <span>Countries</span>
             </div>
             <span className="font-semibold">{category.countries}</span>
           </div>
           
-          <div className="flex items-center justify-between text-sm">
-            <div className="flex items-center gap-1.5 text-muted-foreground">
-              <Calendar className="h-3.5 w-3.5" />
+          <div className="flex items-center justify-between text-xs md:text-sm">
+            <div className="flex items-center gap-1 md:gap-1.5 text-muted-foreground">
+              <Calendar className="h-3 w-3 md:h-3.5 md:w-3.5" />
               <span>Time Range</span>
             </div>
-            <span className="font-semibold text-xs">{category.timeRange}</span>
+            <span className="font-semibold text-[10px] md:text-xs">{category.timeRange}</span>
           </div>
         </div>
 
         <Button 
-          className="w-full mt-4 group-hover:shadow-lg transition-all duration-300"
+          className="w-full mt-3 md:mt-4 group-hover:shadow-lg transition-all duration-300 text-xs md:text-sm"
           size="sm"
           style={{
             backgroundColor: isHovered ? eventColor.fill : undefined,

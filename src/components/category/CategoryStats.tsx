@@ -14,17 +14,11 @@ export const CategoryStats = ({ events }: CategoryStatsProps) => {
   const animatedEvents = useCounterAnimation(totalEvents, 1500);
   const animatedCasualties = useCounterAnimation(totalCasualties, 2000);
   
-  const years = events
-    .map(e => parseInt(e.year || '0'))
-    .filter(y => y > 0)
-    .sort((a, b) => a - b);
+  // Fixed time range: 1-2025
+  const animatedMinYear = useCounterAnimation(1, 1500);
+  const animatedMaxYear = useCounterAnimation(2025, 1500);
   
-  const minYear = years.length > 0 ? years[0] : 0;
-  const maxYear = years.length > 0 ? years[years.length - 1] : 0;
-  const animatedMinYear = useCounterAnimation(minYear, 1500);
-  const animatedMaxYear = useCounterAnimation(maxYear, 1500);
-  
-  const timeRange = years.length > 0 ? `${animatedMinYear} - ${animatedMaxYear}` : 'N/A';
+  const timeRange = `${animatedMinYear} - ${animatedMaxYear}`;
   
   const countryCount = new Map<string, number>();
   events.forEach(e => {
@@ -39,7 +33,7 @@ export const CategoryStats = ({ events }: CategoryStatsProps) => {
     .sort((a, b) => (b.casualties || 0) - (a.casualties || 0))[0];
 
   return (
-    <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+    <div className="grid grid-cols-2 lg:grid-cols-4 gap-2 md:gap-3">
       <Card className="hover:shadow-md transition-shadow">
         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-1 p-3">
           <CardTitle className="text-xs font-medium">Total Events</CardTitle>
