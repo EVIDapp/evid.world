@@ -4,13 +4,14 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { ThemeProvider } from "next-themes";
+import { useState } from "react";
 import Index from "./pages/Index";
 import EventDetail from "./pages/EventDetail";
 import CategoryPage from "./pages/CategoryPage";
 import NotFound from "./pages/NotFound";
 
 const App = () => {
-  const queryClient = new QueryClient();
+  const [queryClient] = useState(() => new QueryClient());
 
   return (
     <QueryClientProvider client={queryClient}>
