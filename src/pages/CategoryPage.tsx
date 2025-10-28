@@ -108,9 +108,9 @@ const CategoryPage = () => {
   const eventColor = getEventColor(eventType);
 
   return (
-    <main className="min-h-screen bg-background flex flex-col">
+    <main className="min-h-screen bg-background flex flex-col overflow-hidden">
       {/* Header */}
-      <header className="border-b bg-card/50 backdrop-blur sticky top-0 z-10">
+      <header className="border-b bg-card/50 backdrop-blur sticky top-0 z-10 flex-shrink-0">
         <div className="container max-w-7xl mx-auto px-4 py-3">
           <Button variant="ghost" size="sm" onClick={() => navigate('/')} className="mb-2">
             <ArrowLeft className="mr-2 h-3 w-3" />
@@ -130,89 +130,37 @@ const CategoryPage = () => {
         </div>
       </header>
 
-      {/* Content */}
-      <article className="container max-w-7xl mx-auto px-4 py-4 flex-1 overflow-y-auto">
-        {/* Stats Cards - Compact */}
-        <div className="mb-4">
-          <CategoryStats events={allEvents} />
-        </div>
-
-        <div className="grid grid-cols-1 lg:grid-cols-4 gap-4">
-          {/* Filters Sidebar */}
-          <div className="lg:col-span-1 space-y-4">
-            <CategoryFilters 
-              events={allEvents} 
-              onFilterChange={setFilteredEvents}
-            />
-            
-            {/* Map - Compact */}
-            <CategoryMap events={allEvents} color={eventColor.fill} />
+      {/* Content - Scrollable */}
+      <div className="flex-1 overflow-y-auto">
+        <article className="container max-w-7xl mx-auto px-4 py-4">
+          {/* Stats Cards - Compact */}
+          <div className="mb-4">
+            <CategoryStats events={filteredEvents} />
           </div>
 
-          {/* Main Content */}
-          <div className="lg:col-span-3 space-y-4">
-            {/* Timeline */}
-            <CategoryTimeline events={allEvents} color={eventColor.fill} />
-
-            {/* Top Events */}
-            <CategoryTopEvents events={allEvents} color={eventColor.fill} />
-
-            {/* All Events Grid */}
-            <div>
-              <h2 className="text-xl font-bold mb-3">All Events ({filteredEvents.length})</h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-3">
-              {filteredEvents.map(event => {
-                const slug = generateEventSlug(event.title, event.year);
-                return (
-                  <Card 
-                    key={event.id} 
-                    className="hover:shadow-md transition-all cursor-pointer group hover:border-primary/50"
-                    onClick={() => navigate(`/event/${slug}`)}
-                  >
-                    {event.image && (
-                      <div className="relative h-32 overflow-hidden rounded-t-lg">
-                        <img 
-                          src={event.image} 
-                          alt={`${event.title} - ${event.type} in ${event.country}, ${event.year}`}
-                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                          loading="lazy"
-                        />
-                      </div>
-                    )}
-                    <CardHeader className="p-3">
-                      <CardTitle className="text-sm line-clamp-2 leading-tight">{event.title}</CardTitle>
-                      <CardDescription className="flex flex-wrap gap-2 mt-1 text-xs">
-                        {event.year && (
-                          <span className="flex items-center gap-1">
-                            <Calendar className="h-3 w-3" />
-                            {event.year}
-                          </span>
-                        )}
-                        <span className="flex items-center gap-1">
-                          <MapPin className="h-3 w-3" />
-                          {event.country}
-                        </span>
-                        {event.casualties && (
-                          <span className="flex items-center gap-1">
-                            <Users className="h-3 w-3" />
-                            {event.casualties.toLocaleString()}
-                          </span>
-                        )}
-                      </CardDescription>
-                    </CardHeader>
-                    <CardContent className="p-3 pt-0">
-                      <p className="text-xs text-muted-foreground line-clamp-2">
-                        {event.desc}
-                      </p>
-                    </CardContent>
-                  </Card>
-                );
-              })}
+          <div className="grid grid-cols-1 lg:grid-cols-4 gap-4">
+            {/* Filters Sidebar */}
+            <div className="lg:col-span-1 space-y-4">
+              <CategoryFilters 
+                events={allEvents} 
+                onFilterChange={setFilteredEvents}
+              />
+              
+              {/* Map - Compact */}
+              <CategoryMap events={filteredEvents} color={eventColor.fill} />
             </div>
+
+            {/* Main Content */}
+            <div className="lg:col-span-3 space-y-4">
+              {/* Timeline */}
+              <CategoryTimeline events={filteredEvents} color={eventColor.fill} />
+
+              {/* Top Events */}
+              <CategoryTopEvents events={filteredEvents} color={eventColor.fill} />
             </div>
           </div>
-        </div>
-      </article>
+        </article>
+      </div>
     </main>
   );
 };

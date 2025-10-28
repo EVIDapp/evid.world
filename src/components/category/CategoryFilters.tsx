@@ -13,13 +13,8 @@ interface CategoryFiltersProps {
 }
 
 export const CategoryFilters = ({ events, onFilterChange }: CategoryFiltersProps) => {
-  const years = events
-    .map(e => parseInt(e.year || '0'))
-    .filter(y => y > 0)
-    .sort((a, b) => a - b);
-  
-  const minYear = years[0] || 0;
-  const maxYear = years[years.length - 1] || 2024;
+  const minYear = 1;
+  const maxYear = 2025;
 
   const [yearRange, setYearRange] = useState<[number, number]>([minYear, maxYear]);
   const [selectedCountries, setSelectedCountries] = useState<Set<string>>(new Set());
@@ -36,6 +31,11 @@ export const CategoryFilters = ({ events, onFilterChange }: CategoryFiltersProps
     onFilterChange(filtered);
   };
 
+  // Auto-apply filters when selections change
+  useState(() => {
+    applyFilters();
+  });
+
   const resetFilters = () => {
     setYearRange([minYear, maxYear]);
     setSelectedCountries(new Set());
@@ -50,6 +50,17 @@ export const CategoryFilters = ({ events, onFilterChange }: CategoryFiltersProps
       newSet.add(country);
     }
     setSelectedCountries(newSet);
+    
+    // Auto-apply filters after country selection
+    setTimeout(() => {
+      let filtered = events.filter(e => {
+        const year = parseInt(e.year || '0');
+        const inYearRange = year >= yearRange[0] && year <= yearRange[1];
+        const inCountryFilter = newSet.size === 0 || newSet.has(e.country);
+        return inYearRange && inCountryFilter;
+      });
+      onFilterChange(filtered);
+    }, 0);
   };
 
   return (

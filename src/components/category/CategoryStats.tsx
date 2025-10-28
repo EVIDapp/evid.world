@@ -1,6 +1,7 @@
 import { HistoricalEvent } from '@/types/event';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Calendar, MapPin, Users, TrendingUp } from 'lucide-react';
+import { useCounterAnimation } from '@/hooks/useCounterAnimation';
 
 interface CategoryStatsProps {
   events: HistoricalEvent[];
@@ -8,8 +9,10 @@ interface CategoryStatsProps {
 
 export const CategoryStats = ({ events }: CategoryStatsProps) => {
   const totalEvents = events.length;
-  
   const totalCasualties = events.reduce((sum, e) => sum + (e.casualties || 0), 0);
+  
+  const animatedEvents = useCounterAnimation(totalEvents, 1500);
+  const animatedCasualties = useCounterAnimation(totalCasualties, 2000);
   
   const years = events
     .map(e => parseInt(e.year || '0'))
@@ -37,7 +40,7 @@ export const CategoryStats = ({ events }: CategoryStatsProps) => {
           <TrendingUp className="h-3 w-3 text-muted-foreground" />
         </CardHeader>
         <CardContent className="p-3 pt-0">
-          <div className="text-2xl font-bold">{totalEvents}</div>
+          <div className="text-2xl font-bold">{animatedEvents.toLocaleString()}</div>
         </CardContent>
       </Card>
 
@@ -47,7 +50,7 @@ export const CategoryStats = ({ events }: CategoryStatsProps) => {
           <Users className="h-3 w-3 text-muted-foreground" />
         </CardHeader>
         <CardContent className="p-3 pt-0">
-          <div className="text-2xl font-bold">{totalCasualties.toLocaleString()}</div>
+          <div className="text-2xl font-bold">{animatedCasualties.toLocaleString()}</div>
         </CardContent>
       </Card>
 
