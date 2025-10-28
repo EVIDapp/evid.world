@@ -108,7 +108,7 @@ const CategoryPage = () => {
   const eventColor = getEventColor(eventType);
 
   return (
-    <main className="min-h-screen bg-background flex flex-col overflow-hidden">
+    <main className="h-screen bg-background flex flex-col overflow-hidden">
       {/* Header */}
       <header className="border-b bg-card/50 backdrop-blur sticky top-0 z-10 flex-shrink-0">
         <div className="container max-w-7xl mx-auto px-4 py-3">

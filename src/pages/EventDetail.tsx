@@ -180,14 +180,17 @@ const EventDetail = () => {
                   )}
                   
                   {event.casualties && (
-                    <div className="p-3 rounded-lg bg-destructive/5 border border-destructive/10">
-                      <h4 className="font-semibold text-sm mb-2 text-destructive flex items-center gap-2">
-                        <Users className="h-4 w-4" />
+                    <div className="p-4 rounded-lg bg-destructive/10 border-2 border-destructive/30 shadow-lg">
+                      <h4 className="font-bold text-base mb-3 text-destructive flex items-center gap-2">
+                        <Users className="h-5 w-5" />
                         Human Impact
                       </h4>
-                      <p className="text-sm leading-relaxed">
-                        This event resulted in approximately <strong>{event.casualties.toLocaleString()}</strong> casualties, 
-                        making it one of the significant incidents in recorded history.
+                      <p className="text-sm leading-relaxed mb-2">
+                        This event resulted in approximately{' '}
+                        <span className="text-destructive font-bold text-lg">
+                          {event.casualties.toLocaleString()} casualties
+                        </span>
+                        , making it one of the significant incidents in recorded history.
                       </p>
                     </div>
                   )}

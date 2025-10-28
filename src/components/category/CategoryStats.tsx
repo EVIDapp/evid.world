@@ -18,7 +18,13 @@ export const CategoryStats = ({ events }: CategoryStatsProps) => {
     .map(e => parseInt(e.year || '0'))
     .filter(y => y > 0)
     .sort((a, b) => a - b);
-  const timeRange = years.length > 0 ? `${years[0]} - ${years[years.length - 1]}` : 'N/A';
+  
+  const minYear = years.length > 0 ? years[0] : 0;
+  const maxYear = years.length > 0 ? years[years.length - 1] : 0;
+  const animatedMinYear = useCounterAnimation(minYear, 1500);
+  const animatedMaxYear = useCounterAnimation(maxYear, 1500);
+  
+  const timeRange = years.length > 0 ? `${animatedMinYear} - ${animatedMaxYear}` : 'N/A';
   
   const countryCount = new Map<string, number>();
   events.forEach(e => {

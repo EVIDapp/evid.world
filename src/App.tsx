@@ -8,6 +8,7 @@ import { useState } from "react";
 import Index from "./pages/Index";
 import EventDetail from "./pages/EventDetail";
 import CategoryPage from "./pages/CategoryPage";
+import Categories from "./pages/Categories";
 import NotFound from "./pages/NotFound";
 
 const App = () => {
@@ -23,6 +24,7 @@ const App = () => {
             <Routes>
               <Route path="/" element={<Index />} />
               <Route path="/event/:slug" element={<EventDetail />} />
+              <Route path="/category" element={<Categories />} />
               <Route path="/category/:category" element={<CategoryPage />} />
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
               <Route path="*" element={<NotFound />} />
