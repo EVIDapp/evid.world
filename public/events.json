@@ -7349,7 +7349,7 @@
         },
         {
             "id": "construction_colosseum_70_80",
-            "type": "culture",
+            "type": "archaeology",
             "title": "Construction of Colosseum (70-80 CE)",
             "country": "IT",
             "pos": {"lat": 41.89, "lng": 12.49},
