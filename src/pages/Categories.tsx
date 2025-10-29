@@ -51,17 +51,12 @@ const Categories = () => {
           const uniqueCountries = new Set(categoryEvents.map(e => e.country));
           stats.countries = uniqueCountries.size;
           
-          const years = categoryEvents
-            .map(e => parseInt(e.year || '0'))
-            .filter(y => y > 0)
-            .sort((a, b) => a - b);
-          
-          if (years.length > 0) {
-            stats.timeRange = `${years[0]} - ${years[years.length - 1]}`;
-          }
+          // Fixed time range
+          stats.timeRange = '1 - 2025';
         });
         
         const sortedCategories = Array.from(categoryMap.values())
+          .filter(cat => cat.type !== 'Unknown') // Filter out Unknown categories
           .sort((a, b) => b.count - a.count);
         
         setCategories(sortedCategories);
@@ -113,8 +108,8 @@ const Categories = () => {
 
       {/* Categories Grid - Scrollable */}
       <main className="flex-1 overflow-y-auto">
-        <div className="container max-w-7xl mx-auto px-4 py-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
+        <div className="container max-w-7xl mx-auto px-3 md:px-4 py-4 md:py-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4">
             {categories.map((category) => {
               const eventColor = getEventColor(category.type);
               const categorySlug = category.type.replace(/ /g, '-');
@@ -150,7 +145,7 @@ const CategoryCard = ({ category, eventColor, categorySlug, onClick }: CategoryC
 
   return (
     <Card 
-      className="group cursor-pointer transition-all duration-300 hover:shadow-xl hover:-translate-y-1 border-2 hover:border-primary/50 animate-fade-in overflow-hidden"
+      className="group cursor-pointer transition-all duration-300 hover:shadow-lg hover:-translate-y-0.5 border hover:border-primary/50 animate-fade-in overflow-hidden"
       onClick={onClick}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
@@ -160,82 +155,82 @@ const CategoryCard = ({ category, eventColor, categorySlug, onClick }: CategoryC
     >
       {/* Color Bar */}
       <div 
-        className="h-1.5 md:h-2 w-full transition-all duration-300"
+        className="h-1 w-full transition-all duration-300"
         style={{ 
           backgroundColor: eventColor.fill,
           opacity: isHovered ? 1 : 0.7
         }}
       />
       
-      <CardHeader className="pb-2 md:pb-3 p-3 md:p-6">
+      <CardHeader className="pb-1.5 p-3 md:p-4">
         <div className="flex items-start justify-between">
           <Badge 
-            className="text-white font-semibold mb-1 md:mb-2 animate-scale-in text-xs md:text-sm"
+            className="text-white font-semibold mb-1 animate-scale-in text-[10px] md:text-xs px-1.5 py-0.5"
             style={{ backgroundColor: eventColor.fill }}
           >
             {eventColor.label}
           </Badge>
           <TrendingUp 
-            className="h-4 w-4 md:h-5 md:w-5 text-muted-foreground transition-transform duration-300 group-hover:scale-110 group-hover:text-primary" 
+            className="h-3.5 w-3.5 text-muted-foreground transition-transform duration-300 group-hover:scale-110 group-hover:text-primary" 
           />
         </div>
-        <CardTitle className="text-lg md:text-xl group-hover:text-primary transition-colors">
+        <CardTitle className="text-base md:text-lg group-hover:text-primary transition-colors">
           {eventColor.label}
         </CardTitle>
-        <CardDescription className="text-xs md:text-sm">
-          Historical {eventColor.label.toLowerCase()} events database
+        <CardDescription className="text-[10px] md:text-xs">
+          Historical events database
         </CardDescription>
       </CardHeader>
       
-      <CardContent className="space-y-3 md:space-y-4 p-3 md:p-6 pt-0">
+      <CardContent className="space-y-2 p-3 md:p-4 pt-0">
         {/* Stats Grid */}
-        <div className="grid grid-cols-2 gap-2 md:gap-3">
-          <div className="space-y-1">
-            <div className="flex items-center gap-1 md:gap-1.5 text-muted-foreground">
-              <TrendingUp className="h-3 w-3 md:h-3.5 md:w-3.5" />
-              <span className="text-xs font-medium">Events</span>
+        <div className="grid grid-cols-2 gap-2">
+          <div className="space-y-0.5">
+            <div className="flex items-center gap-1 text-muted-foreground">
+              <TrendingUp className="h-2.5 w-2.5 md:h-3 md:w-3" />
+              <span className="text-[10px] md:text-xs font-medium">Events</span>
             </div>
-            <div className="text-xl md:text-2xl font-bold">{animatedCount.toLocaleString()}</div>
+            <div className="text-lg md:text-xl font-bold">{animatedCount.toLocaleString()}</div>
           </div>
           
-          <div className="space-y-1">
-            <div className="flex items-center gap-1 md:gap-1.5 text-muted-foreground">
-              <Users className="h-3 w-3 md:h-3.5 md:w-3.5" />
-              <span className="text-xs font-medium">Casualties</span>
+          <div className="space-y-0.5">
+            <div className="flex items-center gap-1 text-muted-foreground">
+              <Users className="h-2.5 w-2.5 md:h-3 md:w-3" />
+              <span className="text-[10px] md:text-xs font-medium">Casualties</span>
             </div>
-            <div className="text-xl md:text-2xl font-bold text-destructive">
+            <div className="text-lg md:text-xl font-bold text-destructive">
               {animatedCasualties.toLocaleString()}
             </div>
           </div>
         </div>
 
         {/* Additional Info */}
-        <div className="space-y-1.5 md:space-y-2 pt-2 border-t">
-          <div className="flex items-center justify-between text-xs md:text-sm">
-            <div className="flex items-center gap-1 md:gap-1.5 text-muted-foreground">
-              <MapPin className="h-3 w-3 md:h-3.5 md:w-3.5" />
+        <div className="space-y-1 pt-1.5 border-t">
+          <div className="flex items-center justify-between text-[10px] md:text-xs">
+            <div className="flex items-center gap-1 text-muted-foreground">
+              <MapPin className="h-2.5 w-2.5 md:h-3 md:w-3" />
               <span>Countries</span>
             </div>
             <span className="font-semibold">{category.countries}</span>
           </div>
           
-          <div className="flex items-center justify-between text-xs md:text-sm">
-            <div className="flex items-center gap-1 md:gap-1.5 text-muted-foreground">
-              <Calendar className="h-3 w-3 md:h-3.5 md:w-3.5" />
-              <span>Time Range</span>
+          <div className="flex items-center justify-between text-[10px] md:text-xs">
+            <div className="flex items-center gap-1 text-muted-foreground">
+              <Calendar className="h-2.5 w-2.5 md:h-3 md:w-3" />
+              <span>Years</span>
             </div>
-            <span className="font-semibold text-[10px] md:text-xs">{category.timeRange}</span>
+            <span className="font-semibold">{category.timeRange}</span>
           </div>
         </div>
 
         <Button 
-          className="w-full mt-3 md:mt-4 group-hover:shadow-lg transition-all duration-300 text-xs md:text-sm"
+          className="w-full mt-2 group-hover:shadow-lg transition-all duration-300 text-[10px] md:text-xs h-7 md:h-8"
           size="sm"
           style={{
             backgroundColor: isHovered ? eventColor.fill : undefined,
           }}
         >
-          Explore {eventColor.label}
+          Explore
         </Button>
       </CardContent>
     </Card>
