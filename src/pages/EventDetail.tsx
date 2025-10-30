@@ -46,13 +46,40 @@ const EventDetail = () => {
             }).catch(() => {});
           }
           
-          // Find related events (same type or country)
+          // Find related events with smart scoring
           const related = events
-            .filter(e => 
-              e.id !== foundEvent.id && 
-              (e.type === foundEvent.type || e.country === foundEvent.country)
-            )
-            .slice(0, 6);
+            .filter(e => e.id !== foundEvent.id)
+            .map(e => {
+              let score = 0;
+              
+              // Same type is most important
+              if (e.type === foundEvent.type) score += 10;
+              
+              // Same country is also important
+              if (e.country === foundEvent.country) score += 5;
+              
+              // Similar time period (within 50 years)
+              const yearDiff = Math.abs(parseInt(e.year || '0') - parseInt(foundEvent.year || '0'));
+              if (yearDiff <= 50) score += 3;
+              else if (yearDiff <= 100) score += 1;
+              
+              // Similar casualties magnitude
+              if (e.casualties && foundEvent.casualties) {
+                const casualtyRatio = Math.min(e.casualties, foundEvent.casualties) / 
+                                     Math.max(e.casualties, foundEvent.casualties);
+                if (casualtyRatio > 0.5) score += 2;
+              }
+              
+              // Both have casualties
+              if (e.casualties && foundEvent.casualties) score += 1;
+              
+              return { event: e, score };
+            })
+            .filter(item => item.score > 0)
+            .sort((a, b) => b.score - a.score)
+            .slice(0, 6)
+            .map(item => item.event);
+            
           setRelatedEvents(related);
         }
       } catch (error) {
@@ -179,18 +206,24 @@ const EventDetail = () => {
                     </>
                   )}
                   
-                  {event.casualties && (
+                  {event.casualties && (event.type === 'war' || event.type === 'earthquake') && (
                     <div className="p-4 rounded-lg bg-destructive/10 border-2 border-destructive/30 shadow-lg">
                       <h4 className="font-bold text-base mb-3 text-destructive flex items-center gap-2">
                         <Users className="h-5 w-5" />
                         Human Impact
                       </h4>
                       <p className="text-sm leading-relaxed mb-2">
-                        This event resulted in approximately{' '}
+                        This {event.type === 'war' ? 'conflict' : 'natural disaster'} resulted in approximately{' '}
                         <span className="text-destructive font-bold text-lg">
                           {event.casualties.toLocaleString()} casualties
                         </span>
-                        , making it one of the significant incidents in recorded history.
+                        {event.type === 'war' 
+                          ? ', representing the devastating human cost of armed conflict.'
+                          : ', highlighting the catastrophic impact of seismic activity on human populations.'}
+                      </p>
+                      <p className="text-xs text-muted-foreground mt-2">
+                        The casualty figures include both direct deaths and those resulting from secondary effects such as 
+                        {event.type === 'war' ? ' displacement, disease, and famine.' : ' collapsed structures, fires, and tsunamis.'}
                       </p>
                     </div>
                   )}

@@ -14,22 +14,19 @@ export const CategoryTimeline = ({ events, color }: CategoryTimelineProps) => {
   events.forEach(event => {
     const year = parseInt(event.year || '0');
     if (year > 0) {
-      const century = Math.floor(year / 100) * 100;
-      const label = century === 0 ? '1st century' : `${century}s`;
+      const century = Math.ceil(year / 100);
+      const label = `${century}${getCenturySuffix(century)} century`;
+      const sortKey = century;
       centuryData.set(label, (centuryData.get(label) || 0) + 1);
     }
   });
 
   const chartData = Array.from(centuryData.entries())
-    .map(([period, count]) => ({ period, count }))
-    .sort((a, b) => {
-      const numA = parseInt(a.period) || 0;
-      const numB = parseInt(b.period) || 0;
-      return numA - numB;
-    });
+    .map(([period, count]) => ({ period, count, sortKey: parseInt(period) || 0 }))
+    .sort((a, b) => a.sortKey - b.sortKey);
 
   return (
-    <Card>
+    <Card className="overflow-hidden">
       <CardHeader className="p-3 md:p-4">
         <CardTitle className="text-sm md:text-base">Timeline Distribution</CardTitle>
         <CardDescription className="text-xs">Events by century</CardDescription>
@@ -65,3 +62,10 @@ export const CategoryTimeline = ({ events, color }: CategoryTimelineProps) => {
     </Card>
   );
 };
+
+function getCenturySuffix(century: number): string {
+  if (century === 1) return 'st';
+  if (century === 2) return 'nd';
+  if (century === 3) return 'rd';
+  return 'th';
+}
