@@ -28,35 +28,78 @@ const slugify = (text) => {
     .trim();
 };
 
-const generateSlug = (title, year) => {
-  if (!year) {
-    return slugify(title);
+/**
+ * Extract year from title if it's in parentheses at the end
+ */
+const extractYearFromTitle = (title) => {
+  const yearInParenthesesPattern = /^(.+?)\s*\(([^)]+)\)\s*$/;
+  const match = title.match(yearInParenthesesPattern);
+  
+  if (!match) {
+    return { cleanTitle: title, extractedYear: null };
   }
+  
+  const cleanTitle = match[1].trim();
+  let yearPart = match[2].trim();
+  
+  // Handle "7th century" format
+  if (yearPart.toLowerCase().includes('century')) {
+    return { 
+      cleanTitle, 
+      extractedYear: yearPart.toLowerCase().replace(/\s+/g, '-')
+    };
+  }
+  
+  // Handle BC dates
+  if (yearPart.toLowerCase().includes('bc')) {
+    yearPart = yearPart.toLowerCase().replace(/\s*bc\s*/gi, '').trim() + '-bc';
+  }
+  
+  // Handle year ranges with various dash types
+  yearPart = yearPart.replace(/[–—]/g, '-');
+  yearPart = yearPart.replace(/\s*-\s*/g, '-');
+  
+  return { cleanTitle, extractedYear: yearPart };
+};
 
+const generateSlug = (title, year) => {
+  let cleanTitle = title;
+  let finalYear = year;
+  
+  // If no year provided, try to extract from title
+  if (!finalYear) {
+    const extracted = extractYearFromTitle(title);
+    cleanTitle = extracted.cleanTitle;
+    finalYear = extracted.extractedYear || undefined;
+  }
+  
+  // If still no year, just return slugified title
+  if (!finalYear) {
+    return slugify(cleanTitle);
+  }
+  
   // Remove -ongoing suffix if present
-  let processedYear = year.replace(/-ongoing$/i, '').trim();
+  finalYear = finalYear.replace(/-ongoing$/i, '').trim();
   
   // Check if title starts with year pattern
   const yearAtStartPattern = /^(\d{1,4}(?:-\d{1,4})?(?:\s*bc)?)\s+(.+)$/i;
-  const yearMatch = title.match(yearAtStartPattern);
-  
-  let cleanTitle = title;
-  let finalYear = processedYear;
+  const yearMatch = cleanTitle.match(yearAtStartPattern);
   
   if (yearMatch) {
-    // Move year from start to end
     cleanTitle = yearMatch[2];
-    finalYear = processedYear;
   }
   
   // Process BC years: ensure only one -bc suffix
-  if (processedYear.toLowerCase().includes('bc')) {
-    finalYear = processedYear.replace(/\s*bc/gi, '').trim();
+  if (finalYear.toLowerCase().includes('bc')) {
+    finalYear = finalYear.replace(/\s*bc/gi, '').trim();
     finalYear = `${finalYear}-bc`;
   }
   
+  // Replace various dash types with regular hyphen
+  finalYear = finalYear.replace(/[–—]/g, '-');
+  
   // Clean up the year string
-  finalYear = finalYear.replace(/--+/g, '-');
+  finalYear = finalYear.replace(/\s+/g, '-').replace(/--+/g, '-');
   
   const titleSlug = slugify(cleanTitle);
   
