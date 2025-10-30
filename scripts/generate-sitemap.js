@@ -18,15 +18,57 @@ events.forEach(event => {
 });
 events = Array.from(uniqueEvents.values());
 
-// Generate slugs for each event
-const generateSlug = (title, year) => {
-  const titleSlug = title
+// Generate slugs for each event - matching slugify.ts logic
+const slugify = (text) => {
+  return text
     .toLowerCase()
     .replace(/[^\w\s-]/g, '')
     .replace(/\s+/g, '-')
     .replace(/--+/g, '-')
     .trim();
-  return year ? `${titleSlug}-${year}` : titleSlug;
+};
+
+const generateSlug = (title, year) => {
+  if (!year) {
+    return slugify(title);
+  }
+
+  // Remove -ongoing suffix if present
+  let processedYear = year.replace(/-ongoing$/i, '').trim();
+  
+  // Check if title starts with year pattern
+  const yearAtStartPattern = /^(\d{1,4}(?:-\d{1,4})?(?:\s*bc)?)\s+(.+)$/i;
+  const yearMatch = title.match(yearAtStartPattern);
+  
+  let cleanTitle = title;
+  let finalYear = processedYear;
+  
+  if (yearMatch) {
+    // Move year from start to end
+    cleanTitle = yearMatch[2];
+    finalYear = processedYear;
+  }
+  
+  // Process BC years: ensure only one -bc suffix
+  if (processedYear.toLowerCase().includes('bc')) {
+    finalYear = processedYear.replace(/\s*bc/gi, '').trim();
+    finalYear = `${finalYear}-bc`;
+  }
+  
+  // Clean up the year string
+  finalYear = finalYear.replace(/--+/g, '-');
+  
+  const titleSlug = slugify(cleanTitle);
+  
+  // Ensure no duplicate year in slug
+  const yearPattern = finalYear.replace(/-/g, '\\-');
+  const duplicatePattern = new RegExp(`-${yearPattern}$`);
+  
+  if (titleSlug.match(duplicatePattern)) {
+    return titleSlug;
+  }
+  
+  return `${titleSlug}-${finalYear}`;
 };
 
 // Get current date
