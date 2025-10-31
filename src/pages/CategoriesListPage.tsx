@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { ScrollArea } from '@/components/ui/scroll-area';
 import { ArrowLeft } from 'lucide-react';
 import { getEventColor } from '@/utils/eventColors';
 import { EventType, HistoricalEvent } from '@/types/event';
@@ -79,8 +78,8 @@ const CategoriesListPage = () => {
   }
 
   return (
-    <main className="min-h-screen bg-background flex flex-col">
-      <header className="border-b bg-card/50 backdrop-blur sticky top-0 z-10">
+    <main className="min-h-screen bg-background flex flex-col h-screen">
+      <header className="border-b bg-card/50 backdrop-blur sticky top-0 z-10 flex-shrink-0">
         <div className="container max-w-6xl mx-auto px-4 py-4">
           <Button variant="ghost" size="sm" onClick={() => navigate('/')} className="mb-3">
             <ArrowLeft className="mr-2 h-4 w-4" />
@@ -91,7 +90,7 @@ const CategoriesListPage = () => {
         </div>
       </header>
 
-      <ScrollArea className="flex-1">
+      <div className="flex-1 overflow-y-auto">
         <div className="container max-w-6xl mx-auto px-4 py-8">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 pb-8">
             {categories.map(({ type, slug, description }) => {
@@ -108,9 +107,12 @@ const CategoriesListPage = () => {
                       <Badge style={{ backgroundColor: color.fill }} className="text-xs">
                         {color.label}
                       </Badge>
-                      <span className="text-2xl font-bold text-primary">
-                        <AnimatedCounter value={eventCount} />
-                      </span>
+                      <div className="text-right">
+                        <div className="text-xs text-muted-foreground mb-1">Total Events</div>
+                        <span className="text-2xl font-bold" style={{ color: color.fill }}>
+                          <AnimatedCounter value={eventCount} />
+                        </span>
+                      </div>
                     </div>
                     <CardTitle className="text-lg">{color.label}</CardTitle>
                     <CardDescription className="text-sm">{description}</CardDescription>
@@ -125,7 +127,7 @@ const CategoriesListPage = () => {
             })}
           </div>
         </div>
-      </ScrollArea>
+      </div>
     </main>
   );
 };
