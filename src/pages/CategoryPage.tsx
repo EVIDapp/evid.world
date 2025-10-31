@@ -500,57 +500,6 @@ const CategoryPage = () => {
             </Card>
           </div>
         </div>
-
-        {/* Events Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
-          {events.map(event => {
-          const slug = generateEventSlug(event.title, event.year);
-            return (
-              <Card 
-                key={event.id} 
-                className="hover:shadow-lg transition-shadow cursor-pointer group"
-                onClick={() => navigate(`/event/${slug}`)}
-              >
-                {event.image && (
-                  <div className="relative h-32 overflow-hidden rounded-t-lg">
-                    <img 
-                      src={event.image} 
-                      alt={`${event.title} - ${event.type} in ${event.country}, ${event.year}`}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                      loading="lazy"
-                    />
-                  </div>
-                )}
-                <CardHeader className="pb-2">
-                  <CardTitle className="text-sm line-clamp-2">{event.title}</CardTitle>
-                  <CardDescription className="flex flex-wrap gap-2 mt-1">
-                    {event.year && (
-                      <span className="flex items-center gap-0.5 text-xs">
-                        <Calendar className="h-2.5 w-2.5" />
-                        {event.year}
-                      </span>
-                    )}
-                    <span className="flex items-center gap-0.5 text-xs">
-                      <MapPin className="h-2.5 w-2.5" />
-                      {event.country}
-                    </span>
-                    {event.casualties && (
-                      <span className="flex items-center gap-0.5 text-xs">
-                        <Users className="h-2.5 w-2.5" />
-                        {event.casualties.toLocaleString()}
-                      </span>
-                    )}
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-xs text-muted-foreground line-clamp-2">
-                    {event.desc}
-                  </p>
-                </CardContent>
-              </Card>
-            );
-          })}
-        </div>
       </div>
       </ScrollArea>
     </main>
