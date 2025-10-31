@@ -8,8 +8,8 @@ interface EventMetaProps {
 
 export const EventMeta = ({ event }: EventMetaProps) => {
   useEffect(() => {
-    const slug = generateEventSlug(event.title, event.year);
-    const url = `https://evid.world/event/${slug}`;
+    const slug = generateEventSlug(event.title, event.type, event.year);
+    const url = `https://evid.world/category/${slug}`;
     
     // Update title
     document.title = `${event.title} (${event.year || 'Historical Event'}) — EVID`;

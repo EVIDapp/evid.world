@@ -427,14 +427,14 @@ const CategoryPage = () => {
               </CardHeader>
               <CardContent>
                 <ScrollArea className="h-[350px]">
-                  <div className="space-y-2 pr-4">
+                    <div className="space-y-2 pr-4">
                     {top10Deadliest.map((event, index) => (
                       <div 
                         key={event.id}
                         className="flex items-start gap-2 p-2 rounded-lg border hover:bg-accent/50 cursor-pointer transition-colors"
                         onClick={() => {
-                          const slug = generateEventSlug(event.title, event.year);
-                          navigate(`/event/${slug}`);
+                          const slug = generateEventSlug(event.title, event.type, event.year);
+                          navigate(`/category/${slug}`);
                         }}
                       >
                         <div className="flex-shrink-0 w-6 h-6 rounded-full bg-destructive/10 text-destructive flex items-center justify-center font-bold text-xs">

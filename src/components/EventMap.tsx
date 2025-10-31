@@ -597,8 +597,8 @@ export const EventMap = () => {
       detailsBtn.style.cssText = 'flex: 1; min-width: 120px; padding: 8px 16px; border-radius: 6px; font-size: 14px; font-weight: 500; cursor: pointer; transition: all 0.2s; border: none;';
       detailsBtn.onclick = (e) => {
         e.preventDefault();
-        const slug = generateEventSlug(event.title, event.year);
-        navigate(`/event/${slug}`);
+        const slug = generateEventSlug(event.title, event.type, event.year);
+        navigate(`/category/${slug}`);
       };
       buttonContainer.appendChild(detailsBtn);
       

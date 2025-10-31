@@ -8,7 +8,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Separator } from '@/components/ui/separator';
 import { ArrowLeft, MapPin, Calendar, Users, ExternalLink, Globe, Flame, AlertTriangle } from 'lucide-react';
 import { getEventColor } from '@/utils/eventColors';
-import { generateEventSlug } from '@/utils/slugify';
+import { generateEventSlug, getEventSlugOnly } from '@/utils/slugify';
 import { getWikipediaImage, getWikipediaText } from '@/utils/wikipediaImage';
 
 const EventDetail = () => {
@@ -26,9 +26,9 @@ const EventDetail = () => {
         const response = await fetch('/events.json');
         const events: HistoricalEvent[] = await response.json();
         
-        // Find event by slug match
+        // Find event by slug match (только event slug, без категории)
         const foundEvent = events.find(e => {
-          const eventSlug = generateEventSlug(e.title, e.year);
+          const eventSlug = getEventSlugOnly(e.title, e.year);
           return eventSlug === slug || e.id === slug;
         });
         
@@ -275,11 +275,11 @@ const EventDetail = () => {
                 </CardHeader>
                 <CardContent className="space-y-2">
                   {relatedEvents.map(relatedEvent => {
-                    const relatedSlug = generateEventSlug(relatedEvent.title, relatedEvent.year);
+                    const relatedSlug = generateEventSlug(relatedEvent.title, relatedEvent.type, relatedEvent.year);
                     return (
                       <a
                         key={relatedEvent.id}
-                        href={`/event/${relatedSlug}`}
+                        href={`/category/${relatedSlug}`}
                         className="block p-2 rounded-lg border hover:bg-accent hover:border-primary transition-all duration-200 hover-scale"
                       >
                         <div className="font-semibold text-xs">{relatedEvent.title}</div>

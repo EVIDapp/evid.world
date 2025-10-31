@@ -30,8 +30,22 @@ export const slugify = (text: string): string => {
   return slug;
 };
 
-// Генерация слага события с годом в конце
-export const generateEventSlug = (title: string, year?: string): string => {
+// Маппинг типов событий в слаги категорий
+export const categorySlugMap: Record<string, string> = {
+  'war': 'war',
+  'earthquake': 'earthquake',
+  'terror': 'terror',
+  'archaeology': 'archaeology',
+  'fire': 'fire',
+  'disaster': 'disaster',
+  'tsunami': 'tsunami',
+  'meteorite': 'meteorite',
+  'epidemic': 'epidemic',
+  'man-made disaster': 'man-made-disaster'
+};
+
+// Генерация полного пути события с категорией: /category/[category-slug]/[event-slug]
+export const generateEventSlug = (title: string, category: string, year?: string): string => {
   const titleSlug = slugify(title);
 
   // Извлекаем год из заголовка, если year не передан
@@ -51,16 +65,46 @@ export const generateEventSlug = (title: string, year?: string): string => {
   const endsWithYearPattern = /-(\d{1,4}(-\d{1,4})?(-bc|-ad)?)$/;
   const alreadyHasYear = endsWithYearPattern.test(titleSlug);
 
+  // Формируем слаг события
+  let eventSlug = titleSlug;
+  
   // Если год уже есть в конце слага, не добавляем его повторно
+  if (!alreadyHasYear && eventYear) {
+    eventSlug = `${titleSlug}-${eventYear}`;
+  }
+
+  // Получаем слаг категории
+  const categorySlug = categorySlugMap[category] || slugify(category);
+
+  // Возвращаем полный путь
+  return `${categorySlug}/${eventSlug}`;
+};
+
+// Вспомогательная функция для получения только event slug без категории
+export const getEventSlugOnly = (title: string, year?: string): string => {
+  const titleSlug = slugify(title);
+
+  let eventYear = year;
+  if (!eventYear) {
+    const yearInParentheses = title.match(/\(([^)]+)\)/);
+    if (yearInParentheses) {
+      eventYear = yearInParentheses[1]
+        .replace(/–/g, '-')
+        .replace(/—/g, '-')
+        .replace(/\s+/g, '');
+    }
+  }
+
+  const endsWithYearPattern = /-(\d{1,4}(-\d{1,4})?(-bc|-ad)?)$/;
+  const alreadyHasYear = endsWithYearPattern.test(titleSlug);
+
   if (alreadyHasYear) {
     return titleSlug;
   }
 
-  // Если год указан и его нет в слаге — добавляем в конец
   if (eventYear) {
     return `${titleSlug}-${eventYear}`;
   }
 
-  // Если года нет вообще, возвращаем только слаг заголовка
   return titleSlug;
 };

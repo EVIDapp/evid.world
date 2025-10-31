@@ -9,6 +9,7 @@ import Index from "./pages/Index";
 import EventDetail from "./pages/EventDetail";
 import CategoryPage from "./pages/CategoryPage";
 import CategoriesListPage from "./pages/CategoriesListPage";
+import OldEventRedirect from "./pages/OldEventRedirect";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient({
@@ -30,7 +31,10 @@ const App: React.FC = () => {
           <BrowserRouter>
             <Routes>
               <Route path="/" element={<Index />} />
-              <Route path="/event/:slug" element={<EventDetail />} />
+              {/* Редирект со старых URL на новые */}
+              <Route path="/event/:slug" element={<OldEventRedirect />} />
+              {/* Новая структура URL */}
+              <Route path="/category/:category/:slug" element={<EventDetail />} />
               <Route path="/category" element={<CategoriesListPage />} />
               <Route path="/category/:category" element={<CategoryPage />} />
               <Route path="*" element={<NotFound />} />
