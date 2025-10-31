@@ -186,20 +186,31 @@ const CategoryPage = () => {
       .slice(0, 10);
   }, [allEvents]);
 
-  // Timeline distribution by 100-year periods
+  // Timeline distribution by 100-year periods (1-2025 CE only)
   const timelineData = useMemo(() => {
     const periods: Record<string, number> = {};
     
     allEvents.forEach(event => {
       const year = parseYear(event);
-      const periodStart = Math.floor(year / 100) * 100;
-      const periodLabel = `${periodStart}-${periodStart + 99}`;
-      periods[periodLabel] = (periods[periodLabel] || 0) + 1;
+      // Only include years from 1 CE to 2025 CE
+      if (year >= 1 && year <= 2025) {
+        const periodStart = Math.floor(year / 100) * 100;
+        // Adjust period labeling for year 1-99 to show as "1-99"
+        const periodLabel = periodStart === 0 
+          ? "1-99" 
+          : `${periodStart}-${periodStart + 99}`;
+        periods[periodLabel] = (periods[periodLabel] || 0) + 1;
+      }
     });
     
     return Object.entries(periods)
       .map(([period, count]) => ({ period, count }))
-      .sort((a, b) => parseInt(a.period) - parseInt(b.period));
+      .sort((a, b) => {
+        // Special sorting for "1-99" period
+        const aStart = a.period === "1-99" ? 1 : parseInt(a.period);
+        const bStart = b.period === "1-99" ? 1 : parseInt(b.period);
+        return aStart - bStart;
+      });
   }, [allEvents]);
 
   // Get unique countries
