@@ -41,8 +41,7 @@ export const categorySlugMap: Record<string, string> = {
   'tsunami': 'tsunami',
   'meteorite': 'meteorite',
   'epidemic': 'epidemic',
-  'man-made disaster': 'man-made-disaster',
-  'culture': 'culture'
+  'man-made disaster': 'man-made-disaster'
 };
 
 // Генерация полного пути события с категорией: /category/[category-slug]/[event-slug]
