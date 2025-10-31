@@ -34,15 +34,33 @@ export const slugify = (text: string): string => {
 export const generateEventSlug = (title: string, year?: string): string => {
   const titleSlug = slugify(title);
 
+  // Извлекаем год из заголовка, если year не передан
+  let eventYear = year;
+  if (!eventYear) {
+    // Извлекаем год из скобок в заголовке (например, "War of Spanish Succession (1701-1714)")
+    const yearInParentheses = title.match(/\(([^)]+)\)/);
+    if (yearInParentheses) {
+      eventYear = yearInParentheses[1]
+        .replace(/–/g, '-') // заменяем em dash на обычный дефис
+        .replace(/—/g, '-') // заменяем en dash на обычный дефис
+        .replace(/\s+/g, ''); // удаляем пробелы
+    }
+  }
+
   // Проверяем, заканчивается ли слаг на год или диапазон лет
   const endsWithYearPattern = /-(\d{1,4}(-\d{1,4})?(-bc|-ad)?)$/;
   const alreadyHasYear = endsWithYearPattern.test(titleSlug);
 
   // Если год уже есть в конце слага, не добавляем его повторно
-  if (alreadyHasYear || !year) {
+  if (alreadyHasYear) {
     return titleSlug;
   }
 
   // Если год указан и его нет в слаге — добавляем в конец
-  return `${titleSlug}-${year}`;
+  if (eventYear) {
+    return `${titleSlug}-${eventYear}`;
+  }
+
+  // Если года нет вообще, возвращаем только слаг заголовка
+  return titleSlug;
 };

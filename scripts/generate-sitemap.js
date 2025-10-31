@@ -39,15 +39,31 @@ const slugify = (text) => {
 const generateSlug = (title, year) => {
   const titleSlug = slugify(title);
   
+  // Извлекаем год из заголовка, если year не передан
+  let eventYear = year;
+  if (!eventYear) {
+    const yearInParentheses = title.match(/\(([^)]+)\)/);
+    if (yearInParentheses) {
+      eventYear = yearInParentheses[1]
+        .replace(/–/g, '-')
+        .replace(/—/g, '-')
+        .replace(/\s+/g, '');
+    }
+  }
+  
   // Check if slug already ends with year
   const endsWithYearPattern = /-(\d{1,4}(-\d{1,4})?(-bc|-ad)?)$/;
   const alreadyHasYear = endsWithYearPattern.test(titleSlug);
   
-  if (alreadyHasYear || !year) {
+  if (alreadyHasYear) {
     return titleSlug;
   }
   
-  return `${titleSlug}-${year}`;
+  if (eventYear) {
+    return `${titleSlug}-${eventYear}`;
+  }
+  
+  return titleSlug;
 };
 
 // Get current date
