@@ -299,11 +299,11 @@ const CategoryPage = () => {
               <CardHeader className="pb-2">
                 <CardTitle className="text-xs font-medium text-muted-foreground flex items-center gap-1.5">
                   <Users className="h-3 w-3" />
-                  Human Impact
+                  Casualties
                 </CardTitle>
               </CardHeader>
               <CardContent>
-                <div className="text-2xl font-bold text-destructive">
+                <div className="text-2xl font-bold">
                   <AnimatedCounter value={stats.totalCasualties} />
                 </div>
               </CardContent>
@@ -535,7 +535,7 @@ const CategoryPage = () => {
                       {event.country}
                     </span>
                     {event.casualties && (
-                      <span className="flex items-center gap-0.5 text-xs text-destructive font-semibold">
+                      <span className="flex items-center gap-0.5 text-xs">
                         <Users className="h-2.5 w-2.5" />
                         {event.casualties.toLocaleString()}
                       </span>

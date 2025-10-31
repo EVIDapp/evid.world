@@ -1,13 +1,56 @@
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
+import { ScrollArea } from '@/components/ui/scroll-area';
 import { ArrowLeft } from 'lucide-react';
 import { getEventColor } from '@/utils/eventColors';
-import { EventType } from '@/types/event';
+import { EventType, HistoricalEvent } from '@/types/event';
+
+// Animated Counter Component
+const AnimatedCounter = ({ value, duration = 2000 }: { value: number; duration?: number }) => {
+  const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    let startTime: number;
+    let animationFrame: number;
+
+    const animate = (currentTime: number) => {
+      if (!startTime) startTime = currentTime;
+      const progress = Math.min((currentTime - startTime) / duration, 1);
+      
+      setCount(Math.floor(progress * value));
+
+      if (progress < 1) {
+        animationFrame = requestAnimationFrame(animate);
+      }
+    };
+
+    animationFrame = requestAnimationFrame(animate);
+    return () => cancelAnimationFrame(animationFrame);
+  }, [value, duration]);
+
+  return <>{count.toLocaleString()}</>;
+};
 
 const CategoriesListPage = () => {
   const navigate = useNavigate();
+  const [events, setEvents] = useState<HistoricalEvent[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetch('/events.json')
+      .then(res => res.json())
+      .then(data => {
+        setEvents(data);
+        setLoading(false);
+      })
+      .catch(err => {
+        console.error('Failed to load events:', err);
+        setLoading(false);
+      });
+  }, []);
 
   const categories: { type: EventType; slug: string; description: string }[] = [
     { type: 'war', slug: 'war', description: 'Military conflicts and battles throughout history' },
@@ -22,8 +65,21 @@ const CategoriesListPage = () => {
     { type: 'man-made disaster', slug: 'man-made-disaster', description: 'Human-caused disasters and accidents' },
   ];
 
+  // Count events per category
+  const getEventCount = (type: EventType) => {
+    return events.filter(event => event.type === type).length;
+  };
+
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-background">
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
+      </div>
+    );
+  }
+
   return (
-    <main className="min-h-screen bg-background">
+    <main className="min-h-screen bg-background flex flex-col">
       <header className="border-b bg-card/50 backdrop-blur sticky top-0 z-10">
         <div className="container max-w-6xl mx-auto px-4 py-4">
           <Button variant="ghost" size="sm" onClick={() => navigate('/')} className="mb-3">
@@ -35,35 +91,41 @@ const CategoriesListPage = () => {
         </div>
       </header>
 
-      <div className="container max-w-6xl mx-auto px-4 py-8">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {categories.map(({ type, slug, description }) => {
-            const color = getEventColor(type);
-            return (
-              <Card
-                key={slug}
-                className="cursor-pointer hover:shadow-lg transition-shadow"
-                onClick={() => navigate(`/category/${slug}`)}
-              >
-                <CardHeader className="pb-3">
-                  <div className="flex items-center justify-between mb-2">
-                    <Badge style={{ backgroundColor: color.fill }} className="text-xs">
-                      {color.label}
-                    </Badge>
-                  </div>
-                  <CardTitle className="text-lg">{color.label}</CardTitle>
-                  <CardDescription className="text-sm">{description}</CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <Button variant="outline" size="sm" className="w-full">
-                    View Events
-                  </Button>
-                </CardContent>
-              </Card>
-            );
-          })}
+      <ScrollArea className="flex-1">
+        <div className="container max-w-6xl mx-auto px-4 py-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 pb-8">
+            {categories.map(({ type, slug, description }) => {
+              const color = getEventColor(type);
+              const eventCount = getEventCount(type);
+              return (
+                <Card
+                  key={slug}
+                  className="cursor-pointer hover:shadow-lg transition-shadow"
+                  onClick={() => navigate(`/category/${slug}`)}
+                >
+                  <CardHeader className="pb-3">
+                    <div className="flex items-center justify-between mb-2">
+                      <Badge style={{ backgroundColor: color.fill }} className="text-xs">
+                        {color.label}
+                      </Badge>
+                      <span className="text-2xl font-bold text-primary">
+                        <AnimatedCounter value={eventCount} />
+                      </span>
+                    </div>
+                    <CardTitle className="text-lg">{color.label}</CardTitle>
+                    <CardDescription className="text-sm">{description}</CardDescription>
+                  </CardHeader>
+                  <CardContent>
+                    <Button variant="outline" size="sm" className="w-full">
+                      View Events
+                    </Button>
+                  </CardContent>
+                </Card>
+              );
+            })}
+          </div>
         </div>
-      </div>
+      </ScrollArea>
     </main>
   );
 };
