@@ -8,6 +8,7 @@ import { ThemeProvider } from "next-themes";
 import Index from "./pages/Index";
 import EventDetail from "./pages/EventDetail";
 import CategoryPage from "./pages/CategoryPage";
+import CategoriesListPage from "./pages/CategoriesListPage";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient({
@@ -30,6 +31,7 @@ const App: React.FC = () => {
             <Routes>
               <Route path="/" element={<Index />} />
               <Route path="/event/:slug" element={<EventDetail />} />
+              <Route path="/category" element={<CategoriesListPage />} />
               <Route path="/category/:category" element={<CategoryPage />} />
               <Route path="*" element={<NotFound />} />
             </Routes>

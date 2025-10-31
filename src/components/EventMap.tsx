@@ -14,6 +14,7 @@ import { ThemeToggle } from './ThemeToggle';
 import { ShareButton } from './ShareButton';
 import { ExportButton } from './ExportButton';
 import { HistoryPanel } from './HistoryPanel';
+import { CategoryPanel } from './CategoryPanel';
 import { TooltipButton } from './TooltipButton';
 import { useToast } from '@/hooks/use-toast';
 import { useTheme } from 'next-themes';
@@ -61,6 +62,7 @@ export const EventMap = () => {
   const [isAnimating, setIsAnimating] = useState(false);
   const [currentZoom, setCurrentZoom] = useState(2.2);
   const [isTimelineOpen, setIsTimelineOpen] = useState(false);
+  const [isCategoryOpen, setIsCategoryOpen] = useState(false);
   const { history, addToHistory, clearHistory } = useEventHistory();
   
   const { toast } = useToast();
@@ -885,6 +887,12 @@ export const EventMap = () => {
             onClear={handleClear}
             onReset={handleResetView}
             onTimelineToggle={() => setIsTimelineOpen(!isTimelineOpen)}
+            onCategoryToggle={() => setIsCategoryOpen(!isCategoryOpen)}
+          />
+
+          <CategoryPanel
+            isOpen={isCategoryOpen}
+            onClose={() => setIsCategoryOpen(false)}
           />
 
           <TimelineFilter

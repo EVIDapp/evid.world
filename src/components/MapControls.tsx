@@ -1,6 +1,6 @@
 import { Button } from '@/components/ui/button';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
-import { Globe, X, RotateCcw, Clock } from 'lucide-react';
+import { Globe, X, RotateCcw, Clock, Grid3x3 } from 'lucide-react';
 import { useIsMobile } from '@/hooks/use-mobile';
 
 interface MapControlsProps {
@@ -8,13 +8,37 @@ interface MapControlsProps {
   onClear: () => void;
   onReset: () => void;
   onTimelineToggle: () => void;
+  onCategoryToggle: () => void;
 }
 
-export const MapControls = ({ onShowAll, onClear, onReset, onTimelineToggle }: MapControlsProps) => {
+export const MapControls = ({ onShowAll, onClear, onReset, onTimelineToggle, onCategoryToggle }: MapControlsProps) => {
   const isMobile = useIsMobile();
   
   const controlButtons = (
     <>
+      <TooltipProvider delayDuration={0}>
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <Button
+              onClick={onCategoryToggle}
+              size="sm"
+              variant="secondary"
+              className="gradient-card backdrop-blur-strong border border-border/50 
+                         hover:border-primary/50 text-[10px] px-2.5 py-1.5 h-auto gap-1"
+              aria-label="Toggle categories"
+            >
+              <Grid3x3 className="w-3 h-3" />
+              {!isMobile && <span>Categories</span>}
+            </Button>
+          </TooltipTrigger>
+          {isMobile && (
+            <TooltipContent side="top" className="text-xs">
+              <p>Categories</p>
+            </TooltipContent>
+          )}
+        </Tooltip>
+      </TooltipProvider>
+
       <TooltipProvider delayDuration={0}>
         <Tooltip>
           <TooltipTrigger asChild>
