@@ -2,16 +2,17 @@ import { Button } from '@/components/ui/button';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 import { Globe, X, RotateCcw, Clock, Grid3x3 } from 'lucide-react';
 import { useIsMobile } from '@/hooks/use-mobile';
+import { useNavigate } from 'react-router-dom';
 
 interface MapControlsProps {
   onShowAll: () => void;
   onClear: () => void;
   onReset: () => void;
   onTimelineToggle: () => void;
-  onCategoryToggle: () => void;
 }
 
-export const MapControls = ({ onShowAll, onClear, onReset, onTimelineToggle, onCategoryToggle }: MapControlsProps) => {
+export const MapControls = ({ onShowAll, onClear, onReset, onTimelineToggle }: MapControlsProps) => {
+  const navigate = useNavigate();
   const isMobile = useIsMobile();
   
   const controlButtons = (
@@ -20,12 +21,12 @@ export const MapControls = ({ onShowAll, onClear, onReset, onTimelineToggle, onC
         <Tooltip>
           <TooltipTrigger asChild>
             <Button
-              onClick={onCategoryToggle}
+              onClick={() => navigate('/category')}
               size="sm"
               variant="secondary"
               className="gradient-card backdrop-blur-strong border border-border/50 
                          hover:border-primary/50 text-[10px] px-2.5 py-1.5 h-auto gap-1"
-              aria-label="Toggle categories"
+              aria-label="View categories"
             >
               <Grid3x3 className="w-3 h-3" />
               {!isMobile && <span>Categories</span>}

@@ -277,68 +277,69 @@ const CategoryPage = () => {
         </div>
       </header>
 
-      <div className="container max-w-7xl mx-auto px-4 py-4">
-        {/* Statistics Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-3 mb-6">
-          <Card>
-            <CardHeader className="pb-2">
-              <CardTitle className="text-xs font-medium text-muted-foreground flex items-center gap-1.5">
-                <TrendingUp className="h-3 w-3" />
-                Total Events
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="text-2xl font-bold">
-                <AnimatedCounter value={stats.totalEvents} />
-              </div>
-            </CardContent>
-          </Card>
+      <ScrollArea className="h-[calc(100vh-120px)]">
+        <div className="container max-w-7xl mx-auto px-4 py-4">
+          {/* Statistics Cards */}
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-3 mb-6">
+            <Card>
+              <CardHeader className="pb-2">
+                <CardTitle className="text-xs font-medium text-muted-foreground flex items-center gap-1.5">
+                  <TrendingUp className="h-3 w-3" />
+                  Total Events
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="text-2xl font-bold">
+                  <AnimatedCounter value={stats.totalEvents} />
+                </div>
+              </CardContent>
+            </Card>
 
-          <Card>
-            <CardHeader className="pb-2">
-              <CardTitle className="text-xs font-medium text-muted-foreground flex items-center gap-1.5">
-                <Users className="h-3 w-3" />
-                Casualties
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="text-2xl font-bold">
-                <AnimatedCounter value={stats.totalCasualties} />
-              </div>
-            </CardContent>
-          </Card>
+            <Card>
+              <CardHeader className="pb-2">
+                <CardTitle className="text-xs font-medium text-muted-foreground flex items-center gap-1.5">
+                  <Users className="h-3 w-3" />
+                  Human Impact
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="text-2xl font-bold text-destructive">
+                  <AnimatedCounter value={stats.totalCasualties} />
+                </div>
+              </CardContent>
+            </Card>
 
-          <Card>
-            <CardHeader className="pb-2">
-              <CardTitle className="text-xs font-medium text-muted-foreground flex items-center gap-1.5">
-                <Calendar className="h-3 w-3" />
-                Time Range
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="text-lg font-bold">1 - 2025</div>
-            </CardContent>
-          </Card>
+            <Card>
+              <CardHeader className="pb-2">
+                <CardTitle className="text-xs font-medium text-muted-foreground flex items-center gap-1.5">
+                  <Calendar className="h-3 w-3" />
+                  Time Range
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="text-lg font-bold">1 - 2025</div>
+              </CardContent>
+            </Card>
 
-          <Card>
-            <CardHeader className="pb-2">
-              <CardTitle className="text-xs font-medium text-muted-foreground flex items-center gap-1.5">
-                <Globe className="h-3 w-3" />
-                Top Countries
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="space-y-0.5">
-                {stats.topCountries.map(([country, count]) => (
-                  <div key={country} className="flex justify-between text-xs">
-                    <span className="font-medium">{country}</span>
-                    <span className="text-muted-foreground">{count}</span>
-                  </div>
-                ))}
-              </div>
-            </CardContent>
-          </Card>
-        </div>
+            <Card>
+              <CardHeader className="pb-2">
+                <CardTitle className="text-xs font-medium text-muted-foreground flex items-center gap-1.5">
+                  <Globe className="h-3 w-3" />
+                  Top Countries
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="space-y-0.5">
+                  {stats.topCountries.map(([country, count]) => (
+                    <div key={country} className="flex justify-between text-xs">
+                      <span className="font-medium">{country}</span>
+                      <span className="text-muted-foreground">{count}</span>
+                    </div>
+                  ))}
+                </div>
+              </CardContent>
+            </Card>
+          </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
           {/* Filters */}
@@ -501,58 +502,57 @@ const CategoryPage = () => {
         </div>
 
         {/* Events Grid */}
-        <ScrollArea className="h-[calc(100vh-500px)]">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 pr-4">
-            {events.map(event => {
-            const slug = generateEventSlug(event.title, event.year);
-              return (
-                <Card 
-                  key={event.id} 
-                  className="hover:shadow-lg transition-shadow cursor-pointer group"
-                  onClick={() => navigate(`/event/${slug}`)}
-                >
-                  {event.image && (
-                    <div className="relative h-32 overflow-hidden rounded-t-lg">
-                      <img 
-                        src={event.image} 
-                        alt={`${event.title} - ${event.type} in ${event.country}, ${event.year}`}
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                        loading="lazy"
-                      />
-                    </div>
-                  )}
-                  <CardHeader className="pb-2">
-                    <CardTitle className="text-sm line-clamp-2">{event.title}</CardTitle>
-                    <CardDescription className="flex flex-wrap gap-2 mt-1">
-                      {event.year && (
-                        <span className="flex items-center gap-0.5 text-xs">
-                          <Calendar className="h-2.5 w-2.5" />
-                          {event.year}
-                        </span>
-                      )}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
+          {events.map(event => {
+          const slug = generateEventSlug(event.title, event.year);
+            return (
+              <Card 
+                key={event.id} 
+                className="hover:shadow-lg transition-shadow cursor-pointer group"
+                onClick={() => navigate(`/event/${slug}`)}
+              >
+                {event.image && (
+                  <div className="relative h-32 overflow-hidden rounded-t-lg">
+                    <img 
+                      src={event.image} 
+                      alt={`${event.title} - ${event.type} in ${event.country}, ${event.year}`}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                      loading="lazy"
+                    />
+                  </div>
+                )}
+                <CardHeader className="pb-2">
+                  <CardTitle className="text-sm line-clamp-2">{event.title}</CardTitle>
+                  <CardDescription className="flex flex-wrap gap-2 mt-1">
+                    {event.year && (
                       <span className="flex items-center gap-0.5 text-xs">
-                        <MapPin className="h-2.5 w-2.5" />
-                        {event.country}
+                        <Calendar className="h-2.5 w-2.5" />
+                        {event.year}
                       </span>
-                      {event.casualties && (
-                        <span className="flex items-center gap-0.5 text-xs">
-                          <Users className="h-2.5 w-2.5" />
-                          {event.casualties.toLocaleString()}
-                        </span>
-                      )}
-                    </CardDescription>
-                  </CardHeader>
-                  <CardContent>
-                    <p className="text-xs text-muted-foreground line-clamp-2">
-                      {event.desc}
-                    </p>
-                  </CardContent>
-                </Card>
-              );
-            })}
-          </div>
-        </ScrollArea>
+                    )}
+                    <span className="flex items-center gap-0.5 text-xs">
+                      <MapPin className="h-2.5 w-2.5" />
+                      {event.country}
+                    </span>
+                    {event.casualties && (
+                      <span className="flex items-center gap-0.5 text-xs text-destructive font-semibold">
+                        <Users className="h-2.5 w-2.5" />
+                        {event.casualties.toLocaleString()}
+                      </span>
+                    )}
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-xs text-muted-foreground line-clamp-2">
+                    {event.desc}
+                  </p>
+                </CardContent>
+              </Card>
+            );
+          })}
+        </div>
       </div>
+      </ScrollArea>
     </main>
   );
 };
