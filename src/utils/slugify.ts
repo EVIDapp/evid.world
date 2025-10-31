@@ -34,14 +34,15 @@ export const slugify = (text: string): string => {
 export const categorySlugMap: Record<string, string> = {
   'war': 'war',
   'earthquake': 'earthquake',
-  'terror': 'terror',
+  'terror': 'terror-attack',
   'archaeology': 'archaeology',
-  'fire': 'fire',
+  'fire': 'wildfire',
   'disaster': 'disaster',
   'tsunami': 'tsunami',
   'meteorite': 'meteorite',
   'epidemic': 'epidemic',
-  'man-made disaster': 'man-made-disaster'
+  'man-made disaster': 'man-made-disaster',
+  'culture': 'culture'
 };
 
 // Генерация полного пути события с категорией: /category/[category-slug]/[event-slug]
@@ -61,16 +62,19 @@ export const generateEventSlug = (title: string, category: string, year?: string
     }
   }
 
-  // Проверяем, заканчивается ли слаг на год или диапазон лет
-  const endsWithYearPattern = /-(\d{1,4}(-\d{1,4})?(-bc|-ad)?)$/;
-  const alreadyHasYear = endsWithYearPattern.test(titleSlug);
+  // Проверяем, есть ли год или диапазон лет уже в слаге
+  // Поддерживаем форматы: -1234, -1234-5678, -1234-bc, -1234-ad, -1234-ce
+  const yearPattern = /\d{1,4}(-\d{1,4})?(-bc|-ad|-ce)?$/;
+  const alreadyHasYear = yearPattern.test(titleSlug);
 
   // Формируем слаг события
   let eventSlug = titleSlug;
   
   // Если год уже есть в конце слага, не добавляем его повторно
   if (!alreadyHasYear && eventYear) {
-    eventSlug = `${titleSlug}-${eventYear}`;
+    // Очищаем год от CE/AD/BC суффиксов для добавления
+    const cleanYear = eventYear.toLowerCase().replace(/\s*(ce|ad|bc)\s*$/i, '');
+    eventSlug = `${titleSlug}-${cleanYear}`;
   }
 
   // Получаем слаг категории
@@ -95,15 +99,18 @@ export const getEventSlugOnly = (title: string, year?: string): string => {
     }
   }
 
-  const endsWithYearPattern = /-(\d{1,4}(-\d{1,4})?(-bc|-ad)?)$/;
-  const alreadyHasYear = endsWithYearPattern.test(titleSlug);
+  // Проверяем, есть ли год или диапазон лет уже в слаге
+  const yearPattern = /\d{1,4}(-\d{1,4})?(-bc|-ad|-ce)?$/;
+  const alreadyHasYear = yearPattern.test(titleSlug);
 
   if (alreadyHasYear) {
     return titleSlug;
   }
 
   if (eventYear) {
-    return `${titleSlug}-${eventYear}`;
+    // Очищаем год от CE/AD/BC суффиксов для добавления
+    const cleanYear = eventYear.toLowerCase().replace(/\s*(ce|ad|bc)\s*$/i, '');
+    return `${titleSlug}-${cleanYear}`;
   }
 
   return titleSlug;
