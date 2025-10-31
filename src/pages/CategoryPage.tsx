@@ -357,17 +357,22 @@ const CategoryPage = () => {
           <div className="lg:col-span-1">
             <Card>
               <CardHeader className="pb-3">
+                <div className="flex items-center justify-between mb-2">
+                  <CardTitle className="text-base">Filters</CardTitle>
+                  {(selectedCountries.size > 0 || selectedYearRange[0] !== yearRange[0] || selectedYearRange[1] !== yearRange[1]) && (
+                    <Button variant="ghost" size="sm" onClick={handleResetFilters}>
+                      Reset
+                    </Button>
+                  )}
+                </div>
                 <Collapsible open={isFiltersOpen} onOpenChange={setIsFiltersOpen}>
-                  <CollapsibleTrigger className="flex items-center justify-between w-full">
-                    <CardTitle className="text-base flex items-center gap-2">
-                      Filters
-                      <ChevronDown className={`h-3 w-3 transition-transform ${isFiltersOpen ? 'rotate-180' : ''}`} />
-                    </CardTitle>
-                    {(selectedCountries.size > 0 || selectedYearRange[0] !== yearRange[0] || selectedYearRange[1] !== yearRange[1]) && (
-                      <Button variant="ghost" size="sm" onClick={handleResetFilters}>
-                        Reset
-                      </Button>
-                    )}
+                  <CollapsibleTrigger asChild>
+                    <Button variant="ghost" className="w-full justify-between p-2 h-auto">
+                      <span className="text-sm text-muted-foreground">
+                        {isFiltersOpen ? 'Hide filters' : 'Show filters'}
+                      </span>
+                      <ChevronDown className={`h-4 w-4 transition-transform ${isFiltersOpen ? 'rotate-180' : ''}`} />
+                    </Button>
                   </CollapsibleTrigger>
                   <CollapsibleContent className="mt-4">
                     <div className="space-y-4">
