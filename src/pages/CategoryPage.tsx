@@ -4,6 +4,7 @@ import { HistoricalEvent, EventType } from '@/types/event';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { ScrollArea } from '@/components/ui/scroll-area';
 import { ArrowLeft, MapPin, Calendar, Users, TrendingUp, Globe } from 'lucide-react';
 import { getEventColor } from '@/utils/eventColors';
 import { generateEventSlug } from '@/utils/slugify';
@@ -12,13 +13,39 @@ import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/component
 import { ChevronDown } from 'lucide-react';
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, Cell } from 'recharts';
 
+// Animated Counter Component
+const AnimatedCounter = ({ value, duration = 2000 }: { value: number; duration?: number }) => {
+  const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    let startTime: number;
+    let animationFrame: number;
+
+    const animate = (currentTime: number) => {
+      if (!startTime) startTime = currentTime;
+      const progress = Math.min((currentTime - startTime) / duration, 1);
+      
+      setCount(Math.floor(progress * value));
+
+      if (progress < 1) {
+        animationFrame = requestAnimationFrame(animate);
+      }
+    };
+
+    animationFrame = requestAnimationFrame(animate);
+    return () => cancelAnimationFrame(animationFrame);
+  }, [value, duration]);
+
+  return <>{count.toLocaleString()}</>;
+};
+
 const CategoryPage = () => {
   const { category } = useParams<{ category: string }>();
   const navigate = useNavigate();
   const [allEvents, setAllEvents] = useState<HistoricalEvent[]>([]);
   const [events, setEvents] = useState<HistoricalEvent[]>([]);
   const [loading, setLoading] = useState(true);
-  const [yearRange, setYearRange] = useState<[number, number]>([1, 2025]);
+  const [yearRange] = useState<[number, number]>([1, 2025]);
   const [selectedYearRange, setSelectedYearRange] = useState<[number, number]>([1, 2025]);
   const [selectedCountries, setSelectedCountries] = useState<Set<string>>(new Set());
   const [isFiltersOpen, setIsFiltersOpen] = useState(false);
@@ -79,13 +106,6 @@ const CategoryPage = () => {
         if (eventType) {
           const filtered = allEventsData.filter(e => e.type === eventType);
           
-          // Calculate year range
-          const years = filtered.map(parseYear).filter(y => !isNaN(y));
-          const minYear = Math.min(...years);
-          const maxYear = Math.max(...years);
-          
-          setYearRange([minYear, maxYear]);
-          setSelectedYearRange([minYear, maxYear]);
           setAllEvents(filtered);
           setEvents(filtered);
         }
@@ -238,18 +258,18 @@ const CategoryPage = () => {
     <main className="min-h-screen bg-background">
       {/* Header */}
       <header className="border-b bg-card/50 backdrop-blur sticky top-0 z-10">
-        <div className="container max-w-7xl mx-auto px-4 py-6">
-          <Button variant="ghost" onClick={() => navigate('/')} className="mb-4">
-            <ArrowLeft className="mr-2 h-4 w-4" />
+        <div className="container max-w-7xl mx-auto px-4 py-3">
+          <Button variant="ghost" size="sm" onClick={() => navigate('/')} className="mb-2">
+            <ArrowLeft className="mr-2 h-3 w-3" />
             Back
           </Button>
-          <div className="flex items-center gap-4">
-            <Badge className="text-lg px-4 py-2" style={{ backgroundColor: eventColor.fill }}>
+          <div className="flex items-center gap-3">
+            <Badge className="text-sm px-3 py-1" style={{ backgroundColor: eventColor.fill }}>
               {eventColor.label}
             </Badge>
             <div>
-              <h1 className="text-4xl font-bold">{categoryTitle}</h1>
-              <p className="text-muted-foreground mt-2">
+              <h1 className="text-2xl font-bold">{categoryTitle}</h1>
+              <p className="text-sm text-muted-foreground mt-1">
                 {events.length} of {stats.totalEvents} events
               </p>
             </div>
@@ -257,56 +277,60 @@ const CategoryPage = () => {
         </div>
       </header>
 
-      <div className="container max-w-7xl mx-auto px-4 py-8">
+      <div className="container max-w-7xl mx-auto px-4 py-4">
         {/* Statistics Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-3 mb-6">
           <Card>
-            <CardHeader className="pb-3">
-              <CardTitle className="text-sm font-medium text-muted-foreground flex items-center gap-2">
-                <TrendingUp className="h-4 w-4" />
+            <CardHeader className="pb-2">
+              <CardTitle className="text-xs font-medium text-muted-foreground flex items-center gap-1.5">
+                <TrendingUp className="h-3 w-3" />
                 Total Events
               </CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="text-3xl font-bold">{stats.totalEvents}</div>
+              <div className="text-2xl font-bold">
+                <AnimatedCounter value={stats.totalEvents} />
+              </div>
             </CardContent>
           </Card>
 
           <Card>
-            <CardHeader className="pb-3">
-              <CardTitle className="text-sm font-medium text-muted-foreground flex items-center gap-2">
-                <Users className="h-4 w-4" />
+            <CardHeader className="pb-2">
+              <CardTitle className="text-xs font-medium text-muted-foreground flex items-center gap-1.5">
+                <Users className="h-3 w-3" />
                 Casualties
               </CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="text-3xl font-bold">{stats.totalCasualties.toLocaleString()}</div>
+              <div className="text-2xl font-bold">
+                <AnimatedCounter value={stats.totalCasualties} />
+              </div>
             </CardContent>
           </Card>
 
           <Card>
-            <CardHeader className="pb-3">
-              <CardTitle className="text-sm font-medium text-muted-foreground flex items-center gap-2">
-                <Calendar className="h-4 w-4" />
+            <CardHeader className="pb-2">
+              <CardTitle className="text-xs font-medium text-muted-foreground flex items-center gap-1.5">
+                <Calendar className="h-3 w-3" />
                 Time Range
               </CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold">{stats.timeRange}</div>
+              <div className="text-lg font-bold">1 - 2025</div>
             </CardContent>
           </Card>
 
           <Card>
-            <CardHeader className="pb-3">
-              <CardTitle className="text-sm font-medium text-muted-foreground flex items-center gap-2">
-                <Globe className="h-4 w-4" />
+            <CardHeader className="pb-2">
+              <CardTitle className="text-xs font-medium text-muted-foreground flex items-center gap-1.5">
+                <Globe className="h-3 w-3" />
                 Top Countries
               </CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="space-y-1">
+              <div className="space-y-0.5">
                 {stats.topCountries.map(([country, count]) => (
-                  <div key={country} className="flex justify-between text-sm">
+                  <div key={country} className="flex justify-between text-xs">
                     <span className="font-medium">{country}</span>
                     <span className="text-muted-foreground">{count}</span>
                   </div>
@@ -316,16 +340,16 @@ const CategoryPage = () => {
           </Card>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-8">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
           {/* Filters */}
           <div className="lg:col-span-1">
             <Card>
-              <CardHeader>
+              <CardHeader className="pb-3">
                 <Collapsible open={isFiltersOpen} onOpenChange={setIsFiltersOpen}>
                   <CollapsibleTrigger className="flex items-center justify-between w-full">
-                    <CardTitle className="text-lg flex items-center gap-2">
+                    <CardTitle className="text-base flex items-center gap-2">
                       Filters
-                      <ChevronDown className={`h-4 w-4 transition-transform ${isFiltersOpen ? 'rotate-180' : ''}`} />
+                      <ChevronDown className={`h-3 w-3 transition-transform ${isFiltersOpen ? 'rotate-180' : ''}`} />
                     </CardTitle>
                     {(selectedCountries.size > 0 || selectedYearRange[0] !== yearRange[0] || selectedYearRange[1] !== yearRange[1]) && (
                       <Button variant="ghost" size="sm" onClick={handleResetFilters}>
@@ -385,46 +409,48 @@ const CategoryPage = () => {
 
             {/* Top 10 Deadliest */}
             <Card className="mt-4">
-              <CardHeader>
-                <CardTitle className="text-lg">Top 10 Deadliest Events</CardTitle>
-                <CardDescription>By casualty count</CardDescription>
+              <CardHeader className="pb-3">
+                <CardTitle className="text-base">Top 10 Deadliest Events</CardTitle>
+                <CardDescription className="text-xs">By casualty count</CardDescription>
               </CardHeader>
               <CardContent>
-                <div className="space-y-3 max-h-[400px] overflow-y-auto">
-                  {top10Deadliest.map((event, index) => (
-                    <div 
-                      key={event.id}
-                      className="flex items-start gap-3 p-3 rounded-lg border hover:bg-accent/50 cursor-pointer transition-colors"
-                      onClick={() => {
-                        const slug = generateEventSlug(event.title, event.year);
-                        navigate(`/event/${slug}`);
-                      }}
-                    >
-                      <div className="flex-shrink-0 w-8 h-8 rounded-full bg-destructive/10 text-destructive flex items-center justify-center font-bold text-sm">
-                        {index + 1}
-                      </div>
-                      <div className="flex-1 min-w-0">
-                        <div className="font-medium text-sm line-clamp-1">{event.title}</div>
-                        <div className="flex items-center gap-3 text-xs text-muted-foreground mt-1">
-                          {event.year && (
-                            <span className="flex items-center gap-1">
-                              <Calendar className="h-3 w-3" />
-                              {event.year}
+                <ScrollArea className="h-[350px]">
+                  <div className="space-y-2 pr-4">
+                    {top10Deadliest.map((event, index) => (
+                      <div 
+                        key={event.id}
+                        className="flex items-start gap-2 p-2 rounded-lg border hover:bg-accent/50 cursor-pointer transition-colors"
+                        onClick={() => {
+                          const slug = generateEventSlug(event.title, event.year);
+                          navigate(`/event/${slug}`);
+                        }}
+                      >
+                        <div className="flex-shrink-0 w-6 h-6 rounded-full bg-destructive/10 text-destructive flex items-center justify-center font-bold text-xs">
+                          {index + 1}
+                        </div>
+                        <div className="flex-1 min-w-0">
+                          <div className="font-medium text-xs line-clamp-1">{event.title}</div>
+                          <div className="flex items-center gap-2 text-[10px] text-muted-foreground mt-0.5">
+                            {event.year && (
+                              <span className="flex items-center gap-0.5">
+                                <Calendar className="h-2.5 w-2.5" />
+                                {event.year}
+                              </span>
+                            )}
+                            <span className="flex items-center gap-0.5">
+                              <MapPin className="h-2.5 w-2.5" />
+                              {event.country}
                             </span>
-                          )}
-                          <span className="flex items-center gap-1">
-                            <MapPin className="h-3 w-3" />
-                            {event.country}
-                          </span>
-                          <span className="flex items-center gap-1 text-destructive">
-                            <Users className="h-3 w-3" />
-                            {event.casualties?.toLocaleString()}
-                          </span>
+                            <span className="flex items-center gap-0.5 text-destructive">
+                              <Users className="h-2.5 w-2.5" />
+                              {event.casualties?.toLocaleString()}
+                            </span>
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  ))}
-                </div>
+                    ))}
+                  </div>
+                </ScrollArea>
               </CardContent>
             </Card>
           </div>
@@ -432,12 +458,12 @@ const CategoryPage = () => {
           {/* Timeline Distribution */}
           <div className="lg:col-span-2">
             <Card>
-              <CardHeader>
-                <CardTitle className="text-lg">Timeline Distribution</CardTitle>
-                <CardDescription>Events by century</CardDescription>
+              <CardHeader className="pb-3">
+                <CardTitle className="text-base">Timeline Distribution</CardTitle>
+                <CardDescription className="text-xs">Events by century</CardDescription>
               </CardHeader>
               <CardContent>
-                <ResponsiveContainer width="100%" height={300}>
+                <ResponsiveContainer width="100%" height={250}>
                   <BarChart data={timelineData}>
                     <XAxis 
                       dataKey="period" 
@@ -475,55 +501,57 @@ const CategoryPage = () => {
         </div>
 
         {/* Events Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {events.map(event => {
+        <ScrollArea className="h-[calc(100vh-500px)]">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 pr-4">
+            {events.map(event => {
             const slug = generateEventSlug(event.title, event.year);
-            return (
-              <Card 
-                key={event.id} 
-                className="hover:shadow-lg transition-shadow cursor-pointer group"
-                onClick={() => navigate(`/event/${slug}`)}
-              >
-                {event.image && (
-                  <div className="relative h-48 overflow-hidden rounded-t-lg">
-                    <img 
-                      src={event.image} 
-                      alt={`${event.title} - ${event.type} in ${event.country}, ${event.year}`}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                      loading="lazy"
-                    />
-                  </div>
-                )}
-                <CardHeader>
-                  <CardTitle className="line-clamp-2">{event.title}</CardTitle>
-                  <CardDescription className="flex flex-wrap gap-3 mt-2">
-                    {event.year && (
-                      <span className="flex items-center gap-1">
-                        <Calendar className="h-3 w-3" />
-                        {event.year}
+              return (
+                <Card 
+                  key={event.id} 
+                  className="hover:shadow-lg transition-shadow cursor-pointer group"
+                  onClick={() => navigate(`/event/${slug}`)}
+                >
+                  {event.image && (
+                    <div className="relative h-32 overflow-hidden rounded-t-lg">
+                      <img 
+                        src={event.image} 
+                        alt={`${event.title} - ${event.type} in ${event.country}, ${event.year}`}
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                        loading="lazy"
+                      />
+                    </div>
+                  )}
+                  <CardHeader className="pb-2">
+                    <CardTitle className="text-sm line-clamp-2">{event.title}</CardTitle>
+                    <CardDescription className="flex flex-wrap gap-2 mt-1">
+                      {event.year && (
+                        <span className="flex items-center gap-0.5 text-xs">
+                          <Calendar className="h-2.5 w-2.5" />
+                          {event.year}
+                        </span>
+                      )}
+                      <span className="flex items-center gap-0.5 text-xs">
+                        <MapPin className="h-2.5 w-2.5" />
+                        {event.country}
                       </span>
-                    )}
-                    <span className="flex items-center gap-1">
-                      <MapPin className="h-3 w-3" />
-                      {event.country}
-                    </span>
-                    {event.casualties && (
-                      <span className="flex items-center gap-1">
-                        <Users className="h-3 w-3" />
-                        {event.casualties.toLocaleString()}
-                      </span>
-                    )}
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-sm text-muted-foreground line-clamp-3">
-                    {event.desc}
-                  </p>
-                </CardContent>
-              </Card>
-            );
-          })}
-        </div>
+                      {event.casualties && (
+                        <span className="flex items-center gap-0.5 text-xs">
+                          <Users className="h-2.5 w-2.5" />
+                          {event.casualties.toLocaleString()}
+                        </span>
+                      )}
+                    </CardDescription>
+                  </CardHeader>
+                  <CardContent>
+                    <p className="text-xs text-muted-foreground line-clamp-2">
+                      {event.desc}
+                    </p>
+                  </CardContent>
+                </Card>
+              );
+            })}
+          </div>
+        </ScrollArea>
       </div>
     </main>
   );
