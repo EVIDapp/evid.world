@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -10,9 +9,9 @@ import EventDetail from "./pages/EventDetail";
 import CategoryPage from "./pages/CategoryPage";
 import NotFound from "./pages/NotFound";
 
-const App = () => {
-  const [queryClient] = useState(() => new QueryClient());
+const queryClient = new QueryClient();
 
+const App = () => {
   return (
     <QueryClientProvider client={queryClient}>
       <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={false}>
