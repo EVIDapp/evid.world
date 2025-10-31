@@ -18,15 +18,36 @@ events.forEach(event => {
 });
 events = Array.from(uniqueEvents.values());
 
+// Slugify function matching frontend logic
+const slugify = (text) => {
+  let slug = text.toLowerCase().trim();
+  
+  slug = slug.replace(/(\d{3,4})(\d{3,4})/g, '$1-$2');
+  slug = slug.replace(/-?(ongoing|present|current)$/g, '');
+  slug = slug.replace(/\b(\d{1,4})\s*bc\b/g, '$1-bc');
+  slug = slug.replace(/\b(\d{1,4})\s*ad\b/g, '$1-ad');
+  slug = slug.replace(/(-\d{1,4})-\1/g, '$1');
+  slug = slug.replace(/[\s_]+/g, '-');
+  slug = slug.replace(/[^a-z0-9-]/g, '');
+  slug = slug.replace(/--+/g, '-');
+  slug = slug.replace(/^-+|-+$/g, '');
+  
+  return slug;
+};
+
 // Generate slugs for each event
 const generateSlug = (title, year) => {
-  const titleSlug = title
-    .toLowerCase()
-    .replace(/[^\w\s-]/g, '')
-    .replace(/\s+/g, '-')
-    .replace(/--+/g, '-')
-    .trim();
-  return year ? `${titleSlug}-${year}` : titleSlug;
+  const titleSlug = slugify(title);
+  
+  // Check if slug already ends with year
+  const endsWithYearPattern = /-(\d{1,4}(-\d{1,4})?(-bc|-ad)?)$/;
+  const alreadyHasYear = endsWithYearPattern.test(titleSlug);
+  
+  if (alreadyHasYear || !year) {
+    return titleSlug;
+  }
+  
+  return `${titleSlug}-${year}`;
 };
 
 // Get current date

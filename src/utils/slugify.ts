@@ -34,6 +34,15 @@ export const slugify = (text: string): string => {
 export const generateEventSlug = (title: string, year?: string): string => {
   const titleSlug = slugify(title);
 
-  // Если год указан — добавляем в конец, иначе оставляем только название
-  return year ? `${titleSlug}-${year}` : titleSlug;
+  // Проверяем, заканчивается ли слаг на год или диапазон лет
+  const endsWithYearPattern = /-(\d{1,4}(-\d{1,4})?(-bc|-ad)?)$/;
+  const alreadyHasYear = endsWithYearPattern.test(titleSlug);
+
+  // Если год уже есть в конце слага, не добавляем его повторно
+  if (alreadyHasYear || !year) {
+    return titleSlug;
+  }
+
+  // Если год указан и его нет в слаге — добавляем в конец
+  return `${titleSlug}-${year}`;
 };
