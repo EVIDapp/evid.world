@@ -1,4 +1,3 @@
-import React from "react";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -21,7 +20,7 @@ const queryClient = new QueryClient({
   },
 });
 
-const App: React.FC = () => {
+function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={false}>
@@ -31,9 +30,7 @@ const App: React.FC = () => {
           <BrowserRouter>
             <Routes>
               <Route path="/" element={<Index />} />
-              {/* Редирект со старых URL на новые */}
               <Route path="/event/:slug" element={<OldEventRedirect />} />
-              {/* Новая структура URL */}
               <Route path="/category/:category/:slug" element={<EventDetail />} />
               <Route path="/category" element={<CategoriesListPage />} />
               <Route path="/category/:category" element={<CategoryPage />} />
@@ -44,6 +41,6 @@ const App: React.FC = () => {
       </ThemeProvider>
     </QueryClientProvider>
   );
-};
+}
 
 export default App;
