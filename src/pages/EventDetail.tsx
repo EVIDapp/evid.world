@@ -13,7 +13,7 @@ import { getWikipediaImage, getWikipediaText } from '@/utils/wikipediaImage';
 import { getSmartRecommendations } from '@/utils/eventRecommendations';
 
 const EventDetail = () => {
-  const { slug } = useParams<{ slug: string }>();
+  const { slug, category } = useParams<{ slug: string; category: string }>();
   const navigate = useNavigate();
   const [event, setEvent] = useState<HistoricalEvent | null>(null);
   const [relatedEvents, setRelatedEvents] = useState<HistoricalEvent[]>([]);
@@ -34,6 +34,14 @@ const EventDetail = () => {
         });
         
         if (foundEvent) {
+          // Check if category in URL matches event type
+          if (category && category !== foundEvent.type) {
+            // Redirect to correct category URL
+            const correctSlug = generateEventSlug(foundEvent.title, foundEvent.type, foundEvent.year);
+            navigate(`/category/${correctSlug}`, { replace: true });
+            return;
+          }
+          
           setEvent(foundEvent);
           
           // Load Wikipedia data if available
@@ -59,7 +67,7 @@ const EventDetail = () => {
     };
     
     loadEvent();
-  }, [slug]);
+  }, [slug, category, navigate]);
 
   if (loading) {
     return (
