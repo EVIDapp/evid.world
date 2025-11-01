@@ -4,7 +4,7 @@ Disallow: /assets/
 Disallow: /node_modules/
 
 # Sitemaps
-Sitemap: https://evid.world/sitemap.xml
+Sitemap: https://www.evid.world/sitemap.xml
 
 # Major search engines
 User-agent: Googlebot
