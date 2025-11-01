@@ -10,6 +10,7 @@ import { ArrowLeft, MapPin, Calendar, Users, ExternalLink, Globe, Flame, AlertTr
 import { getEventColor } from '@/utils/eventColors';
 import { generateEventSlug, getEventSlugOnly } from '@/utils/slugify';
 import { getWikipediaImage, getWikipediaText } from '@/utils/wikipediaImage';
+import { getSmartRecommendations } from '@/utils/eventRecommendations';
 
 const EventDetail = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -46,13 +47,8 @@ const EventDetail = () => {
             }).catch(() => {});
           }
           
-          // Find related events (same type or country)
-          const related = events
-            .filter(e => 
-              e.id !== foundEvent.id && 
-              (e.type === foundEvent.type || e.country === foundEvent.country)
-            )
-            .slice(0, 6);
+          // Find related events using smart recommendations
+          const related = getSmartRecommendations(foundEvent, events, 6);
           setRelatedEvents(related);
         }
       } catch (error) {
@@ -271,20 +267,59 @@ const EventDetail = () => {
               <Card className="hover-scale transition-all duration-300 border-accent/20">
                 <CardHeader>
                   <CardTitle className="text-base">Related Events</CardTitle>
-                  <CardDescription className="text-xs">Similar events in history</CardDescription>
+                  <CardDescription className="text-xs">Events similar in time, place, or scale</CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-2">
                   {relatedEvents.map(relatedEvent => {
                     const relatedSlug = generateEventSlug(relatedEvent.title, relatedEvent.type, relatedEvent.year);
+                    const relatedColor = getEventColor(relatedEvent.type);
+                    const isSameType = relatedEvent.type === event.type;
+                    const isSameCountry = relatedEvent.country === event.country;
+                    
                     return (
                       <a
                         key={relatedEvent.id}
                         href={`/category/${relatedSlug}`}
-                        className="block p-2 rounded-lg border hover:bg-accent hover:border-primary transition-all duration-200 hover-scale"
+                        className="block p-3 rounded-lg border hover:bg-accent hover:border-primary transition-all duration-200 hover-scale"
                       >
-                        <div className="font-semibold text-xs">{relatedEvent.title}</div>
-                        <div className="text-xs mt-1">
-                          {relatedEvent.year} • {relatedEvent.country}
+                        <div className="flex items-start justify-between gap-2 mb-1">
+                          <Badge 
+                            className="text-[10px] px-1.5 py-0.5 text-white" 
+                            style={{ backgroundColor: relatedColor.fill }}
+                          >
+                            {relatedColor.label}
+                          </Badge>
+                          <div className="flex gap-1">
+                            {isSameType && (
+                              <Badge variant="outline" className="text-[9px] px-1 py-0">
+                                Same type
+                              </Badge>
+                            )}
+                            {isSameCountry && (
+                              <Badge variant="outline" className="text-[9px] px-1 py-0">
+                                Same region
+                              </Badge>
+                            )}
+                          </div>
+                        </div>
+                        <div className="font-semibold text-xs line-clamp-2">{relatedEvent.title}</div>
+                        <div className="text-xs mt-1.5 flex items-center gap-2 text-muted-foreground">
+                          {relatedEvent.year && (
+                            <span className="flex items-center gap-1">
+                              <Calendar className="h-3 w-3" />
+                              {relatedEvent.year}
+                            </span>
+                          )}
+                          <span className="flex items-center gap-1">
+                            <MapPin className="h-3 w-3" />
+                            {relatedEvent.country}
+                          </span>
+                          {relatedEvent.casualties && (
+                            <span className="flex items-center gap-1 text-destructive">
+                              <Users className="h-3 w-3" />
+                              {relatedEvent.casualties.toLocaleString()}
+                            </span>
+                          )}
                         </div>
                       </a>
                     );
