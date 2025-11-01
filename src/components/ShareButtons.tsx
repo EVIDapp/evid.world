@@ -17,7 +17,15 @@ interface ShareButtonsProps {
 export const ShareButtons = ({ title, description, url }: ShareButtonsProps) => {
   const [copied, setCopied] = useState(false);
   const { toast } = useToast();
-  const shareUrl = url || window.location.href;
+  
+  // Use production domain instead of staging
+  const getShareUrl = () => {
+    if (url) return url;
+    const currentPath = window.location.pathname;
+    return `https://evid.world${currentPath}`;
+  };
+  
+  const shareUrl = getShareUrl();
 
   const handleCopyLink = async () => {
     try {
