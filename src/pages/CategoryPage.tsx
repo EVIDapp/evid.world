@@ -284,7 +284,7 @@ const CategoryPage = () => {
             Back
           </Button>
           <div className="flex items-center gap-3">
-            <Badge className="text-sm px-3 py-1" style={{ backgroundColor: eventColor.fill }}>
+            <Badge className="text-sm px-3 py-1" style={{ backgroundColor: eventColor.fill, color: 'white' }}>
               {eventColor.label}
             </Badge>
             <div>

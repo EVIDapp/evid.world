@@ -104,17 +104,17 @@ const CategoriesListPage = () => {
                 >
                   <CardHeader className="pb-3">
                     <div className="flex items-center justify-between mb-2">
-                      <Badge style={{ backgroundColor: color.fill }} className="text-xs">
+                      <Badge style={{ backgroundColor: color.fill, color: 'white' }} className="text-xs">
                         {color.label}
                       </Badge>
                       <div className="text-right">
                         <div className="text-xs text-muted-foreground mb-1">Total Events</div>
-                        <span className="text-2xl font-bold" style={{ color: color.fill }}>
+                        <span className="text-2xl font-bold text-foreground">
                           <AnimatedCounter value={eventCount} />
                         </span>
                       </div>
                     </div>
-                    <CardTitle className="text-lg">{color.label}</CardTitle>
+                    <CardTitle className="text-lg text-foreground">{color.label}</CardTitle>
                     <CardDescription className="text-sm">{description}</CardDescription>
                   </CardHeader>
                   <CardContent>
