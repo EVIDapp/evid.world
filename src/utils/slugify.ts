@@ -65,12 +65,15 @@ export const generateEventSlug = (title: string, category: string, year?: string
   // Поддерживаем форматы: -1234, -1234-5678, -1234-bc, -1234-ad, -1234-ce
   const yearPattern = /\d{1,4}(-\d{1,4})?(-bc|-ad|-ce)?$/;
   const alreadyHasYear = yearPattern.test(titleSlug);
+  
+  // Проверяем, начинается ли слаг с года (например, "2022-mogadishu-bombings")
+  const startsWithYear = /^\d{4}-/.test(titleSlug);
 
   // Формируем слаг события
   let eventSlug = titleSlug;
   
-  // Если год уже есть в конце слага, не добавляем его повторно
-  if (!alreadyHasYear && eventYear) {
+  // Если год уже есть в конце слага или в начале, не добавляем его повторно
+  if (!alreadyHasYear && !startsWithYear && eventYear) {
     // Очищаем год от CE/AD/BC суффиксов для добавления
     const cleanYear = eventYear.toLowerCase().replace(/\s*(ce|ad|bc)\s*$/i, '');
     eventSlug = `${titleSlug}-${cleanYear}`;
@@ -101,8 +104,11 @@ export const getEventSlugOnly = (title: string, year?: string): string => {
   // Проверяем, есть ли год или диапазон лет уже в слаге
   const yearPattern = /\d{1,4}(-\d{1,4})?(-bc|-ad|-ce)?$/;
   const alreadyHasYear = yearPattern.test(titleSlug);
+  
+  // Проверяем, начинается ли слаг с года
+  const startsWithYear = /^\d{4}-/.test(titleSlug);
 
-  if (alreadyHasYear) {
+  if (alreadyHasYear || startsWithYear) {
     return titleSlug;
   }
 
