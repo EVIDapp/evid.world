@@ -441,28 +441,6 @@
   },
 
     {
-        "id": "antonine_plague",
-        "type": "epidemic",
-        "title": "Antonine Plague (165–180)",
-        "country": "Roman Empire",
-        "pos": { "lat": 41.9, "lng": 12.5 },
-        "desc": "A deadly plague, possibly smallpox, that affected the Roman Empire.",
-        "desc_long": "The Antonine Plague, believed to be smallpox, killed up to 5 million people across the Roman Empire.",
-        "wiki": "https://en.wikipedia.org/wiki/Antonine_Plague",
-        "geometry": {
-            "type": "Polygon",
-            "coordinates": [
-                [
-                    [ -10, 30 ],
-                    [ 40, 30 ],
-                    [ 40, 55 ],
-                    [ -10, 55 ],
-                    [ -10, 30 ]
-                ]
-            ]
-        }
-    },
-    {
       "id": "anglo_afghan_war_1839_1842",
       "type": "war",
       "title": "First Anglo-Afghan War (1839–1842)",
@@ -955,16 +933,6 @@
       "wiki": "https://en.wikipedia.org/wiki/Terrorism_in_Algeria"
     },
     {
-      "id": "antonine_plague_165_180",
-      "type": "epidemic",
-      "title": "Antonine Plague (165–180)",
-      "country": "Roman Empire",
-      "pos": { "lat": 41.9, "lng": 12.5 },
-      "desc": "A deadly plague, possibly smallpox, that affected the Roman Empire.",
-      "desc_long": "The Antonine Plague, believed to be smallpox, killed up to 5 million people across the Roman Empire and weakened its military and economy.",
-      "wiki": "https://en.wikipedia.org/wiki/Antonine_Plague"
-    },
-    {
       "id": "plague_of_cyprian_249_262",
       "type": "epidemic",
       "title": "Plague of Cyprian (249–262)",
@@ -1073,16 +1041,6 @@
       "desc": "Cholera pandemic mainly affecting India and the Middle East.",
       "desc_long": "The sixth cholera pandemic killed hundreds of thousands, mostly in India and the Middle East.",
       "wiki": "https://en.wikipedia.org/wiki/Cholera_pandemics"
-    },
-    {
-      "id": "spanish_flu_1918_1920",
-      "type": "epidemic",
-      "title": "Spanish Flu (1918–1920)",
-      "country": "World",
-      "pos": { "lat": 45, "lng": -10 },
-      "desc": "Deadliest influenza pandemic in history.",
-      "desc_long": "The 1918 Spanish flu infected one third of the world's population and killed at least 50 million people.",
-      "wiki": "https://en.wikipedia.org/wiki/Spanish_flu"
     },
     {
       "id": "asian_flu_1957_1958",
@@ -1682,28 +1640,6 @@
                     [ 120, 40 ],
                     [ 40, 40 ],
                     [ 40, 0 ]
-                ]
-            ]
-        }
-    },
-    {
-        "id": "spanish_flu",
-        "type": "epidemic",
-        "title": "Spanish Flu (1918–1920)",
-        "country": "World",
-        "pos": { "lat": 45, "lng": -10 },
-        "desc": "Deadliest influenza pandemic in history.",
-        "desc_long": "The 1918 Spanish flu infected one third of the world's population and killed at least 50 million people.",
-        "wiki": "https://en.wikipedia.org/wiki/Spanish_flu",
-        "geometry": {
-            "type": "Polygon",
-            "coordinates": [
-                [
-                    [ -180, -60 ],
-                    [ 180, -60 ],
-                    [ 180, 80 ],
-                    [ -180, 80 ],
-                    [ -180, -60 ]
                 ]
             ]
         }
@@ -7564,17 +7500,6 @@
             "radiusKm": 200
         },
         {
-            "id": "antonine_plague_165",
-            "type": "epidemic",
-            "title": "Antonine Plague (165-180 CE)",
-            "country": "IT",
-            "pos": {"lat": 41.9, "lng": 12.48},
-            "desc": "Pandemic devastates Roman Empire.",
-            "desc_long": "Likely smallpox or measles killed 5 million, weakening Roman military and economy.",
-            "wiki": "https://en.wikipedia.org/wiki/Antonine_Plague",
-            "radiusKm": 1500
-        },
-        {
             "id": "crisis_third_century_235",
             "type": "war",
             "title": "Crisis of the Third Century (235-284 CE)",
@@ -8333,17 +8258,6 @@
             "desc_long": "Lenin's revolution ended the Romanov dynasty and created the world's first communist state.",
             "wiki": "https://en.wikipedia.org/wiki/Russian_Revolution",
             "radiusKm": 800
-        },
-        {
-            "id": "spanish_flu_1918",
-            "type": "epidemic",
-            "title": "Spanish Flu Pandemic (1918 CE)",
-            "country": "US",
-            "pos": {"lat": 39.1, "lng": -94.58},
-            "desc": "Influenza kills 50 million worldwide.",
-            "desc_long": "The deadliest pandemic in modern history infected 500 million people, one-third of world population.",
-            "wiki": "https://en.wikipedia.org/wiki/Spanish_flu",
-            "radiusKm": 3000
         },
         {
             "id": "treaty_of_versailles_1919",
@@ -11162,19 +11076,6 @@
             "radiusKm": 15,
             "year": "1346",
             "casualties": 14000
-        },
-        {
-            "id": "black_death_europe_1347_1353",
-            "type": "epidemic",
-            "title": "Black Death (1347-1353)",
-            "country": "IT",
-            "pos": { "lat": 43.5503, "lng": 10.3167 },
-            "desc": "Plague kills third of European population.",
-            "desc_long": "Bubonic plague pandemic devastated Europe, killing 75-200 million, transforming society, economy, and religion.",
-            "wiki": "https://en.wikipedia.org/wiki/Black_Death",
-            "radiusKm": 3000,
-            "year": "1347",
-            "casualties": 75000000
         },
         {
             "id": "battle_of_poitiers_1356",
