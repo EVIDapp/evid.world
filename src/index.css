@@ -426,6 +426,8 @@ All colors MUST be HSL.
 
   /* Popup text styling for light and dark themes */
   .popup-title {
+    position: relative;
+    z-index: 10;
     color: #1a1a1a;
   }
 
@@ -434,6 +436,8 @@ All colors MUST be HSL.
   }
 
   .popup-desc {
+    position: relative;
+    z-index: 10;
     color: #555;
   }
 
@@ -442,6 +446,8 @@ All colors MUST be HSL.
   }
 
   .popup-link {
+    position: relative;
+    z-index: 10;
     color: #3b82f6;
   }
 
@@ -454,6 +460,8 @@ All colors MUST be HSL.
   }
 
   .popup-close-btn {
+    position: relative;
+    z-index: 10;
     background: rgba(0, 0, 0, 0.1);
     color: #666;
   }

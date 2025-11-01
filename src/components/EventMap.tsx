@@ -54,7 +54,10 @@ export const EventMap = () => {
   const [mapboxToken] = useState('pk.eyJ1IjoiZXZpZCIsImEiOiJjbWgyN3prbGUwZ3p6MmxzaDNlb2Vxa3BqIn0._6oUJJJYhV1oHzidr5AWgw');
   const [tokenSubmitted, setTokenSubmitted] = useState(true);
   const [mapLoaded, setMapLoaded] = useState(false);
-  const [projection, setProjection] = useState<'globe' | 'mercator'>('globe');
+  const [projection, setProjection] = useState<'globe' | 'mercator'>(() => {
+    const saved = localStorage.getItem('mapProjection');
+    return (saved === 'globe' || saved === 'mercator') ? saved : 'globe';
+  });
   const [yearRange, setYearRange] = useState<[number, number]>([0, 0]);
   const [selectedYearRange, setSelectedYearRange] = useState<[number, number]>([0, 0]);
   const [isAnimating, setIsAnimating] = useState(false);
@@ -151,6 +154,11 @@ export const EventMap = () => {
       }
     }
   }, []);
+  
+  // Save projection to localStorage when it changes
+  useEffect(() => {
+    localStorage.setItem('mapProjection', projection);
+  }, [projection]);
   
   // Focus on specific event from URL parameter
   useEffect(() => {
