@@ -132,11 +132,11 @@ const EventDetail = () => {
           <Badge className="mb-1 text-white animate-scale-in text-xs" style={{ backgroundColor: eventColor.fill }}>
             {eventColor.label}
           </Badge>
-          <h1 className="text-lg md:text-xl font-bold mb-1.5 animate-fade-in">
+          <h1 className="text-lg md:text-xl font-bold mb-1.5 animate-fade-in text-foreground">
             {event.title}
           </h1>
           
-          <div className="flex flex-wrap gap-2 text-xs">
+          <div className="flex flex-wrap gap-2 text-xs text-foreground">
             {event.year && (
               <div className="flex items-center gap-1">
                 <Calendar className="h-3 w-3" />
@@ -179,13 +179,13 @@ const EventDetail = () => {
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-4">
-                  <p className="text-sm leading-relaxed">{event.desc}</p>
+                  <p className="text-sm leading-relaxed text-foreground">{event.desc}</p>
                   
                   {wikiText && (
                     <>
                       <Separator className="my-3" />
                       <div className="space-y-3">
-                        <p className="text-sm leading-relaxed">{wikiText}</p>
+                        <p className="text-sm leading-relaxed text-foreground">{wikiText}</p>
                       </div>
                     </>
                   )}
@@ -193,7 +193,7 @@ const EventDetail = () => {
                   {event.desc_long && !wikiText && (
                     <>
                       <Separator className="my-3" />
-                      <p className="text-sm leading-relaxed">{event.desc_long}</p>
+                      <p className="text-sm leading-relaxed text-foreground">{event.desc_long}</p>
                     </>
                   )}
                   
@@ -203,7 +203,7 @@ const EventDetail = () => {
                         <Users className="h-4 w-4" />
                         Human Impact
                       </h4>
-                      <p className="text-sm leading-relaxed">
+                      <p className="text-sm leading-relaxed text-foreground">
                         This event resulted in approximately <strong>{event.casualties.toLocaleString()}</strong> casualties, 
                         making it one of the significant incidents in recorded history.
                       </p>
@@ -216,7 +216,7 @@ const EventDetail = () => {
                         <Globe className="h-4 w-4" />
                         Geographic Scope
                       </h4>
-                      <p className="text-sm leading-relaxed">
+                      <p className="text-sm leading-relaxed text-foreground">
                         The event affected an area with a radius of approximately <strong>{event.radiusKm} kilometers</strong>.
                       </p>
                     </div>
@@ -233,8 +233,8 @@ const EventDetail = () => {
                         <ExternalLink className="h-5 w-5 text-primary" />
                       </div>
                       <div className="flex-1">
-                        <h3 className="font-semibold text-base mb-1">Want to Learn More?</h3>
-                        <p className="text-xs mb-3">
+                        <h3 className="font-semibold text-base mb-1 text-foreground">Want to Learn More?</h3>
+                        <p className="text-xs mb-3 text-foreground">
                           Explore comprehensive historical details and sources about this event on Wikipedia.
                         </p>
                         <Button asChild variant="default" size="sm" className="hover-scale">
@@ -261,7 +261,7 @@ const EventDetail = () => {
                 <CardTitle className="text-base">Location</CardTitle>
               </CardHeader>
               <CardContent>
-                <div className="space-y-2 text-sm">
+                <div className="space-y-2 text-sm text-foreground">
                   <div>
                     <span className="font-semibold">Country:</span> {event.country}
                   </div>
@@ -324,7 +324,7 @@ const EventDetail = () => {
                             )}
                           </div>
                         </div>
-                        <div className="font-semibold text-xs line-clamp-2">{relatedEvent.title}</div>
+                        <div className="font-semibold text-xs line-clamp-2 text-foreground">{relatedEvent.title}</div>
                         <div className="text-xs mt-1.5 flex items-center gap-2 text-muted-foreground">
                           {relatedEvent.year && (
                             <span className="flex items-center gap-1">
