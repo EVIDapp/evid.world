@@ -7355,7 +7355,7 @@
         },
         {
             "id": "construction_colosseum_70_80",
-            "type": "culture",
+            "type": "archaeology",
             "title": "Construction of Colosseum (70-80 CE)",
             "country": "IT",
             "pos": {"lat": 41.89, "lng": 12.49},
@@ -7377,7 +7377,7 @@
         },
         {
             "id": "library_alexandria_founded_300bc",
-            "type": "culture",
+            "type": "archaeology",
             "title": "Library of Alexandria Founded (300 BC)",
             "country": "EG",
             "pos": {"lat": 31.2, "lng": 29.92},
@@ -7388,7 +7388,7 @@
         },
         {
             "id": "qin_dynasty_unification_221bc",
-            "type": "culture",
+            "type": "archaeology",
             "title": "Qin Dynasty Unifies China (221 BC)",
             "country": "CN",
             "pos": {"lat": 34.38, "lng": 108.95},
@@ -7399,7 +7399,7 @@
         },
         {
             "id": "mauryan_empire_peak_250bc",
-            "type": "culture",
+            "type": "archaeology",
             "title": "Mauryan Empire Peak (250 BC)",
             "country": "IN",
             "pos": {"lat": 25.59, "lng": 85.14},
@@ -7410,7 +7410,7 @@
         },
         {
             "id": "roman_republic_founded_509bc",
-            "type": "culture",
+            "type": "archaeology",
             "title": "Roman Republic Founded (509 BC)",
             "country": "IT",
             "pos": {"lat": 41.9, "lng": 12.48},
@@ -7421,7 +7421,7 @@
         },
         {
             "id": "persian_empire_founded_550bc",
-            "type": "culture",
+            "type": "archaeology",
             "title": "Persian Empire Founded (550 BC)",
             "country": "IR",
             "pos": {"lat": 29.93, "lng": 52.89},
@@ -7432,7 +7432,7 @@
         },
         {
             "id": "parthenon_completed_432bc",
-            "type": "culture",
+            "type": "archaeology",
             "title": "Parthenon Completed (432 BC)",
             "country": "GR",
             "pos": {"lat": 37.97, "lng": 23.73},
@@ -7443,7 +7443,7 @@
         },
         {
             "id": "death_of_socrates_399bc",
-            "type": "culture",
+            "type": "archaeology",
             "title": "Death of Socrates (399 BC)",
             "country": "GR",
             "pos": {"lat": 37.98, "lng": 23.73},
@@ -7454,7 +7454,7 @@
         },
         {
             "id": "han_dynasty_established_206bc",
-            "type": "culture",
+            "type": "archaeology",
             "title": "Han Dynasty Established (206 BC)",
             "country": "CN",
             "pos": {"lat": 34.27, "lng": 108.93},
@@ -7476,7 +7476,7 @@
         },
         {
             "id": "edict_of_milan_313",
-            "type": "culture",
+            "type": "archaeology",
             "title": "Edict of Milan (313 CE)",
             "country": "IT",
             "pos": {"lat": 45.46, "lng": 9.19},
@@ -7487,7 +7487,7 @@
         },
         {
             "id": "council_of_nicaea_325",
-            "type": "culture",
+            "type": "archaeology",
             "title": "Council of Nicaea (325 CE)",
             "country": "TR",
             "pos": {"lat": 40.43, "lng": 29.72},
@@ -7509,7 +7509,7 @@
         },
         {
             "id": "founding_constantinople_330",
-            "type": "culture",
+            "type": "archaeology",
             "title": "Founding of Constantinople (330 CE)",
             "country": "TR",
             "pos": {"lat": 41.01, "lng": 28.98},
@@ -7520,7 +7520,7 @@
         },
         {
             "id": "crucifixion_of_jesus_33",
-            "type": "culture",
+            "type": "archaeology",
             "title": "Crucifixion of Jesus (33 CE)",
             "country": "IL",
             "pos": {"lat": 31.78, "lng": 35.23},
@@ -7663,7 +7663,7 @@
         },
         {
             "id": "diocletian_reforms_284",
-            "type": "culture",
+            "type": "archaeology",
             "title": "Diocletian's Reforms (284 CE)",
             "country": "TR",
             "pos": {"lat": 41.01, "lng": 28.98},
@@ -7685,7 +7685,7 @@
         },
         {
             "id": "charlemagne_crowned_800",
-            "type": "culture",
+            "type": "archaeology",
             "title": "Charlemagne Crowned Emperor (800 CE)",
             "country": "IT",
             "pos": {"lat": 41.9, "lng": 12.48},
@@ -7707,7 +7707,7 @@
         },
         {
             "id": "baghdad_founded_762",
-            "type": "culture",
+            "type": "archaeology",
             "title": "Baghdad Founded (762 CE)",
             "country": "IQ",
             "pos": {"lat": 33.31, "lng": 44.36},
@@ -7718,7 +7718,7 @@
         },
         {
             "id": "treaty_of_verdun_843",
-            "type": "culture",
+            "type": "archaeology",
             "title": "Treaty of Verdun (843 CE)",
             "country": "FR",
             "pos": {"lat": 49.16, "lng": 5.38},
@@ -7729,7 +7729,7 @@
         },
         {
             "id": "great_schism_1054",
-            "type": "culture",
+            "type": "archaeology",
             "title": "East-West Schism (1054 CE)",
             "country": "TR",
             "pos": {"lat": 41.01, "lng": 28.98},
@@ -7762,7 +7762,7 @@
         },
         {
             "id": "founding_cairo_969",
-            "type": "culture",
+            "type": "archaeology",
             "title": "Founding of Cairo (969 CE)",
             "country": "EG",
             "pos": {"lat": 30.04, "lng": 31.24},
@@ -7795,7 +7795,7 @@
         },
         {
             "id": "angkor_wat_built_1113",
-            "type": "culture",
+            "type": "archaeology",
             "title": "Angkor Wat Built (1113-1150 CE)",
             "country": "KH",
             "pos": {"lat": 13.41, "lng": 103.87},
@@ -7806,7 +7806,7 @@
         },
         {
             "id": "university_of_bologna_1088",
-            "type": "culture",
+            "type": "archaeology",
             "title": "University of Bologna Founded (1088 CE)",
             "country": "IT",
             "pos": {"lat": 44.49, "lng": 11.34},
@@ -7828,7 +7828,7 @@
         },
         {
             "id": "magna_carta_1215",
-            "type": "culture",
+            "type": "archaeology",
             "title": "Magna Carta Signed (1215 CE)",
             "country": "GB",
             "pos": {"lat": 51.44, "lng": -0.56},
@@ -7916,7 +7916,7 @@
         },
         {
             "id": "christopher_columbus_1492",
-            "type": "culture",
+            "type": "archaeology",
             "title": "Columbus Reaches Americas (1492 CE)",
             "country": "BS",
             "pos": {"lat": 24.25, "lng": -76.63},
@@ -7927,7 +7927,7 @@
         },
         {
             "id": "vasco_da_gama_india_1498",
-            "type": "culture",
+            "type": "archaeology",
             "title": "Vasco da Gama Reaches India (1498 CE)",
             "country": "IN",
             "pos": {"lat": 11.25, "lng": 75.78},
@@ -7938,7 +7938,7 @@
         },
         {
             "id": "leonardo_mona_lisa_1503",
-            "type": "culture",
+            "type": "archaeology",
             "title": "Leonardo Paints Mona Lisa (1503 CE)",
             "country": "IT",
             "pos": {"lat": 43.77, "lng": 11.25},
@@ -7949,7 +7949,7 @@
         },
         {
             "id": "michelangelo_sistine_chapel_1512",
-            "type": "culture",
+            "type": "archaeology",
             "title": "Sistine Chapel Ceiling Completed (1512 CE)",
             "country": "VA",
             "pos": {"lat": 41.9, "lng": 12.45},
@@ -7960,7 +7960,7 @@
         },
         {
             "id": "martin_luther_95_theses_1517",
-            "type": "culture",
+            "type": "archaeology",
             "title": "Luther's 95 Theses (1517 CE)",
             "country": "DE",
             "pos": {"lat": 51.87, "lng": 12.64},
@@ -7972,7 +7972,7 @@
         },
         {
             "id": "magellan_circumnavigation_1519",
-            "type": "culture",
+            "type": "archaeology",
             "title": "Magellan's Circumnavigation (1519-1522 CE)",
             "country": "PH",
             "pos": {"lat": 10.32, "lng": 123.89},
@@ -8005,7 +8005,7 @@
         },
         {
             "id": "council_of_trent_1545",
-            "type": "culture",
+            "type": "archaeology",
             "title": "Council of Trent (1545-1563 CE)",
             "country": "IT",
             "pos": {"lat": 46.07, "lng": 11.12},
@@ -8038,7 +8038,7 @@
         },
         {
             "id": "shakespeare_hamlet_1600",
-            "type": "culture",
+            "type": "archaeology",
             "title": "Shakespeare Writes Hamlet (1600 CE)",
             "country": "GB",
             "pos": {"lat": 51.51, "lng": -0.13},
@@ -8049,7 +8049,7 @@
         },
         {
             "id": "jamestown_founded_1607",
-            "type": "culture",
+            "type": "archaeology",
             "title": "Jamestown Colony Founded (1607 CE)",
             "country": "US",
             "pos": {"lat": 37.21, "lng": -76.78},
@@ -8082,7 +8082,7 @@
         },
         {
             "id": "napoleon_born_1769",
-            "type": "culture",
+            "type": "archaeology",
             "title": "Napoleon Bonaparte Born (1769 CE)",
             "country": "FR",
             "pos": {"lat": 41.92, "lng": 8.74},
@@ -8093,7 +8093,7 @@
         },
         {
             "id": "declaration_independence_1776",
-            "type": "culture",
+            "type": "archaeology",
             "title": "Declaration of Independence (1776 CE)",
             "country": "US",
             "pos": {"lat": 39.95, "lng": -75.15},
@@ -8159,7 +8159,7 @@
         },
         {
             "id": "congress_of_vienna_1815",
-            "type": "culture",
+            "type": "archaeology",
             "title": "Congress of Vienna (1815 CE)",
             "country": "AT",
             "pos": {"lat": 48.21, "lng": 16.37},
@@ -8181,7 +8181,7 @@
         },
         {
             "id": "monroe_doctrine_1823",
-            "type": "culture",
+            "type": "archaeology",
             "title": "Monroe Doctrine (1823 CE)",
             "country": "US",
             "pos": {"lat": 38.9, "lng": -77.04},
@@ -8203,7 +8203,7 @@
         },
         {
             "id": "erie_canal_1825",
-            "type": "culture",
+            "type": "archaeology",
             "title": "Erie Canal Opens (1825 CE)",
             "country": "US",
             "pos": {"lat": 43.15, "lng": -77.61},
@@ -8258,7 +8258,7 @@
         },
         {
             "id": "california_gold_rush_1849",
-            "type": "culture",
+            "type": "archaeology",
             "title": "California Gold Rush (1849 CE)",
             "country": "US",
             "pos": {"lat": 38.8, "lng": -120.9},
@@ -8269,7 +8269,7 @@
         },
         {
             "id": "commodore_perry_japan_1853",
-            "type": "culture",
+            "type": "archaeology",
             "title": "Perry Opens Japan (1853 CE)",
             "country": "JP",
             "pos": {"lat": 35.44, "lng": 139.64},
@@ -8302,7 +8302,7 @@
         },
         {
             "id": "unification_of_italy_1861",
-            "type": "culture",
+            "type": "archaeology",
             "title": "Unification of Italy (1861 CE)",
             "country": "IT",
             "pos": {"lat": 45.07, "lng": 7.69},
@@ -8346,7 +8346,7 @@
         },
         {
             "id": "treaty_of_versailles_1919",
-            "type": "culture",
+            "type": "archaeology",
             "title": "Treaty of Versailles (1919 CE)",
             "country": "FR",
             "pos": {"lat": 48.8, "lng": 2.12},
@@ -8379,7 +8379,7 @@
         },
         {
             "id": "hitler_power_1933",
-            "type": "culture",
+            "type": "archaeology",
             "title": "Hitler Becomes Chancellor (1933 CE)",
             "country": "DE",
             "pos": {"lat": 52.52, "lng": 13.4},
@@ -8480,7 +8480,7 @@
         },
         {
             "id": "un_founded_1945",
-            "type": "culture",
+            "type": "archaeology",
             "title": "United Nations Founded (1945 CE)",
             "country": "US",
             "pos": {"lat": 40.75, "lng": -73.97},
@@ -8524,7 +8524,7 @@
         },
         {
             "id": "nato_founded_1949",
-            "type": "culture",
+            "type": "war",
             "title": "NATO Founded (1949 CE)",
             "country": "US",
             "pos": {"lat": 38.9, "lng": -77.04},
@@ -8557,7 +8557,7 @@
         },
         {
             "id": "rosenberg_executed_1953",
-            "type": "culture",
+            "type": "archaeology",
             "title": "Rosenbergs Executed (1953 CE)",
             "country": "US",
             "pos": {"lat": 40.71, "lng": -74.01},
@@ -8568,7 +8568,7 @@
         },
         {
             "id": "stalin_dies_1953",
-            "type": "culture",
+            "type": "archaeology",
             "title": "Stalin Dies (1953 CE)",
             "country": "RU",
             "pos": {"lat": 55.75, "lng": 37.62},
@@ -8579,7 +8579,7 @@
         },
         {
             "id": "brown_v_board_1954",
-            "type": "culture",
+            "type": "archaeology",
             "title": "Brown v. Board of Education (1954 CE)",
             "country": "US",
             "pos": {"lat": 38.9, "lng": -77.04},
@@ -8590,7 +8590,7 @@
         },
         {
             "id": "warsaw_pact_1955",
-            "type": "culture",
+            "type": "war",
             "title": "Warsaw Pact Formed (1955 CE)",
             "country": "PL",
             "pos": {"lat": 52.23, "lng": 21.01},
@@ -8645,7 +8645,7 @@
         },
         {
             "id": "berlin_wall_built_1961",
-            "type": "culture",
+            "type": "archaeology",
             "title": "Berlin Wall Constructed (1961 CE)",
             "country": "DE",
             "pos": {"lat": 52.52, "lng": 13.4},
@@ -8689,7 +8689,7 @@
         },
         {
             "id": "mlk_speech_1963",
-            "type": "culture",
+            "type": "archaeology",
             "title": "MLK 'I Have a Dream' Speech (1963 CE)",
             "country": "US",
             "pos": {"lat": 38.89, "lng": -77.05},
