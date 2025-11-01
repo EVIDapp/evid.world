@@ -48,7 +48,7 @@ export const SearchPanel = ({
             e.country.toLowerCase().includes(query) ||
             e.desc.toLowerCase().includes(query)
           )
-          .slice(0, 8); // Reduced to 8 suggestions for faster rendering
+          .slice(0, 12); // Show more results
         setSuggestions(filtered);
         setShowSuggestions(filtered.length > 0);
       } else {
@@ -93,7 +93,7 @@ export const SearchPanel = ({
 
       {/* Collapsible Content */}
       {isExpanded && (
-        <div className={`p-2 animate-fade-in overflow-y-auto ${isMobile ? 'max-h-[45vh]' : 'max-h-[40vh]'}`}>
+        <div className={`p-2 animate-fade-in overflow-y-auto ${isMobile ? 'max-h-[55vh]' : 'max-h-[50vh]'}`}>
 
       {/* Search */}
       <div className="mb-2 relative">
@@ -127,7 +127,7 @@ export const SearchPanel = ({
         {/* Suggestions */}
         {showSuggestions && (
           <div className="absolute top-full left-0 right-0 mt-2 bg-popover border border-border/50 
-                          rounded-lg max-h-[220px] overflow-auto shadow-elevated z-50 
+                          rounded-lg max-h-[480px] overflow-auto shadow-elevated z-50 
                           animate-fade-in-up backdrop-blur-strong">
             {suggestions.map((event) => (
               <div
@@ -137,13 +137,13 @@ export const SearchPanel = ({
                   setShowSuggestions(false);
                   onEventSelect?.(event);
                 }}
-                className="px-2.5 py-2 hover:bg-primary/10 cursor-pointer border-b border-border/30 
+                className="px-2.5 py-2.5 hover:bg-primary/10 cursor-pointer border-b border-border/30 
                            last:border-0 transition-smooth group"
               >
-                <div className="font-medium text-foreground group-hover:text-primary transition-smooth text-[10px]">
+                <div className="font-medium text-foreground group-hover:text-primary transition-smooth text-[11px]">
                   {event.title}
                 </div>
-                <div className="text-[9px] text-muted-foreground mt-0.5">
+                <div className="text-[10px] text-muted-foreground mt-1">
                   {event.country} • {event.type}
                 </div>
               </div>
