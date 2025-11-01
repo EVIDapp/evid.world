@@ -6,6 +6,7 @@ import { Badge } from '@/components/ui/badge';
 import { ArrowLeft } from 'lucide-react';
 import { getEventColor } from '@/utils/eventColors';
 import { EventType, HistoricalEvent } from '@/types/event';
+import { CategoryListSkeleton } from '@/components/SkeletonLoader';
 
 // Animated Counter Component
 const AnimatedCounter = ({ value, duration = 2000 }: { value: number; duration?: number }) => {
@@ -71,8 +72,17 @@ const CategoriesListPage = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-background">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
+      <div className="min-h-screen bg-background p-4">
+        <div className="container max-w-6xl mx-auto">
+          <div className="mb-6">
+            <Button variant="ghost" size="sm" onClick={() => navigate('/')} className="mb-3">
+              <ArrowLeft className="mr-2 h-4 w-4" />
+              Back to Map
+            </Button>
+            <h1 className="text-3xl font-bold">Event Categories</h1>
+          </div>
+          <CategoryListSkeleton />
+        </div>
       </div>
     );
   }
@@ -93,14 +103,17 @@ const CategoriesListPage = () => {
       <div className="flex-1 overflow-y-auto">
         <div className="container max-w-6xl mx-auto px-4 py-8">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 pb-8">
-            {categories.map(({ type, slug, description }) => {
+            {categories.map(({ type, slug, description }, index) => {
               const color = getEventColor(type);
               const eventCount = getEventCount(type);
               return (
                 <Card
                   key={slug}
-                  className="cursor-pointer hover:shadow-lg transition-shadow"
+                  className="cursor-pointer hover:shadow-lg transition-all duration-300 
+                             hover:-translate-y-1 hover:border-primary/50 
+                             active:scale-95 touch-manipulation animate-fade-in"
                   onClick={() => navigate(`/category/${slug}`)}
+                  style={{ animationDelay: `${index * 50}ms` }}
                 >
                   <CardHeader className="pb-3">
                     <div className="flex items-center justify-between mb-2">

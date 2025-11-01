@@ -11,6 +11,9 @@ import { getEventColor } from '@/utils/eventColors';
 import { generateEventSlug, getEventSlugOnly } from '@/utils/slugify';
 import { getWikipediaImage, getWikipediaText } from '@/utils/wikipediaImage';
 import { getSmartRecommendations } from '@/utils/eventRecommendations';
+import { ShareButtons } from '@/components/ShareButtons';
+import { BackToTop } from '@/components/BackToTop';
+import { EventDetailSkeleton } from '@/components/SkeletonLoader';
 
 const EventDetail = () => {
   const { slug, category } = useParams<{ slug: string; category: string }>();
@@ -84,11 +87,7 @@ const EventDetail = () => {
   }, [slug, category, navigate]);
 
   if (loading) {
-    return (
-      <div className="min-h-screen flex items-center justify-center bg-background">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
-      </div>
-    );
+    return <EventDetailSkeleton />;
   }
 
   if (!event) {
@@ -118,11 +117,17 @@ const EventDetail = () => {
       
       {/* Header */}
       <header className="sticky top-0 z-20 border-b bg-card/95 backdrop-blur-md shadow-sm animate-fade-in">
-        <div className="container max-w-6xl mx-auto px-4 py-3">
+        <div className="container max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
           <Button variant="ghost" size="sm" onClick={() => navigate('/')} className="hover-scale">
             <ArrowLeft className="mr-2 h-4 w-4" />
             Back to Map
           </Button>
+          {event && (
+            <ShareButtons
+              title={event.title}
+              description={event.desc}
+            />
+          )}
         </div>
       </header>
 
@@ -302,7 +307,10 @@ const EventDetail = () => {
                       <a
                         key={relatedEvent.id}
                         href={`/category/${relatedSlug}`}
-                        className="block p-3 rounded-lg border hover:bg-accent hover:border-primary transition-all duration-200 hover-scale"
+                        className="block p-3 rounded-lg border hover:bg-accent hover:border-primary 
+                                   transition-all duration-200 hover-scale active:scale-95 
+                                   touch-manipulation animate-fade-in"
+                        style={{ animationDelay: `${relatedEvents.indexOf(relatedEvent) * 50}ms` }}
                       >
                         <div className="flex items-start justify-between gap-2 mb-1">
                           <Badge 
@@ -353,6 +361,8 @@ const EventDetail = () => {
         </div>
       </div>
     </main>
+    
+    <BackToTop />
   </div>
   );
 };

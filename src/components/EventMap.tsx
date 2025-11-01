@@ -539,19 +539,22 @@ export const EventMap = () => {
       
       const popupContent = document.createElement('div');
       popupContent.className = 'popup-content';
-      popupContent.style.cssText = 'max-width: 320px; padding: 12px; position: relative;';
+      popupContent.style.cssText = 'max-width: 320px; padding: 16px; position: relative;';
       
       const closeBtn = document.createElement('button');
       closeBtn.className = 'popup-close-btn';
       closeBtn.innerHTML = '×';
       closeBtn.setAttribute('aria-label', 'Close popup');
       closeBtn.setAttribute('type', 'button');
-      closeBtn.style.cssText = 'position: absolute; top: 8px; right: 8px; border: none; border-radius: 4px; width: 24px; height: 24px; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 16px; transition: all 0.2s;';
+      closeBtn.style.cssText = `position: absolute; top: 12px; right: 12px; border: none; 
+                                 border-radius: 6px; width: 28px; height: 28px; cursor: pointer; 
+                                 display: flex; align-items: center; justify-content: center; 
+                                 font-size: 20px; transition: all 0.2s; z-index: 10;`;
       closeBtn.onclick = closePopup;
       
       const title = document.createElement('h3');
       title.className = 'popup-title';
-      title.style.cssText = 'margin: 0 24px 8px 0; font-size: 16px; font-weight: 600;';
+      title.style.cssText = 'margin: 0 32px 12px 0; font-size: 17px; font-weight: 600; line-height: 1.3;';
       title.textContent = event.title;
       
       popupContent.appendChild(closeBtn);
@@ -571,13 +574,22 @@ export const EventMap = () => {
             const eventYear = parseYear(event);
             img.alt = `${event.title} ${event.type} map, ${event.country}, year ${eventYear} - historical event visualization`;
             img.loading = 'lazy';
-            img.style.cssText = 'width: 100%; max-height: 200px; object-fit: cover; border-radius: 8px; margin: 8px 0;';
+            img.style.cssText = `width: 100%; max-height: 180px; object-fit: cover; 
+                                 border-radius: 10px; margin: 10px 0;
+                                 transition: transform 0.3s ease;`;
             img.onerror = function(this: HTMLImageElement) { 
               this.style.display = 'none';
               imgContainer.style.display = 'none';
             };
             img.onload = function() {
               imgContainer.style.display = 'block';
+            };
+            // Add hover effect
+            img.onmouseenter = function(this: HTMLImageElement) {
+              this.style.transform = 'scale(1.02)';
+            };
+            img.onmouseleave = function(this: HTMLImageElement) {
+              this.style.transform = 'scale(1)';
             };
             imgContainer.appendChild(img);
           }
@@ -588,7 +600,7 @@ export const EventMap = () => {
       
       const desc = document.createElement('p');
       desc.className = 'popup-desc';
-      desc.style.cssText = 'line-height: 1.5; margin: 8px 0; font-size: 14px;';
+      desc.style.cssText = 'line-height: 1.6; margin: 12px 0; font-size: 14px;';
       desc.textContent = event.desc_long || event.desc;
       popupContent.appendChild(desc);
       

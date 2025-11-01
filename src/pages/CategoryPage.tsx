@@ -12,6 +12,8 @@ import { Slider } from '@/components/ui/slider';
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
 import { ChevronDown } from 'lucide-react';
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, Cell } from 'recharts';
+import { CategoryListSkeleton } from '@/components/SkeletonLoader';
+import { BackToTop } from '@/components/BackToTop';
 
 // Animated Counter Component
 const AnimatedCounter = ({ value, duration = 2000 }: { value: number; duration?: number }) => {
@@ -247,8 +249,10 @@ const CategoryPage = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-background">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
+      <div className="min-h-screen bg-background p-4">
+        <div className="container max-w-7xl mx-auto">
+          <CategoryListSkeleton />
+        </div>
       </div>
     );
   }
@@ -445,7 +449,10 @@ const CategoryPage = () => {
                       return (
                       <div 
                         key={`${event.id}-${index}`}
-                        className="flex items-start gap-2 p-2 rounded-lg border hover:bg-accent/50 cursor-pointer transition-colors"
+                        className="flex items-start gap-2 p-3 rounded-lg border 
+                                   hover:bg-accent/50 hover:border-primary/50 cursor-pointer 
+                                   transition-all duration-200 hover-scale
+                                   active:scale-95 touch-manipulation"
                         onClick={() => {
                           navigate(`/category/${slug}`);
                         }}
@@ -526,6 +533,7 @@ const CategoryPage = () => {
         </div>
       </div>
       </ScrollArea>
+      <BackToTop />
     </main>
   );
 };
