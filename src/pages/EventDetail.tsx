@@ -34,8 +34,22 @@ const EventDetail = () => {
         });
         
         if (foundEvent) {
+          // Category slug map for validation
+          const categorySlugMap: Record<string, string> = {
+            'war': 'war',
+            'earthquake': 'earthquake',
+            'terror-attack': 'terror',
+            'archaeology': 'archaeology',
+            'wildfire': 'fire',
+            'disaster': 'disaster',
+            'tsunami': 'tsunami',
+            'meteorite': 'meteorite',
+            'epidemic': 'epidemic',
+            'man-made-disaster': 'man-made disaster'
+          };
+          
           // Check if category in URL matches event type
-          if (category && category !== foundEvent.type) {
+          if (category && categorySlugMap[category] !== foundEvent.type) {
             // Redirect to correct category URL
             const correctSlug = generateEventSlug(foundEvent.title, foundEvent.type, foundEvent.year);
             navigate(`/category/${correctSlug}`, { replace: true });

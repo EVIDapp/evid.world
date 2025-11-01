@@ -53,9 +53,9 @@ const CategoryPage = () => {
   const categoryMap: Record<string, EventType> = {
     'war': 'war',
     'earthquake': 'earthquake',
-    'terror': 'terror',
+    'terror-attack': 'terror',
     'archaeology': 'archaeology',
-    'fire': 'fire',
+    'wildfire': 'fire',
     'disaster': 'disaster',
     'tsunami': 'tsunami',
     'meteorite': 'meteorite',
