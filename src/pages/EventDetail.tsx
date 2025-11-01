@@ -165,19 +165,6 @@ const EventDetail = () => {
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-4">
-                  {(wikiImage || event.image) && (
-                    <div className="rounded-lg overflow-hidden border border-primary/10 animate-fade-in">
-                      <img 
-                        src={wikiImage || event.image} 
-                        alt={event.title}
-                        className="w-full h-auto object-cover max-h-96"
-                        loading="lazy"
-                        onError={(e) => {
-                          e.currentTarget.style.display = 'none';
-                        }}
-                      />
-                    </div>
-                  )}
                   <p className="text-sm leading-relaxed">{event.desc}</p>
                   
                   {wikiText && (
