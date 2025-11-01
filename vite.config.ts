@@ -39,7 +39,7 @@ export default defineConfig(({ mode }) => ({
       },
       workbox: {
         globPatterns: ["**/*.{js,css,html,ico,png,svg,json}"],
-        maximumFileSizeToCacheInBytes: 5 * 1024 * 1024, // 5 MB limit
+        maximumFileSizeToCacheInBytes: 5 * 1024 * 1024,
         runtimeCaching: [
           {
             urlPattern: /^https:\/\/maps\.googleapis\.com\/.*/i,
@@ -48,7 +48,7 @@ export default defineConfig(({ mode }) => ({
               cacheName: "google-maps-cache",
               expiration: {
                 maxEntries: 10,
-                maxAgeSeconds: 60 * 60 * 24 * 7 // 1 week
+                maxAgeSeconds: 60 * 60 * 24 * 7
               }
             }
           }
@@ -61,4 +61,14 @@ export default defineConfig(({ mode }) => ({
       "@": path.resolve(__dirname, "./src"),
     },
   },
+  optimizeDeps: {
+    include: ["react", "react-dom"]
+  },
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks: undefined
+      }
+    }
+  }
 }));
