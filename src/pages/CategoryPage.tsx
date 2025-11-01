@@ -48,6 +48,8 @@ const CategoryPage = () => {
   const [yearRange] = useState<[number, number]>([1, 2025]);
   const [selectedYearRange, setSelectedYearRange] = useState<[number, number]>([1, 2025]);
   const [selectedCountries, setSelectedCountries] = useState<Set<string>>(new Set());
+  const [appliedYearRange, setAppliedYearRange] = useState<[number, number]>([1, 2025]);
+  const [appliedCountries, setAppliedCountries] = useState<Set<string>>(new Set());
   const [isFiltersOpen, setIsFiltersOpen] = useState(true);
 
   const categoryMap: Record<string, EventType> = {
@@ -136,12 +138,12 @@ const CategoryPage = () => {
     // Filter by year range
     filtered = filtered.filter(e => {
       const eventYear = parseYear(e);
-      return eventYear >= selectedYearRange[0] && eventYear <= selectedYearRange[1];
+      return eventYear >= appliedYearRange[0] && eventYear <= appliedYearRange[1];
     });
 
     // Filter by countries
-    if (selectedCountries.size > 0) {
-      filtered = filtered.filter(e => selectedCountries.has(e.country));
+    if (appliedCountries.size > 0) {
+      filtered = filtered.filter(e => appliedCountries.has(e.country));
     }
 
     // Sort by year descending
@@ -152,16 +154,16 @@ const CategoryPage = () => {
     });
 
     setEvents(filtered);
-  }, [allEvents, selectedYearRange, selectedCountries]);
+  }, [allEvents, appliedYearRange, appliedCountries]);
 
-  // Statistics
+  // Statistics - use filtered events
   const stats = useMemo(() => {
-    const totalCasualties = allEvents.reduce((sum, e) => sum + (e.casualties || 0), 0);
-    const timeRange = allEvents.length > 0 
-      ? `${Math.min(...allEvents.map(parseYear))} - ${Math.max(...allEvents.map(parseYear))}`
+    const totalCasualties = events.reduce((sum, e) => sum + (e.casualties || 0), 0);
+    const timeRange = events.length > 0 
+      ? `${Math.min(...events.map(parseYear))} - ${Math.max(...events.map(parseYear))}`
       : '-';
     
-    const countryCounts = allEvents.reduce((acc, e) => {
+    const countryCounts = events.reduce((acc, e) => {
       acc[e.country] = (acc[e.country] || 0) + 1;
       return acc;
     }, {} as Record<string, number>);
@@ -171,26 +173,26 @@ const CategoryPage = () => {
       .slice(0, 3);
 
     return {
-      totalEvents: allEvents.length,
+      totalEvents: events.length,
       totalCasualties,
       timeRange,
       topCountries
     };
-  }, [allEvents]);
+  }, [events]);
 
-  // Top 10 deadliest events (sorted by casualties)
+  // Top 10 deadliest events (sorted by casualties) - use filtered events
   const top10Deadliest = useMemo(() => {
-    return [...allEvents]
+    return [...events]
       .filter(e => e.casualties && e.casualties > 0)
       .sort((a, b) => (b.casualties || 0) - (a.casualties || 0))
       .slice(0, 10);
-  }, [allEvents]);
+  }, [events]);
 
-  // Timeline distribution by 100-year periods (1-2025 CE only)
+  // Timeline distribution by 100-year periods (1-2025 CE only) - use filtered events
   const timelineData = useMemo(() => {
     const periods: Record<string, number> = {};
     
-    allEvents.forEach(event => {
+    events.forEach(event => {
       const year = parseYear(event);
       // Only include years from 1 CE to 2025 CE
       if (year >= 1 && year <= 2025) {
@@ -211,7 +213,7 @@ const CategoryPage = () => {
         const bStart = b.period === "1-99" ? 1 : parseInt(b.period);
         return aStart - bStart;
       });
-  }, [allEvents]);
+  }, [events]);
 
   // Get unique countries
   const allCountries = useMemo(() => {
@@ -219,9 +221,16 @@ const CategoryPage = () => {
     return Array.from(countries).sort();
   }, [allEvents]);
 
+  const handleApplyFilters = () => {
+    setAppliedYearRange(selectedYearRange);
+    setAppliedCountries(new Set(selectedCountries));
+  };
+
   const handleResetFilters = () => {
     setSelectedYearRange(yearRange);
     setSelectedCountries(new Set());
+    setAppliedYearRange(yearRange);
+    setAppliedCountries(new Set());
   };
 
   const handleCountryToggle = (country: string) => {
@@ -409,6 +418,13 @@ const CategoryPage = () => {
                           ))}
                         </div>
                       </div>
+
+                      <Button 
+                        onClick={handleApplyFilters}
+                        className="w-full"
+                      >
+                        Apply Filters
+                      </Button>
                     </div>
                   </CollapsibleContent>
                 </Collapsible>
