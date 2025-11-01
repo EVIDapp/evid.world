@@ -48,7 +48,7 @@ const CategoryPage = () => {
   const [yearRange] = useState<[number, number]>([1, 2025]);
   const [selectedYearRange, setSelectedYearRange] = useState<[number, number]>([1, 2025]);
   const [selectedCountries, setSelectedCountries] = useState<Set<string>>(new Set());
-  const [isFiltersOpen, setIsFiltersOpen] = useState(false);
+  const [isFiltersOpen, setIsFiltersOpen] = useState(true);
 
   const categoryMap: Record<string, EventType> = {
     'war': 'war',
@@ -394,14 +394,14 @@ const CategoryPage = () => {
                       {/* Countries */}
                       <div>
                         <label className="text-sm font-medium mb-2 block">
-                          Countries ({selectedCountries.size})
+                          Countries ({selectedCountries.size} selected)
                         </label>
-                        <div className="max-h-[200px] overflow-y-auto space-y-2 border rounded-md p-3">
+                        <div className="max-h-[200px] overflow-y-auto space-y-2 border rounded-md p-3 bg-card">
                           {allCountries.map(country => (
                             <Badge
                               key={country}
                               variant={selectedCountries.has(country) ? "default" : "outline"}
-                              className="cursor-pointer mr-2 mb-2"
+                              className="cursor-pointer mr-2 mb-2 hover:opacity-80 transition-opacity"
                               onClick={() => handleCountryToggle(country)}
                             >
                               {country}
@@ -409,15 +409,6 @@ const CategoryPage = () => {
                           ))}
                         </div>
                       </div>
-
-                      <Button 
-                        onClick={() => {
-                          // Apply filters is automatic via useEffect
-                        }}
-                        className="w-full"
-                      >
-                        Apply Filters
-                      </Button>
                     </div>
                   </CollapsibleContent>
                 </Collapsible>
