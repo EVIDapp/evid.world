@@ -48,7 +48,7 @@ export const SearchPanel = ({
             e.country.toLowerCase().includes(query) ||
             e.desc.toLowerCase().includes(query)
           )
-          .slice(0, 8); // Reduced to 8 suggestions for faster rendering
+          .slice(0, 12); // Show more results
         setSuggestions(filtered);
         setShowSuggestions(filtered.length > 0);
       } else {
@@ -127,7 +127,7 @@ export const SearchPanel = ({
         {/* Suggestions */}
         {showSuggestions && (
           <div className="absolute top-full left-0 right-0 mt-2 bg-popover border border-border/50 
-                          rounded-lg max-h-[320px] overflow-auto shadow-elevated z-50 
+                          rounded-lg max-h-[480px] overflow-auto shadow-elevated z-50 
                           animate-fade-in-up backdrop-blur-strong">
             {suggestions.map((event) => (
               <div
