@@ -78,8 +78,8 @@ const CategoriesListPage = () => {
   }
 
   return (
-    <main className="min-h-screen bg-background flex flex-col h-screen">
-      <header className="border-b bg-card/50 backdrop-blur sticky top-0 z-10 flex-shrink-0">
+    <main className="min-h-screen bg-background flex flex-col h-screen relative z-10">
+      <header className="border-b bg-card/50 backdrop-blur sticky top-0 z-20 flex-shrink-0">
         <div className="container max-w-6xl mx-auto px-4 py-4">
           <Button variant="ghost" size="sm" onClick={() => navigate('/')} className="mb-3">
             <ArrowLeft className="mr-2 h-4 w-4" />

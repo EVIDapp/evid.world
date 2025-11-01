@@ -275,9 +275,9 @@ const CategoryPage = () => {
   const eventColor = getEventColor(eventType);
 
   return (
-    <main className="min-h-screen bg-background">
+    <main className="min-h-screen bg-background relative z-10">
       {/* Header */}
-      <header className="border-b bg-card/50 backdrop-blur sticky top-0 z-10">
+      <header className="border-b bg-card/50 backdrop-blur sticky top-0 z-20">
         <div className="container max-w-7xl mx-auto px-4 py-3">
           <Button variant="ghost" size="sm" onClick={() => navigate('/')} className="mb-2">
             <ArrowLeft className="mr-2 h-3 w-3" />

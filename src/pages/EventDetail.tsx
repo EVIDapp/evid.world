@@ -113,11 +113,11 @@ const EventDetail = () => {
   const eventColor = getEventColor(event.type);
 
   return (
-    <div className="h-screen bg-background flex flex-col overflow-hidden">
+    <div className="h-screen bg-background flex flex-col overflow-hidden relative z-10">
       <EventMeta event={event} />
       
       {/* Header */}
-      <header className="sticky top-0 z-10 border-b bg-card/95 backdrop-blur-md shadow-sm animate-fade-in">
+      <header className="sticky top-0 z-20 border-b bg-card/95 backdrop-blur-md shadow-sm animate-fade-in">
         <div className="container max-w-6xl mx-auto px-4 py-3">
           <Button variant="ghost" size="sm" onClick={() => navigate('/')} className="hover-scale">
             <ArrowLeft className="mr-2 h-4 w-4" />
@@ -127,7 +127,7 @@ const EventDetail = () => {
       </header>
 
       {/* Hero Section */}
-      <div className="relative bg-gradient-to-br from-card via-card to-primary/5 border-b animate-fade-in">
+      <div className="relative z-10 bg-gradient-to-br from-card via-card to-primary/5 border-b animate-fade-in">
         <div className="container max-w-6xl mx-auto px-4 py-2">
           <Badge className="mb-1 text-white animate-scale-in text-xs" style={{ backgroundColor: eventColor.fill }}>
             {eventColor.label}
@@ -164,7 +164,7 @@ const EventDetail = () => {
       </div>
 
       {/* Main Content - Scrollable */}
-      <main className="flex-1 overflow-y-auto scroll-smooth">
+      <main className="flex-1 overflow-y-auto scroll-smooth relative z-10">
         <div className="container max-w-6xl mx-auto px-4 py-6">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 animate-fade-in">
             {/* Main Content */}
