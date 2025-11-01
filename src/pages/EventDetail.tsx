@@ -8,7 +8,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Separator } from '@/components/ui/separator';
 import { ArrowLeft, MapPin, Calendar, Users, ExternalLink, Globe, Flame, AlertTriangle } from 'lucide-react';
 import { getEventColor } from '@/utils/eventColors';
-import { generateEventSlug } from '@/utils/slugify';
+import { generateEventSlug, slugify } from '@/utils/slugify';
 import { getWikipediaImage, getWikipediaText } from '@/utils/wikipediaImage';
 
 const EventDetail = () => {
@@ -26,10 +26,24 @@ const EventDetail = () => {
         const response = await fetch('/events.json');
         const events: HistoricalEvent[] = await response.json();
         
-        // Find event by slug match
+        // Find event by slug match with multiple fallbacks
         const foundEvent = events.find(e => {
           const eventSlug = generateEventSlug(e.title, e.year);
-          return eventSlug === slug || e.id === slug;
+          
+          // Try exact slug match
+          if (eventSlug === slug) return true;
+          
+          // Try ID match
+          if (e.id === slug) return true;
+          
+          // Try ID with underscores replaced with hyphens
+          if (e.id.replace(/_/g, '-') === slug) return true;
+          
+          // Try slug from title only (without year)
+          const titleOnlySlug = slugify(e.title);
+          if (titleOnlySlug === slug) return true;
+          
+          return false;
         });
         
         if (foundEvent) {
