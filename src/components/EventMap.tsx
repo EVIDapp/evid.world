@@ -11,7 +11,6 @@ import { MapControls } from './MapControls';
 import { EventLegend } from './EventLegend';
 import { TimelineFilter } from './TimelineFilter';
 import { ThemeToggle } from './ThemeToggle';
-import { ShareButton } from './ShareButton';
 import { ExportButton } from './ExportButton';
 import { HistoryPanel } from './HistoryPanel';
 import { TooltipButton } from './TooltipButton';
@@ -936,12 +935,7 @@ export const EventMap = () => {
               tooltip="Zoom out"
             />
             <ThemeToggle />
-            <ShareButton 
-              searchQuery={searchQuery}
-              selectedTypes={Array.from(selectedTypes)}
-              yearRange={selectedYearRange}
-            />
-            <ExportButton 
+            <ExportButton
               events={events}
               filteredEvents={filteredEvents}
             />
