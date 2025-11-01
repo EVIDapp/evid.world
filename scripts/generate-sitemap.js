@@ -18,52 +18,100 @@ events.forEach(event => {
 });
 events = Array.from(uniqueEvents.values());
 
-// Slugify function matching frontend logic
+// Generate slugs for each event - matching slugify.ts logic
 const slugify = (text) => {
-  let slug = text.toLowerCase().trim();
-  
-  slug = slug.replace(/(\d{3,4})(\d{3,4})/g, '$1-$2');
-  slug = slug.replace(/-?(ongoing|present|current)$/g, '');
-  slug = slug.replace(/\b(\d{1,4})\s*bc\b/g, '$1-bc');
-  slug = slug.replace(/\b(\d{1,4})\s*ad\b/g, '$1-ad');
-  slug = slug.replace(/(-\d{1,4})-\1/g, '$1');
-  slug = slug.replace(/[\s_]+/g, '-');
-  slug = slug.replace(/[^a-z0-9-]/g, '');
-  slug = slug.replace(/--+/g, '-');
-  slug = slug.replace(/^-+|-+$/g, '');
-  
-  return slug;
+  return text
+    .toLowerCase()
+    .replace(/[^\w\s-]/g, '')
+    .replace(/\s+/g, '-')
+    .replace(/--+/g, '-')
+    .trim();
 };
 
-// Generate slugs for each event
-const generateSlug = (title, year) => {
-  const titleSlug = slugify(title);
+/**
+ * Extract year from title if it's in parentheses at the end
+ */
+const extractYearFromTitle = (title) => {
+  const yearInParenthesesPattern = /^(.+?)\s*\(([^)]+)\)\s*$/;
+  const match = title.match(yearInParenthesesPattern);
   
-  // Извлекаем год из заголовка, если year не передан
-  let eventYear = year;
-  if (!eventYear) {
-    const yearInParentheses = title.match(/\(([^)]+)\)/);
-    if (yearInParentheses) {
-      eventYear = yearInParentheses[1]
-        .replace(/–/g, '-')
-        .replace(/—/g, '-')
-        .replace(/\s+/g, '');
-    }
+  if (!match) {
+    return { cleanTitle: title, extractedYear: null };
   }
   
-  // Check if slug already ends with year
-  const endsWithYearPattern = /-(\d{1,4}(-\d{1,4})?(-bc|-ad)?)$/;
-  const alreadyHasYear = endsWithYearPattern.test(titleSlug);
+  const cleanTitle = match[1].trim();
+  let yearPart = match[2].trim();
   
-  if (alreadyHasYear) {
+  // Handle "7th century" format
+  if (yearPart.toLowerCase().includes('century')) {
+    return { 
+      cleanTitle, 
+      extractedYear: yearPart.toLowerCase().replace(/\s+/g, '-')
+    };
+  }
+  
+  // Handle BC dates
+  if (yearPart.toLowerCase().includes('bc')) {
+    yearPart = yearPart.toLowerCase().replace(/\s*bc\s*/gi, '').trim() + '-bc';
+  }
+  
+  // Handle year ranges with various dash types
+  yearPart = yearPart.replace(/[–—]/g, '-');
+  yearPart = yearPart.replace(/\s*-\s*/g, '-');
+  
+  return { cleanTitle, extractedYear: yearPart };
+};
+
+const generateSlug = (title, year) => {
+  let cleanTitle = title;
+  let finalYear = year;
+  
+  // If no year provided, try to extract from title
+  if (!finalYear) {
+    const extracted = extractYearFromTitle(title);
+    cleanTitle = extracted.cleanTitle;
+    finalYear = extracted.extractedYear || undefined;
+  }
+  
+  // If still no year, just return slugified title
+  if (!finalYear) {
+    return slugify(cleanTitle);
+  }
+  
+  // Remove -ongoing suffix if present
+  finalYear = finalYear.replace(/-ongoing$/i, '').trim();
+  
+  // Check if title starts with year pattern
+  const yearAtStartPattern = /^(\d{1,4}(?:-\d{1,4})?(?:\s*bc)?)\s+(.+)$/i;
+  const yearMatch = cleanTitle.match(yearAtStartPattern);
+  
+  if (yearMatch) {
+    cleanTitle = yearMatch[2];
+  }
+  
+  // Process BC years: ensure only one -bc suffix
+  if (finalYear.toLowerCase().includes('bc')) {
+    finalYear = finalYear.replace(/\s*bc/gi, '').trim();
+    finalYear = `${finalYear}-bc`;
+  }
+  
+  // Replace various dash types with regular hyphen
+  finalYear = finalYear.replace(/[–—]/g, '-');
+  
+  // Clean up the year string
+  finalYear = finalYear.replace(/\s+/g, '-').replace(/--+/g, '-');
+  
+  const titleSlug = slugify(cleanTitle);
+  
+  // Ensure no duplicate year in slug
+  const yearPattern = finalYear.replace(/-/g, '\\-');
+  const duplicatePattern = new RegExp(`-${yearPattern}$`);
+  
+  if (titleSlug.match(duplicatePattern)) {
     return titleSlug;
   }
   
-  if (eventYear) {
-    return `${titleSlug}-${eventYear}`;
-  }
-  
-  return titleSlug;
+  return `${titleSlug}-${finalYear}`;
 };
 
 // Get current date

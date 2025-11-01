@@ -11,36 +11,54 @@ export const EventMeta = ({ event }: EventMetaProps) => {
     const slug = generateEventSlug(event.title, event.type, event.year);
     const url = `https://evid.world/category/${slug}`;
     
-    // Update title
-    document.title = `${event.title} (${event.year || 'Historical Event'}) — EVID`;
+    // Update title with better SEO format
+    const yearDisplay = event.year ? `(${event.year})` : '';
+    document.title = `${event.title} ${yearDisplay} — Historical Event | EVID`;
     
     // Update meta description
     const description = event.desc.length > 160 
       ? event.desc.substring(0, 157) + '...' 
       : event.desc;
     updateMetaTag('name', 'description', description);
-    updateMetaTag('name', 'keywords', `${event.title}, ${event.year || ''}, ${event.type}, ${event.country}, historical event, world history`);
+    
+    // Enhanced keywords
+    const keywords = [
+      event.title,
+      event.year || '',
+      event.type,
+      event.country,
+      'historical event',
+      'world history',
+      `${event.type} history`,
+      event.casualties ? 'casualties' : ''
+    ].filter(Boolean).join(', ');
+    updateMetaTag('name', 'keywords', keywords);
     
     // Update Open Graph tags
     updateMetaTag('property', 'og:title', document.title);
     updateMetaTag('property', 'og:description', description);
     updateMetaTag('property', 'og:url', url);
     updateMetaTag('property', 'og:type', 'article');
+    updateMetaTag('property', 'og:site_name', 'EVID.WORLD');
     if (event.image) {
       updateMetaTag('property', 'og:image', event.image);
+      updateMetaTag('property', 'og:image:alt', `${event.title} - Historical Event`);
     }
     
     // Update Twitter Card tags
+    updateMetaTag('name', 'twitter:card', 'summary_large_image');
     updateMetaTag('name', 'twitter:title', document.title);
     updateMetaTag('name', 'twitter:description', description);
+    updateMetaTag('name', 'twitter:site', '@evidworld');
     if (event.image) {
       updateMetaTag('name', 'twitter:image', event.image);
+      updateMetaTag('name', 'twitter:image:alt', `${event.title} - Historical Event`);
     }
     
     // Update canonical URL
     updateLinkTag('canonical', url);
     
-    // Add structured data
+    // Add structured data with enhanced schema
     const structuredData = {
       "@context": "https://schema.org",
       "@type": "Event",
@@ -55,11 +73,19 @@ export const EventMeta = ({ event }: EventMetaProps) => {
           "longitude": event.pos.lng
         }
       },
-      "startDate": event.year ? `${event.year}-01-01` : undefined,
+      "startDate": event.year ? `${event.year.split('-')[0]}-01-01` : undefined,
+      "endDate": event.year?.includes('-') ? `${event.year.split('-')[1]}-12-31` : undefined,
       "eventStatus": "https://schema.org/EventScheduled",
       "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
       "url": url,
-      "image": event.image || undefined
+      "image": event.image || undefined,
+      "organizer": {
+        "@type": "Organization",
+        "name": "EVID.WORLD",
+        "url": "https://evid.world"
+      },
+      "category": event.type,
+      "isAccessibleForFree": true
     };
     
     updateStructuredData('event-schema', structuredData);

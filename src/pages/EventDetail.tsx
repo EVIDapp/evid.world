@@ -8,15 +8,11 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Separator } from '@/components/ui/separator';
 import { ArrowLeft, MapPin, Calendar, Users, ExternalLink, Globe, Flame, AlertTriangle } from 'lucide-react';
 import { getEventColor } from '@/utils/eventColors';
-import { generateEventSlug, getEventSlugOnly } from '@/utils/slugify';
+import { generateEventSlug } from '@/utils/slugify';
 import { getWikipediaImage, getWikipediaText } from '@/utils/wikipediaImage';
-import { getSmartRecommendations } from '@/utils/eventRecommendations';
-import { ShareButtons } from '@/components/ShareButtons';
-import { BackToTop } from '@/components/BackToTop';
-import { EventDetailSkeleton } from '@/components/SkeletonLoader';
 
 const EventDetail = () => {
-  const { slug, category } = useParams<{ slug: string; category: string }>();
+  const { slug } = useParams<{ slug: string }>();
   const navigate = useNavigate();
   const [event, setEvent] = useState<HistoricalEvent | null>(null);
   const [relatedEvents, setRelatedEvents] = useState<HistoricalEvent[]>([]);
@@ -30,35 +26,13 @@ const EventDetail = () => {
         const response = await fetch('/events.json');
         const events: HistoricalEvent[] = await response.json();
         
-        // Find event by slug match (только event slug, без категории)
+        // Find event by slug match
         const foundEvent = events.find(e => {
-          const eventSlug = getEventSlugOnly(e.title, e.year);
+          const eventSlug = generateEventSlug(e.title, e.year);
           return eventSlug === slug || e.id === slug;
         });
         
         if (foundEvent) {
-          // Category slug map for validation
-          const categorySlugMap: Record<string, string> = {
-            'war': 'war',
-            'earthquake': 'earthquake',
-            'terror-attack': 'terror',
-            'archaeology': 'archaeology',
-            'wildfire': 'fire',
-            'disaster': 'disaster',
-            'tsunami': 'tsunami',
-            'meteorite': 'meteorite',
-            'epidemic': 'epidemic',
-            'man-made-disaster': 'man-made disaster'
-          };
-          
-          // Check if category in URL matches event type
-          if (category && categorySlugMap[category] !== foundEvent.type) {
-            // Redirect to correct category URL
-            const correctSlug = generateEventSlug(foundEvent.title, foundEvent.type, foundEvent.year);
-            navigate(`/category/${correctSlug}`, { replace: true });
-            return;
-          }
-          
           setEvent(foundEvent);
           
           // Load Wikipedia data if available
@@ -72,8 +46,40 @@ const EventDetail = () => {
             }).catch(() => {});
           }
           
-          // Find related events using smart recommendations
-          const related = getSmartRecommendations(foundEvent, events, 6);
+          // Find related events with smart scoring
+          const related = events
+            .filter(e => e.id !== foundEvent.id)
+            .map(e => {
+              let score = 0;
+              
+              // Same type is most important
+              if (e.type === foundEvent.type) score += 10;
+              
+              // Same country is also important
+              if (e.country === foundEvent.country) score += 5;
+              
+              // Similar time period (within 50 years)
+              const yearDiff = Math.abs(parseInt(e.year || '0') - parseInt(foundEvent.year || '0'));
+              if (yearDiff <= 50) score += 3;
+              else if (yearDiff <= 100) score += 1;
+              
+              // Similar casualties magnitude
+              if (e.casualties && foundEvent.casualties) {
+                const casualtyRatio = Math.min(e.casualties, foundEvent.casualties) / 
+                                     Math.max(e.casualties, foundEvent.casualties);
+                if (casualtyRatio > 0.5) score += 2;
+              }
+              
+              // Both have casualties
+              if (e.casualties && foundEvent.casualties) score += 1;
+              
+              return { event: e, score };
+            })
+            .filter(item => item.score > 0)
+            .sort((a, b) => b.score - a.score)
+            .slice(0, 6)
+            .map(item => item.event);
+            
           setRelatedEvents(related);
         }
       } catch (error) {
@@ -84,10 +90,14 @@ const EventDetail = () => {
     };
     
     loadEvent();
-  }, [slug, category, navigate]);
+  }, [slug]);
 
   if (loading) {
-    return <EventDetailSkeleton />;
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-background">
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
+      </div>
+    );
   }
 
   if (!event) {
@@ -112,36 +122,30 @@ const EventDetail = () => {
   const eventColor = getEventColor(event.type);
 
   return (
-    <div className="h-screen bg-background flex flex-col overflow-hidden relative z-10">
+    <div className="h-screen bg-background flex flex-col overflow-hidden">
       <EventMeta event={event} />
       
       {/* Header */}
-      <header className="sticky top-0 z-20 border-b bg-card/95 backdrop-blur-md shadow-sm animate-fade-in">
-        <div className="container max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
+      <header className="sticky top-0 z-10 border-b bg-card/95 backdrop-blur-md shadow-sm animate-fade-in">
+        <div className="container max-w-6xl mx-auto px-4 py-3">
           <Button variant="ghost" size="sm" onClick={() => navigate('/')} className="hover-scale">
             <ArrowLeft className="mr-2 h-4 w-4" />
             Back to Map
           </Button>
-          {event && (
-            <ShareButtons
-              title={event.title}
-              description={event.desc}
-            />
-          )}
         </div>
       </header>
 
       {/* Hero Section */}
-      <div className="relative z-10 bg-gradient-to-br from-card via-card to-primary/5 border-b animate-fade-in">
+      <div className="relative bg-gradient-to-br from-card via-card to-primary/5 border-b animate-fade-in">
         <div className="container max-w-6xl mx-auto px-4 py-2">
           <Badge className="mb-1 text-white animate-scale-in text-xs" style={{ backgroundColor: eventColor.fill }}>
             {eventColor.label}
           </Badge>
-          <h1 className="text-lg md:text-xl font-bold mb-1.5 animate-fade-in text-foreground">
+          <h1 className="text-lg md:text-xl font-bold mb-1.5 animate-fade-in">
             {event.title}
           </h1>
           
-          <div className="flex flex-wrap gap-2 text-xs text-foreground">
+          <div className="flex flex-wrap gap-2 text-xs">
             {event.year && (
               <div className="flex items-center gap-1">
                 <Calendar className="h-3 w-3" />
@@ -169,7 +173,7 @@ const EventDetail = () => {
       </div>
 
       {/* Main Content - Scrollable */}
-      <main className="flex-1 overflow-y-auto scroll-smooth relative z-10">
+      <main className="flex-1 overflow-y-auto scroll-smooth">
         <div className="container max-w-6xl mx-auto px-4 py-6">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 animate-fade-in">
             {/* Main Content */}
@@ -184,13 +188,13 @@ const EventDetail = () => {
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-4">
-                  <p className="text-sm leading-relaxed text-foreground">{event.desc}</p>
+                  <p className="text-sm leading-relaxed">{event.desc}</p>
                   
                   {wikiText && (
                     <>
                       <Separator className="my-3" />
                       <div className="space-y-3">
-                        <p className="text-sm leading-relaxed text-foreground">{wikiText}</p>
+                        <p className="text-sm leading-relaxed">{wikiText}</p>
                       </div>
                     </>
                   )}
@@ -198,19 +202,28 @@ const EventDetail = () => {
                   {event.desc_long && !wikiText && (
                     <>
                       <Separator className="my-3" />
-                      <p className="text-sm leading-relaxed text-foreground">{event.desc_long}</p>
+                      <p className="text-sm leading-relaxed">{event.desc_long}</p>
                     </>
                   )}
                   
-                  {event.casualties && (
-                    <div className="p-3 rounded-lg bg-destructive/5 border border-destructive/10">
-                      <h4 className="font-semibold text-sm mb-2 text-destructive flex items-center gap-2">
-                        <Users className="h-4 w-4" />
+                  {event.casualties && (event.type === 'war' || event.type === 'earthquake') && (
+                    <div className="p-4 rounded-lg bg-destructive/10 border-2 border-destructive/30 shadow-lg">
+                      <h4 className="font-bold text-base mb-3 text-destructive flex items-center gap-2">
+                        <Users className="h-5 w-5" />
                         Human Impact
                       </h4>
-                      <p className="text-sm leading-relaxed text-foreground">
-                        This event resulted in approximately <strong>{event.casualties.toLocaleString()}</strong> casualties, 
-                        making it one of the significant incidents in recorded history.
+                      <p className="text-sm leading-relaxed mb-2">
+                        This {event.type === 'war' ? 'conflict' : 'natural disaster'} resulted in approximately{' '}
+                        <span className="text-destructive font-bold text-lg">
+                          {event.casualties.toLocaleString()} casualties
+                        </span>
+                        {event.type === 'war' 
+                          ? ', representing the devastating human cost of armed conflict.'
+                          : ', highlighting the catastrophic impact of seismic activity on human populations.'}
+                      </p>
+                      <p className="text-xs text-muted-foreground mt-2">
+                        The casualty figures include both direct deaths and those resulting from secondary effects such as 
+                        {event.type === 'war' ? ' displacement, disease, and famine.' : ' collapsed structures, fires, and tsunamis.'}
                       </p>
                     </div>
                   )}
@@ -221,7 +234,7 @@ const EventDetail = () => {
                         <Globe className="h-4 w-4" />
                         Geographic Scope
                       </h4>
-                      <p className="text-sm leading-relaxed text-foreground">
+                      <p className="text-sm leading-relaxed">
                         The event affected an area with a radius of approximately <strong>{event.radiusKm} kilometers</strong>.
                       </p>
                     </div>
@@ -238,8 +251,8 @@ const EventDetail = () => {
                         <ExternalLink className="h-5 w-5 text-primary" />
                       </div>
                       <div className="flex-1">
-                        <h3 className="font-semibold text-base mb-1 text-foreground">Want to Learn More?</h3>
-                        <p className="text-xs mb-3 text-foreground">
+                        <h3 className="font-semibold text-base mb-1">Want to Learn More?</h3>
+                        <p className="text-xs mb-3">
                           Explore comprehensive historical details and sources about this event on Wikipedia.
                         </p>
                         <Button asChild variant="default" size="sm" className="hover-scale">
@@ -266,7 +279,7 @@ const EventDetail = () => {
                 <CardTitle className="text-base">Location</CardTitle>
               </CardHeader>
               <CardContent>
-                <div className="space-y-2 text-sm text-foreground">
+                <div className="space-y-2 text-sm">
                   <div>
                     <span className="font-semibold">Country:</span> {event.country}
                   </div>
@@ -294,62 +307,20 @@ const EventDetail = () => {
               <Card className="hover-scale transition-all duration-300 border-accent/20">
                 <CardHeader>
                   <CardTitle className="text-base">Related Events</CardTitle>
-                  <CardDescription className="text-xs">Events similar in time, place, or scale</CardDescription>
+                  <CardDescription className="text-xs">Similar events in history</CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-2">
                   {relatedEvents.map(relatedEvent => {
-                    const relatedSlug = generateEventSlug(relatedEvent.title, relatedEvent.type, relatedEvent.year);
-                    const relatedColor = getEventColor(relatedEvent.type);
-                    const isSameType = relatedEvent.type === event.type;
-                    const isSameCountry = relatedEvent.country === event.country;
-                    
+                    const relatedSlug = generateEventSlug(relatedEvent.title, relatedEvent.year);
                     return (
                       <a
                         key={relatedEvent.id}
-                        href={`/category/${relatedSlug}`}
-                        className="block p-3 rounded-lg border hover:bg-accent hover:border-primary 
-                                   transition-all duration-200 hover-scale active:scale-95 
-                                   touch-manipulation animate-fade-in"
-                        style={{ animationDelay: `${relatedEvents.indexOf(relatedEvent) * 50}ms` }}
+                        href={`/event/${relatedSlug}`}
+                        className="block p-2 rounded-lg border hover:bg-accent hover:border-primary transition-all duration-200 hover-scale"
                       >
-                        <div className="flex items-start justify-between gap-2 mb-1">
-                          <Badge 
-                            className="text-[10px] px-1.5 py-0.5 text-white" 
-                            style={{ backgroundColor: relatedColor.fill }}
-                          >
-                            {relatedColor.label}
-                          </Badge>
-                          <div className="flex gap-1">
-                            {isSameType && (
-                              <Badge variant="outline" className="text-[9px] px-1 py-0">
-                                Same type
-                              </Badge>
-                            )}
-                            {isSameCountry && (
-                              <Badge variant="outline" className="text-[9px] px-1 py-0">
-                                Same region
-                              </Badge>
-                            )}
-                          </div>
-                        </div>
-                        <div className="font-semibold text-xs line-clamp-2 text-foreground">{relatedEvent.title}</div>
-                        <div className="text-xs mt-1.5 flex items-center gap-2 text-muted-foreground">
-                          {relatedEvent.year && (
-                            <span className="flex items-center gap-1">
-                              <Calendar className="h-3 w-3" />
-                              {relatedEvent.year}
-                            </span>
-                          )}
-                          <span className="flex items-center gap-1">
-                            <MapPin className="h-3 w-3" />
-                            {relatedEvent.country}
-                          </span>
-                          {relatedEvent.casualties && (
-                            <span className="flex items-center gap-1 text-destructive">
-                              <Users className="h-3 w-3" />
-                              {relatedEvent.casualties.toLocaleString()}
-                            </span>
-                          )}
+                        <div className="font-semibold text-xs">{relatedEvent.title}</div>
+                        <div className="text-xs mt-1">
+                          {relatedEvent.year} • {relatedEvent.country}
                         </div>
                       </a>
                     );
@@ -361,8 +332,6 @@ const EventDetail = () => {
         </div>
       </div>
     </main>
-    
-    <BackToTop />
   </div>
   );
 };

@@ -20,7 +20,7 @@ import { useIsMobile } from '@/hooks/use-mobile';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Progress } from '@/components/ui/progress';
-import { Key, Plus, Minus, Globe as GlobeIcon, Map } from 'lucide-react';
+import { Key, Plus, Minus, Globe as GlobeIcon, Map, Grid3x3 } from 'lucide-react';
 import { getWikipediaImage } from '@/utils/wikipediaImage';
 import { deduplicateEvents } from '@/utils/deduplicateEvents';
 import { useKeyboardShortcuts } from '@/hooks/useKeyboardShortcuts';

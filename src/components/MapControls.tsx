@@ -12,8 +12,8 @@ interface MapControlsProps {
 }
 
 export const MapControls = ({ onShowAll, onClear, onReset, onTimelineToggle }: MapControlsProps) => {
-  const navigate = useNavigate();
   const isMobile = useIsMobile();
+  const navigate = useNavigate();
   
   const controlButtons = (
     <>
@@ -39,7 +39,7 @@ export const MapControls = ({ onShowAll, onClear, onReset, onTimelineToggle }: M
           )}
         </Tooltip>
       </TooltipProvider>
-
+      
       <TooltipProvider delayDuration={0}>
         <Tooltip>
           <TooltipTrigger asChild>

@@ -1,4 +1,3 @@
-import React from "react";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -8,20 +7,13 @@ import { ThemeProvider } from "next-themes";
 import Index from "./pages/Index";
 import EventDetail from "./pages/EventDetail";
 import CategoryPage from "./pages/CategoryPage";
-import CategoriesListPage from "./pages/CategoriesListPage";
-import OldEventRedirect from "./pages/OldEventRedirect";
+import Categories from "./pages/Categories";
 import NotFound from "./pages/NotFound";
 
-const queryClient = new QueryClient({
-  defaultOptions: {
-    queries: {
-      staleTime: 60000,
-      refetchOnWindowFocus: false,
-    },
-  },
-});
+const queryClient = new QueryClient();
 
-function App() {
+const App = () => {
+
   return (
     <QueryClientProvider client={queryClient}>
       <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={false}>
@@ -31,10 +23,10 @@ function App() {
           <BrowserRouter>
             <Routes>
               <Route path="/" element={<Index />} />
-              <Route path="/event/:slug" element={<OldEventRedirect />} />
-              <Route path="/category/:category/:slug" element={<EventDetail />} />
-              <Route path="/category" element={<CategoriesListPage />} />
+              <Route path="/event/:slug" element={<EventDetail />} />
+              <Route path="/category" element={<Categories />} />
               <Route path="/category/:category" element={<CategoryPage />} />
+              {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
               <Route path="*" element={<NotFound />} />
             </Routes>
           </BrowserRouter>
@@ -42,6 +34,6 @@ function App() {
       </ThemeProvider>
     </QueryClientProvider>
   );
-}
+};
 
 export default App;

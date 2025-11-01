@@ -4,91 +4,5629 @@
         xmlns:xhtml="http://www.w3.org/1999/xhtml"
         xmlns:mobile="http://www.google.com/schemas/sitemap-mobile/1.0"
         xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
-  
-  <!-- Main page -->
+
+  <!-- Homepage -->
   <url>
     <loc>https://evid.world/</loc>
-    <lastmod>2025-01-27</lastmod>
+    <lastmod>2025-11-01</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
 
-  <!-- Category pages -->
+  <!-- Battle of Actium (31 BC) -->
+  <url>
+    <loc>https://evid.world/event/battle-of-actium-31-bc</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Bar Kokhba revolt (132–136) -->
+  <url>
+    <loc>https://evid.world/event/bar-kokhba-revolt-132-136</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Gothic War (376–382) -->
+  <url>
+    <loc>https://evid.world/event/gothic-war-376-382</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Early Muslim conquests (7th century) -->
+  <url>
+    <loc>https://evid.world/event/early-muslim-conquests-7th-century</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Byzantine–Sassanid War (602–628) -->
+  <url>
+    <loc>https://evid.world/event/byzantinesassanid-war-602-628</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Mongol invasion of Khwarezmia (1219–1221) -->
+  <url>
+    <loc>https://evid.world/event/mongol-invasion-of-khwarezmia-1219-1221</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Hundred Years' War (1337–1453) -->
+  <url>
+    <loc>https://evid.world/event/hundred-years-war-1337-1453</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Greek War of Independence (1821–1830) -->
+  <url>
+    <loc>https://evid.world/event/greek-war-of-independence-1821-1830</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Russo-Turkish War (1877–1878) -->
+  <url>
+    <loc>https://evid.world/event/russo-turkish-war-1877-1878</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- American Revolutionary War (1775–1783) -->
+  <url>
+    <loc>https://evid.world/event/american-revolutionary-war-1775-1783</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Shaka's Zulu Wars (1816–1828) -->
+  <url>
+    <loc>https://evid.world/event/shakas-zulu-wars-1816-1828</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- French Revolutionary Wars (1792–1802) -->
+  <url>
+    <loc>https://evid.world/event/french-revolutionary-wars-1792-1802</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Anglo-Zulu War (1879) -->
+  <url>
+    <loc>https://evid.world/event/anglo-zulu-war-1879</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Boshin War (1868–1869) -->
+  <url>
+    <loc>https://evid.world/event/boshin-war-1868-1869</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- First Opium War (1839-1842) -->
+  <url>
+    <loc>https://evid.world/event/first-opium-war-1839-1842-1839</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Second Opium War (1856–1860) -->
+  <url>
+    <loc>https://evid.world/event/second-opium-war-1856-1860</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Taiping Rebellion (1850–1864) -->
+  <url>
+    <loc>https://evid.world/event/taiping-rebellion-1850-1864</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Sengoku period (1467–1615) -->
+  <url>
+    <loc>https://evid.world/event/sengoku-period-1467-1615</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Punic Wars (264–146 BC) -->
+  <url>
+    <loc>https://evid.world/event/punic-wars-264-146-bc</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- The Crusades (1096–1291) -->
+  <url>
+    <loc>https://evid.world/event/the-crusades-1096-1291</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Wars of the Roses (1455–1487) -->
+  <url>
+    <loc>https://evid.world/event/wars-of-the-roses-1455-1487</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Great Northern War (1700-1721) -->
+  <url>
+    <loc>https://evid.world/event/great-northern-war-1700-1721</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Seven Years' War (1756–1763) -->
+  <url>
+    <loc>https://evid.world/event/seven-years-war-1756-1763</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Mexican–American War (1846–1848) -->
+  <url>
+    <loc>https://evid.world/event/mexicanamerican-war-1846-1848</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Crimean War (1853–1856) -->
+  <url>
+    <loc>https://evid.world/event/crimean-war-1853-1856</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Second Boer War (1899–1902) -->
+  <url>
+    <loc>https://evid.world/event/second-boer-war-1899-1902</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Russo-Japanese War (1904–1905) -->
+  <url>
+    <loc>https://evid.world/event/russo-japanese-war-1904-1905</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Balkan Wars (1912–1913) -->
+  <url>
+    <loc>https://evid.world/event/balkan-wars-1912-1913</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Greco-Turkish War (1919–1922) -->
+  <url>
+    <loc>https://evid.world/event/greco-turkish-war-1919-1922</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Chaco War (1932-1935) -->
+  <url>
+    <loc>https://evid.world/event/chaco-war-1932-1935</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Korean War (1950–1953) -->
+  <url>
+    <loc>https://evid.world/event/korean-war-1950-1953</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Algerian War of Independence (1954–1962) -->
+  <url>
+    <loc>https://evid.world/event/algerian-war-of-independence-1954-1962</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Nigerian Civil War (1967–1970) -->
+  <url>
+    <loc>https://evid.world/event/nigerian-civil-war-1967-1970</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Bangladesh Liberation War (1971) -->
+  <url>
+    <loc>https://evid.world/event/bangladesh-liberation-war-1971</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Yom Kippur War (1973) -->
+  <url>
+    <loc>https://evid.world/event/yom-kippur-war-1973</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Ethiopian–Eritrean War (1998–2000) -->
+  <url>
+    <loc>https://evid.world/event/ethiopianeritrean-war-1998-2000</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Second Congo War (1998–2003) -->
+  <url>
+    <loc>https://evid.world/event/second-congo-war-1998-2003</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Darfur conflict (2003–ongoing) -->
+  <url>
+    <loc>https://evid.world/event/darfur-conflict-2003</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Syrian Civil War (2011–present) -->
+  <url>
+    <loc>https://evid.world/event/syrian-civil-war-2011-present</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Libyan Civil War (2011–2020) -->
+  <url>
+    <loc>https://evid.world/event/libyan-civil-war-2011-2020</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Antonine Plague (165–180) -->
+  <url>
+    <loc>https://evid.world/event/antonine-plague-165-180</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- First Anglo-Afghan War (1839–1842) -->
+  <url>
+    <loc>https://evid.world/event/first-anglo-afghan-war-1839-1842</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Second Anglo-Afghan War (1878–1880) -->
+  <url>
+    <loc>https://evid.world/event/second-anglo-afghan-war-1878-1880</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Second Italo-Ethiopian War (1935–1936) -->
+  <url>
+    <loc>https://evid.world/event/second-italo-ethiopian-war-1935-1936</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Iran–Iraq War (1980–1988) -->
+  <url>
+    <loc>https://evid.world/event/iraniraq-war-1980-1988</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Gulf War (1990-1991) -->
+  <url>
+    <loc>https://evid.world/event/gulf-war-1990-1991</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Kargil War (1999) -->
+  <url>
+    <loc>https://evid.world/event/kargil-war-1999</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Falklands War (1982) -->
+  <url>
+    <loc>https://evid.world/event/falklands-war-1982</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Ogaden War (1977-1978) -->
+  <url>
+    <loc>https://evid.world/event/ogaden-war-1977-1978</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Six-Day War (1967) -->
+  <url>
+    <loc>https://evid.world/event/six-day-war-1967</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- First Indochina War (1946-1954) -->
+  <url>
+    <loc>https://evid.world/event/first-indochina-war-1946-1954</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Cambodian Civil War (1967–1975) -->
+  <url>
+    <loc>https://evid.world/event/cambodian-civil-war-1967-1975</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Rwandan Genocide and Civil War (1994) -->
+  <url>
+    <loc>https://evid.world/event/rwandan-genocide-and-civil-war-1994</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Bosnian War (1992–1995) -->
+  <url>
+    <loc>https://evid.world/event/bosnian-war-1992-1995</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Kosovo War (1998–1999) -->
+  <url>
+    <loc>https://evid.world/event/kosovo-war-1998-1999</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Chechen Wars (1994–2009) -->
+  <url>
+    <loc>https://evid.world/event/chechen-wars-1994-2009</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Russian invasion of Ukraine (2022–2026, ongoing) -->
+  <url>
+    <loc>https://evid.world/event/russian-invasion-of-ukraine-2022-2026,-ongoing</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Second Sudanese Civil War (1983–2005) -->
+  <url>
+    <loc>https://evid.world/event/second-sudanese-civil-war-1983-2005</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Mexican Drug War (2006–2026, ongoing) -->
+  <url>
+    <loc>https://evid.world/event/mexican-drug-war-2006-2026,-ongoing</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Israeli–Palestinian conflict (1948–2026, ongoing) -->
+  <url>
+    <loc>https://evid.world/event/israelipalestinian-conflict-1948-2026,-ongoing</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Tigray War (2020–2022) -->
+  <url>
+    <loc>https://evid.world/event/tigray-war-2020-2022</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Nagorno-Karabakh War (2020) -->
+  <url>
+    <loc>https://evid.world/event/nagorno-karabakh-war-2020</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Sahel conflict (2012–2026, ongoing) -->
+  <url>
+    <loc>https://evid.world/event/sahel-conflict-2012-2026,-ongoing</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Gunpowder Plot (1605) -->
+  <url>
+    <loc>https://evid.world/event/gunpowder-plot-1605</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Cawnpore Massacre (1857) -->
+  <url>
+    <loc>https://evid.world/event/cawnpore-massacre-1857</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Haymarket affair (1886) -->
+  <url>
+    <loc>https://evid.world/event/haymarket-affair-1886</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Wall Street bombing (1920) -->
+  <url>
+    <loc>https://evid.world/event/wall-street-bombing-1920</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- King David Hotel bombing (1946) -->
+  <url>
+    <loc>https://evid.world/event/king-david-hotel-bombing-1946</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Milk Bar Café bombing (1956) -->
+  <url>
+    <loc>https://evid.world/event/milk-bar-caf-bombing-1956</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Bologna massacre (1980) -->
+  <url>
+    <loc>https://evid.world/event/bologna-massacre-1980</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- 1993 Bombay bombings -->
+  <url>
+    <loc>https://evid.world/event/1993-bombay-bombings</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Oklahoma City bombing (1995) -->
+  <url>
+    <loc>https://evid.world/event/oklahoma-city-bombing-1995</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Markale market shelling (1994) -->
+  <url>
+    <loc>https://evid.world/event/markale-market-shelling-1994</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- 1998 United States embassy bombings -->
+  <url>
+    <loc>https://evid.world/event/1998-united-states-embassy-bombings</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- 2003 Casablanca bombings -->
+  <url>
+    <loc>https://evid.world/event/2003-casablanca-bombings</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- 2004 Madrid train bombings -->
+  <url>
+    <loc>https://evid.world/event/2004-madrid-train-bombings</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Beslan school siege -->
+  <url>
+    <loc>https://evid.world/event/beslan-school-siege</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Sharm El Sheikh bombings (2005) -->
+  <url>
+    <loc>https://evid.world/event/sharm-el-sheikh-bombings-2005</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Algiers bombings (2007) -->
+  <url>
+    <loc>https://evid.world/event/algiers-bombings-2007</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- 2008 Mumbai attacks -->
+  <url>
+    <loc>https://evid.world/event/2008-mumbai-attacks</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Peshawar school massacre (2014) -->
+  <url>
+    <loc>https://evid.world/event/peshawar-school-massacre-2014</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Bardo National Museum attack (2015) -->
+  <url>
+    <loc>https://evid.world/event/bardo-national-museum-attack-2015</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- November Paris Attacks (2015) -->
+  <url>
+    <loc>https://evid.world/event/november-paris-attacks-2015</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- 2016 Brussels bombings -->
+  <url>
+    <loc>https://evid.world/event/2016-brussels-bombings</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Istanbul nightclub attack (2017) -->
+  <url>
+    <loc>https://evid.world/event/istanbul-nightclub-attack-2017</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Manchester Arena bombing (2017) -->
+  <url>
+    <loc>https://evid.world/event/manchester-arena-bombing-2017</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Christchurch mosque shootings (2019) -->
+  <url>
+    <loc>https://evid.world/event/christchurch-mosque-shootings-2019</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Kabylia bombings (2022) -->
+  <url>
+    <loc>https://evid.world/event/kabylia-bombings-2022</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Plague of Cyprian (249–262) -->
+  <url>
+    <loc>https://evid.world/event/plague-of-cyprian-249-262</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Plague of Justinian (541–542) -->
+  <url>
+    <loc>https://evid.world/event/plague-of-justinian-541-542</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Black Death (1346–1353) -->
+  <url>
+    <loc>https://evid.world/event/black-death-1346-1353</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Cocoliztli Epidemics (1545–1576) -->
+  <url>
+    <loc>https://evid.world/event/cocoliztli-epidemics-1545-1576</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Smallpox in the Americas (1520–1800) -->
+  <url>
+    <loc>https://evid.world/event/smallpox-in-the-americas-1520-1800</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Great Plague of London (1665–1666) -->
+  <url>
+    <loc>https://evid.world/event/great-plague-of-london-1665-1666</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- First Cholera Pandemic (1817–1824) -->
+  <url>
+    <loc>https://evid.world/event/first-cholera-pandemic-1817-1824</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Third Cholera Pandemic (1846–1860) -->
+  <url>
+    <loc>https://evid.world/event/third-cholera-pandemic-1846-1860</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Third Plague Pandemic (1855–1960) -->
+  <url>
+    <loc>https://evid.world/event/third-plague-pandemic-1855-1960</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Russian Flu (1889–1890) -->
+  <url>
+    <loc>https://evid.world/event/russian-flu-1889-1890</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Sixth Cholera Pandemic (1899–1923) -->
+  <url>
+    <loc>https://evid.world/event/sixth-cholera-pandemic-1899-1923</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Spanish Flu (1918–1920) -->
+  <url>
+    <loc>https://evid.world/event/spanish-flu-1918-1920</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Asian Flu (1957–1958) -->
+  <url>
+    <loc>https://evid.world/event/asian-flu-1957-1958</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Hong Kong Flu (1968–1969) -->
+  <url>
+    <loc>https://evid.world/event/hong-kong-flu-1968-1969</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Ninth Cholera Pandemic (1961–1975) -->
+  <url>
+    <loc>https://evid.world/event/ninth-cholera-pandemic-1961-1975</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- HIV/AIDS pandemic (1981–present) -->
+  <url>
+    <loc>https://evid.world/event/hivaids-pandemic-1981-present</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- 2009 H1N1 pandemic (swine flu) -->
+  <url>
+    <loc>https://evid.world/event/h1n1-pandemic-swine-flu</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- West African Ebola outbreak (2014–2016) -->
+  <url>
+    <loc>https://evid.world/event/west-african-ebola-outbreak-2014-2016</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- COVID-19 pandemic (2020–2023) -->
+  <url>
+    <loc>https://evid.world/event/covid-19-pandemic-2020-2023</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Great Fire of Rome (AD 64) -->
+  <url>
+    <loc>https://evid.world/event/great-fire-of-rome-AD-64</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Great Fire of London (1666) -->
+  <url>
+    <loc>https://evid.world/event/great-fire-of-london-1666</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Fire of Moscow (1812) -->
+  <url>
+    <loc>https://evid.world/event/fire-of-moscow-1812</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Great Chicago Fire (1871) -->
+  <url>
+    <loc>https://evid.world/event/great-chicago-fire-1871</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Great Boston Fire of 1872 -->
+  <url>
+    <loc>https://evid.world/event/great-boston-fire-of-1872</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Peshtigo Fire (1871) -->
+  <url>
+    <loc>https://evid.world/event/peshtigo-fire-1871</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Great Thessaloniki Fire (1917) -->
+  <url>
+    <loc>https://evid.world/event/great-thessaloniki-fire-1917</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Hinckley Fire (1894) -->
+  <url>
+    <loc>https://evid.world/event/hinckley-fire-1894</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Black Saturday bushfires (2009) -->
+  <url>
+    <loc>https://evid.world/event/black-saturday-bushfires-2009</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- 1988 Yellowstone fires -->
+  <url>
+    <loc>https://evid.world/event/1988-yellowstone-fires</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Eruption of Mount Vesuvius (AD 79) -->
+  <url>
+    <loc>https://evid.world/event/eruption-of-mount-vesuvius-AD-79</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- 1755 Lisbon earthquake -->
+  <url>
+    <loc>https://evid.world/event/1755-lisbon-earthquake</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Krakatoa eruption (1883) -->
+  <url>
+    <loc>https://evid.world/event/krakatoa-eruption-1883</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- 1900 Galveston hurricane -->
+  <url>
+    <loc>https://evid.world/event/1900-galveston-hurricane</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- 2008 Sichuan earthquake -->
+  <url>
+    <loc>https://evid.world/event/2008-sichuan-earthquake</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- 2010 Haiti earthquake -->
+  <url>
+    <loc>https://evid.world/event/2010-haiti-earthquake</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- 2004 Indian Ocean tsunami -->
+  <url>
+    <loc>https://evid.world/event/2004-indian-ocean-tsunami</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- 2011 Tōhoku earthquake and tsunami -->
+  <url>
+    <loc>https://evid.world/event/2011-thoku-earthquake-and-tsunami</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Laki eruption (1783–1784) -->
+  <url>
+    <loc>https://evid.world/event/laki-eruption-1783-1784</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Deepwater Horizon oil spill (2010) -->
+  <url>
+    <loc>https://evid.world/event/deepwater-horizon-oil-spill-2010</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Chernobyl disaster (1986) -->
+  <url>
+    <loc>https://evid.world/event/chernobyl-disaster-1986</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Bhopal disaster (1984) -->
+  <url>
+    <loc>https://evid.world/event/bhopal-disaster-1984</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Three Mile Island accident (1979) -->
+  <url>
+    <loc>https://evid.world/event/three-mile-island-accident-1979</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Exxon Valdez oil spill (1989) -->
+  <url>
+    <loc>https://evid.world/event/exxon-valdez-oil-spill-1989</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Texas City disaster (1947) -->
+  <url>
+    <loc>https://evid.world/event/texas-city-disaster-1947</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Lac-Mégantic rail disaster (2013) -->
+  <url>
+    <loc>https://evid.world/event/lac-mgantic-rail-disaster-2013</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Granville rail disaster (1977) -->
+  <url>
+    <loc>https://evid.world/event/granville-rail-disaster-1977</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Halifax Explosion (1917) -->
+  <url>
+    <loc>https://evid.world/event/halifax-explosion-1917</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- 2022–2023 mpox outbreak -->
+  <url>
+    <loc>https://evid.world/event/20222023-mpox-outbreak</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- 1755 Lisbon earthquake and tsunami -->
+  <url>
+    <loc>https://evid.world/event/1755-lisbon-earthquake-and-tsunami</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- 2004 Indian Ocean earthquake and tsunami -->
+  <url>
+    <loc>https://evid.world/event/2004-indian-ocean-earthquake-and-tsunami</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Battle of Austerlitz (1805) -->
+  <url>
+    <loc>https://evid.world/event/battle-of-austerlitz-1805</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Battle of Gaugamela -->
+  <url>
+    <loc>https://evid.world/event/battle-of-gaugamela</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Dyatlov Pass incident (1959) -->
+  <url>
+    <loc>https://evid.world/event/dyatlov-pass-incident-1959</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Tunguska event -->
+  <url>
+    <loc>https://evid.world/event/tunguska-event</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Chelyabinsk meteor (2013) -->
+  <url>
+    <loc>https://evid.world/event/chelyabinsk-meteor-2013</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- 1906 San Francisco earthquake -->
+  <url>
+    <loc>https://evid.world/event/1906-san-francisco-earthquake</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Portugal Wildfire demo area -->
+  <url>
+    <loc>https://evid.world/event/portugal-wildfire-demo-area</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Rosetta Stone (findspot, 1799) -->
+  <url>
+    <loc>https://evid.world/event/rosetta-stone-findspot,-1799</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Pompeii archaeological site -->
+  <url>
+    <loc>https://evid.world/event/pompeii-archaeological-site</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Battle of Stalingrad (1942–43) -->
+  <url>
+    <loc>https://evid.world/event/battle-of-stalingrad-1942-43</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- 1980 Irpinia earthquake -->
+  <url>
+    <loc>https://evid.world/event/1980-irpinia-earthquake</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- 1964 Alaska earthquake -->
+  <url>
+    <loc>https://evid.world/event/1964-alaska-earthquake</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Valdivia Earthquake (1960) -->
+  <url>
+    <loc>https://evid.world/event/valdivia-earthquake-1960</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Nepal Earthquake (2015) -->
+  <url>
+    <loc>https://evid.world/event/nepal-earthquake-2015</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Tangshan Earthquake (1976) -->
+  <url>
+    <loc>https://evid.world/event/tangshan-earthquake-1976</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- 2003 Bam earthquake -->
+  <url>
+    <loc>https://evid.world/event/2003-bam-earthquake</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- 1755 Lisbon tsunami impact area -->
+  <url>
+    <loc>https://evid.world/event/1755-lisbon-tsunami-impact-area</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Normandy landings -->
+  <url>
+    <loc>https://evid.world/event/normandy-landings</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Battle of Waterloo (1815) -->
+  <url>
+    <loc>https://evid.world/event/battle-of-waterloo-1815</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Battle of Kursk -->
+  <url>
+    <loc>https://evid.world/event/battle-of-kursk</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Battle of Thermopylae -->
+  <url>
+    <loc>https://evid.world/event/battle-of-thermopylae</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- 2011 Tōhoku tsunami inundation -->
+  <url>
+    <loc>https://evid.world/event/2011-thoku-tsunami-inundation</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- September 11 attacks -->
+  <url>
+    <loc>https://evid.world/event/september-11-attacks-2001</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- 7 July 2005 London bombings -->
+  <url>
+    <loc>https://evid.world/event/july-2005-london-bombings-2005</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- 2019–20 Australian bushfire season -->
+  <url>
+    <loc>https://evid.world/event/201920-australian-bushfire-season</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Camp Fire (2018) -->
+  <url>
+    <loc>https://evid.world/event/camp-fire-2018</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- 2023 Greece wildfires -->
+  <url>
+    <loc>https://evid.world/event/2023-greece-wildfires</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- 2021 Siberia wildfires -->
+  <url>
+    <loc>https://evid.world/event/2021-siberia-wildfires</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Tutankhamun's Tomb Discovery (1922) -->
+  <url>
+    <loc>https://evid.world/event/tutankhamuns-tomb-discovery-1922</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Terracotta Army Discovery (1974) -->
+  <url>
+    <loc>https://evid.world/event/terracotta-army-discovery-1974</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Göbekli Tepe -->
+  <url>
+    <loc>https://evid.world/event/gbekli-tepe</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Vajont Dam disaster -->
+  <url>
+    <loc>https://evid.world/event/vajont-dam-disaster</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Hurricane Katrina -->
+  <url>
+    <loc>https://evid.world/event/hurricane-katrina</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- 2010 Polish Air Force Tu-154 crash -->
+  <url>
+    <loc>https://evid.world/event/2010-polish-air-force-tu-154-crash</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Minamata disease -->
+  <url>
+    <loc>https://evid.world/event/minamata-disease</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Pompeii excavations -->
+  <url>
+    <loc>https://evid.world/event/pompeii-excavations</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- 2010 Eyjafjallajökull eruptions -->
+  <url>
+    <loc>https://evid.world/event/2010-eyjafjallajkull-eruptions</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- 1999 European windstorm Lothar -->
+  <url>
+    <loc>https://evid.world/event/1999-european-windstorm-lothar</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- 2023 Java earthquake and tsunami -->
+  <url>
+    <loc>https://evid.world/event/2023-java-earthquake-and-tsunami</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- 2022–2023 Russian invasion: Kyiv/Chernihiv axis -->
+  <url>
+    <loc>https://evid.world/event/20222023-russian-invasion-kyivchernihiv-axis</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Russo-Ukrainian War (2014–present) -->
+  <url>
+    <loc>https://evid.world/event/russo-ukrainian-war-2014-present</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- RMS Titanic Shipwreck (1912) -->
+  <url>
+    <loc>https://evid.world/event/rms-titanic-shipwreck-1912</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- World War I (global) -->
+  <url>
+    <loc>https://evid.world/event/world-war-i-global</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- World War II (global) -->
+  <url>
+    <loc>https://evid.world/event/world-war-ii-global</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Battle of Hastings (1066) -->
+  <url>
+    <loc>https://evid.world/event/battle-of-hastings-1066</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- American Civil War (1861-1865) -->
+  <url>
+    <loc>https://evid.world/event/american-civil-war-1861-1865-1861</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Mongol conquests (13th century) -->
+  <url>
+    <loc>https://evid.world/event/mongol-conquests-13th-century</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Napoleonic Wars (1803-1815) -->
+  <url>
+    <loc>https://evid.world/event/napoleonic-wars-1803-1815-1803</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Vietnam War (1965-1975) -->
+  <url>
+    <loc>https://evid.world/event/vietnam-war-1965-1975-1965</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- 2011 Norway attacks (Oslo and Utøya) -->
+  <url>
+    <loc>https://evid.world/event/norway-attacks-Oslo-and-Utøya</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Bali Bombings (2002) -->
+  <url>
+    <loc>https://evid.world/event/bali-bombings-2002</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- 2015 Ankara bombings (Oct) -->
+  <url>
+    <loc>https://evid.world/event/ankara-bombings-Oct</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Nice Truck Attack (2016) -->
+  <url>
+    <loc>https://evid.world/event/nice-truck-attack-2016</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- 2019 Sri Lanka Easter bombings -->
+  <url>
+    <loc>https://evid.world/event/2019-sri-lanka-easter-bombings</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Moscow theater hostage crisis (2002) -->
+  <url>
+    <loc>https://evid.world/event/moscow-theater-hostage-crisis-2002</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- 2006 Mumbai train bombings -->
+  <url>
+    <loc>https://evid.world/event/2006-mumbai-train-bombings</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Westgate shopping mall attack (2013) -->
+  <url>
+    <loc>https://evid.world/event/westgate-shopping-mall-attack-2013</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- 2016 Karrada bombing, Baghdad -->
+  <url>
+    <loc>https://evid.world/event/2016-karrada-bombing-baghdad</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- 2016 Atatürk Airport attack -->
+  <url>
+    <loc>https://evid.world/event/2016-atatrk-airport-attack</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- 1960 Chile earthquake & tsunami -->
+  <url>
+    <loc>https://evid.world/event/1960-chile-earthquake-tsunami</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- 1964 Alaska earthquake & tsunami -->
+  <url>
+    <loc>https://evid.world/event/1964-alaska-earthquake-tsunami</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- 1883 Krakatoa eruption & tsunamis -->
+  <url>
+    <loc>https://evid.world/event/1883-krakatoa-eruption-tsunamis</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- 1700 Cascadia earthquake & tsunami -->
+  <url>
+    <loc>https://evid.world/event/1700-cascadia-earthquake-tsunami</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- 2018 Sulawesi (Palu) tsunami -->
+  <url>
+    <loc>https://evid.world/event/2018-sulawesi-palu-tsunami</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- 2009 Samoa earthquake and tsunami -->
+  <url>
+    <loc>https://evid.world/event/2009-samoa-earthquake-and-tsunami</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- 1995 Great Hanshin earthquake (Kobe) -->
+  <url>
+    <loc>https://evid.world/event/great-hanshin-earthquake-Kobe</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Kashmir Earthquake (2005) -->
+  <url>
+    <loc>https://evid.world/event/kashmir-earthquake-2005</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- 2020 Beirut port explosion -->
+  <url>
+    <loc>https://evid.world/event/2020-beirut-port-explosion</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Piper Alpha disaster (1988) -->
+  <url>
+    <loc>https://evid.world/event/piper-alpha-disaster-1988</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Seveso disaster (1976) -->
+  <url>
+    <loc>https://evid.world/event/seveso-disaster-1976</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Banqiao Dam failure (1975) -->
+  <url>
+    <loc>https://evid.world/event/banqiao-dam-failure-1975</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Kyshtym disaster (1957) -->
+  <url>
+    <loc>https://evid.world/event/kyshtym-disaster-1957</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Sayano–Shushenskaya hydro accident (2009) -->
+  <url>
+    <loc>https://evid.world/event/sayanoshushenskaya-hydro-accident-2009</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Aberfan Disaster (1966) -->
+  <url>
+    <loc>https://evid.world/event/aberfan-disaster-1966</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Rana Plaza Collapse (2013) -->
+  <url>
+    <loc>https://evid.world/event/rana-plaza-collapse-2013</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Sampoong Department Store collapse (1995) -->
+  <url>
+    <loc>https://evid.world/event/sampoong-department-store-collapse-1995</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Love Canal environmental disaster (1978) -->
+  <url>
+    <loc>https://evid.world/event/love-canal-environmental-disaster-1978</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Halabja chemical attack (1988) -->
+  <url>
+    <loc>https://evid.world/event/halabja-chemical-attack-1988</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Chernobyl disaster (1986) (ChatGPT version) -->
+  <url>
+    <loc>https://evid.world/event/chernobyl-disaster-1986-ChatGPT-version</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Deepwater Horizon oil spill (2010) (ChatGPT version) -->
+  <url>
+    <loc>https://evid.world/event/deepwater-horizon-oil-spill-2010-ChatGPT-version</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- RMS Titanic shipwreck (1912) (ChatGPT version) -->
+  <url>
+    <loc>https://evid.world/event/rms-titanic-shipwreck-1912-ChatGPT-version</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Dead Sea Scrolls discovery (Qumran) -->
+  <url>
+    <loc>https://evid.world/event/dead-sea-scrolls-discovery-Qumran</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Altamira Cave Paintings (1879) -->
+  <url>
+    <loc>https://evid.world/event/altamira-cave-paintings-1879</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Lascaux Cave Paintings (1940) -->
+  <url>
+    <loc>https://evid.world/event/lascaux-cave-paintings-1940</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Chauvet Cave -->
+  <url>
+    <loc>https://evid.world/event/chauvet-cave</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Sutton Hoo Ship Burial (1939) -->
+  <url>
+    <loc>https://evid.world/event/sutton-hoo-ship-burial-1939</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Machu Picchu (rediscovery 1911) -->
+  <url>
+    <loc>https://evid.world/event/machu-picchu-rediscovery-1911</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Olduvai Gorge hominin finds -->
+  <url>
+    <loc>https://evid.world/event/olduvai-gorge-hominin-finds</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Laetoli footprints -->
+  <url>
+    <loc>https://evid.world/event/laetoli-footprints</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Ötzi the Iceman Discovery (1991) -->
+  <url>
+    <loc>https://evid.world/event/tzi-the-iceman-discovery-1991</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Angkor archaeological park -->
+  <url>
+    <loc>https://evid.world/event/angkor-archaeological-park</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Ancient Troy (Hisarlik) -->
+  <url>
+    <loc>https://evid.world/event/ancient-troy-Hisarlik</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Great Zimbabwe -->
+  <url>
+    <loc>https://evid.world/event/great-zimbabwe</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Mohenjo-daro -->
+  <url>
+    <loc>https://evid.world/event/mohenjo-daro</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Petra -->
+  <url>
+    <loc>https://evid.world/event/petra</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Nazca Lines -->
+  <url>
+    <loc>https://evid.world/event/nazca-lines</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Stonehenge -->
+  <url>
+    <loc>https://evid.world/event/stonehenge</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Nabta Playa megaliths -->
+  <url>
+    <loc>https://evid.world/event/nabta-playa-megaliths</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Denisova Cave -->
+  <url>
+    <loc>https://evid.world/event/denisova-cave</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Royal Cemetery of Ur -->
+  <url>
+    <loc>https://evid.world/event/royal-cemetery-of-ur</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Clovis culture (Blackwater Draw) -->
+  <url>
+    <loc>https://evid.world/event/clovis-culture-Blackwater-Draw</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Skara Brae -->
+  <url>
+    <loc>https://evid.world/event/skara-brae</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Ancient Jericho (Tell es-Sultan) -->
+  <url>
+    <loc>https://evid.world/event/ancient-jericho-Tell-es-Sultan</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Çatalhöyük -->
+  <url>
+    <loc>https://evid.world/event/atalhyk</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Sanxingdui -->
+  <url>
+    <loc>https://evid.world/event/sanxingdui</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Dmanisi hominin site -->
+  <url>
+    <loc>https://evid.world/event/dmanisi-hominin-site</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Giza pyramid complex -->
+  <url>
+    <loc>https://evid.world/event/giza-pyramid-complex</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Teotihuacan -->
+  <url>
+    <loc>https://evid.world/event/teotihuacan</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Rapa Nui (Easter Island) moai -->
+  <url>
+    <loc>https://evid.world/event/rapa-nui-easter-island-moai</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Palmyra -->
+  <url>
+    <loc>https://evid.world/event/palmyra</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Chicxulub impact crater -->
+  <url>
+    <loc>https://evid.world/event/chicxulub-impact-crater</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Campo del Cielo meteorites -->
+  <url>
+    <loc>https://evid.world/event/campo-del-cielo-meteorites</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Sikhote-Alin Meteorite (1947) -->
+  <url>
+    <loc>https://evid.world/event/sikhote-alin-meteorite-1947</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Hoba meteorite -->
+  <url>
+    <loc>https://evid.world/event/hoba-meteorite</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Barringer Crater (Meteor Crater) -->
+  <url>
+    <loc>https://evid.world/event/barringer-crater-Meteor-Crater</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Allende Meteorite (1969) -->
+  <url>
+    <loc>https://evid.world/event/allende-meteorite-1969</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Thirty Years' War (1618-1648) -->
+  <url>
+    <loc>https://evid.world/event/thirty-years-war-1618-1648-1618</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Franco-Prussian War (1870-1871) -->
+  <url>
+    <loc>https://evid.world/event/franco-prussian-war-1870-1871-1870</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Russian Civil War (1917–1923) -->
+  <url>
+    <loc>https://evid.world/event/russian-civil-war-1917-1923</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Chinese Civil War (1927–1950) -->
+  <url>
+    <loc>https://evid.world/event/chinese-civil-war-1927-1950</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Spanish Civil War (1936-1939) -->
+  <url>
+    <loc>https://evid.world/event/spanish-civil-war-1936-1939-1936</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Soviet–Afghan War (1979–1989) -->
+  <url>
+    <loc>https://evid.world/event/sovietafghan-war-1979-1989</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- War in Afghanistan (2001–2021) -->
+  <url>
+    <loc>https://evid.world/event/war-in-afghanistan-2001-2021</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Iraq War (2003-2011) -->
+  <url>
+    <loc>https://evid.world/event/iraq-war-2003-2011</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Russian invasion of Ukraine (2022– ) -->
+  <url>
+    <loc>https://evid.world/event/russian-invasion-of-ukraine-2022-</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Battle of 73 Easting (1991) -->
+  <url>
+    <loc>https://evid.world/event/battle-of-73-easting-1991</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Battle of Gettysburg (1863) -->
+  <url>
+    <loc>https://evid.world/event/battle-of-gettysburg-1863</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- The Blitz (1940–41) -->
+  <url>
+    <loc>https://evid.world/event/the-blitz-1940-41</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Second Battle of El Alamein (1942) -->
+  <url>
+    <loc>https://evid.world/event/second-battle-of-el-alamein-1942</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Battle of Okinawa (1945) -->
+  <url>
+    <loc>https://evid.world/event/battle-of-okinawa-1945</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Guadalcanal Campaign (1942–43) -->
+  <url>
+    <loc>https://evid.world/event/guadalcanal-campaign-1942-43</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- D-Day, Normandy landings (1944) -->
+  <url>
+    <loc>https://evid.world/event/d-day-normandy-landings-1944</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Battle of Berlin (1945) -->
+  <url>
+    <loc>https://evid.world/event/battle-of-berlin-1945</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Munich massacre (1972) -->
+  <url>
+    <loc>https://evid.world/event/munich-massacre-1972</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Pan Am Flight 103 (Lockerbie) bombing (1988) -->
+  <url>
+    <loc>https://evid.world/event/pan-am-flight-103-lockerbie-bombing-1988</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Air India Flight 182 Bombing (1985) -->
+  <url>
+    <loc>https://evid.world/event/air-india-flight-182-bombing-1985</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- 1983 Beirut barracks bombings -->
+  <url>
+    <loc>https://evid.world/event/1983-beirut-barracks-bombings</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- USS Cole Bombing (2000) -->
+  <url>
+    <loc>https://evid.world/event/uss-cole-bombing-2000</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- 2017 Westminster attack -->
+  <url>
+    <loc>https://evid.world/event/2017-westminster-attack</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- 2017 London Bridge attack -->
+  <url>
+    <loc>https://evid.world/event/2017-london-bridge-attack</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Orlando nightclub shooting (2016) -->
+  <url>
+    <loc>https://evid.world/event/orlando-nightclub-shooting-2016</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- 2015 San Bernardino attack -->
+  <url>
+    <loc>https://evid.world/event/2015-san-bernardino-attack</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- 2019 Nairobi DusitD2 complex attack -->
+  <url>
+    <loc>https://evid.world/event/2019-nairobi-dusitd2-complex-attack</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- 2017 Mogadishu bombings -->
+  <url>
+    <loc>https://evid.world/event/2017-mogadishu-bombings</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- 2015 Garissa University College attack -->
+  <url>
+    <loc>https://evid.world/event/2015-garissa-university-college-attack</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- 2016 Lahore Easter bombing -->
+  <url>
+    <loc>https://evid.world/event/2016-lahore-easter-bombing</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- 2021 Kabul airport bombings -->
+  <url>
+    <loc>https://evid.world/event/2021-kabul-airport-bombings</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- 2013 Volgograd bombings -->
+  <url>
+    <loc>https://evid.world/event/2013-volgograd-bombings</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Domodedovo International Airport bombing (2011) -->
+  <url>
+    <loc>https://evid.world/event/domodedovo-international-airport-bombing-2011</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- 2006 Malegaon blasts -->
+  <url>
+    <loc>https://evid.world/event/2006-malegaon-blasts</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- 2008 Ahmedabad bombings -->
+  <url>
+    <loc>https://evid.world/event/2008-ahmedabad-bombings</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- 2008 Jaipur bombings -->
+  <url>
+    <loc>https://evid.world/event/2008-jaipur-bombings</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- 2003 Istanbul bombings -->
+  <url>
+    <loc>https://evid.world/event/2003-istanbul-bombings</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- 2016 Ankara bombing (Feb) -->
+  <url>
+    <loc>https://evid.world/event/ankara-bombing-Feb</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- 2022 Herat mosque bombing -->
+  <url>
+    <loc>https://evid.world/event/2022-herat-mosque-bombing</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- 2017 Tehran attacks -->
+  <url>
+    <loc>https://evid.world/event/2017-tehran-attacks</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- 2020 Nice stabbing -->
+  <url>
+    <loc>https://evid.world/event/2020-nice-stabbing</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- 2018 Strasbourg Christmas market attack -->
+  <url>
+    <loc>https://evid.world/event/2018-strasbourg-christmas-market-attack</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Marawi siege (2017) -->
+  <url>
+    <loc>https://evid.world/event/marawi-siege-2017</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- 1896 Sanriku earthquake and tsunami -->
+  <url>
+    <loc>https://evid.world/event/1896-sanriku-earthquake-and-tsunami</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- 1868 Arica earthquake and tsunami -->
+  <url>
+    <loc>https://evid.world/event/1868-arica-earthquake-and-tsunami</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- 1976 Moro Gulf earthquake and tsunami -->
+  <url>
+    <loc>https://evid.world/event/1976-moro-gulf-earthquake-and-tsunami</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- 1998 Papua New Guinea tsunami -->
+  <url>
+    <loc>https://evid.world/event/1998-papua-new-guinea-tsunami</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- 2006 Java tsunami (Pangandaran) -->
+  <url>
+    <loc>https://evid.world/event/java-tsunami-Pangandaran</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- 2010 Mentawai earthquake and tsunami -->
+  <url>
+    <loc>https://evid.world/event/2010-mentawai-earthquake-and-tsunami</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- 1999 İzmit earthquake -->
+  <url>
+    <loc>https://evid.world/event/1999-izmit-earthquake</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- 2011 Christchurch earthquake -->
+  <url>
+    <loc>https://evid.world/event/2011-christchurch-earthquake</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- 1985 Mexico City earthquake -->
+  <url>
+    <loc>https://evid.world/event/1985-mexico-city-earthquake</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- 2017 Puebla earthquake -->
+  <url>
+    <loc>https://evid.world/event/2017-puebla-earthquake</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- 2003 Boumerdès earthquake -->
+  <url>
+    <loc>https://evid.world/event/2003-boumerds-earthquake</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- 2001 Gujarat earthquake -->
+  <url>
+    <loc>https://evid.world/event/2001-gujarat-earthquake</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Grenfell Tower fire (2017) -->
+  <url>
+    <loc>https://evid.world/event/grenfell-tower-fire-2017</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Tenerife Airport Disaster (1977) -->
+  <url>
+    <loc>https://evid.world/event/tenerife-airport-disaster-1977</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Space Shuttle Challenger disaster (1986) -->
+  <url>
+    <loc>https://evid.world/event/space-shuttle-challenger-disaster-1986</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Space Shuttle Columbia disaster (2003) -->
+  <url>
+    <loc>https://evid.world/event/space-shuttle-columbia-disaster-2003</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Goiânia radiological accident (1987) -->
+  <url>
+    <loc>https://evid.world/event/goinia-radiological-accident-1987</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Great Smog of London (1952) -->
+  <url>
+    <loc>https://evid.world/event/great-smog-of-london-1952</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Fukushima Nuclear Disaster (2011) -->
+  <url>
+    <loc>https://evid.world/event/fukushima-nuclear-disaster-2011</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Amagasaki rail crash (2005) -->
+  <url>
+    <loc>https://evid.world/event/amagasaki-rail-crash-2005</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Love Parade disaster (2010) -->
+  <url>
+    <loc>https://evid.world/event/love-parade-disaster-2010</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Antikythera shipwreck and mechanism -->
+  <url>
+    <loc>https://evid.world/event/antikythera-shipwreck-and-mechanism</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Vindolanda tablets discovery -->
+  <url>
+    <loc>https://evid.world/event/vindolanda-tablets-discovery</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Pazyryk burials (Altai) -->
+  <url>
+    <loc>https://evid.world/event/pazyryk-burials-Altai</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Varna Necropolis -->
+  <url>
+    <loc>https://evid.world/event/varna-necropolis</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Ġgantija megalithic temples -->
+  <url>
+    <loc>https://evid.world/event/gantija-megalithic-temples</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Knossos excavations -->
+  <url>
+    <loc>https://evid.world/event/knossos-excavations</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Herculaneum excavations -->
+  <url>
+    <loc>https://evid.world/event/herculaneum-excavations</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Palenque -->
+  <url>
+    <loc>https://evid.world/event/palenque</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Tikal -->
+  <url>
+    <loc>https://evid.world/event/tikal</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Chan Chan -->
+  <url>
+    <loc>https://evid.world/event/chan-chan</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Blombos Cave discoveries -->
+  <url>
+    <loc>https://evid.world/event/blombos-cave-discoveries</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Shigir Idol discovery -->
+  <url>
+    <loc>https://evid.world/event/shigir-idol-discovery</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Antioch mosaics discovery -->
+  <url>
+    <loc>https://evid.world/event/antioch-mosaics-discovery</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Circus Maximus excavations (Rome) -->
+  <url>
+    <loc>https://evid.world/event/circus-maximus-excavations-Rome</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Oakland Hills Firestorm (1991) -->
+  <url>
+    <loc>https://evid.world/event/oakland-hills-firestorm-1991</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Fort McMurray wildfire (2016) -->
+  <url>
+    <loc>https://evid.world/event/fort-mcmurray-wildfire-2016</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- 2023 Hawaii wildfires (Lahaina) -->
+  <url>
+    <loc>https://evid.world/event/hawaii-wildfires-Lahaina</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- 2019 Amazon rainforest wildfires -->
+  <url>
+    <loc>https://evid.world/event/2019-amazon-rainforest-wildfires</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- 2010 Russian wildfires -->
+  <url>
+    <loc>https://evid.world/event/2010-russian-wildfires</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Great Fire of 1910 (Big Burn) -->
+  <url>
+    <loc>https://evid.world/event/great-fire-of-1910-Big-Burn</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Ensisheim Meteorite (1492) -->
+  <url>
+    <loc>https://evid.world/event/ensisheim-meteorite-1492</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Murchison Meteorite (1969) -->
+  <url>
+    <loc>https://evid.world/event/murchison-meteorite-1969</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Tagish Lake Meteorite (2000) -->
+  <url>
+    <loc>https://evid.world/event/tagish-lake-meteorite-2000</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Sutter's Mill meteorite (2012) -->
+  <url>
+    <loc>https://evid.world/event/sutters-mill-meteorite-2012</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Peekskill Meteorite (1992) -->
+  <url>
+    <loc>https://evid.world/event/peekskill-meteorite-1992</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Park Forest meteorite (2003) -->
+  <url>
+    <loc>https://evid.world/event/park-forest-meteorite-2003</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Winchcombe meteorite (2021) -->
+  <url>
+    <loc>https://evid.world/event/winchcombe-meteorite-2021</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Carancas impact event (2007) -->
+  <url>
+    <loc>https://evid.world/event/carancas-impact-event-2007</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Benld meteorite (1938) -->
+  <url>
+    <loc>https://evid.world/event/benld-meteorite-1938</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Orgueil meteorite (1864) -->
+  <url>
+    <loc>https://evid.world/event/orgueil-meteorite-1864</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Omagh bombing (1998) -->
+  <url>
+    <loc>https://evid.world/event/omagh-bombing-1998</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Tissint meteorite (2011) -->
+  <url>
+    <loc>https://evid.world/event/tissint-meteorite-2011</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Third Crusade (1189-1192) -->
+  <url>
+    <loc>https://evid.world/event/third-crusade-1189-1192</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Hussite Wars (1419-1434) -->
+  <url>
+    <loc>https://evid.world/event/hussite-wars-1419-1434</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- War of Spanish Succession (1701-1714) -->
+  <url>
+    <loc>https://evid.world/event/war-of-spanish-succession-1701-1714</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- War of Austrian Succession (1740-1748) -->
+  <url>
+    <loc>https://evid.world/event/war-of-austrian-succession-1740-1748</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Boxer Rebellion (1899-1901) -->
+  <url>
+    <loc>https://evid.world/event/boxer-rebellion-1899-1901</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Italo-Turkish War (1911-1912) -->
+  <url>
+    <loc>https://evid.world/event/italo-turkish-war-1911-1912</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- First Balkan War (1912-1913) -->
+  <url>
+    <loc>https://evid.world/event/first-balkan-war-1912-1913</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Winter War (1939-1940) -->
+  <url>
+    <loc>https://evid.world/event/winter-war-1939-1940</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Suez Crisis (1956) -->
+  <url>
+    <loc>https://evid.world/event/suez-crisis-1956</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Iran-Iraq War (1980-1988) -->
+  <url>
+    <loc>https://evid.world/event/iran-iraq-war-1980-1988</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Yugoslav Wars (1991-2001) -->
+  <url>
+    <loc>https://evid.world/event/yugoslav-wars-1991-2001</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- First Chechen War (1994-1996) -->
+  <url>
+    <loc>https://evid.world/event/first-chechen-war-1994-1996</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Eritrean-Ethiopian War (1998-2000) -->
+  <url>
+    <loc>https://evid.world/event/eritrean-ethiopian-war-1998-2000</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Russo-Georgian War (2008) -->
+  <url>
+    <loc>https://evid.world/event/russo-georgian-war-2008</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Syrian Civil War (2011-present) -->
+  <url>
+    <loc>https://evid.world/event/syrian-civil-war-2011-present</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Munich Olympic Massacre (1972) -->
+  <url>
+    <loc>https://evid.world/event/munich-olympic-massacre-1972</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Tokyo Sarin Attack (1995) -->
+  <url>
+    <loc>https://evid.world/event/tokyo-sarin-attack-1995</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Khobar Towers Bombing (1996) -->
+  <url>
+    <loc>https://evid.world/event/khobar-towers-bombing-1996</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- US Embassy Bombings (1998) -->
+  <url>
+    <loc>https://evid.world/event/us-embassy-bombings-1998</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Moscow Theater Siege (2002) -->
+  <url>
+    <loc>https://evid.world/event/moscow-theater-siege-2002</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Norway Attacks (2011) -->
+  <url>
+    <loc>https://evid.world/event/norway-attacks-2011</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Boston Marathon Bombing (2013) -->
+  <url>
+    <loc>https://evid.world/event/boston-marathon-bombing-2013</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Charlie Hebdo Shooting (2015) -->
+  <url>
+    <loc>https://evid.world/event/charlie-hebdo-shooting-2015</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Rosetta Stone Discovery (1799) -->
+  <url>
+    <loc>https://evid.world/event/rosetta-stone-discovery-1799</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Pompeii Excavation (1748) -->
+  <url>
+    <loc>https://evid.world/event/pompeii-excavation-1748</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Dead Sea Scrolls Discovery (1947) -->
+  <url>
+    <loc>https://evid.world/event/dead-sea-scrolls-discovery-1947</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Machu Picchu Rediscovery (1911) -->
+  <url>
+    <loc>https://evid.world/event/machu-picchu-rediscovery-1911</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Göbekli Tepe Discovery (1994) -->
+  <url>
+    <loc>https://evid.world/event/gbekli-tepe-discovery-1994</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Nag Hammadi Library (1945) -->
+  <url>
+    <loc>https://evid.world/event/nag-hammadi-library-1945</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Cave of the Hands -->
+  <url>
+    <loc>https://evid.world/event/cave-of-the-hands</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Vindolanda Tablets (1973) -->
+  <url>
+    <loc>https://evid.world/event/vindolanda-tablets-1973</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Lady of Cao Discovery (2006) -->
+  <url>
+    <loc>https://evid.world/event/lady-of-cao-discovery-2006</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Antikythera Mechanism (1901) -->
+  <url>
+    <loc>https://evid.world/event/antikythera-mechanism-1901</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Lucy Fossil Discovery (1974) -->
+  <url>
+    <loc>https://evid.world/event/lucy-fossil-discovery-1974</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Chauvet Cave Discovery (1994) -->
+  <url>
+    <loc>https://evid.world/event/chauvet-cave-discovery-1994</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Tomb of Qin Shi Huang (1974) -->
+  <url>
+    <loc>https://evid.world/event/tomb-of-qin-shi-huang-1974</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Denisovan Discovery (2010) -->
+  <url>
+    <loc>https://evid.world/event/denisovan-discovery-2010</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Mbale Meteorite Shower (1992) -->
+  <url>
+    <loc>https://evid.world/event/mbale-meteorite-shower-1992</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Almahata Sitta Meteorite (2008) -->
+  <url>
+    <loc>https://evid.world/event/almahata-sitta-meteorite-2008</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Barwell Meteorite (1965) -->
+  <url>
+    <loc>https://evid.world/event/barwell-meteorite-1965</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Fukang Pallasite (2000) -->
+  <url>
+    <loc>https://evid.world/event/fukang-pallasite-2000</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Shaanxi Earthquake (1556) -->
+  <url>
+    <loc>https://evid.world/event/shaanxi-earthquake-1556</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Indian Ocean Earthquake (2004) -->
+  <url>
+    <loc>https://evid.world/event/indian-ocean-earthquake-2004</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Tōhoku Earthquake & Tsunami (2011) -->
+  <url>
+    <loc>https://evid.world/event/thoku-earthquake-tsunami-2011</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Turkey-Syria Earthquakes (2023) -->
+  <url>
+    <loc>https://evid.world/event/turkey-syria-earthquakes-2023</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Titanic Sinking (1912) -->
+  <url>
+    <loc>https://evid.world/event/titanic-sinking-1912</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Hindenburg Disaster (1937) -->
+  <url>
+    <loc>https://evid.world/event/hindenburg-disaster-1937</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Costa Concordia Disaster (2012) -->
+  <url>
+    <loc>https://evid.world/event/costa-concordia-disaster-2012</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Spartacus Revolt (73-71 BC) -->
+  <url>
+    <loc>https://evid.world/event/spartacus-revolt-73-71-bc</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Battle of Thermopylae (480 BC) -->
+  <url>
+    <loc>https://evid.world/event/battle-of-thermopylae-480-bc--480</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Battle of Cannae (216 BC) -->
+  <url>
+    <loc>https://evid.world/event/battle-of-cannae-216-bc--216</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Construction of Colosseum (70-80 CE) -->
+  <url>
+    <loc>https://evid.world/event/construction-of-colosseum-70-80-CE</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Eruption of Mount Vesuvius (79 CE) -->
+  <url>
+    <loc>https://evid.world/event/eruption-of-mount-vesuvius-79-CE</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Library of Alexandria Founded (300 BC) -->
+  <url>
+    <loc>https://evid.world/event/library-of-alexandria-founded-300-bc</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Qin Dynasty Unifies China (221 BC) -->
+  <url>
+    <loc>https://evid.world/event/qin-dynasty-unifies-china-221-bc</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Mauryan Empire Peak (250 BC) -->
+  <url>
+    <loc>https://evid.world/event/mauryan-empire-peak-250-bc</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Roman Republic Founded (509 BC) -->
+  <url>
+    <loc>https://evid.world/event/roman-republic-founded-509-bc</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Persian Empire Founded (550 BC) -->
+  <url>
+    <loc>https://evid.world/event/persian-empire-founded-550-bc</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Parthenon Completed (432 BC) -->
+  <url>
+    <loc>https://evid.world/event/parthenon-completed-432-bc</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Death of Socrates (399 BC) -->
+  <url>
+    <loc>https://evid.world/event/death-of-socrates-399-bc</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Han Dynasty Established (206 BC) -->
+  <url>
+    <loc>https://evid.world/event/han-dynasty-established-206-bc</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Battle of Adrianople (378 CE) -->
+  <url>
+    <loc>https://evid.world/event/battle-of-adrianople-378-CE</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Edict of Milan (313 CE) -->
+  <url>
+    <loc>https://evid.world/event/edict-of-milan-313-ce-313</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Council of Nicaea (325 CE) -->
+  <url>
+    <loc>https://evid.world/event/council-of-nicaea-325-ce-325</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Fall of Western Roman Empire (476 CE) -->
+  <url>
+    <loc>https://evid.world/event/fall-of-western-roman-empire-476-ce-476</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Founding of Constantinople (330 CE) -->
+  <url>
+    <loc>https://evid.world/event/founding-of-constantinople-330-CE</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Crucifixion of Jesus (33 CE) -->
+  <url>
+    <loc>https://evid.world/event/crucifixion-of-jesus-33-CE</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Assassination of Julius Caesar (44 BC) -->
+  <url>
+    <loc>https://evid.world/event/assassination-of-julius-caesar-44-bc--44</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Great Fire of Rome (64 CE) -->
+  <url>
+    <loc>https://evid.world/event/great-fire-of-rome-64-ce-64</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- First Jewish-Roman War (66-73 CE) -->
+  <url>
+    <loc>https://evid.world/event/first-jewish-roman-war-66-73-CE</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Antonine Plague (165-180 CE) -->
+  <url>
+    <loc>https://evid.world/event/antonine-plague-165-180-CE</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Crisis of the Third Century (235-284 CE) -->
+  <url>
+    <loc>https://evid.world/event/crisis-of-the-third-century-235-284-CE</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Battle of Salamis (480 BC) -->
+  <url>
+    <loc>https://evid.world/event/battle-of-salamis-480-bc--480</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Peloponnesian War (431-404 BC) -->
+  <url>
+    <loc>https://evid.world/event/peloponnesian-war-431-404-bc--431</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Plague of Athens (430 BC) -->
+  <url>
+    <loc>https://evid.world/event/plague-of-athens-430-bc</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Alexander's Conquests (334-323 BC) -->
+  <url>
+    <loc>https://evid.world/event/alexanders-conquests-334-323-bc--334</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Burning of Persepolis (330 BC) -->
+  <url>
+    <loc>https://evid.world/event/burning-of-persepolis-330-bc</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Wars of the Diadochi (323-281 BC) -->
+  <url>
+    <loc>https://evid.world/event/wars-of-the-diadochi-323-281-bc--323</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Imperial Crisis (235-284 CE) -->
+  <url>
+    <loc>https://evid.world/event/imperial-crisis-235-284-CE</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Diocletian's Reforms (284 CE) -->
+  <url>
+    <loc>https://evid.world/event/diocletians-reforms-284-CE</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Battle of Tours (732 CE) -->
+  <url>
+    <loc>https://evid.world/event/battle-of-tours-732-CE</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Charlemagne Crowned Emperor (800 CE) -->
+  <url>
+    <loc>https://evid.world/event/charlemagne-crowned-emperor-800-CE</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Viking Age Begins (793 CE) -->
+  <url>
+    <loc>https://evid.world/event/viking-age-begins-793-CE</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Baghdad Founded (762 CE) -->
+  <url>
+    <loc>https://evid.world/event/baghdad-founded-762-CE</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Treaty of Verdun (843 CE) -->
+  <url>
+    <loc>https://evid.world/event/treaty-of-verdun-843-CE</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- East-West Schism (1054 CE) -->
+  <url>
+    <loc>https://evid.world/event/east-west-schism-1054-CE</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- First Crusade Launched (1096 CE) -->
+  <url>
+    <loc>https://evid.world/event/first-crusade-launched-1096-CE</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Founding of Cairo (969 CE) -->
+  <url>
+    <loc>https://evid.world/event/founding-of-cairo-969-CE</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Reconquista Begins (722 CE) -->
+  <url>
+    <loc>https://evid.world/event/reconquista-begins-722-CE</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Battle of Manzikert (1071 CE) -->
+  <url>
+    <loc>https://evid.world/event/battle-of-manzikert-1071-CE</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Angkor Wat Built (1113-1150 CE) -->
+  <url>
+    <loc>https://evid.world/event/angkor-wat-built-1113-1150-CE</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- University of Bologna Founded (1088 CE) -->
+  <url>
+    <loc>https://evid.world/event/university-of-bologna-founded-1088-CE</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Saladin Retakes Jerusalem (1187 CE) -->
+  <url>
+    <loc>https://evid.world/event/saladin-retakes-jerusalem-1187-CE</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Magna Carta Signed (1215 CE) -->
+  <url>
+    <loc>https://evid.world/event/magna-carta-signed-1215-CE</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Mongol Invasion of Rus' (1237-1242 CE) -->
+  <url>
+    <loc>https://evid.world/event/mongol-invasion-of-rus-1237-1242-CE</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Black Death Arrives in Europe (1347 CE) -->
+  <url>
+    <loc>https://evid.world/event/black-death-arrives-in-europe-1347-CE</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Battle of Crécy (1346 CE) -->
+  <url>
+    <loc>https://evid.world/event/battle-of-crcy-1346-CE</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Fall of Constantinople (1453 CE) -->
+  <url>
+    <loc>https://evid.world/event/fall-of-constantinople-1453-CE</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Joan of Arc Leads French (1429 CE) -->
+  <url>
+    <loc>https://evid.world/event/joan-of-arc-leads-french-1429-CE</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Gutenberg's Printing Press (1440 CE) -->
+  <url>
+    <loc>https://evid.world/event/gutenbergs-printing-press-1440-CE</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Battle of Agincourt (1415 CE) -->
+  <url>
+    <loc>https://evid.world/event/battle-of-agincourt-1415-CE</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Columbus Reaches Americas (1492 CE) -->
+  <url>
+    <loc>https://evid.world/event/columbus-reaches-americas-1492-CE</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Vasco da Gama Reaches India (1498 CE) -->
+  <url>
+    <loc>https://evid.world/event/vasco-da-gama-reaches-india-1498-CE</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Leonardo Paints Mona Lisa (1503 CE) -->
+  <url>
+    <loc>https://evid.world/event/leonardo-paints-mona-lisa-1503-CE</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Sistine Chapel Ceiling Completed (1512 CE) -->
+  <url>
+    <loc>https://evid.world/event/sistine-chapel-ceiling-completed-1512-CE</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Luther's 95 Theses (1517 CE) -->
+  <url>
+    <loc>https://evid.world/event/luthers-95-theses-1517-ce-1517</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Magellan's Circumnavigation (1519-1522 CE) -->
+  <url>
+    <loc>https://evid.world/event/magellans-circumnavigation-1519-1522-CE</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Fall of Aztec Empire (1521 CE) -->
+  <url>
+    <loc>https://evid.world/event/fall-of-aztec-empire-1521-CE</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Copernicus Heliocentric Theory (1543 CE) -->
+  <url>
+    <loc>https://evid.world/event/copernicus-heliocentric-theory-1543-CE</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Council of Trent (1545-1563 CE) -->
+  <url>
+    <loc>https://evid.world/event/council-of-trent-1545-1563-CE</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Battle of Lepanto (1571 CE) -->
+  <url>
+    <loc>https://evid.world/event/battle-of-lepanto-1571-CE</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Spanish Armada Defeated (1588 CE) -->
+  <url>
+    <loc>https://evid.world/event/spanish-armada-defeated-1588-CE</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Shakespeare Writes Hamlet (1600 CE) -->
+  <url>
+    <loc>https://evid.world/event/shakespeare-writes-hamlet-1600-CE</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Jamestown Colony Founded (1607 CE) -->
+  <url>
+    <loc>https://evid.world/event/jamestown-colony-founded-1607-CE</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Galileo's Telescope Observations (1609 CE) -->
+  <url>
+    <loc>https://evid.world/event/galileos-telescope-observations-1609-CE</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Thirty Years' War Begins (1618 CE) -->
+  <url>
+    <loc>https://evid.world/event/thirty-years-war-begins-1618-CE</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Napoleon Bonaparte Born (1769 CE) -->
+  <url>
+    <loc>https://evid.world/event/napoleon-bonaparte-born-1769-CE</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Declaration of Independence (1776 CE) -->
+  <url>
+    <loc>https://evid.world/event/declaration-of-independence-1776-CE</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- French Revolution Begins (1789 CE) -->
+  <url>
+    <loc>https://evid.world/event/french-revolution-begins-1789-CE</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Haitian Revolution Begins (1791 CE) -->
+  <url>
+    <loc>https://evid.world/event/haitian-revolution-begins-1791-CE</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Rosetta Stone Discovered (1799 CE) -->
+  <url>
+    <loc>https://evid.world/event/rosetta-stone-discovered-1799-CE</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Battle of Trafalgar (1805 CE) -->
+  <url>
+    <loc>https://evid.world/event/battle-of-trafalgar-1805-CE</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Congress of Vienna (1815 CE) -->
+  <url>
+    <loc>https://evid.world/event/congress-of-vienna-1815-CE</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Bolívar Liberates Colombia (1819 CE) -->
+  <url>
+    <loc>https://evid.world/event/bolvar-liberates-colombia-1819-CE</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Monroe Doctrine (1823 CE) -->
+  <url>
+    <loc>https://evid.world/event/monroe-doctrine-1823-CE</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- First Photograph Taken (1826 CE) -->
+  <url>
+    <loc>https://evid.world/event/first-photograph-taken-1826-CE</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Erie Canal Opens (1825 CE) -->
+  <url>
+    <loc>https://evid.world/event/erie-canal-opens-1825-CE</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Texas Revolution (1836 CE) -->
+  <url>
+    <loc>https://evid.world/event/texas-revolution-1836-CE</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- First Opium War (1839-1842 CE) -->
+  <url>
+    <loc>https://evid.world/event/first-opium-war-1839-1842-CE</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Irish Potato Famine (1845-1852 CE) -->
+  <url>
+    <loc>https://evid.world/event/irish-potato-famine-1845-1852-CE</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Revolutions of 1848 (1848 CE) -->
+  <url>
+    <loc>https://evid.world/event/revolutions-of-1848-1848-CE</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- California Gold Rush (1849 CE) -->
+  <url>
+    <loc>https://evid.world/event/california-gold-rush-1849-CE</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Perry Opens Japan (1853 CE) -->
+  <url>
+    <loc>https://evid.world/event/perry-opens-japan-1853-CE</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Crimean War (1853-1856 CE) -->
+  <url>
+    <loc>https://evid.world/event/crimean-war-1853-1856-CE</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Darwin's Origin of Species (1859 CE) -->
+  <url>
+    <loc>https://evid.world/event/darwins-origin-of-species-1859-CE</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Unification of Italy (1861 CE) -->
+  <url>
+    <loc>https://evid.world/event/unification-of-italy-1861-CE</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- World War I Begins (1914 CE) -->
+  <url>
+    <loc>https://evid.world/event/world-war-i-begins-1914-CE</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Russian Revolution (1917 CE) -->
+  <url>
+    <loc>https://evid.world/event/russian-revolution-1917-CE</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Spanish Flu Pandemic (1918 CE) -->
+  <url>
+    <loc>https://evid.world/event/spanish-flu-pandemic-1918-CE</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Treaty of Versailles (1919 CE) -->
+  <url>
+    <loc>https://evid.world/event/treaty-of-versailles-1919-CE</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Tutankhamun's Tomb Discovered (1922 CE) -->
+  <url>
+    <loc>https://evid.world/event/tutankhamuns-tomb-discovered-1922-CE</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Great Depression Begins (1929 CE) -->
+  <url>
+    <loc>https://evid.world/event/great-depression-begins-1929-CE</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Hitler Becomes Chancellor (1933 CE) -->
+  <url>
+    <loc>https://evid.world/event/hitler-becomes-chancellor-1933-CE</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- The Long March (1934-1935 CE) -->
+  <url>
+    <loc>https://evid.world/event/the-long-march-1934-1935-CE</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Invasion of Poland (1939 CE) -->
+  <url>
+    <loc>https://evid.world/event/invasion-of-poland-1939-CE</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Battle of Britain (1940 CE) -->
+  <url>
+    <loc>https://evid.world/event/battle-of-britain-1940-CE</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Attack on Pearl Harbor (1941 CE) -->
+  <url>
+    <loc>https://evid.world/event/attack-on-pearl-harbor-1941-CE</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Battle of Stalingrad (1942-1943 CE) -->
+  <url>
+    <loc>https://evid.world/event/battle-of-stalingrad-1942-1943-CE</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- D-Day Normandy Invasion (1944 CE) -->
+  <url>
+    <loc>https://evid.world/event/d-day-normandy-invasion-1944-CE</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Atomic Bomb Dropped on Hiroshima (1945 CE) -->
+  <url>
+    <loc>https://evid.world/event/atomic-bomb-dropped-on-hiroshima-1945-CE</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- United Nations Founded (1945 CE) -->
+  <url>
+    <loc>https://evid.world/event/united-nations-founded-1945-CE</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Partition of India (1947 CE) -->
+  <url>
+    <loc>https://evid.world/event/partition-of-india-1947-CE</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- State of Israel Founded (1948 CE) -->
+  <url>
+    <loc>https://evid.world/event/state-of-israel-founded-1948-CE</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Berlin Airlift (1948-1949 CE) -->
+  <url>
+    <loc>https://evid.world/event/berlin-airlift-1948-1949-CE</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- NATO Founded (1949 CE) -->
+  <url>
+    <loc>https://evid.world/event/nato-founded-1949-CE</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- People's Republic of China Proclaimed (1949 CE) -->
+  <url>
+    <loc>https://evid.world/event/peoples-republic-of-china-proclaimed-1949-CE</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Korean War Begins (1950 CE) -->
+  <url>
+    <loc>https://evid.world/event/korean-war-begins-1950-CE</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Rosenbergs Executed (1953 CE) -->
+  <url>
+    <loc>https://evid.world/event/rosenbergs-executed-1953-CE</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Stalin Dies (1953 CE) -->
+  <url>
+    <loc>https://evid.world/event/stalin-dies-1953-CE</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Brown v. Board of Education (1954 CE) -->
+  <url>
+    <loc>https://evid.world/event/brown-v-board-of-education-1954-CE</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Warsaw Pact Formed (1955 CE) -->
+  <url>
+    <loc>https://evid.world/event/warsaw-pact-formed-1955-CE</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Hungarian Revolution (1956 CE) -->
+  <url>
+    <loc>https://evid.world/event/hungarian-revolution-1956-CE</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Sputnik Launched (1957 CE) -->
+  <url>
+    <loc>https://evid.world/event/sputnik-launched-1957-CE</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Cuban Revolution (1959 CE) -->
+  <url>
+    <loc>https://evid.world/event/cuban-revolution-1959-CE</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Berlin Wall Constructed (1961 CE) -->
+  <url>
+    <loc>https://evid.world/event/berlin-wall-constructed-1961-CE</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Bay of Pigs Invasion (1961 CE) -->
+  <url>
+    <loc>https://evid.world/event/bay-of-pigs-invasion-1961-CE</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Cuban Missile Crisis (1962 CE) -->
+  <url>
+    <loc>https://evid.world/event/cuban-missile-crisis-1962-CE</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- JFK Assassination (1963 CE) -->
+  <url>
+    <loc>https://evid.world/event/jfk-assassination-1963-CE</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- MLK 'I Have a Dream' Speech (1963 CE) -->
+  <url>
+    <loc>https://evid.world/event/mlk-i-have-a-dream-speech-1963-CE</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Vietnam War Escalates (1965 CE) -->
+  <url>
+    <loc>https://evid.world/event/vietnam-war-escalates-1965-CE</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Cultural Revolution Begins (1966 CE) -->
+  <url>
+    <loc>https://evid.world/event/cultural-revolution-begins-1966-CE</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Prague Spring (1968 CE) -->
+  <url>
+    <loc>https://evid.world/event/prague-spring-1968-CE</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Apollo 11 Moon Landing (1969 CE) -->
+  <url>
+    <loc>https://evid.world/event/apollo-11-moon-landing-1969-ce-1969</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Great Pyramid of Giza Built (2560 BCE) -->
+  <url>
+    <loc>https://evid.world/event/great-pyramid-of-giza-built-2560-bce--2560</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Fall of Troy (1180 BCE) -->
+  <url>
+    <loc>https://evid.world/event/fall-of-troy-1180-bce--1180</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Founding of Rome (753 BCE) -->
+  <url>
+    <loc>https://evid.world/event/founding-of-rome-753-bce--753</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Battle of Marathon (490 BCE) -->
+  <url>
+    <loc>https://evid.world/event/battle-of-marathon-490-bce--490</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Battle of Thermopylae (480 BCE) -->
+  <url>
+    <loc>https://evid.world/event/battle-of-thermopylae-480-bce--480</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Battle of Salamis (480 BCE) -->
+  <url>
+    <loc>https://evid.world/event/battle-of-salamis-480-bce--480</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Peloponnesian War Begins (431 BCE) -->
+  <url>
+    <loc>https://evid.world/event/peloponnesian-war-begins-431-bce--431</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Death of Socrates (399 BCE) -->
+  <url>
+    <loc>https://evid.world/event/death-of-socrates-399-bce--399</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Battle of Gaugamela (331 BCE) -->
+  <url>
+    <loc>https://evid.world/event/battle-of-gaugamela-331-bce--331</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Founding of Alexandria (331 BCE) -->
+  <url>
+    <loc>https://evid.world/event/founding-of-alexandria-331-bce--331</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Battle of Cannae (216 BCE) -->
+  <url>
+    <loc>https://evid.world/event/battle-of-cannae-216-bce--216</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Assassination of Julius Caesar (44 BCE) -->
+  <url>
+    <loc>https://evid.world/event/assassination-of-julius-caesar-44-bce--44</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Birth of Jesus Christ (1 CE) -->
+  <url>
+    <loc>https://evid.world/event/birth-of-jesus-christ-1-ce-1</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Battle of Teutoburg Forest (9 CE) -->
+  <url>
+    <loc>https://evid.world/event/battle-of-teutoburg-forest-9-ce-9</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Destruction of Jerusalem (70 CE) -->
+  <url>
+    <loc>https://evid.world/event/destruction-of-jerusalem-70-ce-70</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Justinian Plague (541 CE) -->
+  <url>
+    <loc>https://evid.world/event/justinian-plague-541-ce-541</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Battle of Marathon (490 BC) -->
+  <url>
+    <loc>https://evid.world/event/battle-of-marathon-490-bc--490</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Siege of Tyre (332 BC) -->
+  <url>
+    <loc>https://evid.world/event/siege-of-tyre-332-bc--332</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- First Punic War (264-241 BC) -->
+  <url>
+    <loc>https://evid.world/event/first-punic-war-264-241-bc--264</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Gallic Wars (58-50 BC) -->
+  <url>
+    <loc>https://evid.world/event/gallic-wars-58-50-bc--58</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Battle of Alesia (52 BC) -->
+  <url>
+    <loc>https://evid.world/event/battle-of-alesia-52-bc--52</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Caesar's Civil War (49-45 BC) -->
+  <url>
+    <loc>https://evid.world/event/caesars-civil-war-49-45-bc--49</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Battle of Pharsalus (48 BC) -->
+  <url>
+    <loc>https://evid.world/event/battle-of-pharsalus-48-bc--48</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Crisis of the Third Century (235-284) -->
+  <url>
+    <loc>https://evid.world/event/crisis-of-the-third-century-235-284-235</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Eruption of Thera (1600 BC) -->
+  <url>
+    <loc>https://evid.world/event/eruption-of-thera-1600-bc--1600</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Bronze Age Collapse (1200 BC) -->
+  <url>
+    <loc>https://evid.world/event/bronze-age-collapse-1200-bc--1200</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Battle of Kadesh (1274 BC) -->
+  <url>
+    <loc>https://evid.world/event/battle-of-kadesh-1274-bc--1274</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Exodus from Egypt (1450 BC) -->
+  <url>
+    <loc>https://evid.world/event/exodus-from-egypt-1450-bc--1450</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Great Pyramid Built (2560 BC) -->
+  <url>
+    <loc>https://evid.world/event/great-pyramid-built-2560-bc--2560</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Akkadian Empire Founded (2334 BC) -->
+  <url>
+    <loc>https://evid.world/event/akkadian-empire-founded-2334-bc--2334</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Fall of Ur (2004 BC) -->
+  <url>
+    <loc>https://evid.world/event/fall-of-ur-2004-bc--2004</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Reign of Hammurabi (1792-1750 BC) -->
+  <url>
+    <loc>https://evid.world/event/reign-of-hammurabi-1792-1750-bc--1792</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Hyksos Invasion of Egypt (1650 BC) -->
+  <url>
+    <loc>https://evid.world/event/hyksos-invasion-of-egypt-1650-bc--1650</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Neo-Assyrian Empire Peak (700 BC) -->
+  <url>
+    <loc>https://evid.world/event/neo-assyrian-empire-peak-700-bc--700</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Sack of Nineveh (612 BC) -->
+  <url>
+    <loc>https://evid.world/event/sack-of-nineveh-612-bc--612</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Nebuchadnezzar's Reign (605-562 BC) -->
+  <url>
+    <loc>https://evid.world/event/nebuchadnezzars-reign-605-562-bc--605</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Persian Conquest of Babylon (539 BC) -->
+  <url>
+    <loc>https://evid.world/event/persian-conquest-of-babylon-539-bc--539</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Sack of Jerusalem (586 BC) -->
+  <url>
+    <loc>https://evid.world/event/sack-of-jerusalem-586-bc--586</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Battle of Leuctra (371 BC) -->
+  <url>
+    <loc>https://evid.world/event/battle-of-leuctra-371-bc--371</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Fall of Western Roman Empire (476) -->
+  <url>
+    <loc>https://evid.world/event/fall-of-western-roman-empire-476</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Viking Raid on Lindisfarne (793) -->
+  <url>
+    <loc>https://evid.world/event/viking-raid-on-lindisfarne-793</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Foundation of Kievan Rus (882) -->
+  <url>
+    <loc>https://evid.world/event/foundation-of-kievan-rus-882</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Umayyad Caliphate (661-750) -->
+  <url>
+    <loc>https://evid.world/event/umayyad-caliphate-661-750-661</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Abbasid Revolution (750) -->
+  <url>
+    <loc>https://evid.world/event/abbasid-revolution-750</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Foundation of Cairo (969) -->
+  <url>
+    <loc>https://evid.world/event/foundation-of-cairo-969</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Norman Conquest of England (1066) -->
+  <url>
+    <loc>https://evid.world/event/norman-conquest-of-england-1066</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Buyid Conquest of Baghdad (945) -->
+  <url>
+    <loc>https://evid.world/event/buyid-conquest-of-baghdad-945</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Battle of Talas (751) -->
+  <url>
+    <loc>https://evid.world/event/battle-of-talas-751</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- An Lushan Rebellion (755-763) -->
+  <url>
+    <loc>https://evid.world/event/an-lushan-rebellion-755-763-755</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Viking Siege of Paris (885-886) -->
+  <url>
+    <loc>https://evid.world/event/viking-siege-of-paris-885-886-885</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Christianization of Kievan Rus (988) -->
+  <url>
+    <loc>https://evid.world/event/christianization-of-kievan-rus-988</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Battle of Stirling Bridge (1297) -->
+  <url>
+    <loc>https://evid.world/event/battle-of-stirling-bridge-1297</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Fourth Crusade (1202-1204) -->
+  <url>
+    <loc>https://evid.world/event/fourth-crusade-1202-1204</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Battle of Ain Jalut (1260) -->
+  <url>
+    <loc>https://evid.world/event/battle-of-ain-jalut-1260</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Mongol Sack of Baghdad (1258) -->
+  <url>
+    <loc>https://evid.world/event/mongol-sack-of-baghdad-1258</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Battle of Bosworth Field (1485) -->
+  <url>
+    <loc>https://evid.world/event/battle-of-bosworth-field-1485</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Fall of Granada (1492) -->
+  <url>
+    <loc>https://evid.world/event/fall-of-granada-1492</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Battle of Grunwald (1410) -->
+  <url>
+    <loc>https://evid.world/event/battle-of-grunwald-1410</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Battle of Kosovo (1389) -->
+  <url>
+    <loc>https://evid.world/event/battle-of-kosovo-1389</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Great Famine (1315-1317) -->
+  <url>
+    <loc>https://evid.world/event/great-famine-1315-1317-1315</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Jacquerie Uprising (1358) -->
+  <url>
+    <loc>https://evid.world/event/jacquerie-uprising-1358</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Battle of Nicopolis (1396) -->
+  <url>
+    <loc>https://evid.world/event/battle-of-nicopolis-1396</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Gutenberg Printing Press (1450) -->
+  <url>
+    <loc>https://evid.world/event/gutenberg-printing-press-1450</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Battle of Varna (1444) -->
+  <url>
+    <loc>https://evid.world/event/battle-of-varna-1444</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- End of Hundred Years' War (1453) -->
+  <url>
+    <loc>https://evid.world/event/end-of-hundred-years-war-1453</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Columbus Reaches America (1492) -->
+  <url>
+    <loc>https://evid.world/event/columbus-reaches-america-1492</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Spanish Conquest of Aztec Empire (1521) -->
+  <url>
+    <loc>https://evid.world/event/spanish-conquest-of-aztec-empire-1521</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Battle of Pavia (1525) -->
+  <url>
+    <loc>https://evid.world/event/battle-of-pavia-1525</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Sack of Rome (1527) -->
+  <url>
+    <loc>https://evid.world/event/sack-of-rome-1527</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Spanish Conquest of Inca Empire (1533) -->
+  <url>
+    <loc>https://evid.world/event/spanish-conquest-of-inca-empire-1533</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Council of Trent (1545-1563) -->
+  <url>
+    <loc>https://evid.world/event/council-of-trent-1545-1563-1545</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- St. Bartholomew's Day Massacre (1572) -->
+  <url>
+    <loc>https://evid.world/event/st-bartholomews-day-massacre-1572</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Edict of Nantes (1598) -->
+  <url>
+    <loc>https://evid.world/event/edict-of-nantes-1598</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Shakespeare First Folio (1623) -->
+  <url>
+    <loc>https://evid.world/event/shakespeare-first-folio-1623</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- English Civil War (1642-1651) -->
+  <url>
+    <loc>https://evid.world/event/english-civil-war-1642-1651-1642</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Peace of Westphalia (1648) -->
+  <url>
+    <loc>https://evid.world/event/peace-of-westphalia-1648</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Execution of Charles I (1649) -->
+  <url>
+    <loc>https://evid.world/event/execution-of-charles-i-1649</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Glorious Revolution (1688) -->
+  <url>
+    <loc>https://evid.world/event/glorious-revolution-1688</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Newton's Principia Published (1687) -->
+  <url>
+    <loc>https://evid.world/event/newtons-principia-published-1687</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Battle of Poltava (1709) -->
+  <url>
+    <loc>https://evid.world/event/battle-of-poltava-1709</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Treaty of Utrecht (1713) -->
+  <url>
+    <loc>https://evid.world/event/treaty-of-utrecht-1713</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Battle of Plassey (1757) -->
+  <url>
+    <loc>https://evid.world/event/battle-of-plassey-1757</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Battle of Quebec (1759) -->
+  <url>
+    <loc>https://evid.world/event/battle-of-quebec-1759</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- American Revolution (1775-1783) -->
+  <url>
+    <loc>https://evid.world/event/american-revolution-1775-1783-1775</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Battle of Yorktown (1781) -->
+  <url>
+    <loc>https://evid.world/event/battle-of-yorktown-1781</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- U.S. Constitution Ratified (1788) -->
+  <url>
+    <loc>https://evid.world/event/us-constitution-ratified-1788-1787</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Reign of Terror (1793-1794) -->
+  <url>
+    <loc>https://evid.world/event/reign-of-terror-1793-1794-1793</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Haitian Revolution (1791-1804) -->
+  <url>
+    <loc>https://evid.world/event/haitian-revolution-1791-1804-1791</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Latin American Independence Wars (1808-1826) -->
+  <url>
+    <loc>https://evid.world/event/latin-american-independence-wars-1808-1826-1810</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Napoleon's Invasion of Russia (1812) -->
+  <url>
+    <loc>https://evid.world/event/napoleons-invasion-of-russia-1812</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- War of 1812 (1812-1815) -->
+  <url>
+    <loc>https://evid.world/event/war-of-1812-1812-1815-1812</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Battle of Leipzig (1813) -->
+  <url>
+    <loc>https://evid.world/event/battle-of-leipzig-1813</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Irish Potato Famine (1845-1852) -->
+  <url>
+    <loc>https://evid.world/event/irish-potato-famine-1845-1852-1845</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Revolutions of 1848 -->
+  <url>
+    <loc>https://evid.world/event/revolutions-of-1848</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Indian Rebellion of 1857 -->
+  <url>
+    <loc>https://evid.world/event/indian-rebellion-of-1857</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Italian Unification (1861) -->
+  <url>
+    <loc>https://evid.world/event/italian-unification-1861</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Meiji Restoration (1868) -->
+  <url>
+    <loc>https://evid.world/event/meiji-restoration-1868</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- German Unification (1871) -->
+  <url>
+    <loc>https://evid.world/event/german-unification-1871</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Third Anglo-Burmese War (1885) -->
+  <url>
+    <loc>https://evid.world/event/third-anglo-burmese-war-1885</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Johnstown Flood (1889) -->
+  <url>
+    <loc>https://evid.world/event/johnstown-flood-1889</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- First Sino-Japanese War (1894-1895) -->
+  <url>
+    <loc>https://evid.world/event/first-sino-japanese-war-1894-1895-1894</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Battle of Chaeronea (338 BC) -->
+  <url>
+    <loc>https://evid.world/event/battle-of-chaeronea-338-bc--338</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Battle of Issus (333 BC) -->
+  <url>
+    <loc>https://evid.world/event/battle-of-issus-333-bc--333</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Battle of the Hydaspes (326 BC) -->
+  <url>
+    <loc>https://evid.world/event/battle-of-the-hydaspes-326-bc--326</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Second Punic War (218-201 BC) -->
+  <url>
+    <loc>https://evid.world/event/second-punic-war-218-201-bc--218</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Battle of Zama (202 BC) -->
+  <url>
+    <loc>https://evid.world/event/battle-of-zama-202-bc--202</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Third Punic War (149-146 BC) -->
+  <url>
+    <loc>https://evid.world/event/third-punic-war-149-146-bc--149</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Battle of Philippi (42 BC) -->
+  <url>
+    <loc>https://evid.world/event/battle-of-philippi-42-bc--42</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Battle of Teutoburg Forest (9 AD) -->
+  <url>
+    <loc>https://evid.world/event/battle-of-teutoburg-forest-9-ad-9</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Great Fire of Rome (64 AD) -->
+  <url>
+    <loc>https://evid.world/event/great-fire-of-rome-64-ad-64</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- First Jewish-Roman War (66-73 AD) -->
+  <url>
+    <loc>https://evid.world/event/first-jewish-roman-war-66-73-ad-66</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Siege of Jerusalem (70 AD) -->
+  <url>
+    <loc>https://evid.world/event/siege-of-jerusalem-70-ad-70</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Fall of Kingdom of Israel (722 BC) -->
+  <url>
+    <loc>https://evid.world/event/fall-of-kingdom-of-israel-722-bc--722</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Battle of Carrhae (53 BC) -->
+  <url>
+    <loc>https://evid.world/event/battle-of-carrhae-53-bc--53</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Coronation of Charlemagne (800) -->
+  <url>
+    <loc>https://evid.world/event/coronation-of-charlemagne-800</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Great Heathen Army Invasion (865) -->
+  <url>
+    <loc>https://evid.world/event/great-heathen-army-invasion-865</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- First Crusade (1096-1099) -->
+  <url>
+    <loc>https://evid.world/event/first-crusade-1096-1099-1096</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Sack of Constantinople (1204) -->
+  <url>
+    <loc>https://evid.world/event/sack-of-constantinople-1204</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Fall of Acre (1291) -->
+  <url>
+    <loc>https://evid.world/event/fall-of-acre-1291</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Battle of Poitiers (1356) -->
+  <url>
+    <loc>https://evid.world/event/battle-of-poitiers-1356</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Peasants' Revolt (1381) -->
+  <url>
+    <loc>https://evid.world/event/peasants-revolt-1381</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Council of Constance (1414-1418) -->
+  <url>
+    <loc>https://evid.world/event/council-of-constance-1414-1418-1414</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Gutenberg's Printing Press (1440) -->
+  <url>
+    <loc>https://evid.world/event/gutenbergs-printing-press-1440</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Columbus Reaches Americas (1492) -->
+  <url>
+    <loc>https://evid.world/event/columbus-reaches-americas-1492</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Treaty of Tordesillas (1494) -->
+  <url>
+    <loc>https://evid.world/event/treaty-of-tordesillas-1494</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Magellan's Circumnavigation (1519-1522) -->
+  <url>
+    <loc>https://evid.world/event/magellans-circumnavigation-1519-1522-1519</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Copernicus' De Revolutionibus (1543) -->
+  <url>
+    <loc>https://evid.world/event/copernicus-de-revolutionibus-1543</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Newcomen Steam Engine (1712) -->
+  <url>
+    <loc>https://evid.world/event/newcomen-steam-engine-1712</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Diderot's Encyclopédie (1751-1772) -->
+  <url>
+    <loc>https://evid.world/event/diderots-encyclopdie-1751-1772-1751</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Rousseau's Social Contract (1762) -->
+  <url>
+    <loc>https://evid.world/event/rousseaus-social-contract-1762</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Watt's Improved Steam Engine (1769) -->
+  <url>
+    <loc>https://evid.world/event/watts-improved-steam-engine-1769</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Boston Tea Party (1773) -->
+  <url>
+    <loc>https://evid.world/event/boston-tea-party-1773</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Adam Smith's Wealth of Nations (1776) -->
+  <url>
+    <loc>https://evid.world/event/adam-smiths-wealth-of-nations-1776</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Battle of Saratoga (1777) -->
+  <url>
+    <loc>https://evid.world/event/battle-of-saratoga-1777</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Storming of the Bastille (1789) -->
+  <url>
+    <loc>https://evid.world/event/storming-of-the-bastille-1789</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Declaration of Rights of Man (1789) -->
+  <url>
+    <loc>https://evid.world/event/declaration-of-rights-of-man-1789</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Battle of the Nile (1798) -->
+  <url>
+    <loc>https://evid.world/event/battle-of-the-nile-1798</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Battle of Jena-Auerstedt (1806) -->
+  <url>
+    <loc>https://evid.world/event/battle-of-jena-auerstedt-1806</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Continental System (1806) -->
+  <url>
+    <loc>https://evid.world/event/continental-system-1806</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Peninsular War (1808-1814) -->
+  <url>
+    <loc>https://evid.world/event/peninsular-war-1808-1814-1808</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Napoleon's Russian Campaign (1812) -->
+  <url>
+    <loc>https://evid.world/event/napoleons-russian-campaign-1812</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Battle of Borodino (1812) -->
+  <url>
+    <loc>https://evid.world/event/battle-of-borodino-1812</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Battle of the Somme (1916) -->
+  <url>
+    <loc>https://evid.world/event/battle-of-the-somme-1916</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- League of Nations Founded (1920) -->
+  <url>
+    <loc>https://evid.world/event/league-of-nations-founded-1920</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Irish Independence (1921) -->
+  <url>
+    <loc>https://evid.world/event/irish-independence-1921</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- March on Rome (1922) -->
+  <url>
+    <loc>https://evid.world/event/march-on-rome-1922</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Discovery of Tutankhamun's Tomb (1922) -->
+  <url>
+    <loc>https://evid.world/event/discovery-of-tutankhamuns-tomb-1922</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Great Kanto Earthquake (1923) -->
+  <url>
+    <loc>https://evid.world/event/great-kanto-earthquake-1923</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Stalin Consolidates Power (1924) -->
+  <url>
+    <loc>https://evid.world/event/stalin-consolidates-power-1924</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Wall Street Crash (1929) -->
+  <url>
+    <loc>https://evid.world/event/wall-street-crash-1929</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Japanese Invasion of Manchuria (1931) -->
+  <url>
+    <loc>https://evid.world/event/japanese-invasion-of-manchuria-1931</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Hitler Becomes Chancellor (1933) -->
+  <url>
+    <loc>https://evid.world/event/hitler-becomes-chancellor-1933</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- The Long March (1934-1935) -->
+  <url>
+    <loc>https://evid.world/event/the-long-march-1934-1935-1934</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Nanjing Massacre (1937) -->
+  <url>
+    <loc>https://evid.world/event/nanjing-massacre-1937</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Kristallnacht (1938) -->
+  <url>
+    <loc>https://evid.world/event/kristallnacht-1938</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Munich Agreement (1938) -->
+  <url>
+    <loc>https://evid.world/event/munich-agreement-1938</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Great Leap Forward (1958-1962) -->
+  <url>
+    <loc>https://evid.world/event/great-leap-forward-1958-1962-1958</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Berlin Wall Erected (1961) -->
+  <url>
+    <loc>https://evid.world/event/berlin-wall-erected-1961</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Cultural Revolution (1966-1976) -->
+  <url>
+    <loc>https://evid.world/event/cultural-revolution-1966-1976-1966</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Tet Offensive (1968) -->
+  <url>
+    <loc>https://evid.world/event/tet-offensive-1968</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Fall of Saigon (1975) -->
+  <url>
+    <loc>https://evid.world/event/fall-of-saigon-1975</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Cambodian Genocide (1975-1979) -->
+  <url>
+    <loc>https://evid.world/event/cambodian-genocide-1975-1979-1975</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Iranian Revolution (1979) -->
+  <url>
+    <loc>https://evid.world/event/iranian-revolution-1979</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Soviet Invasion of Afghanistan (1979) -->
+  <url>
+    <loc>https://evid.world/event/soviet-invasion-of-afghanistan-1979</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Solidarity Movement (1980) -->
+  <url>
+    <loc>https://evid.world/event/solidarity-movement-1980</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Gorbachev's Reforms (1985) -->
+  <url>
+    <loc>https://evid.world/event/gorbachevs-reforms-1985</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Tiananmen Square Massacre (1989) -->
+  <url>
+    <loc>https://evid.world/event/tiananmen-square-massacre-1989</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Fall of Berlin Wall (1989) -->
+  <url>
+    <loc>https://evid.world/event/fall-of-berlin-wall-1989</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Dissolution of Soviet Union (1991) -->
+  <url>
+    <loc>https://evid.world/event/dissolution-of-soviet-union-1991</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Category: war -->
   <url>
     <loc>https://evid.world/category/war</loc>
-    <lastmod>2025-01-27</lastmod>
+    <lastmod>2025-11-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
+    <priority>0.7</priority>
   </url>
 
+  <!-- Category: earthquake -->
   <url>
     <loc>https://evid.world/category/earthquake</loc>
-    <lastmod>2025-01-27</lastmod>
+    <lastmod>2025-11-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
+    <priority>0.7</priority>
   </url>
 
-  <url>
-    <loc>https://evid.world/category/tsunami</loc>
-    <lastmod>2025-01-27</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-  </url>
-
-  <url>
-    <loc>https://evid.world/category/epidemic</loc>
-    <lastmod>2025-01-27</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-  </url>
-
-  <url>
-    <loc>https://evid.world/category/fire</loc>
-    <lastmod>2025-01-27</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-  </url>
-
-  <url>
-    <loc>https://evid.world/category/disaster</loc>
-    <lastmod>2025-01-27</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-  </url>
-
-  <url>
-    <loc>https://evid.world/category/archaeology</loc>
-    <lastmod>2025-01-27</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-  </url>
-
-  <url>
-    <loc>https://evid.world/category/meteorite</loc>
-    <lastmod>2025-01-27</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-  </url>
-
+  <!-- Category: terror -->
   <url>
     <loc>https://evid.world/category/terror</loc>
-    <lastmod>2025-01-27</lastmod>
+    <lastmod>2025-11-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
+    <priority>0.7</priority>
   </url>
 
+  <!-- Category: archaeology -->
+  <url>
+    <loc>https://evid.world/category/archaeology</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Category: fire -->
+  <url>
+    <loc>https://evid.world/category/fire</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Category: disaster -->
+  <url>
+    <loc>https://evid.world/category/disaster</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Category: tsunami -->
+  <url>
+    <loc>https://evid.world/category/tsunami</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Category: meteorite -->
+  <url>
+    <loc>https://evid.world/category/meteorite</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Category: epidemic -->
+  <url>
+    <loc>https://evid.world/category/epidemic</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Category: man-made-disaster -->
   <url>
     <loc>https://evid.world/category/man-made-disaster</loc>
-    <lastmod>2025-01-27</lastmod>
+    <lastmod>2025-11-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
+    <priority>0.7</priority>
   </url>
-
-  <!-- 
-    To generate complete sitemap with all event pages, run:
-    node scripts/generate-full-sitemap.js
-    
-    This will add URLs for all events from events.json
-  -->
 
 </urlset>
