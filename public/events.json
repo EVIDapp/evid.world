@@ -3718,7 +3718,10 @@
             "type": "war",
             "title": "World War II (1939-1945)",
             "country": "EU",
-...
+            "pos": {
+                "lat": 52.52,
+                "lng": 13.405
+            },
             "desc": "Deadliest conflict in human history involving over 100 million people.",
             "desc_long": "World War II was fought between Axis Powers (Germany, Italy, Japan) and Allies (UK, USSR, USA, China). Major theaters: European (Western/Eastern Fronts), Pacific, North Africa, Southeast Asia, Mediterranean. Total deaths 70-85 million including Holocaust. Ended with nuclear weapons.",
             "wiki": "https://en.wikipedia.org/wiki/World_War_II",
