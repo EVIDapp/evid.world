@@ -1213,16 +1213,6 @@
       "wiki": "https://en.wikipedia.org/wiki/1988_Yellowstone_fires"
     },
     {
-      "id": "pompeii_eruption_79ad",
-      "type": "disaster",
-      "title": "Eruption of Mount Vesuvius (AD 79)",
-      "country": "IT",
-      "pos": { "lat": 40.748, "lng": 14.486 },
-      "desc": "Eruption buried Pompeii and Herculaneum.",
-      "desc_long": "In AD 79, Mount Vesuvius violently erupted, burying the Roman cities of Pompeii and Herculaneum under ash and pumice.",
-      "wiki": "https://en.wikipedia.org/wiki/Eruption_of_Mount_Vesuvius_in_79"
-    },
-    {
       "id": "lisbon_earthquake_1755",
       "type": "disaster",
       "title": "1755 Lisbon earthquake",
@@ -2081,19 +2071,6 @@
             "desc": "Granodiorite stele key to deciphering Egyptian hieroglyphs.",
             "desc_long": "Discovered in 1799 at Fort Julien (Rashid), the Rosetta Stone provided the key to deciphering Egyptian hieroglyphs because it bears parallel inscriptions in hieroglyphs, Demotic and Ancient Greek.",
             "wiki": "https://en.wikipedia.org/wiki/Rosetta_Stone"
-        },
-        {
-            "id": "pompeii_archaeological_site",
-            "type": "archaeology",
-            "title": "Pompeii archaeological site",
-            "country": "IT",
-            "pos": {
-                "lat": 40.748,
-                "lng": 14.486
-            },
-            "desc": "World-famous Roman archaeological site.",
-            "desc_long": "The archaeological site of Pompeii offers unique insights into Roman urban life, preserved under volcanic ash since AD 79.",
-            "wiki": "https://en.wikipedia.org/wiki/Pompeii"
         },
         {
             "id": "ww2_stalingrad_battle",
@@ -6730,17 +6707,6 @@
             "year": "1799"
         },
         {
-            "id": "pompeii_excavation_1748",
-            "type": "archaeology",
-            "title": "Pompeii Excavation (1748)",
-            "country": "IT",
-            "pos": {"lat": 40.75, "lng": 14.49},
-            "desc": "Roman city preserved by volcanic eruption.",
-            "desc_long": "Systematic excavation began of ancient Roman city buried by Mount Vesuvius eruption in 79 AD.",
-            "wiki": "https://en.wikipedia.org/wiki/Pompeii",
-            "radiusKm": 20
-        },
-        {
             "id": "tutankhamun_tomb_1922",
             "type": "archaeology",
             "title": "Tutankhamun's Tomb Discovery (1922)",
@@ -9969,19 +9935,6 @@
             "casualties": 1
         },
         {
-            "id": "great_fire_of_london_1666",
-            "type": "fire",
-            "title": "Great Fire of London (1666)",
-            "country": "GB",
-            "pos": { "lat": 51.5074, "lng": -0.1278 },
-            "desc": "Massive fire destroys much of London.",
-            "desc_long": "The Great Fire destroyed 13,000 houses and 87 churches, leading to London's reconstruction with improved fire safety.",
-            "wiki": "https://en.wikipedia.org/wiki/Great_Fire_of_London",
-            "radiusKm": 10,
-            "year": "1666",
-            "casualties": 6
-        },
-        {
             "id": "glorious_revolution_1688",
             "type": "war",
             "title": "Glorious Revolution (1688)",
@@ -11315,19 +11268,6 @@
             "casualties": 40000
         },
         {
-            "id": "st_bartholomews_massacre_1572",
-            "type": "terror",
-            "title": "St. Bartholomew's Day Massacre (1572)",
-            "country": "FR",
-            "pos": { "lat": 48.8566, "lng": 2.3522 },
-            "desc": "Mass killing of French Protestants.",
-            "desc_long": "Catholics massacred thousands of Huguenots in Paris, intensifying French Wars of Religion.",
-            "wiki": "https://en.wikipedia.org/wiki/St._Bartholomew%27s_Day_massacre",
-            "radiusKm": 20,
-            "year": "1572",
-            "casualties": 30000
-        },
-        {
             "id": "spanish_armada_1588",
             "type": "war",
             "title": "Spanish Armada Defeated (1588)",
@@ -11585,19 +11525,6 @@
             "wiki": "https://en.wikipedia.org/wiki/Declaration_of_the_Rights_of_Man_and_of_the_Citizen",
             "radiusKm": 5,
             "year": "1789"
-        },
-        {
-            "id": "reign_of_terror_1793_1794",
-            "type": "terror",
-            "title": "Reign of Terror (1793-1794)",
-            "country": "FR",
-            "pos": { "lat": 48.8566, "lng": 2.3522 },
-            "desc": "Revolutionary mass executions.",
-            "desc_long": "Jacobins executed thousands by guillotine during radical phase of French Revolution.",
-            "wiki": "https://en.wikipedia.org/wiki/Reign_of_Terror",
-            "radiusKm": 50,
-            "year": "1793",
-            "casualties": 40000
         },
         {
             "id": "battle_of_the_nile_1798",

@@ -104,6 +104,13 @@ export const deduplicateEvents = (events: HistoricalEvent[]): HistoricalEvent[] 
     // Rosetta Stone duplicates (keep best one)
     'rosetta_stone_discovery_1799',
     'rosetta_stone_1799',
+    
+    // Great Fire of London duplicates (keep great_fire_london_area_1666)
+    'great_fire_of_london_1666',
+    
+    // Pompeii duplicates (keep pompeii_excavations_area with geometry)
+    'pompeii_archaeological_site',
+    'pompeii_excavation_1748',
   ]);
 
   // Track seen event titles (normalized)
