@@ -180,13 +180,13 @@ const CategoryPage = () => {
     };
   }, [events]);
 
-  // Top 10 deadliest events (sorted by casualties) - use filtered events
+  // Top 10 deadliest events (sorted by casualties) - always use ALL events from category
   const top10Deadliest = useMemo(() => {
-    return [...events]
+    return [...allEvents]
       .filter(e => e.casualties && e.casualties > 0)
       .sort((a, b) => (b.casualties || 0) - (a.casualties || 0))
       .slice(0, 10);
-  }, [events]);
+  }, [allEvents]);
 
   // Timeline distribution by 100-year periods (1-2025 CE only) - use filtered events
   const timelineData = useMemo(() => {
@@ -440,12 +440,13 @@ const CategoryPage = () => {
               <CardContent>
                 <ScrollArea className="h-[350px]">
                     <div className="space-y-2 pr-4">
-                    {top10Deadliest.map((event, index) => (
+                    {top10Deadliest.map((event, index) => {
+                      const slug = generateEventSlug(event.title, event.type, event.year);
+                      return (
                       <div 
-                        key={event.id}
+                        key={`${event.id}-${index}`}
                         className="flex items-start gap-2 p-2 rounded-lg border hover:bg-accent/50 cursor-pointer transition-colors"
                         onClick={() => {
-                          const slug = generateEventSlug(event.title, event.type, event.year);
                           navigate(`/category/${slug}`);
                         }}
                       >
@@ -472,7 +473,7 @@ const CategoryPage = () => {
                           </div>
                         </div>
                       </div>
-                    ))}
+                    )})}
                   </div>
                 </ScrollArea>
               </CardContent>
