@@ -9,13 +9,16 @@ const __dirname = path.dirname(__filename);
 const normalizeTitle = (title) => {
   let normalized = title.toLowerCase();
   
-  // Remove years in various formats
-  normalized = normalized.replace(/\(?\d{1,4}\s*[-–—]\s*\d{1,4}\)?/g, '');
-  normalized = normalized.replace(/\(?\d{1,4}\s*(?:bc|ad|bce|ce)\)?/gi, '');
-  normalized = normalized.replace(/\(?\d{1,4}\)?/g, '');
+  // Remove content in parentheses completely
+  normalized = normalized.replace(/\([^)]*\)/g, '');
   
-  // Remove common words
-  normalized = normalized.replace(/\b(the|of|and|in|at|on|to|a|an)\b/g, '');
+  // Remove years in various formats
+  normalized = normalized.replace(/\b\d{1,4}\s*[-–—]\s*\d{1,4}\b/g, '');
+  normalized = normalized.replace(/\b\d{1,4}\s*(?:bc|ad|bce|ce)\b/gi, '');
+  normalized = normalized.replace(/\b\d{1,4}\b/g, '');
+  
+  // Remove common articles and prepositions
+  normalized = normalized.replace(/\b(the|of|and|in|at|on|to|a|an|for)\b/g, '');
   
   // Remove special characters and normalize spaces
   normalized = normalized.replace(/[^\w\s]/g, '');
@@ -28,32 +31,48 @@ const normalizeTitle = (title) => {
 const scoreEvent = (event) => {
   let score = 0;
   
-  // Prefer events with _area suffix
-  if (event.id.endsWith('_area')) score += 1000;
+  // Strongly prefer events with _area suffix (indicates geographic events)
+  if (event.id.endsWith('_area')) score += 2000;
   
-  // Prefer events with radiusKm
-  if (event.radiusKm) score += 500;
+  // Prefer events with radiusKm (indicates scale)
+  if (event.radiusKm) {
+    score += 500;
+    if (event.radiusKm > 100) score += 300; // Bonus for large events
+  }
   
-  // Prefer events with casualties
-  if (event.casualties) score += 300;
+  // Prefer events with casualties (indicates impact)
+  if (event.casualties) {
+    score += 400;
+    if (event.casualties > 10000) score += 200; // Bonus for major events
+  }
   
-  // Prefer events with long descriptions
-  if (event.desc_long) score += (event.desc_long.length / 10);
+  // Prefer events with comprehensive descriptions
+  if (event.desc_long) {
+    score += Math.min(event.desc_long.length / 5, 500); // Cap at 500
+  }
   
-  // Prefer events with wiki links
-  if (event.wiki) score += 200;
+  // Prefer events with wiki links (indicates verifiability)
+  if (event.wiki) score += 300;
   
   // Prefer events with images
-  if (event.image) score += 150;
+  if (event.image) score += 200;
   
-  // Prefer events with years
-  if (event.year) score += 100;
+  // Prefer events with precise years
+  if (event.year) {
+    score += 150;
+    // Bonus for specific years vs ranges
+    if (!event.year.includes('-')) score += 50;
+  }
   
-  // Penalize generic IDs
-  if (event.id.includes('_new')) score -= 200;
-  if (event.id.includes('_point')) score -= 300;
-  if (event.id.includes('_chatgpt')) score -= 400;
-  if (event.id.includes('_v2')) score -= 150;
+  // Heavily penalize low-quality ID patterns
+  if (event.id.includes('_new')) score -= 400;
+  if (event.id.includes('_point')) score -= 500;
+  if (event.id.includes('_chatgpt')) score -= 800;
+  if (event.id.includes('_v2')) score -= 300;
+  if (event.id.includes('_temp')) score -= 600;
+  
+  // Penalize very short descriptions
+  if (event.desc && event.desc.length < 50) score -= 100;
   
   return score;
 };
