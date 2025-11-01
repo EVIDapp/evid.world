@@ -3700,28 +3700,31 @@
         {
             "id": "world_war_1_global_1914_1918",
             "type": "war",
-            "title": "World War I (global)",
+            "title": "World War I (1914-1918)",
             "country": "EU",
             "pos": {
                 "lat": 48.8566,
                 "lng": 2.3522
             },
-            "desc": "Global conflict centered in Europe (1914–1918).",
+            "desc": "The Great War - global conflict involving over 30 nations.",
+            "desc_long": "World War I involved major powers in two opposing alliances: Allied Powers and Central Powers. Main theaters included Western Front (France/Belgium), Eastern Front (Russia/Germany), Italian Front, Middle East, and African campaigns. Over 17 million deaths, introduction of trench warfare, chemical weapons, tanks, and aircraft.",
             "wiki": "https://en.wikipedia.org/wiki/World_War_I",
-            "radiusKm": 1500
+            "radiusKm": 2500,
+            "year": "1914-1918",
+            "casualties": 17000000
         },
         {
             "id": "world_war_2_global_1939_1945",
             "type": "war",
-            "title": "World War II (global)",
+            "title": "World War II (1939-1945)",
             "country": "EU",
-            "pos": {
-                "lat": 52.52,
-                "lng": 13.405
-            },
-            "desc": "Global war involving most of the world’s nations (1939–1945).",
+...
+            "desc": "Deadliest conflict in human history involving over 100 million people.",
+            "desc_long": "World War II was fought between Axis Powers (Germany, Italy, Japan) and Allies (UK, USSR, USA, China). Major theaters: European (Western/Eastern Fronts), Pacific, North Africa, Southeast Asia, Mediterranean. Total deaths 70-85 million including Holocaust. Ended with nuclear weapons.",
             "wiki": "https://en.wikipedia.org/wiki/World_War_II",
-            "radiusKm": 2000
+            "radiusKm": 3000,
+            "year": "1939-1945",
+            "casualties": 75000000
         },
         {
             "id": "battle_of_hastings_1066",
@@ -8429,13 +8432,15 @@
         {
             "id": "pearl_harbor_1941",
             "type": "war",
-            "title": "Attack on Pearl Harbor (1941 CE)",
+            "title": "Attack on Pearl Harbor (1941)",
             "country": "US",
             "pos": {"lat": 21.37, "lng": -157.95},
-            "desc": "Japanese attack brings US into WWII.",
-            "desc_long": "Surprise attack on US naval base brought America into World War II, changing the war's course.",
+            "desc": "Japanese surprise attack brings US into WWII.",
+            "desc_long": "On December 7, 1941, Japanese aircraft launched surprise attack on US Pacific Fleet at Pearl Harbor, Hawaii. 2,403 Americans killed, 8 battleships damaged/destroyed. Attack brought United States into World War II.",
             "wiki": "https://en.wikipedia.org/wiki/Attack_on_Pearl_Harbor",
-            "radiusKm": 50
+            "radiusKm": 50,
+            "year": "1941",
+            "casualties": 2403
         },
         {
             "id": "battle_of_stalingrad_1942",
@@ -12449,5 +12454,96 @@
             "wiki": "https://en.wikipedia.org/wiki/Dissolution_of_the_Soviet_Union",
             "radiusKm": 5000,
             "year": "1991"
+        },
+        {
+            "id": "ww1_western_front",
+            "type": "war",
+            "title": "Western Front WWI (1914-1918)",
+            "country": "FR",
+            "pos": {"lat": 49.5, "lng": 3.0},
+            "desc": "Main theater of World War I trench warfare.",
+            "desc_long": "Western Front stretched from North Sea to Swiss border through Belgium and France. Characterized by brutal trench warfare, battles of Verdun, Somme, Ypres. Over 8 million casualties. Introduced chemical weapons, machine guns, tanks.",
+            "wiki": "https://en.wikipedia.org/wiki/Western_Front_(World_War_I)",
+            "radiusKm": 800,
+            "year": "1914-1918",
+            "casualties": 8000000
+        },
+        {
+            "id": "ww1_eastern_front",
+            "type": "war",
+            "title": "Eastern Front WWI (1914-1918)",
+            "country": "PL",
+            "pos": {"lat": 52.0, "lng": 20.0},
+            "desc": "WWI theater between Central Powers and Russia.",
+            "desc_long": "Eastern Front stretched from Baltic to Black Sea. More mobile warfare than Western Front. Major battles: Tannenberg, Galicia, Brusilov Offensive. Led to Russian Revolution and Treaty of Brest-Litovsk. Millions of casualties.",
+            "wiki": "https://en.wikipedia.org/wiki/Eastern_Front_(World_War_I)",
+            "radiusKm": 1200,
+            "year": "1914-1918",
+            "casualties": 5000000
+        },
+        {
+            "id": "ww2_eastern_front",
+            "type": "war",
+            "title": "Eastern Front WWII (1941-1945)",
+            "country": "RU",
+            "pos": {"lat": 55.0, "lng": 37.0},
+            "desc": "Largest theater of WWII, Nazi Germany vs Soviet Union.",
+            "desc_long": "Eastern Front was largest and deadliest theater of WWII. Operation Barbarossa to fall of Berlin. Battles: Stalingrad, Kursk, Leningrad Siege, Berlin. 80% of German military casualties occurred here. 30+ million total deaths.",
+            "wiki": "https://en.wikipedia.org/wiki/Eastern_Front_(World_War_II)",
+            "radiusKm": 2500,
+            "year": "1941-1945",
+            "casualties": 30000000
+        },
+        {
+            "id": "ww2_pacific_theater",
+            "type": "war",
+            "title": "Pacific Theater WWII (1941-1945)",
+            "country": "PH",
+            "pos": {"lat": 10.0, "lng": 140.0},
+            "desc": "WWII theater across Pacific Ocean, Allies vs Japan.",
+            "desc_long": "Pacific Theater spanned entire Pacific Ocean and East Asia. Island-hopping campaigns, naval battles: Pearl Harbor, Midway, Guadalcanal, Iwo Jima, Okinawa. Ended with atomic bombs on Hiroshima and Nagasaki. Over 10 million deaths.",
+            "wiki": "https://en.wikipedia.org/wiki/Pacific_War",
+            "radiusKm": 8000,
+            "year": "1941-1945",
+            "casualties": 10000000
+        },
+        {
+            "id": "ww2_western_front",
+            "type": "war",
+            "title": "Western Front WWII (1944-1945)",
+            "country": "FR",
+            "pos": {"lat": 49.0, "lng": 2.5},
+            "desc": "Liberation of Western Europe from Nazi occupation.",
+            "desc_long": "Western Front opened with D-Day Normandy landings June 6, 1944. Allied forces liberated France, Belgium, Netherlands. Major operations: Market Garden, Battle of Bulge. Ended with crossing Rhine and meeting Soviets at Elbe River.",
+            "wiki": "https://en.wikipedia.org/wiki/Western_Front_(World_War_II)",
+            "radiusKm": 900,
+            "year": "1944-1945",
+            "casualties": 2000000
+        },
+        {
+            "id": "ww2_north_africa_campaign",
+            "type": "war",
+            "title": "North Africa Campaign WWII (1940-1943)",
+            "country": "EG",
+            "pos": {"lat": 30.0, "lng": 27.0},
+            "desc": "Desert warfare between Axis and Allied forces.",
+            "desc_long": "North African Campaign fought in Libyan and Egyptian deserts. Key battles: El Alamein, Tobruk, Tunisia. Rommel's Afrika Korps vs British 8th Army and US forces. Allied victory opened Mediterranean and led to invasion of Italy.",
+            "wiki": "https://en.wikipedia.org/wiki/North_African_campaign",
+            "radiusKm": 1500,
+            "year": "1940-1943",
+            "casualties": 500000
+        },
+        {
+            "id": "battle_of_britain_1940",
+            "type": "war",
+            "title": "Battle of Britain (1940)",
+            "country": "GB",
+            "pos": {"lat": 51.5, "lng": -0.1},
+            "desc": "Air campaign to defend Britain from Nazi invasion.",
+            "desc_long": "First major military campaign fought entirely by air forces. Luftwaffe attempted to gain air superiority over RAF. British victory prevented Operation Sea Lion (Nazi invasion). Churchill: 'Never was so much owed by so many to so few.'",
+            "wiki": "https://en.wikipedia.org/wiki/Battle_of_Britain",
+            "radiusKm": 400,
+            "year": "1940",
+            "casualties": 45000
         }
     ]
