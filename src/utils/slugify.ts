@@ -2,18 +2,8 @@
 export const slugify = (text: string): string => {
   let slug = text.toLowerCase().trim();
 
-  // Исправление: диапазоны лет (20122026 → 2012-2026)
-  slug = slug.replace(/(\d{3,4})(\d{3,4})/g, '$1-$2');
-
-  // Удаляем "ongoing" и похожие маркеры
-  slug = slug.replace(/-?(ongoing|present|current)$/g, '');
-
-  // Исправляем BC и AD — превращаем в "-bc" или "-ad"
-  slug = slug.replace(/\b(\d{1,4})\s*bc\b/g, '$1-bc');
-  slug = slug.replace(/\b(\d{1,4})\s*ad\b/g, '$1-ad');
-
-  // Удаляем повтор годов или дефисы вроде "--605"
-  slug = slug.replace(/(-\d{1,4})-\1/g, '$1');
+  // Удаляем содержимое скобок (годы и прочее обработаем отдельно)
+  slug = slug.replace(/\([^)]*\)/g, '');
 
   // Заменяем пробелы и подчёркивания на дефисы
   slug = slug.replace(/[\s_]+/g, '-');
@@ -54,10 +44,21 @@ export const generateEventSlug = (title: string, category: string, year?: string
     // Извлекаем год из скобок в заголовке (например, "War of Spanish Succession (1701-1714)")
     const yearInParentheses = title.match(/\(([^)]+)\)/);
     if (yearInParentheses) {
-      eventYear = yearInParentheses[1]
-        .replace(/–/g, '-') // заменяем em dash на обычный дефис
-        .replace(/—/g, '-') // заменяем en dash на обычный дефис
-        .replace(/\s+/g, ''); // удаляем пробелы
+      let yearStr = yearInParentheses[1];
+      
+      // Удаляем слова "ongoing", "present", "current" и запятые
+      yearStr = yearStr.replace(/,?\s*(ongoing|present|current)\s*/gi, '');
+      
+      // Заменяем различные виды дефисов на обычный дефис
+      yearStr = yearStr.replace(/[–—]/g, '-');
+      
+      // Удаляем все пробелы
+      yearStr = yearStr.replace(/\s+/g, '');
+      
+      // Удаляем начальные/конечные дефисы и запятые
+      yearStr = yearStr.replace(/^[-,]+|[-,]+$/g, '');
+      
+      eventYear = yearStr;
     }
   }
 
@@ -74,7 +75,7 @@ export const generateEventSlug = (title: string, category: string, year?: string
   
   // Если год уже есть в конце слага или в начале, не добавляем его повторно
   if (!alreadyHasYear && !startsWithYear && eventYear) {
-    // Очищаем год от CE/AD/BC суффиксов для добавления
+    // Очищаем год от CE/AD/BC суффиксов
     const cleanYear = eventYear.toLowerCase().replace(/\s*(ce|ad|bc)\s*$/i, '');
     eventSlug = `${titleSlug}-${cleanYear}`;
   }
@@ -94,10 +95,21 @@ export const getEventSlugOnly = (title: string, year?: string): string => {
   if (!eventYear) {
     const yearInParentheses = title.match(/\(([^)]+)\)/);
     if (yearInParentheses) {
-      eventYear = yearInParentheses[1]
-        .replace(/–/g, '-')
-        .replace(/—/g, '-')
-        .replace(/\s+/g, '');
+      let yearStr = yearInParentheses[1];
+      
+      // Удаляем слова "ongoing", "present", "current" и запятые
+      yearStr = yearStr.replace(/,?\s*(ongoing|present|current)\s*/gi, '');
+      
+      // Заменяем различные виды дефисов на обычный дефис
+      yearStr = yearStr.replace(/[–—]/g, '-');
+      
+      // Удаляем все пробелы
+      yearStr = yearStr.replace(/\s+/g, '');
+      
+      // Удаляем начальные/конечные дефисы и запятые
+      yearStr = yearStr.replace(/^[-,]+|[-,]+$/g, '');
+      
+      eventYear = yearStr;
     }
   }
 
@@ -113,7 +125,7 @@ export const getEventSlugOnly = (title: string, year?: string): string => {
   }
 
   if (eventYear) {
-    // Очищаем год от CE/AD/BC суффиксов для добавления
+    // Очищаем год от CE/AD/BC суффиксов
     const cleanYear = eventYear.toLowerCase().replace(/\s*(ce|ad|bc)\s*$/i, '');
     return `${titleSlug}-${cleanYear}`;
   }
