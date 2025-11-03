@@ -17,81 +17,92 @@ const validTypes = [
 // Read events
 const events = JSON.parse(fs.readFileSync('public/events.json', 'utf-8'));
 
-// Find invalid types
+// Analyze current types
+console.log('\n===== ANALYZING EVENT TYPES =====\n');
 const typeMap = new Map();
 events.forEach(event => {
-  const type = event.type || 'NO_TYPE';
+  const type = event.type || 'MISSING';
   if (!typeMap.has(type)) {
-    typeMap.set(type, []);
+    typeMap.set(type, { count: 0, examples: [] });
   }
-  typeMap.get(type).push(event);
-});
-
-console.log('\n===== TYPE ANALYSIS =====\n');
-typeMap.forEach((events, type) => {
-  const isValid = validTypes.includes(type);
-  console.log(`${type}: ${events.length} events ${!isValid ? '❌ INVALID' : '✅'}`);
-  if (!isValid) {
-    console.log(`  Examples:` );
-    events.slice(0, 5).forEach(e => {
-      console.log(`    - ${e.title} (${e.id})`);
-    });
+  const data = typeMap.get(type);
+  data.count++;
+  if (data.examples.length < 3) {
+    data.examples.push(event.title);
   }
 });
 
-// Fix invalid types
+typeMap.forEach((data, type) => {
+  const valid = validTypes.includes(type);
+  console.log(`${type} (${valid ? 'VALID' : 'INVALID'}): ${data.count} events`);
+  if (!valid) {
+    console.log(`  Examples: ${data.examples.join(', ')}`);
+  }
+});
+
+// Fix invalid types and optimize disaster categories
+console.log('\n===== FIXING TYPES =====\n');
 let fixed = 0;
+let optimized = 0;
+
 events.forEach(event => {
+  const title = (event.title || '').toLowerCase();
+  const desc = (event.desc || '').toLowerCase();
+  const descLong = (event.desc_long || '').toLowerCase();
+  const combined = title + ' ' + desc + ' ' + descLong;
+  
+  // First fix invalid types (Unknown, etc)
   if (!validTypes.includes(event.type)) {
-    console.log(`\nFixing: ${event.title}`);
-    console.log(`  Current type: ${event.type}`);
+    let newType = 'archaeology'; // default
     
-    // Categorization logic based on title/description
-    const titleLower = event.title.toLowerCase();
-    const descLower = (event.desc || '').toLowerCase();
-    
-    if (titleLower.includes('war') || titleLower.includes('battle') || titleLower.includes('invasion') || 
-        titleLower.includes('siege') || titleLower.includes('conflict') || titleLower.includes('revolt') ||
-        titleLower.includes('rebellion') || titleLower.includes('military')) {
-      event.type = 'war';
-    } else if (titleLower.includes('earthquake') || titleLower.includes('quake')) {
-      event.type = 'earthquake';
-    } else if (titleLower.includes('fire') || titleLower.includes('burning')) {
-      event.type = 'fire';
-    } else if (titleLower.includes('tsunami') || titleLower.includes('tidal wave')) {
-      event.type = 'tsunami';
-    } else if (titleLower.includes('plague') || titleLower.includes('epidemic') || titleLower.includes('pandemic') ||
-               titleLower.includes('disease') || titleLower.includes('outbreak') || titleLower.includes('virus')) {
-      event.type = 'epidemic';
-    } else if (titleLower.includes('terror') || titleLower.includes('attack') || titleLower.includes('bombing') ||
-               titleLower.includes('assassination')) {
-      event.type = 'terror';
-    } else if (titleLower.includes('meteor') || titleLower.includes('asteroid') || titleLower.includes('comet')) {
-      event.type = 'meteorite';
-    } else if (titleLower.includes('flood') || titleLower.includes('hurricane') || titleLower.includes('cyclone') ||
-               titleLower.includes('typhoon') || titleLower.includes('storm') || titleLower.includes('volcano') ||
-               titleLower.includes('eruption') || titleLower.includes('avalanche') || titleLower.includes('landslide')) {
-      event.type = 'disaster';
-    } else if (titleLower.includes('accident') || titleLower.includes('explosion') || titleLower.includes('collapse') ||
-               titleLower.includes('crash') || titleLower.includes('spill') || titleLower.includes('leak') ||
-               titleLower.includes('nuclear') || titleLower.includes('chemical')) {
-      event.type = 'man-made disaster';
-    } else if (titleLower.includes('discovery') || titleLower.includes('found') || titleLower.includes('tomb') ||
-               titleLower.includes('ancient') || titleLower.includes('ruins') || titleLower.includes('artifact') ||
-               titleLower.includes('excavation') || titleLower.includes('archaeological')) {
-      event.type = 'archaeology';
-    } else {
-      // Default fallback
-      event.type = 'archaeology'; // Use archaeology as default for historical events
+    // Check for specific keywords
+    if (combined.match(/war|battle|invasion|conflict|siege|militar|combat/)) {
+      newType = 'war';
+    } else if (combined.match(/earthquake|seismic|tremor|quake/)) {
+      newType = 'earthquake';
+    } else if (combined.match(/terror|attack|bombing|shoot|hijack|hostage/)) {
+      newType = 'terror';
+    } else if (combined.match(/wildfire|blaze|burn|forest fire/)) {
+      newType = 'fire';
+    } else if (combined.match(/tsunami|tidal wave/)) {
+      newType = 'tsunami';
+    } else if (combined.match(/meteorite|asteroid|meteor|comet|impact/)) {
+      newType = 'meteorite';
+    } else if (combined.match(/epidemic|pandemic|plague|disease|virus|cholera|flu|outbreak/)) {
+      newType = 'epidemic';
+    } else if (combined.match(/nuclear|chernobyl|fukushima|reactor|meltdown|chemical plant|industrial accident|mine disaster|dam fail|bridge collap|train crash|plane crash|ship sink|titanic|factory/)) {
+      newType = 'man-made disaster';
+    } else if (combined.match(/flood|hurricane|cyclone|tornado|storm|avalanche|landslide|volcano|eruption|drought|typhoon|monsoon/)) {
+      newType = 'disaster';
     }
     
-    console.log(`  New type: ${event.type}`);
+    console.log(`INVALID ${event.type} → ${newType}: ${event.title}`);
+    event.type = newType;
     fixed++;
+  }
+  
+  // Optimize disaster vs man-made disaster
+  if (event.type === 'disaster') {
+    // Check if it should be man-made disaster
+    if (combined.match(/nuclear|chernobyl|fukushima|reactor|meltdown|chemical|industrial|mine|dam fail|dam burst|bridge collap|train|plane|ship|titanic|factory|accident|collap/)) {
+      console.log(`OPTIMIZE disaster → man-made disaster: ${event.title}`);
+      event.type = 'man-made disaster';
+      optimized++;
+    }
+  } else if (event.type === 'man-made disaster') {
+    // Check if it should be natural disaster
+    if (combined.match(/flood|hurricane|cyclone|tornado|storm|avalanche|landslide|volcano|eruption|drought|typhoon|monsoon|earthquake|tsunami/) 
+        && !combined.match(/nuclear|chernobyl|fukushima|reactor|chemical|industrial|mine|dam|bridge|train|plane|factory/)) {
+      console.log(`OPTIMIZE man-made disaster → disaster: ${event.title}`);
+      event.type = 'disaster';
+      optimized++;
+    }
   }
 });
 
 // Write back
 fs.writeFileSync('public/events.json', JSON.stringify(events, null, 2));
 
-console.log(`\n✅ Fixed ${fixed} events with invalid types`);
-console.log(`Total events: ${events.length}`);
+console.log(`\n✅ Fixed ${fixed} invalid types`);
+console.log(`✅ Optimized ${optimized} disaster categorizations`);
+console.log(`Total events processed: ${events.length}`);

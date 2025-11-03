@@ -8,8 +8,7 @@ export type EventType =
   | 'tsunami' 
   | 'meteorite' 
   | 'epidemic' 
-  | 'man-made disaster'
-  | 'Unknown';
+  | 'man-made disaster';
 
 export interface EventPosition {
   lat: number;
