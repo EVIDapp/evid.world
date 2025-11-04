@@ -39,13 +39,24 @@ export const slugify = (text: string): string => {
 // Слаг события с годом в конце, БЕЗ дублирования года
 export const generateEventSlug = (title: string, year?: string): string => {
   const titleSlug = slugify(title);
-  const y = (year ?? "").trim();
+  
+  // Если year не передан, попробуем извлечь из title
+  let y = (year ?? "").trim();
+  
+  if (!y) {
+    // Ищем год в скобках в конце title: "(1816–1828)" или "(1980)"
+    const yearInParentheses = title.match(/\(([^)]+)\)\s*$/);
+    if (yearInParentheses) {
+      y = yearInParentheses[1].trim();
+    }
+  }
+  
   if (!y) return titleSlug;
 
   // Нормализуем год для slug (удаляем минус для BC лет)
   const yearSlug = y.toLowerCase().replace(/^-/, "");
   
   // если уже заканчивается на "-год" (в т.ч. "-405-bc", "-1980"), ничего не добавляем
-  const endsWithYear = new RegExp(`-${yearSlug}$`);
+  const endsWithYear = new RegExp(`-${yearSlug.replace(/-/g, '\\-')}$`);
   return endsWithYear.test(titleSlug) ? titleSlug : `${titleSlug}-${yearSlug}`;
 };

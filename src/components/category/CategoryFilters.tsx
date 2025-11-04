@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { HistoricalEvent } from '@/types/event';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Label } from '@/components/ui/label';
@@ -34,9 +34,9 @@ export const CategoryFilters = ({ events, onFilterChange }: CategoryFiltersProps
   };
 
   // Auto-apply filters when selections change
-  useState(() => {
+  useEffect(() => {
     applyFilters();
-  });
+  }, [yearRange]);
 
   const resetFilters = () => {
     setYearRange([minYear, maxYear]);
