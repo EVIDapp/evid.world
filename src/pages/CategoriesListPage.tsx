@@ -56,7 +56,7 @@ const CategoriesListPage = () => {
     { type: 'war', slug: 'war', description: 'Military conflicts and battles throughout history' },
     { type: 'earthquake', slug: 'earthquake', description: 'Seismic events and natural disasters' },
     { type: 'terror', slug: 'terror-attack', description: 'Terrorist attacks and incidents' },
-    { type: 'archaeology', slug: 'archaeology', description: 'Archaeological discoveries and findings' },
+    { type: 'discovery', slug: 'discovery', description: 'Archaeological discoveries and findings' },
     { type: 'fire', slug: 'wildfire', description: 'Major fire incidents and disasters' },
     { type: 'disaster', slug: 'disaster', description: 'Various natural and man-made disasters' },
     { type: 'tsunami', slug: 'tsunami', description: 'Tsunami waves and related events' },
