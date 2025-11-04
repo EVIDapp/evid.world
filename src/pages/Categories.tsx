@@ -63,14 +63,8 @@ const Categories = () => {
           stats.timeRange = '1 - 2025';
         });
         
-        // Valid event types
-        const validTypes: EventType[] = [
-          'war', 'earthquake', 'terror', 'archaeology', 'fire', 
-          'disaster', 'tsunami', 'meteorite', 'epidemic', 'man-made disaster'
-        ];
-        
+        // Show ALL categories without filtering
         const sortedCategories = Array.from(categoryMap.values())
-          .filter(cat => validTypes.includes(cat.type)) // Only show valid categories
           .sort((a, b) => b.count - a.count);
         
         console.log('📊 Final categories count:', sortedCategories.length);
