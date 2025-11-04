@@ -14,15 +14,8 @@ export const CategoryStats = ({ events }: CategoryStatsProps) => {
   const animatedEvents = useCounterAnimation(totalEvents, 1500);
   const animatedCasualties = useCounterAnimation(totalCasualties, 2000);
   
-  // Calculate actual time range from events
-  const years = events.map(e => parseInt(e.year || '0')).filter(y => y > 0);
-  const minYear = years.length > 0 ? Math.min(...years) : 1;
-  const maxYear = years.length > 0 ? Math.max(...years) : 2025;
-  
-  const animatedMinYear = useCounterAnimation(minYear, 1500);
-  const animatedMaxYear = useCounterAnimation(maxYear, 1500);
-  
-  const timeRange = `${animatedMinYear} - ${animatedMaxYear}`;
+  // Fixed time range for all categories
+  const timeRange = '1 - 2025';
   
   const countryCount = new Map<string, number>();
   events.forEach(e => {
