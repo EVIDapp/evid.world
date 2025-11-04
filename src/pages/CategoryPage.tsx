@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { ArrowLeft, MapPin, Calendar, Users } from 'lucide-react';
-import { getEventColor } from '@/utils/eventColors';
+import { getEventColor, URL_TO_EVENT_TYPE, EVENT_TYPE_TO_URL } from '@/utils/eventColors';
 import { generateEventSlug } from '@/utils/slugify';
 import { CategoryStats } from '@/components/category/CategoryStats';
 import { CategoryTimeline } from '@/components/category/CategoryTimeline';
@@ -20,21 +20,10 @@ const CategoryPage = () => {
   const [filteredEvents, setFilteredEvents] = useState<HistoricalEvent[]>([]);
   const [loading, setLoading] = useState(true);
 
-  const categoryMap: Record<string, EventType> = {
-    'war': 'war',
-    'earthquake': 'earthquake',
-    'terror': 'terror',
-    'archaeology': 'archaeology',
-    'fire': 'fire',
-    'disaster': 'disaster',
-    'tsunami': 'tsunami',
-    'meteorite': 'meteorite',
-    'epidemic': 'epidemic',
-    'man-made-disaster': 'man-made disaster'
-  };
-
-  const categoryTitle = category ? category.split('-').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ') : '';
-  const eventType = category ? categoryMap[category] : undefined;
+  // Используем URL_TO_EVENT_TYPE из eventColors
+  const eventType = category ? URL_TO_EVENT_TYPE[category] : undefined;
+  const eventColor = eventType ? getEventColor(eventType) : undefined;
+  const categoryTitle = eventColor?.label || '';
 
   useEffect(() => {
     const loadEvents = async () => {
@@ -86,7 +75,7 @@ const CategoryPage = () => {
     );
   }
 
-  if (!eventType || allEvents.length === 0) {
+  if (!eventType || !eventColor || allEvents.length === 0) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-background">
         <Card className="max-w-md">
@@ -104,8 +93,6 @@ const CategoryPage = () => {
       </div>
     );
   }
-
-  const eventColor = getEventColor(eventType);
 
   return (
     <main className="h-screen bg-background flex flex-col overflow-hidden">

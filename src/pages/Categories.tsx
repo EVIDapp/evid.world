@@ -4,7 +4,7 @@ import { HistoricalEvent, EventType } from '@/types/event';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { EVENT_COLORS, getEventColor } from '@/utils/eventColors';
+import { EVENT_COLORS, getEventColor, EVENT_TYPE_TO_URL } from '@/utils/eventColors';
 import { Calendar, MapPin, Users, TrendingUp, ArrowLeft } from 'lucide-react';
 import { useCounterAnimation } from '@/hooks/useCounterAnimation';
 
@@ -118,7 +118,7 @@ const Categories = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4">
             {categories.map((category) => {
               const eventColor = getEventColor(category.type);
-              const categorySlug = category.type.replace(/ /g, '-');
+              const categorySlug = EVENT_TYPE_TO_URL[category.type];
               
               return (
                 <CategoryCard

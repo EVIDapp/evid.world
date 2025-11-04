@@ -13,6 +13,34 @@ export const EVENT_COLORS: Record<EventType, EventColor> = {
   'man-made disaster': { stroke: '#64748b', fill: '#cbd5e1', label: 'Man-made Disaster' }
 };
 
+// URL-friendly маппинг: внутренний тип → URL slug
+export const EVENT_TYPE_TO_URL: Record<EventType, string> = {
+  war: 'war',
+  earthquake: 'earthquake',
+  terror: 'terror',
+  archaeology: 'archaeology',
+  fire: 'wildfire',
+  disaster: 'disaster',
+  tsunami: 'tsunami',
+  meteorite: 'meteorite',
+  epidemic: 'epidemic',
+  'man-made disaster': 'man-made-disaster'
+};
+
+// Обратный маппинг: URL slug → внутренний тип
+export const URL_TO_EVENT_TYPE: Record<string, EventType> = {
+  'war': 'war',
+  'earthquake': 'earthquake',
+  'terror': 'terror',
+  'archaeology': 'archaeology',
+  'wildfire': 'fire',
+  'disaster': 'disaster',
+  'tsunami': 'tsunami',
+  'meteorite': 'meteorite',
+  'epidemic': 'epidemic',
+  'man-made-disaster': 'man-made disaster'
+};
+
 export const AREA_CATEGORIES = new Set<EventType>([
   'war', 'earthquake', 'fire', 'tsunami', 'epidemic'
 ]);

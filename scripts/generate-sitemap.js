@@ -20,98 +20,53 @@ events = Array.from(uniqueEvents.values());
 
 // Generate slugs for each event - matching slugify.ts logic
 const slugify = (text) => {
-  return text
-    .toLowerCase()
-    .replace(/[^\w\s-]/g, '')
-    .replace(/\s+/g, '-')
-    .replace(/--+/g, '-')
-    .trim();
-};
+  let slug = text.toLowerCase().trim();
 
-/**
- * Extract year from title if it's in parentheses at the end
- */
-const extractYearFromTitle = (title) => {
-  const yearInParenthesesPattern = /^(.+?)\s*\(([^)]+)\)\s*$/;
-  const match = title.match(yearInParenthesesPattern);
-  
-  if (!match) {
-    return { cleanTitle: title, extractedYear: null };
-  }
-  
-  const cleanTitle = match[1].trim();
-  let yearPart = match[2].trim();
-  
-  // Handle "7th century" format
-  if (yearPart.toLowerCase().includes('century')) {
-    return { 
-      cleanTitle, 
-      extractedYear: yearPart.toLowerCase().replace(/\s+/g, '-')
-    };
-  }
-  
-  // Handle BC dates
-  if (yearPart.toLowerCase().includes('bc')) {
-    yearPart = yearPart.toLowerCase().replace(/\s*bc\s*/gi, '').trim() + '-bc';
-  }
-  
-  // Handle year ranges with various dash types
-  yearPart = yearPart.replace(/[–—]/g, '-');
-  yearPart = yearPart.replace(/\s*-\s*/g, '-');
-  
-  return { cleanTitle, extractedYear: yearPart };
+  // Нормализуем все типы дефисов к обычному "-" ДО обработки диапазонов
+  slug = slug.replace(/[–—―−]/g, "-");
+
+  // Удаляем скобки и их содержимое (типа "(1816–1828)")
+  slug = slug.replace(/\s*\([^)]*\)/g, "");
+
+  // Исправление: слипшиеся диапазоны лет уже после замены дефисов
+  // Паттерн: 4 цифры сразу после 4 цифр -> разделяем дефисом
+  slug = slug.replace(/(\d{4})(\d{4})/g, "$1-$2");
+
+  // Удаляем "ongoing"/"present"/"current" в конце
+  slug = slug.replace(/-?(?:ongoing|present|current)$/g, "");
+
+  // Превращаем "400 bc"/"400bc" → "400-bc", "800 ad" → "800-ad"
+  slug = slug.replace(/\b(\d{1,4})\s*(bc|ad)\b/g, "$1-$2");
+
+  // Удаляем повторы годов типа "...-1812-1812"
+  slug = slug.replace(/(-\d{1,4})-\1\b/g, "$1");
+
+  // Пробелы/подчёркивания → дефисы
+  slug = slug.replace(/[\s_]+/g, "-");
+
+  // Оставляем только латиницу, цифры и дефисы
+  slug = slug.replace(/[^a-z0-9-]/g, "");
+
+  // Сжимаем повторные дефисы
+  slug = slug.replace(/-+/g, "-");
+
+  // Убираем дефисы по краям
+  slug = slug.replace(/^-+|-+$/g, "");
+
+  return slug;
 };
 
 const generateSlug = (title, year) => {
-  let cleanTitle = title;
-  let finalYear = year;
+  const titleSlug = slugify(title);
+  const y = (year ?? "").trim();
+  if (!y) return titleSlug;
+
+  // Нормализуем год для slug (удаляем минус для BC лет)
+  const yearSlug = y.toLowerCase().replace(/^-/, "");
   
-  // If no year provided, try to extract from title
-  if (!finalYear) {
-    const extracted = extractYearFromTitle(title);
-    cleanTitle = extracted.cleanTitle;
-    finalYear = extracted.extractedYear || undefined;
-  }
-  
-  // If still no year, just return slugified title
-  if (!finalYear) {
-    return slugify(cleanTitle);
-  }
-  
-  // Remove -ongoing suffix if present
-  finalYear = finalYear.replace(/-ongoing$/i, '').trim();
-  
-  // Check if title starts with year pattern
-  const yearAtStartPattern = /^(\d{1,4}(?:-\d{1,4})?(?:\s*bc)?)\s+(.+)$/i;
-  const yearMatch = cleanTitle.match(yearAtStartPattern);
-  
-  if (yearMatch) {
-    cleanTitle = yearMatch[2];
-  }
-  
-  // Process BC years: ensure only one -bc suffix
-  if (finalYear.toLowerCase().includes('bc')) {
-    finalYear = finalYear.replace(/\s*bc/gi, '').trim();
-    finalYear = `${finalYear}-bc`;
-  }
-  
-  // Replace various dash types with regular hyphen
-  finalYear = finalYear.replace(/[–—]/g, '-');
-  
-  // Clean up the year string
-  finalYear = finalYear.replace(/\s+/g, '-').replace(/--+/g, '-');
-  
-  const titleSlug = slugify(cleanTitle);
-  
-  // Ensure no duplicate year in slug
-  const yearPattern = finalYear.replace(/-/g, '\\-');
-  const duplicatePattern = new RegExp(`-${yearPattern}$`);
-  
-  if (titleSlug.match(duplicatePattern)) {
-    return titleSlug;
-  }
-  
-  return `${titleSlug}-${finalYear}`;
+  // если уже заканчивается на "-год" (в т.ч. "-405-bc", "-1980"), ничего не добавляем
+  const endsWithYear = new RegExp(`-${yearSlug.replace(/-/g, '\\-')}$`);
+  return endsWithYear.test(titleSlug) ? titleSlug : `${titleSlug}-${yearSlug}`;
 };
 
 // Get current date
@@ -149,12 +104,24 @@ events.forEach(event => {
 `;
 });
 
-// Add category pages
-const categories = ['war', 'earthquake', 'terror', 'archaeology', 'fire', 'disaster', 'tsunami', 'meteorite', 'epidemic', 'man-made-disaster'];
-categories.forEach(category => {
-  sitemap += `  <!-- Category: ${category} -->
+// Add category pages - use URL-friendly slugs
+const categories = [
+  { type: 'war', slug: 'war' },
+  { type: 'earthquake', slug: 'earthquake' },
+  { type: 'terror', slug: 'terror' },
+  { type: 'archaeology', slug: 'archaeology' },
+  { type: 'fire', slug: 'wildfire' },
+  { type: 'disaster', slug: 'disaster' },
+  { type: 'tsunami', slug: 'tsunami' },
+  { type: 'meteorite', slug: 'meteorite' },
+  { type: 'epidemic', slug: 'epidemic' },
+  { type: 'man-made disaster', slug: 'man-made-disaster' }
+];
+
+categories.forEach(({ type, slug }) => {
+  sitemap += `  <!-- Category: ${type} -->
   <url>
-    <loc>https://evid.world/category/${category}</loc>
+    <loc>https://evid.world/category/${slug}</loc>
     <lastmod>${today}</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>

@@ -2,11 +2,15 @@
 export const slugify = (text: string): string => {
   let slug = text.toLowerCase().trim();
 
-  // Нормализуем все типы дефисов к обычному "-"
+  // Нормализуем все типы дефисов к обычному "-" ДО обработки диапазонов
   slug = slug.replace(/[–—―−]/g, "-");
 
-  // Исправление: диапазоны лет (20122026 → 2012-2026)
-  slug = slug.replace(/(\d{3,4})(\d{3,4})/g, "$1-$2");
+  // Удаляем скобки и их содержимое (типа "(1816–1828)")
+  slug = slug.replace(/\s*\([^)]*\)/g, "");
+
+  // Исправление: слипшиеся диапазоны лет уже после замены дефисов
+  // Паттерн: 4 цифры сразу после 4 цифр -> разделяем дефисом
+  slug = slug.replace(/(\d{4})(\d{4})/g, "$1-$2");
 
   // Удаляем "ongoing"/"present"/"current" в конце
   slug = slug.replace(/-?(?:ongoing|present|current)$/g, "");
@@ -35,10 +39,13 @@ export const slugify = (text: string): string => {
 // Слаг события с годом в конце, БЕЗ дублирования года
 export const generateEventSlug = (title: string, year?: string): string => {
   const titleSlug = slugify(title);
-  const y = (year ?? "").toLowerCase().trim();
+  const y = (year ?? "").trim();
   if (!y) return titleSlug;
 
-  // если уже заканчивается на "-год" (в т.ч. "-405-bc"), ничего не добавляем
-  const endsWithYear = new RegExp(`-${y}$`);
-  return endsWithYear.test(titleSlug) ? titleSlug : `${titleSlug}-${y}`;
+  // Нормализуем год для slug (удаляем минус для BC лет)
+  const yearSlug = y.toLowerCase().replace(/^-/, "");
+  
+  // если уже заканчивается на "-год" (в т.ч. "-405-bc", "-1980"), ничего не добавляем
+  const endsWithYear = new RegExp(`-${yearSlug}$`);
+  return endsWithYear.test(titleSlug) ? titleSlug : `${titleSlug}-${yearSlug}`;
 };
