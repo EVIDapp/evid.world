@@ -25,7 +25,15 @@ const Categories = () => {
     const loadCategories = async () => {
       try {
         const response = await fetch('/events.json');
-        const events: HistoricalEvent[] = await response.json();
+        let events: any[] = await response.json();
+        
+        // Автоматически исправляем неправильные типы events (culture, science → archaeology)
+        events = events.map(event => {
+          if (event.type === 'culture' || event.type === 'science') {
+            return { ...event, type: 'archaeology' };
+          }
+          return event;
+        }) as HistoricalEvent[];
         
         console.log('📊 Total events loaded:', events.length);
         
