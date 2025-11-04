@@ -27,6 +27,8 @@ const Categories = () => {
         const response = await fetch('/events.json');
         const events: HistoricalEvent[] = await response.json();
         
+        console.log('📊 Total events loaded:', events.length);
+        
         const categoryMap = new Map<EventType, CategoryStats>();
         
         events.forEach(event => {
@@ -43,6 +45,12 @@ const Categories = () => {
           const stats = categoryMap.get(event.type)!;
           stats.count++;
           stats.casualties += event.casualties || 0;
+        });
+        
+        // Log category stats before filtering
+        console.log('📊 Category stats before filtering:');
+        categoryMap.forEach((stats, type) => {
+          console.log(`  ${type}: ${stats.count} events, ${stats.casualties.toLocaleString()} casualties`);
         });
         
         // Calculate countries and time range for each category
@@ -64,6 +72,11 @@ const Categories = () => {
         const sortedCategories = Array.from(categoryMap.values())
           .filter(cat => validTypes.includes(cat.type)) // Only show valid categories
           .sort((a, b) => b.count - a.count);
+        
+        console.log('📊 Final categories count:', sortedCategories.length);
+        sortedCategories.forEach(cat => {
+          console.log(`  ${cat.type}: ${cat.count} events, ${cat.casualties.toLocaleString()} casualties`);
+        });
         
         setCategories(sortedCategories);
       } catch (error) {
