@@ -17,7 +17,7 @@ export const EVENT_COLORS: Record<EventType, EventColor> = {
 export const EVENT_TYPE_TO_URL: Record<EventType, string> = {
   war: 'war',
   earthquake: 'earthquake',
-  terror: 'terror',
+  terror: 'terror-attack',
   archaeology: 'archaeology',
   fire: 'wildfire',
   disaster: 'disaster',
@@ -31,7 +31,7 @@ export const EVENT_TYPE_TO_URL: Record<EventType, string> = {
 export const URL_TO_EVENT_TYPE: Record<string, EventType> = {
   'war': 'war',
   'earthquake': 'earthquake',
-  'terror': 'terror',
+  'terror-attack': 'terror',
   'archaeology': 'archaeology',
   'wildfire': 'fire',
   'disaster': 'disaster',
