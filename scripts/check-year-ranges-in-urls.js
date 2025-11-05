@@ -1,0 +1,144 @@
+#!/usr/bin/env node
+
+import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+// Копируем функции slugify из utils
+const slugify = (text) => {
+  let slug = text.toLowerCase().trim();
+  slug = slug.replace(/[–—―−]/g, "-");
+  slug = slug.replace(/\s*\([^)]*\)/g, "");
+  slug = slug.replace(/(\d{4})(\d{4})/g, "$1-$2");
+  slug = slug.replace(/-?(?:ongoing|present|current)$/g, "");
+  slug = slug.replace(/\b(\d{1,4})\s*(bc|ad)\b/g, "$1-$2");
+  slug = slug.replace(/(-\d{1,4})-\1\b/g, "$1");
+  slug = slug.replace(/[\s_]+/g, "-");
+  slug = slug.replace(/[^a-z0-9-]/g, "");
+  slug = slug.replace(/-+/g, "-");
+  slug = slug.replace(/^-+|-+$/g, "");
+  return slug;
+};
+
+const generateEventSlug = (title, year) => {
+  const titleSlug = slugify(title);
+  
+  let y = String(year ?? "").trim();
+  
+  if (!y) {
+    const yearInParentheses = title.match(/\(([^)]+)\)\s*$/);
+    if (yearInParentheses) {
+      y = yearInParentheses[1].trim();
+    }
+  }
+  
+  if (!y) return titleSlug;
+
+  let yearSlug = y.toLowerCase()
+    .replace(/[–—―−]/g, "-")
+    .replace(/^-/, "");
+  
+  const endsWithYear = new RegExp(`-${yearSlug.replace(/-/g, '\\-')}$`);
+  return endsWithYear.test(titleSlug) ? titleSlug : `${titleSlug}-${yearSlug}`;
+};
+
+// Основной скрипт
+const checkYearRanges = () => {
+  console.log('🔍 Проверка диапазонов годов в URL событий...\n');
+  
+  // Загружаем события
+  const eventsPath = path.join(__dirname, '../public/events-clean.json');
+  const eventsData = JSON.parse(fs.readFileSync(eventsPath, 'utf-8'));
+  
+  // Фильтруем события с диапазонами годов
+  const eventsWithRanges = eventsData.filter(event => {
+    const year = String(event.year || '');
+    // Проверяем наличие дефиса (любого типа) в году
+    return /[–—―−-]/.test(year) && !/bc|ad/i.test(year);
+  });
+  
+  console.log(`📊 Найдено событий с диапазонами годов: ${eventsWithRanges.length}`);
+  console.log(`📊 Всего событий: ${eventsData.length}\n`);
+  
+  // Проверяем каждое событие
+  let correctCount = 0;
+  let incorrectCount = 0;
+  const incorrectEvents = [];
+  
+  eventsWithRanges.forEach((event, index) => {
+    const slug = generateEventSlug(event.title, event.year);
+    const url = `https://evid.world/event/${slug}`;
+    const year = String(event.year);
+    
+    // Нормализуем year для проверки (все дефисы к обычному)
+    const normalizedYear = year.replace(/[–—―−]/g, '-');
+    
+    // Проверяем, есть ли диапазон в URL
+    const hasRangeInUrl = slug.includes(normalizedYear);
+    
+    if (hasRangeInUrl) {
+      correctCount++;
+    } else {
+      incorrectCount++;
+      incorrectEvents.push({
+        index: index + 1,
+        title: event.title,
+        year: event.year,
+        slug: slug,
+        url: url,
+        normalizedYear: normalizedYear
+      });
+    }
+  });
+  
+  // Выводим результаты
+  console.log('✅ Результаты проверки:\n');
+  console.log(`✓ Корректных URL: ${correctCount} (${Math.round(correctCount / eventsWithRanges.length * 100)}%)`);
+  console.log(`✗ Некорректных URL: ${incorrectCount} (${Math.round(incorrectCount / eventsWithRanges.length * 100)}%)\n`);
+  
+  if (incorrectEvents.length > 0) {
+    console.log('❌ События с отсутствующим диапазоном в URL:\n');
+    incorrectEvents.forEach((event, idx) => {
+      console.log(`${idx + 1}. "${event.title}"`);
+      console.log(`   Год: ${event.year}`);
+      console.log(`   Ожидаемый диапазон: ${event.normalizedYear}`);
+      console.log(`   URL: ${event.url}`);
+      console.log(`   Slug: ${event.slug}`);
+      console.log('');
+    });
+    
+    // Сохраняем отчет в файл
+    const reportPath = path.join(__dirname, 'year-ranges-report.json');
+    fs.writeFileSync(reportPath, JSON.stringify(incorrectEvents, null, 2));
+    console.log(`📄 Подробный отчет сохранен в: ${reportPath}\n`);
+  } else {
+    console.log('🎉 Все события с диапазонами годов имеют корректные URL!\n');
+  }
+  
+  // Показываем примеры корректных URL
+  console.log('✓ Примеры корректных URL:\n');
+  const correctExamples = eventsWithRanges
+    .filter(e => {
+      const slug = generateEventSlug(e.title, e.year);
+      const normalizedYear = String(e.year).replace(/[–—―−]/g, '-');
+      return slug.includes(normalizedYear);
+    })
+    .slice(0, 5);
+  
+  correctExamples.forEach(event => {
+    const slug = generateEventSlug(event.title, event.year);
+    console.log(`  • ${event.title} (${event.year})`);
+    console.log(`    https://evid.world/event/${slug}\n`);
+  });
+};
+
+// Запускаем проверку
+try {
+  checkYearRanges();
+} catch (error) {
+  console.error('❌ Ошибка:', error.message);
+  process.exit(1);
+}
