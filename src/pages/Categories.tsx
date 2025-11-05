@@ -39,39 +39,22 @@ const Categories = () => {
           console.log(`  ${type}: ${count}`);
         });
         
-        // Initialize ALL possible event types first
-        const allEventTypes: EventType[] = [
-          'war',
-          'earthquake',
-          'terror attack',
-          'discovery',
-          'wildfire',
-          'disaster',
-          'tsunami',
-          'meteorite',
-          'epidemic'
-        ];
-        
         const categoryMap = new Map<EventType, CategoryStats>();
         
-        // Initialize all categories with 0 counts
-        allEventTypes.forEach(type => {
-          categoryMap.set(type, {
-            type,
-            count: 0,
-            casualties: 0,
-            countries: 0,
-            timeRange: ''
-          });
-        });
-        
-        // Now add the actual event data
         events.forEach(event => {
-          if (categoryMap.has(event.type)) {
-            const stats = categoryMap.get(event.type)!;
-            stats.count++;
-            stats.casualties += event.casualties || 0;
+          if (!categoryMap.has(event.type)) {
+            categoryMap.set(event.type, {
+              type: event.type,
+              count: 0,
+              casualties: 0,
+              countries: 0,
+              timeRange: ''
+            });
           }
+          
+          const stats = categoryMap.get(event.type)!;
+          stats.count++;
+          stats.casualties += event.casualties || 0;
         });
         
         // Log category stats before filtering
