@@ -64,5 +64,12 @@ export default defineConfig(({ mode }) => ({
     alias: {
       "@": path.resolve(__dirname, "./src"),
     },
+    dedupe: ["react", "react-dom", "react/jsx-runtime"]
+  },
+  optimizeDeps: {
+    exclude: ["react", "react-dom"],
+    esbuildOptions: {
+      target: "es2020"
+    }
   },
 }));
