@@ -466,42 +466,53 @@ All colors MUST be HSL.
     position: absolute;
     inset: 0;
     background: linear-gradient(180deg, 
-      hsl(225 35% 8%) 0%,
-      hsl(225 35% 12%) 30%,
+      transparent 0%,
+      transparent 45%,
       var(--category-gradient-color) 100%
     );
-    opacity: 1;
+    opacity: 0.25;
     transition: opacity 0.3s ease;
   }
 
   .dark .category-card::before {
     background: linear-gradient(180deg, 
-      hsl(225 35% 8%) 0%,
-      hsl(225 35% 12%) 30%,
+      transparent 0%,
+      transparent 40%,
       var(--category-gradient-color) 100%
     );
+    opacity: 0.35;
   }
 
   .category-card:hover {
     transform: translateY(-2px);
-    box-shadow: 0 0 30px var(--category-glow-color);
   }
 
-  .category-card.inactive {
-    opacity: 0.5;
+  .dark .category-card:hover {
+    box-shadow: 0 0 30px var(--category-glow-color);
   }
 
   .category-card.inactive::before {
     background: linear-gradient(180deg, 
-      hsl(225 25% 18%) 0%,
-      hsl(225 25% 20%) 50%,
+      transparent 0%,
+      transparent 50%,
       hsl(225 25% 22%) 100%
     ) !important;
+    opacity: 0.2;
+  }
+
+  .dark .category-card.inactive::before {
+    opacity: 0.3;
   }
 
   .category-card-content {
     position: relative;
     z-index: 1;
+  }
+
+  /* Ensure text remains visible on gradients */
+  .dark .category-card-content .text-white\/90 {
+    color: rgba(255, 255, 255, 0.95);
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
   }
 
   /* Globe container effects - enhanced borders */

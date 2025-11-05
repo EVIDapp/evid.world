@@ -166,26 +166,43 @@ const CategoryCard = ({ category, eventColor, categorySlug, onClick }: CategoryC
   const animatedCount = useCounterAnimation(category.count, 1000);
   const animatedCasualties = useCounterAnimation(category.casualties, 1500);
 
+  const hexToHSL = (hex: string) => {
+    const r = parseInt(hex.slice(1, 3), 16) / 255;
+    const g = parseInt(hex.slice(3, 5), 16) / 255;
+    const b = parseInt(hex.slice(5, 7), 16) / 255;
+    
+    const max = Math.max(r, g, b);
+    const min = Math.min(r, g, b);
+    let h = 0, s = 0, l = (max + min) / 2;
+
+    if (max !== min) {
+      const d = max - min;
+      s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+      
+      switch (max) {
+        case r: h = ((g - b) / d + (g < b ? 6 : 0)) / 6; break;
+        case g: h = ((b - r) / d + 2) / 6; break;
+        case b: h = ((r - g) / d + 4) / 6; break;
+      }
+    }
+
+    return `${Math.round(h * 360)} ${Math.round(s * 100)}% ${Math.round(l * 100)}%`;
+  };
+
   return (
     <Card 
-      className="group cursor-pointer transition-all duration-300 hover:shadow-lg hover:-translate-y-0.5 border hover:border-primary/50 animate-fade-in overflow-hidden"
+      className="category-card group cursor-pointer transition-all duration-300 hover:-translate-y-1 border animate-fade-in overflow-hidden relative"
       onClick={onClick}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       style={{
+        '--category-gradient-color': eventColor.fill,
+        '--category-glow-color': `${eventColor.fill}60`,
         borderColor: isHovered ? `${eventColor.fill}40` : undefined,
-      }}
+      } as React.CSSProperties}
     >
-      {/* Color Bar */}
-      <div 
-        className="h-1 w-full transition-all duration-300"
-        style={{ 
-          backgroundColor: eventColor.fill,
-          opacity: isHovered ? 1 : 0.7
-        }}
-      />
       
-      <CardHeader className="pb-1.5 p-3 md:p-4">
+      <CardHeader className="pb-1.5 p-3 md:p-4 category-card-content">
         <div className="flex items-start justify-between">
           <Badge 
             className="text-white font-semibold mb-1 animate-scale-in text-[10px] md:text-xs px-1.5 py-0.5"
@@ -205,7 +222,7 @@ const CategoryCard = ({ category, eventColor, categorySlug, onClick }: CategoryC
         </CardDescription>
       </CardHeader>
       
-      <CardContent className="space-y-2 p-3 md:p-4 pt-0">
+      <CardContent className="space-y-2 p-3 md:p-4 pt-0 category-card-content">
         {/* Stats Grid */}
         <div className="grid grid-cols-2 gap-2">
           <div className="space-y-0.5">

@@ -39,10 +39,8 @@ export const EventLegend = ({ selectedTypes, onTypeToggle }: EventLegendProps) =
   return (
     <div className="hidden md:block absolute right-3 bottom-6 md:right-4 md:bottom-8 z-20 
                     backdrop-blur-strong border border-border/50 rounded-lg 
-                    shadow-elevated animate-fade-in-up w-[180px] overflow-hidden"
-         style={{
-           background: 'linear-gradient(145deg, hsl(225 35% 10% / 0.95), hsl(225 35% 7% / 0.95))'
-         }}>
+                    shadow-elevated animate-fade-in-up w-[180px] overflow-hidden
+                    bg-card/95">
       <div className="flex items-center justify-between p-2 border-b border-border/30">
         <h3 className="text-xs font-bold tracking-wide" 
             style={{
@@ -86,7 +84,7 @@ export const EventLegend = ({ selectedTypes, onTypeToggle }: EventLegendProps) =
                   className="w-3 h-3 rounded-sm border border-white/40 flex-shrink-0"
                   style={{ backgroundColor: fill }}
                 />
-                <span className="text-[10px] font-medium text-white/90 whitespace-nowrap leading-none">
+                <span className="text-[10px] font-medium whitespace-nowrap leading-none">
                   {label}
                 </span>
               </div>
