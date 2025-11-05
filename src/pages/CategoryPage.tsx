@@ -25,12 +25,6 @@ const CategoryPage = () => {
   const eventColor = eventType ? getEventColor(eventType) : undefined;
   const categoryTitle = eventColor?.label || '';
 
-  // Debug logging
-  console.log('Category URL param:', category);
-  console.log('Mapped eventType:', eventType);
-  console.log('Event color:', eventColor);
-  console.log('Available mappings:', URL_TO_EVENT_TYPE);
-
   useEffect(() => {
     const loadEvents = async () => {
       try {
