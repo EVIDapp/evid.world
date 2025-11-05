@@ -3430,8 +3430,8 @@
     "desc": "Global war involving most of the world’s nations (1939–1945).",
     "wiki": "https://en.wikipedia.org/wiki/World_War_II",
     "radiusKm": 2000,
-    "year": 1939,
-    "casualties": null
+    "year": "1939-1945",
+    "casualties": 75000000
   },
   {
     "id": "battle_of_hastings_1066",
