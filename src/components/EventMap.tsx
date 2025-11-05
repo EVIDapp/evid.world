@@ -22,7 +22,6 @@ import { Button } from '@/components/ui/button';
 import { Progress } from '@/components/ui/progress';
 import { Key, Plus, Minus, Globe as GlobeIcon, Map, Grid3x3 } from 'lucide-react';
 import { getWikipediaImage } from '@/utils/wikipediaImage';
-import { deduplicateEvents } from '@/utils/deduplicateEvents';
 import { useKeyboardShortcuts } from '@/hooks/useKeyboardShortcuts';
 import { useEventHistory } from '@/hooks/useEventHistory';
 import { generateEventSlug } from '@/utils/slugify';
@@ -106,11 +105,8 @@ export const EventMap = () => {
     fetch('/events.json')
       .then(res => res.json())
       .then(data => {
-        // Deduplicate events
-        const uniqueEvents = deduplicateEvents(data);
-        
         // Calculate year range
-        const years = uniqueEvents
+        const years = data
           .map(parseYear)
           .filter(y => !isNaN(y));
         
@@ -119,7 +115,7 @@ export const EventMap = () => {
         
         setYearRange([minYear, maxYear]);
         setSelectedYearRange([minYear, maxYear]);
-        setEvents(uniqueEvents);
+        setEvents(data);
         setLoading(false);
       })
       .catch(err => {
