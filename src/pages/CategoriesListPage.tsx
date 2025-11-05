@@ -62,7 +62,6 @@ const CategoriesListPage = () => {
     { type: 'tsunami', slug: 'tsunami', description: 'Tsunami waves and related events' },
     { type: 'meteorite', slug: 'meteorite', description: 'Meteorite impacts and astronomical events' },
     { type: 'epidemic', slug: 'epidemic', description: 'Disease outbreaks and pandemics' },
-    { type: 'man-made disaster', slug: 'man-made-disaster', description: 'Human-caused disasters and accidents' },
   ];
 
   // Count events per category
