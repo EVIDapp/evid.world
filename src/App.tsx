@@ -5,7 +5,18 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { ThemeProvider } from "next-themes";
 import { lazy, Suspense } from "react";
-import { SkeletonLoader } from "./components/SkeletonLoader";
+import { Skeleton } from "@/components/ui/skeleton";
+
+// Simple loading component
+const PageLoader = () => (
+  <div className="w-full h-screen bg-background flex items-center justify-center">
+    <div className="space-y-4 w-full max-w-md px-4">
+      <Skeleton className="h-12 w-full" />
+      <Skeleton className="h-8 w-3/4" />
+      <Skeleton className="h-8 w-2/3" />
+    </div>
+  </div>
+);
 
 // Lazy load route components
 const Index = lazy(() => import("./pages/Index"));
@@ -25,7 +36,7 @@ const App = () => {
           <Toaster />
           <Sonner />
           <BrowserRouter>
-            <Suspense fallback={<SkeletonLoader />}>
+            <Suspense fallback={<PageLoader />}>
               <Routes>
                 <Route path="/" element={<Index />} />
                 <Route path="/event/:slug" element={<EventDetail />} />
