@@ -64,9 +64,7 @@ export default defineConfig(({ mode }) => ({
     alias: {
       "@": path.resolve(__dirname, "./src"),
     },
-  },
-  optimizeDeps: {
-    include: ["react", "react-dom"]
+    dedupe: ["react", "react-dom"]
   },
   build: {
     rollupOptions: {
