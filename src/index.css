@@ -453,6 +453,57 @@ All colors MUST be HSL.
       0 4px 8px rgba(0, 0, 0, 0.2);
   }
 
+  /* Gradient category cards */
+  .category-card {
+    position: relative;
+    overflow: hidden;
+    border-radius: 12px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .category-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, 
+      hsl(225 35% 8%) 0%,
+      hsl(225 35% 12%) 30%,
+      var(--category-gradient-color) 100%
+    );
+    opacity: 1;
+    transition: opacity 0.3s ease;
+  }
+
+  .dark .category-card::before {
+    background: linear-gradient(180deg, 
+      hsl(225 35% 8%) 0%,
+      hsl(225 35% 12%) 30%,
+      var(--category-gradient-color) 100%
+    );
+  }
+
+  .category-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0 30px var(--category-glow-color);
+  }
+
+  .category-card.inactive {
+    opacity: 0.5;
+  }
+
+  .category-card.inactive::before {
+    background: linear-gradient(180deg, 
+      hsl(225 25% 18%) 0%,
+      hsl(225 25% 20%) 50%,
+      hsl(225 25% 22%) 100%
+    ) !important;
+  }
+
+  .category-card-content {
+    position: relative;
+    z-index: 1;
+  }
+
   /* Globe container effects - enhanced borders */
   .mapboxgl-canvas-container {
     filter: drop-shadow(0 4px 20px rgba(0, 0, 0, 0.15))
