@@ -38,19 +38,18 @@ export const EventLegend = ({ selectedTypes, onTypeToggle }: EventLegendProps) =
 
   return (
     <div className="hidden md:block absolute right-3 bottom-6 md:right-4 md:bottom-8 z-20 
-                    backdrop-blur-strong border border-primary/40 rounded-lg 
+                    backdrop-blur-strong border border-border/50 rounded-lg 
                     shadow-elevated animate-fade-in-up w-[180px] overflow-hidden
-                    bg-card/90 dark:bg-card/95">
-      <div className="flex items-center justify-between p-2.5 border-b border-primary/25 bg-primary/5">
-        <h3 className="text-xs font-bold tracking-wider uppercase" 
+                    bg-card/95">
+      <div className="flex items-center justify-between p-2 border-b border-border/30">
+        <h3 className="text-xs font-bold tracking-wide" 
             style={{
-              backgroundImage: 'linear-gradient(135deg, hsl(194 100% 55%) 0%, hsl(222 89% 65%) 50%, hsl(222 89% 70%) 100%)',
+              backgroundImage: 'linear-gradient(90deg, #00D9FF 0%, #5B7FFF 35%, rgba(91, 127, 255, 0.6) 70%, rgba(100, 100, 100, 0.2) 100%)',
               WebkitBackgroundClip: 'text',
               backgroundClip: 'text',
               color: 'transparent',
               WebkitTextFillColor: 'transparent',
-              filter: 'brightness(1.1)',
-              textShadow: '0 0 20px rgba(91, 127, 255, 0.4)'
+              textShadow: '0 0 20px rgba(0, 217, 255, 0.3)'
             }}>
           Categories
         </h3>
@@ -80,15 +79,12 @@ export const EventLegend = ({ selectedTypes, onTypeToggle }: EventLegendProps) =
                 '--category-glow-color': `${fill}40`,
               } as React.CSSProperties}
             >
-              <div className="category-card-content p-2.5 flex items-center gap-2.5">
+              <div className="category-card-content p-2 flex items-center gap-2">
                 <div 
-                  className="w-3.5 h-3.5 rounded-[4px] border-2 border-white/70 dark:border-white/50 flex-shrink-0"
-                  style={{ 
-                    backgroundColor: fill,
-                    boxShadow: `0 2px 6px ${fill}60, inset 0 0 0 1px rgba(255,255,255,0.2)`
-                  }}
+                  className="w-3 h-3 rounded-sm border border-white/40 flex-shrink-0"
+                  style={{ backgroundColor: fill }}
                 />
-                <span className="text-[11px] font-semibold whitespace-nowrap leading-none dark:text-white/95 text-gray-800">
+                <span className="text-[10px] font-medium whitespace-nowrap leading-none">
                   {label}
                 </span>
               </div>
