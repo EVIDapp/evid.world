@@ -58,11 +58,10 @@ const CategoriesListPage = () => {
     { type: 'terror attack', slug: 'terror-attack', description: 'Terrorist attacks and incidents' },
     { type: 'discovery', slug: 'discovery', description: 'Archaeological discoveries and findings' },
     { type: 'wildfire', slug: 'wildfire', description: 'Major fire incidents and disasters' },
-    { type: 'disaster', slug: 'disaster', description: 'Various natural and man-made disasters' },
+    { type: 'disaster', slug: 'disaster', description: 'Natural and man-made disasters' },
     { type: 'tsunami', slug: 'tsunami', description: 'Tsunami waves and related events' },
     { type: 'meteorite', slug: 'meteorite', description: 'Meteorite impacts and astronomical events' },
-    { type: 'epidemic', slug: 'epidemic', description: 'Disease outbreaks and pandemics' },
-    { type: 'man-made disaster', slug: 'man-made-disaster', description: 'Human-caused disasters and accidents' },
+    { type: 'epidemic', slug: 'epidemic', description: 'Disease outbreaks and pandemics' }
   ];
 
   // Count events per category

@@ -9,8 +9,7 @@ export const EVENT_COLORS: Record<EventType, EventColor> = {
   disaster: { stroke: '#8b6f47', fill: '#a98467', label: 'Disaster' },
   tsunami: { stroke: '#005f8a', fill: '#0077b6', label: 'Tsunami' },
   meteorite: { stroke: '#2d4a33', fill: '#3a5a40', label: 'Meteorite' },
-  epidemic: { stroke: '#c026d3', fill: '#d946ef', label: 'Epidemic' },
-  'man-made disaster': { stroke: '#64748b', fill: '#cbd5e1', label: 'Man-made Disaster' }
+  epidemic: { stroke: '#c026d3', fill: '#d946ef', label: 'Epidemic' }
 };
 
 // URL-friendly маппинг: внутренний тип → URL slug
@@ -23,8 +22,7 @@ export const EVENT_TYPE_TO_URL: Record<EventType, string> = {
   disaster: 'disaster',
   tsunami: 'tsunami',
   meteorite: 'meteorite',
-  epidemic: 'epidemic',
-  'man-made disaster': 'man-made-disaster'
+  epidemic: 'epidemic'
 };
 
 // Обратный маппинг: URL slug → внутренний тип
@@ -37,8 +35,7 @@ export const URL_TO_EVENT_TYPE: Record<string, EventType> = {
   'disaster': 'disaster',
   'tsunami': 'tsunami',
   'meteorite': 'meteorite',
-  'epidemic': 'epidemic',
-  'man-made-disaster': 'man-made disaster'
+  'epidemic': 'epidemic'
 };
 
 export const AREA_CATEGORIES = new Set<EventType>([
