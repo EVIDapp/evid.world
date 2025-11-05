@@ -113,12 +113,17 @@ const knownCasualties = {
   'samoa_2009_tsunami_chatgpt': 189,
 };
 
-// Normalize title for comparison
+// Normalize title for comparison - more aggressive
 const normalizeTitle = (title) => {
   return title
-    .replace(/\([\d–-\s]+\)/g, '')
+    .replace(/\([\d–-\s]+\)/g, '') // Remove years in parentheses
     .replace(/\(ChatGPT version\)/gi, '')
-    .replace(/[\d]+/g, '')
+    .replace(/\(ChatGPT\)/gi, '')
+    .replace(/\s+version\s*/gi, '')
+    .replace(/\s*\d{4}[-–]\d{4}\s*/g, '') // Remove year ranges
+    .replace(/\s*\d{1,4}\s+(CE|BCE|BC|AD)\s*/gi, '') // Remove years with era
+    .replace(/[\d]+/g, '') // Remove all numbers
+    .replace(/[–—―−-]+/g, '') // Remove all dashes
     .toLowerCase()
     .trim()
     .replace(/\s+/g, ' ');
