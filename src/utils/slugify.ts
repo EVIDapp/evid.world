@@ -53,10 +53,12 @@ export const generateEventSlug = (title: string, year?: string | number): string
   
   if (!y) return titleSlug;
 
-  // Нормализуем год для slug (удаляем минус для BC лет)
-  const yearSlug = y.toLowerCase().replace(/^-/, "");
+  // Нормализуем год для slug: заменяем все типы дефисов на обычные, удаляем минус для BC лет
+  let yearSlug = y.toLowerCase()
+    .replace(/[–—―−]/g, "-")  // Нормализуем все типы дефисов
+    .replace(/^-/, "");         // Удаляем начальный минус для BC
   
-  // если уже заканчивается на "-год" (в т.ч. "-405-bc", "-1980"), ничего не добавляем
+  // если уже заканчивается на "-год" (в т.ч. "-405-bc", "-1980", "-1803-1815"), ничего не добавляем
   const endsWithYear = new RegExp(`-${yearSlug.replace(/-/g, '\\-')}$`);
   return endsWithYear.test(titleSlug) ? titleSlug : `${titleSlug}-${yearSlug}`;
 };
