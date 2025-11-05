@@ -30,15 +30,7 @@ const Categories = () => {
         
         console.log('📊 Raw events loaded:', rawEvents.length);
         
-        // Автоматически исправляем неправильные типы events (culture, science, unknown → discovery)
-        rawEvents = rawEvents.map(event => {
-          if (event.type === 'culture' || event.type === 'science' || event.type === 'unknown') {
-            return { ...event, type: 'discovery' };
-          }
-          return event;
-        });
-        
-        // Удаляем дубликаты ПОСЛЕ исправления типов
+        // Удаляем дубликаты
         const events = deduplicateEvents(rawEvents as HistoricalEvent[]);
         
         console.log('📊 Unique events after deduplication:', events.length);
