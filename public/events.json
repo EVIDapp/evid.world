@@ -3415,8 +3415,8 @@
     "desc": "Global conflict centered in Europe (1914–1918).",
     "wiki": "https://en.wikipedia.org/wiki/World_War_I",
     "radiusKm": 1500,
-    "year": 1914,
-    "casualties": null
+    "year": "1914-1918",
+    "casualties": 17000000
   },
   {
     "id": "world_war_2_global_1939_1945",
@@ -3967,21 +3967,6 @@
     "wiki": "https://en.wikipedia.org/wiki/Deepwater_Horizon_oil_spill",
     "radiusKm": 300,
     "year": 2010,
-    "casualties": null
-  },
-  {
-    "id": "titanic_shipwreck_1912_chatgpt_v2",
-    "type": "disaster",
-    "title": "RMS Titanic shipwreck (1912) (ChatGPT version)",
-    "country": "North Atlantic",
-    "pos": {
-      "lat": 41.7325,
-      "lng": -49.9469
-    },
-    "desc": "Sinking of RMS Titanic in the North Atlantic.",
-    "wiki": "https://en.wikipedia.org/wiki/Wreck_of_the_RMS_Titanic",
-    "radiusKm": 30,
-    "year": 1912,
     "casualties": null
   },
   {
@@ -6504,21 +6489,6 @@
     "wiki": "https://en.wikipedia.org/wiki/2023_Turkey–Syria_earthquake",
     "radiusKm": 350,
     "year": 2023,
-    "casualties": null
-  },
-  {
-    "id": "titanic_sinking_1912",
-    "type": "disaster",
-    "title": "Titanic Sinking (1912)",
-    "country": "CA",
-    "pos": {
-      "lat": 41.73,
-      "lng": -49.95
-    },
-    "desc": "RMS Titanic struck iceberg, 1,500 deaths.",
-    "desc_long": "'Unsinkable' luxury liner sank on maiden voyage after hitting iceberg, one of deadliest peacetime maritime disasters.",
-    "wiki": "https://en.wikipedia.org/wiki/Sinking_of_the_Titanic",
-    "year": "1912",
     "casualties": null
   },
   {

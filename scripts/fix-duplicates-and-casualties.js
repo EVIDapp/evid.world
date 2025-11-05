@@ -179,6 +179,36 @@ events.forEach((event, index) => {
   }
 });
 
+// Year ranges for events (id -> year range string)
+const yearRanges = {
+  'world_war_1_global_1914_1918': '1914-1918',
+  'world_war_1_begins_1914': '1914-1918',
+  'world_war_2_global_1939_1945': '1939-1945',
+  'vietnam_war_1955_1975': '1955-1975',
+  'korean_war_1950_1953': '1950-1953',
+  'iran_iraq_war_1980_1988': '1980-1988',
+  'iran_iraq_war_1980_1988_new': '1980-1988',
+  'gulf_war_1990_1991': '1990-1991',
+  'gulf_war_1990_1991_new': '1990-1991',
+  'soviet_afghan_war_1979_1989': '1979-1989',
+  'russo_japanese_war_1904_1905': '1904-1905',
+  'russo_japanese_war_1904_1905_new': '1904-1905',
+  'bosnian_war_1992_1995': '1992-1995',
+  'bosnian_war_1992_1995_new': '1992-1995',
+  'kosovo_war_1998_1999': '1998-1999',
+  'kosovo_war_1998_1999_new': '1998-1999',
+  'first_indochina_war_1946_1954': '1946-1954',
+  'first_indochina_war_1946_1954_new': '1946-1954',
+  'algerian_war_1954_1962': '1954-1962',
+  'algerian_war_1954_1962_new': '1954-1962',
+  'syrian_civil_war_2011_present': '2011-present',
+  'syrian_civil_war_2011_present_new': '2011-present',
+  'spanish_civil_war_1936_1939': '1936-1939',
+  'balkan_wars_1912_1913': '1912-1913',
+  'greco_turkish_war_1919_1922': '1919-1922',
+  'italo_ethiopian_war_1935_1936': '1935-1936',
+};
+
 // Remove duplicates and add casualties
 const uniqueEvents = events
   .filter(event => !idsToRemove.has(event.id))
@@ -191,6 +221,16 @@ const uniqueEvents = events
         event.casualties = knownValue;
       }
     }
+    
+    // Fix year ranges for wars
+    if (yearRanges[event.id] !== undefined) {
+      const correctYear = yearRanges[event.id];
+      if (event.year !== correctYear) {
+        console.log(`Fixing year for ${event.id}: ${event.year} -> ${correctYear}`);
+        event.year = correctYear;
+      }
+    }
+    
     return event;
   });
 
