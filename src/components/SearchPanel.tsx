@@ -127,7 +127,7 @@ export const SearchPanel = ({
         {/* Suggestions */}
         {showSuggestions && (
           <div className="absolute top-full left-0 right-0 mt-2 bg-popover border border-border/50 
-                          rounded-lg max-h-[480px] overflow-auto shadow-elevated z-50 
+                          rounded-lg max-h-[70vh] overflow-auto shadow-elevated z-50 
                           animate-fade-in-up backdrop-blur-strong">
             {suggestions.map((event) => (
               <div
