@@ -37,11 +37,11 @@ export const slugify = (text: string): string => {
 };
 
 // Слаг события с годом в конце, БЕЗ дублирования года
-export const generateEventSlug = (title: string, year?: string): string => {
+export const generateEventSlug = (title: string, year?: string | number): string => {
   const titleSlug = slugify(title);
   
   // Если year не передан, попробуем извлечь из title
-  let y = (year ?? "").trim();
+  let y = String(year ?? "").trim();
   
   if (!y) {
     // Ищем год в скобках в конце title: "(1816–1828)" или "(1980)"
