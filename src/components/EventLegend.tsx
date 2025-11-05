@@ -38,11 +38,11 @@ export const EventLegend = ({ selectedTypes, onTypeToggle }: EventLegendProps) =
 
   return (
     <div className="hidden md:block absolute right-3 bottom-6 md:right-4 md:bottom-8 z-20 
-                    backdrop-blur-strong border border-border/50 rounded-lg 
-                    shadow-elevated animate-fade-in-up w-[180px] overflow-hidden
-                    bg-card/95">
-      <div className="flex items-center justify-between p-2 border-b border-border/30">
-        <h3 className="text-xs font-bold tracking-wide" 
+                    backdrop-blur-strong border-2 border-primary/40 rounded-lg 
+                    shadow-elevated animate-fade-in-up w-[200px] overflow-hidden
+                    bg-card/98">
+      <div className="flex items-center justify-between p-3 border-b-2 border-primary/20">
+        <h3 className="text-lg font-bold tracking-wide" 
             style={{
               backgroundImage: 'linear-gradient(90deg, #00D9FF 0%, #5B7FFF 35%, rgba(91, 127, 255, 0.6) 70%, rgba(100, 100, 100, 0.2) 100%)',
               WebkitBackgroundClip: 'text',
@@ -64,7 +64,7 @@ export const EventLegend = ({ selectedTypes, onTypeToggle }: EventLegendProps) =
       </div>
       
       {isExpanded && (
-        <div className="p-1.5 animate-fade-in space-y-1.5">
+        <div className="p-2 animate-fade-in space-y-2">
         {Object.entries(EVENT_COLORS).map(([type, { fill, label }]) => {
           const isSelected = selectedTypes.has(type as EventType);
           const hslColor = hexToHSL(fill);
@@ -73,18 +73,18 @@ export const EventLegend = ({ selectedTypes, onTypeToggle }: EventLegendProps) =
             <div
               key={type}
               onClick={() => onTypeToggle(type as EventType)}
-              className={`category-card cursor-pointer ${!isSelected ? 'inactive' : ''}`}
+              className={`category-card cursor-pointer border-2 ${isSelected ? 'border-white/30' : 'border-border/20'} ${!isSelected ? 'inactive' : ''}`}
               style={{
                 '--category-gradient-color': fill,
-                '--category-glow-color': `${fill}40`,
+                '--category-glow-color': `${fill}60`,
               } as React.CSSProperties}
             >
-              <div className="category-card-content p-2 flex items-center gap-2">
+              <div className="category-card-content p-2.5 flex items-center gap-2.5">
                 <div 
-                  className="w-3 h-3 rounded-sm border border-white/40 flex-shrink-0"
+                  className="w-4 h-4 rounded-sm border-2 border-white/50 flex-shrink-0 shadow-md"
                   style={{ backgroundColor: fill }}
                 />
-                <span className="text-[10px] font-medium whitespace-nowrap leading-none">
+                <span className="text-xs font-semibold whitespace-nowrap leading-none">
                   {label}
                 </span>
               </div>
