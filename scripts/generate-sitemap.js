@@ -92,7 +92,18 @@ let sitemap = `<?xml version="1.0" encoding="UTF-8"?>
 
 // Add event pages
 events.forEach(event => {
-  const slug = generateSlug(event.title, event.year);
+    // 🧹 Убираем года из title, чтобы не было дублей
+    const cleanTitle = event.title.replace(/\(?\b\d{3,4}(?:[–—-]\d{2,4})?\)?/g, '').trim();
+
+    // 🧮 Нормализуем и убираем повтор года
+    let year = String(event.year || '')
+      .replace(/[–—]/g, '-') // заменяем длинные тире на обычные
+      .replace(/^(\d{3,4})-\1$/, '$1') // если повтор, оставляем один (1812-1812 → 1812)
+      .replace(/^(\d{3,4})-\1-(\d{3,4})$/, '$1-$3') // если 1812-1812-1815 → 1812-1815
+      .trim();
+
+    // 🧩 Финальный slug без дублей годов
+    const slug = slugify(`${cleanTitle} ${year}`.trim());
   sitemap += `  <!-- ${event.title} -->
   <url>
     <loc>https://evid.world/event/${slug}</loc>
@@ -134,6 +145,11 @@ sitemap += `</urlset>`;
 
 // Write sitemap to public folder
 const sitemapPath = path.join(__dirname, '../public/sitemap.xml');
+// 🧹 Удаляем старый sitemap, если он существует
+if (fs.existsSync(sitemapPath)) {
+  fs.unlinkSync(sitemapPath);
+  console.log('🗑️ Старый sitemap.xml удалён перед генерацией.');
+}
 fs.writeFileSync(sitemapPath, sitemap, 'utf-8');
 
 console.log(`✅ Sitemap generated with ${events.length} event pages!`);

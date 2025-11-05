@@ -1,0 +1,43 @@
+import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+// Путь к файлу событий
+const eventsPath = path.join(__dirname, '../public/events.json');
+const backupPath = path.join(__dirname, '../public/events-backup.json');
+
+// Делаем бэкап перед изменениями
+fs.copyFileSync(eventsPath, backupPath);
+console.log('🧩 Backup created: events-backup.json');
+
+// Загружаем события
+const events = JSON.parse(fs.readFileSync(eventsPath, 'utf-8'));
+let fixedCount = 0;
+
+// Проходим по всем событиям
+events.forEach(event => {
+  // Ищем диапазон лет в названии — например (1803–1815)
+  const rangeMatch = event.title.match(/\((\d{3,4})[–-](\d{3,4})\)/);
+
+  if (rangeMatch) {
+    const startYear = rangeMatch[1];
+    const endYear = rangeMatch[2];
+    const fullRange = `${startYear}–${endYear}`;
+
+    // Если в поле year указан только один год — исправляем
+    if (event.year !== fullRange) {
+      console.log(`Fixing: ${event.title}`);
+      console.log(`  Old year: ${event.year || 'missing'}`);
+      console.log(`  New year: ${fullRange}`);
+      event.year = fullRange;
+      fixedCount++;
+    }
+  }
+});
+
+// Сохраняем изменения обратно
+fs.writeFileSync(eventsPath, JSON.stringify(events, null, 2));
+console.log(`\n✅ Fixed year ranges for ${fixedCount} events`);

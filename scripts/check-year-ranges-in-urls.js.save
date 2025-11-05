@@ -1,5 +1,3 @@
-#!/usr/bin/env node
-
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
@@ -50,7 +48,7 @@ const checkYearRanges = () => {
   console.log('🔍 Проверка диапазонов годов в URL событий...\n');
   
   // Загружаем события
-  const eventsPath = path.join(__dirname, '../public/events.json');
+  const eventsPath = path.join(__dirname, '../public/events-clean.json');
   const eventsData = JSON.parse(fs.readFileSync(eventsPath, 'utf-8'));
   
   // Фильтруем события с диапазонами годов
