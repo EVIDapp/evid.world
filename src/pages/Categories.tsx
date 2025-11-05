@@ -7,7 +7,6 @@ import { Button } from '@/components/ui/button';
 import { EVENT_COLORS, getEventColor, EVENT_TYPE_TO_URL } from '@/utils/eventColors';
 import { Calendar, MapPin, Users, TrendingUp, ArrowLeft } from 'lucide-react';
 import { useCounterAnimation } from '@/hooks/useCounterAnimation';
-import { deduplicateEvents } from '@/utils/deduplicateEvents';
 
 interface CategoryStats {
   type: EventType;
@@ -26,14 +25,9 @@ const Categories = () => {
     const loadCategories = async () => {
       try {
         const response = await fetch('/events.json');
-        let rawEvents: any[] = await response.json();
+        const events: HistoricalEvent[] = await response.json();
         
-        console.log('📊 Raw events loaded:', rawEvents.length);
-        
-        // Удаляем дубликаты
-        const events = deduplicateEvents(rawEvents as HistoricalEvent[]);
-        
-        console.log('📊 Unique events after deduplication:', events.length);
+        console.log('📊 Total events loaded:', events.length);
         
         const categoryMap = new Map<EventType, CategoryStats>();
         
