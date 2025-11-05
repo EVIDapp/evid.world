@@ -73,8 +73,8 @@ export const EventMeta = ({ event }: EventMetaProps) => {
           "longitude": event.pos.lng
         }
       },
-      "startDate": event.year ? `${event.year.split('-')[0]}-01-01` : undefined,
-      "endDate": event.year?.includes('-') ? `${event.year.split('-')[1]}-12-31` : undefined,
+      "startDate": event.year ? `${String(event.year).split('-')[0]}-01-01` : undefined,
+      "endDate": event.year && String(event.year).includes('-') ? `${String(event.year).split('-')[1]}-12-31` : undefined,
       "eventStatus": "https://schema.org/EventScheduled",
       "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
       "url": url,
