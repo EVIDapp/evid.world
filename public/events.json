@@ -2010,7 +2010,7 @@
   },
   {
     "id": "chernobyl_disaster_1986_new",
-    "type": "man-made disaster",
+    "type": "disaster",
     "title": "Chernobyl disaster (1986)",
     "country": "UA",
     "pos": {
@@ -2025,7 +2025,7 @@
   },
   {
     "id": "bhopal_disaster_1984",
-    "type": "man-made disaster",
+    "type": "disaster",
     "title": "Bhopal disaster (1984)",
     "country": "IN",
     "pos": {
@@ -2040,7 +2040,7 @@
   },
   {
     "id": "three_mile_island_1979",
-    "type": "man-made disaster",
+    "type": "disaster",
     "title": "Three Mile Island accident (1979)",
     "country": "US",
     "pos": {
@@ -2055,7 +2055,7 @@
   },
   {
     "id": "exxon_valdez_spill_1989",
-    "type": "man-made disaster",
+    "type": "disaster",
     "title": "Exxon Valdez oil spill (1989)",
     "country": "US",
     "pos": {
@@ -2070,7 +2070,7 @@
   },
   {
     "id": "texas_city_disaster_1947",
-    "type": "man-made disaster",
+    "type": "disaster",
     "title": "Texas City disaster (1947)",
     "country": "US",
     "pos": {
@@ -2085,7 +2085,7 @@
   },
   {
     "id": "lac_megantic_rail_2013",
-    "type": "man-made disaster",
+    "type": "disaster",
     "title": "Lac-Mégantic rail disaster (2013)",
     "country": "CA",
     "pos": {
@@ -2100,7 +2100,7 @@
   },
   {
     "id": "granville_train_crash_1977",
-    "type": "man-made disaster",
+    "type": "disaster",
     "title": "Granville rail disaster (1977)",
     "country": "AU",
     "pos": {
@@ -2115,7 +2115,7 @@
   },
   {
     "id": "halifax_explosion_1917",
-    "type": "man-made disaster",
+    "type": "disaster",
     "title": "Halifax Explosion (1917)",
     "country": "CA",
     "pos": {
@@ -3391,7 +3391,7 @@
   },
   {
     "id": "titanic_shipwreck_1912",
-    "type": "man-made disaster",
+    "type": "disaster",
     "title": "RMS Titanic Shipwreck (1912)",
     "country": "North Atlantic",
     "pos": {
@@ -3776,7 +3776,7 @@
   },
   {
     "id": "beirut_port_explosion_2020_chatgpt",
-    "type": "man-made disaster",
+    "type": "disaster",
     "title": "2020 Beirut port explosion",
     "country": "LB",
     "pos": {
@@ -3791,7 +3791,7 @@
   },
   {
     "id": "piper_alpha_1988_chatgpt",
-    "type": "man-made disaster",
+    "type": "disaster",
     "title": "Piper Alpha disaster (1988)",
     "country": "GB",
     "pos": {
@@ -3806,7 +3806,7 @@
   },
   {
     "id": "seveso_disaster_1976_chatgpt",
-    "type": "man-made disaster",
+    "type": "disaster",
     "title": "Seveso disaster (1976)",
     "country": "IT",
     "pos": {
@@ -3821,7 +3821,7 @@
   },
   {
     "id": "banqiao_dam_failure_1975_chatgpt",
-    "type": "man-made disaster",
+    "type": "disaster",
     "title": "Banqiao Dam failure (1975)",
     "country": "CN",
     "pos": {
@@ -3836,7 +3836,7 @@
   },
   {
     "id": "kyshtym_disaster_1957_chatgpt",
-    "type": "man-made disaster",
+    "type": "disaster",
     "title": "Kyshtym disaster (1957)",
     "country": "RU",
     "pos": {
@@ -3851,7 +3851,7 @@
   },
   {
     "id": "sayano_shushenskaya_accident_2009_chatgpt",
-    "type": "man-made disaster",
+    "type": "disaster",
     "title": "Sayano–Shushenskaya hydro accident (2009)",
     "country": "RU",
     "pos": {
@@ -3896,7 +3896,7 @@
   },
   {
     "id": "sampoong_store_collapse_1995_chatgpt",
-    "type": "man-made disaster",
+    "type": "disaster",
     "title": "Sampoong Department Store collapse (1995)",
     "country": "KR",
     "pos": {
@@ -3911,7 +3911,7 @@
   },
   {
     "id": "love_canal_1978_chatgpt",
-    "type": "man-made disaster",
+    "type": "disaster",
     "title": "Love Canal environmental disaster (1978)",
     "country": "US",
     "pos": {
@@ -3926,7 +3926,7 @@
   },
   {
     "id": "halabja_chemical_attack_1988_chatgpt",
-    "type": "man-made disaster",
+    "type": "disaster",
     "title": "Halabja chemical attack (1988)",
     "country": "IQ",
     "pos": {
@@ -3941,7 +3941,7 @@
   },
   {
     "id": "chernobyl_disaster_1986_chatgpt_v2",
-    "type": "man-made disaster",
+    "type": "disaster",
     "title": "Chernobyl disaster (1986) (ChatGPT version)",
     "country": "UA",
     "pos": {
@@ -3956,7 +3956,7 @@
   },
   {
     "id": "deepwater_horizon_oil_spill_chatgpt_v2",
-    "type": "man-made disaster",
+    "type": "disaster",
     "title": "Deepwater Horizon oil spill (2010) (ChatGPT version)",
     "country": "US",
     "pos": {
@@ -3971,7 +3971,7 @@
   },
   {
     "id": "titanic_shipwreck_1912_chatgpt_v2",
-    "type": "man-made disaster",
+    "type": "disaster",
     "title": "RMS Titanic shipwreck (1912) (ChatGPT version)",
     "country": "North Atlantic",
     "pos": {
@@ -5247,7 +5247,7 @@
   },
   {
     "id": "grenfell_tower_fire_2017",
-    "type": "man-made disaster",
+    "type": "disaster",
     "title": "Grenfell Tower fire (2017)",
     "country": "GB",
     "pos": {
@@ -5276,7 +5276,7 @@
   },
   {
     "id": "challenger_disaster_1986",
-    "type": "man-made disaster",
+    "type": "disaster",
     "title": "Space Shuttle Challenger disaster (1986)",
     "country": "US",
     "pos": {
@@ -5290,7 +5290,7 @@
   },
   {
     "id": "columbia_disaster_2003",
-    "type": "man-made disaster",
+    "type": "disaster",
     "title": "Space Shuttle Columbia disaster (2003)",
     "country": "US",
     "pos": {
@@ -5304,7 +5304,7 @@
   },
   {
     "id": "goiania_accident_1987",
-    "type": "man-made disaster",
+    "type": "disaster",
     "title": "Goiânia radiological accident (1987)",
     "country": "BR",
     "pos": {
@@ -5318,7 +5318,7 @@
   },
   {
     "id": "great_smog_london_1952",
-    "type": "man-made disaster",
+    "type": "disaster",
     "title": "Great Smog of London (1952)",
     "country": "GB",
     "pos": {
@@ -5348,7 +5348,7 @@
   },
   {
     "id": "amagasaki_derail_2005",
-    "type": "man-made disaster",
+    "type": "disaster",
     "title": "Amagasaki rail crash (2005)",
     "country": "JP",
     "pos": {
@@ -5362,7 +5362,7 @@
   },
   {
     "id": "loveparade_disaster_2010",
-    "type": "man-made disaster",
+    "type": "disaster",
     "title": "Love Parade disaster (2010)",
     "country": "DE",
     "pos": {
@@ -7836,7 +7836,7 @@
   },
   {
     "id": "death_socrates_399bc",
-    "type": "man-made disaster",
+    "type": "disaster",
     "title": "Death of Socrates (399 BCE)",
     "country": "GR",
     "pos": {
