@@ -1,7 +1,7 @@
 {
   "name": "EVID",
   "short_name": "Evid",
-  "description": "Explore historical events on a global map.",
+  "description": "Discover the world's history in one interactive map — from ancient wars and empires to natural disasters, epidemics, and groundbreaking discoveries",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#0b0e15",

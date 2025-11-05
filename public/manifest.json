@@ -1,7 +1,7 @@
 {
   "name": "EVID.WORLD - Global Event Map",
   "short_name": "EVID.WORLD",
-  "description": "Interactive map of historical events: wars, earthquakes, disasters, archaeological discoveries",
+  "description": "Discover the world's history in one interactive map — from ancient wars and empires to natural disasters, epidemics, and groundbreaking discoveries",
   "start_url": "/",
   "display": "standalone",
   "theme_color": "#5B7FFF",
