@@ -19,14 +19,11 @@ import { useTheme } from 'next-themes';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
-import { Progress } from '@/components/ui/progress';
 import { Key, Plus, Minus, Globe as GlobeIcon, Map, Grid3x3 } from 'lucide-react';
 import { getWikipediaImage } from '@/utils/wikipediaImage';
 import { useKeyboardShortcuts } from '@/hooks/useKeyboardShortcuts';
 import { useEventHistory } from '@/hooks/useEventHistory';
 import { generateEventSlug } from '@/utils/slugify';
-import { useEventData } from '@/hooks/useEventData';
-import { LazyImage } from './LazyImage';
 
 const WORLD_BOUNDS = {
   north: 85,
@@ -46,7 +43,8 @@ export const EventMap = () => {
   const activePolygonRef = useRef<string | null>(null);
   const searchInputRef = useRef<HTMLInputElement>(null);
   
-  const { events, loading, loadingProgress } = useEventData();
+  const [events, setEvents] = useState<HistoricalEvent[]>([]);
+  const [loading, setLoading] = useState(true);
   const [filteredEvents, setFilteredEvents] = useState<HistoricalEvent[]>([]);
   const [selectedTypes, setSelectedTypes] = useState<Set<EventType>>(new Set());
   const [searchQuery, setSearchQuery] = useState('');
@@ -67,6 +65,20 @@ export const EventMap = () => {
   
   const { toast } = useToast();
   const { theme } = useTheme();
+
+  // Load events from JSON
+  useEffect(() => {
+    fetch('/events.json')
+      .then(res => res.json())
+      .then(data => {
+        setEvents(data);
+        setLoading(false);
+      })
+      .catch(err => {
+        console.error('Failed to load events:', err);
+        setLoading(false);
+      });
+  }, []);
 
   // Parse year from event data
   const parseYear = (event: HistoricalEvent): number => {
@@ -840,13 +852,7 @@ export const EventMap = () => {
             <p className="text-lg font-semibold mb-2 bg-gradient-to-r from-primary via-accent to-primary-glow bg-clip-text text-transparent animate-pulse">
               Loading EVID
             </p>
-            <p className="text-sm text-muted-foreground mb-4">Preparing historical events...</p>
-            {loadingProgress > 0 && (
-              <div className="w-full max-w-xs mx-auto mt-4">
-                <Progress value={loadingProgress} className="h-2" />
-                <p className="text-xs text-muted-foreground mt-2">{loadingProgress}%</p>
-              </div>
-            )}
+            <p className="text-sm text-muted-foreground mb-4">Loading historical events...</p>
           </div>
         </div>
       )}
@@ -862,9 +868,6 @@ export const EventMap = () => {
             <p className="text-lg font-semibold mb-4 bg-gradient-to-r from-primary via-accent to-primary-glow bg-clip-text text-transparent">
               Loading Map
             </p>
-            <div className="w-full max-w-xs mx-auto">
-              <Progress value={undefined} className="h-2 animate-pulse" />
-            </div>
             <p className="text-xs text-muted-foreground mt-3">Initializing globe...</p>
           </div>
         </div>
