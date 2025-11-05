@@ -66,27 +66,13 @@ export default defineConfig(({ mode }) => ({
     },
   },
   optimizeDeps: {
-    include: ["react", "react-dom", "mapbox-gl", "supercluster"]
+    include: ["react", "react-dom"]
   },
   build: {
     rollupOptions: {
       output: {
-        manualChunks(id) {
-          if (id.includes('node_modules')) {
-            if (id.includes('mapbox-gl') || id.includes('supercluster')) {
-              return 'map-vendor';
-            }
-            if (id.includes('@radix-ui')) {
-              return 'ui-vendor';
-            }
-            if (id.includes('react') || id.includes('react-dom') || id.includes('react-router')) {
-              return 'react-vendor';
-            }
-            return 'vendor';
-          }
-        }
+        manualChunks: undefined
       }
-    },
-    chunkSizeWarningLimit: 1000
+    }
   }
 }));
