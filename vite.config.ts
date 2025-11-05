@@ -67,9 +67,7 @@ export default defineConfig(({ mode }) => ({
     dedupe: ["react", "react-dom", "react/jsx-runtime"]
   },
   optimizeDeps: {
-    exclude: ["react", "react-dom"],
-    esbuildOptions: {
-      target: "es2020"
-    }
+    include: ["react", "react-dom", "react/jsx-runtime"],
+    force: true
   },
 }));
