@@ -26,7 +26,8 @@ export const CategoryFilters = ({ events, onFilterChange }: CategoryFiltersProps
   const applyFilters = () => {
     let filtered = events.filter(e => {
       const year = parseInt(e.year || '0');
-      const inYearRange = year >= yearRange[0] && year <= yearRange[1];
+      // Include events with invalid/missing years (year <= 0) in the results
+      const inYearRange = year <= 0 || (year >= yearRange[0] && year <= yearRange[1]);
       const inCountryFilter = selectedCountries.size === 0 || selectedCountries.has(e.country);
       return inYearRange && inCountryFilter;
     });
@@ -57,7 +58,8 @@ export const CategoryFilters = ({ events, onFilterChange }: CategoryFiltersProps
     setTimeout(() => {
       let filtered = events.filter(e => {
         const year = parseInt(e.year || '0');
-        const inYearRange = year >= yearRange[0] && year <= yearRange[1];
+        // Include events with invalid/missing years (year <= 0) in the results
+        const inYearRange = year <= 0 || (year >= yearRange[0] && year <= yearRange[1]);
         const inCountryFilter = newSet.size === 0 || newSet.has(e.country);
         return inYearRange && inCountryFilter;
       });
