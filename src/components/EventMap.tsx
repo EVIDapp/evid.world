@@ -25,6 +25,8 @@ import { getWikipediaImage } from '@/utils/wikipediaImage';
 import { useKeyboardShortcuts } from '@/hooks/useKeyboardShortcuts';
 import { useEventHistory } from '@/hooks/useEventHistory';
 import { generateEventSlug } from '@/utils/slugify';
+import { useEventData } from '@/hooks/useEventData';
+import { LazyImage } from './LazyImage';
 
 const WORLD_BOUNDS = {
   north: 85,
@@ -44,12 +46,11 @@ export const EventMap = () => {
   const activePolygonRef = useRef<string | null>(null);
   const searchInputRef = useRef<HTMLInputElement>(null);
   
-  const [events, setEvents] = useState<HistoricalEvent[]>([]);
+  const { events, loading, loadingProgress } = useEventData();
   const [filteredEvents, setFilteredEvents] = useState<HistoricalEvent[]>([]);
   const [selectedTypes, setSelectedTypes] = useState<Set<EventType>>(new Set());
   const [searchQuery, setSearchQuery] = useState('');
   const [onDemandMode, setOnDemandMode] = useState(false);
-  const [loading, setLoading] = useState(true);
   const [mapboxToken] = useState('pk.eyJ1IjoiZXZpZCIsImEiOiJjbWgyN3prbGUwZ3p6MmxzaDNlb2Vxa3BqIn0._6oUJJJYhV1oHzidr5AWgw');
   const [tokenSubmitted, setTokenSubmitted] = useState(true);
   const [mapLoaded, setMapLoaded] = useState(false);
@@ -100,34 +101,20 @@ export const EventMap = () => {
     return new Date().getFullYear();
   };
 
-  // Load events data
+  // Calculate year range when events are loaded
   useEffect(() => {
-    fetch('/events.json')
-      .then(res => res.json())
-      .then(data => {
-        // Calculate year range
-        const years = data
-          .map(parseYear)
-          .filter(y => !isNaN(y));
-        
-        const minYear = 1; // Start from year 1 CE
-        const maxYear = Math.min(Math.max(...years), 2025); // Cap at 2025
-        
-        setYearRange([minYear, maxYear]);
-        setSelectedYearRange([minYear, maxYear]);
-        setEvents(data);
-        setLoading(false);
-      })
-      .catch(err => {
-        console.error('Failed to load events:', err);
-        setLoading(false);
-        toast({
-          variant: "destructive",
-          title: "Error loading events",
-          description: "Please refresh the page to try again",
-        });
-      });
-  }, [toast]);
+    if (events.length > 0) {
+      const years = events
+        .map(parseYear)
+        .filter(y => !isNaN(y));
+      
+      const minYear = 1; // Start from year 1 CE
+      const maxYear = Math.min(Math.max(...years), 2025); // Cap at 2025
+      
+      setYearRange([minYear, maxYear]);
+      setSelectedYearRange([minYear, maxYear]);
+    }
+  }, [events]);
 
   // Parse URL parameters on mount
   useEffect(() => {
@@ -843,7 +830,7 @@ export const EventMap = () => {
       {/* Loading overlay */}
       {loading && tokenSubmitted && (
         <div className="absolute inset-0 flex flex-col items-center justify-center bg-background/90 backdrop-blur-strong z-50 animate-fade-in">
-          <div className="text-center max-w-md px-4">
+          <div className="text-center max-w-md px-4 w-full">
             <div className="relative w-16 h-16 mx-auto mb-6">
               <div className="absolute inset-0 border-4 border-primary/30 rounded-full"></div>
               <div className="absolute inset-0 border-4 border-t-primary border-transparent rounded-full animate-spin"></div>
@@ -854,6 +841,12 @@ export const EventMap = () => {
               Loading EVID
             </p>
             <p className="text-sm text-muted-foreground mb-4">Preparing historical events...</p>
+            {loadingProgress > 0 && (
+              <div className="w-full max-w-xs mx-auto mt-4">
+                <Progress value={loadingProgress} className="h-2" />
+                <p className="text-xs text-muted-foreground mt-2">{loadingProgress}%</p>
+              </div>
+            )}
           </div>
         </div>
       )}

@@ -74,3 +74,13 @@ export const CategoryListSkeleton = () => (
     ))}
   </div>
 );
+
+export const SkeletonLoader = () => (
+  <div className="w-full h-screen bg-background flex items-center justify-center">
+    <div className="space-y-4 w-full max-w-md px-4">
+      <Skeleton className="h-12 w-full" />
+      <Skeleton className="h-8 w-3/4" />
+      <Skeleton className="h-8 w-2/3" />
+    </div>
+  </div>
+);

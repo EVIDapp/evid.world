@@ -66,13 +66,18 @@ export default defineConfig(({ mode }) => ({
     },
   },
   optimizeDeps: {
-    include: ["react", "react-dom"]
+    include: ["react", "react-dom", "mapbox-gl", "supercluster"]
   },
   build: {
     rollupOptions: {
       output: {
-        manualChunks: undefined
+        manualChunks: {
+          'vendor': ['react', 'react-dom', 'react-router-dom'],
+          'map': ['mapbox-gl', 'supercluster'],
+          'ui': ['@radix-ui/react-dialog', '@radix-ui/react-tooltip', '@radix-ui/react-select']
+        }
       }
-    }
+    },
+    chunkSizeWarningLimit: 1000
   }
 }));
