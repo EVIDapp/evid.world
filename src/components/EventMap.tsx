@@ -19,6 +19,7 @@ import { useTheme } from 'next-themes';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
+import { Progress } from '@/components/ui/progress';
 import { Key, Plus, Minus, Globe as GlobeIcon, Map, Grid3x3 } from 'lucide-react';
 import { getWikipediaImage } from '@/utils/wikipediaImage';
 import { useKeyboardShortcuts } from '@/hooks/useKeyboardShortcuts';
@@ -44,11 +45,11 @@ export const EventMap = () => {
   const searchInputRef = useRef<HTMLInputElement>(null);
   
   const [events, setEvents] = useState<HistoricalEvent[]>([]);
-  const [loading, setLoading] = useState(true);
   const [filteredEvents, setFilteredEvents] = useState<HistoricalEvent[]>([]);
   const [selectedTypes, setSelectedTypes] = useState<Set<EventType>>(new Set());
   const [searchQuery, setSearchQuery] = useState('');
   const [onDemandMode, setOnDemandMode] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [mapboxToken] = useState('pk.eyJ1IjoiZXZpZCIsImEiOiJjbWgyN3prbGUwZ3p6MmxzaDNlb2Vxa3BqIn0._6oUJJJYhV1oHzidr5AWgw');
   const [tokenSubmitted, setTokenSubmitted] = useState(true);
   const [mapLoaded, setMapLoaded] = useState(false);
@@ -65,20 +66,6 @@ export const EventMap = () => {
   
   const { toast } = useToast();
   const { theme } = useTheme();
-
-  // Load events from JSON
-  useEffect(() => {
-    fetch('/events.json')
-      .then(res => res.json())
-      .then(data => {
-        setEvents(data);
-        setLoading(false);
-      })
-      .catch(err => {
-        console.error('Failed to load events:', err);
-        setLoading(false);
-      });
-  }, []);
 
   // Parse year from event data
   const parseYear = (event: HistoricalEvent): number => {
@@ -113,20 +100,34 @@ export const EventMap = () => {
     return new Date().getFullYear();
   };
 
-  // Calculate year range when events are loaded
+  // Load events data
   useEffect(() => {
-    if (events.length > 0) {
-      const years = events
-        .map(parseYear)
-        .filter(y => !isNaN(y));
-      
-      const minYear = 1; // Start from year 1 CE
-      const maxYear = Math.min(Math.max(...years), 2025); // Cap at 2025
-      
-      setYearRange([minYear, maxYear]);
-      setSelectedYearRange([minYear, maxYear]);
-    }
-  }, [events]);
+    fetch('/events.json')
+      .then(res => res.json())
+      .then(data => {
+        // Calculate year range
+        const years = data
+          .map(parseYear)
+          .filter(y => !isNaN(y));
+        
+        const minYear = 1; // Start from year 1 CE
+        const maxYear = Math.min(Math.max(...years), 2025); // Cap at 2025
+        
+        setYearRange([minYear, maxYear]);
+        setSelectedYearRange([minYear, maxYear]);
+        setEvents(data);
+        setLoading(false);
+      })
+      .catch(err => {
+        console.error('Failed to load events:', err);
+        setLoading(false);
+        toast({
+          variant: "destructive",
+          title: "Error loading events",
+          description: "Please refresh the page to try again",
+        });
+      });
+  }, [toast]);
 
   // Parse URL parameters on mount
   useEffect(() => {
@@ -842,7 +843,7 @@ export const EventMap = () => {
       {/* Loading overlay */}
       {loading && tokenSubmitted && (
         <div className="absolute inset-0 flex flex-col items-center justify-center bg-background/90 backdrop-blur-strong z-50 animate-fade-in">
-          <div className="text-center max-w-md px-4 w-full">
+          <div className="text-center max-w-md px-4">
             <div className="relative w-16 h-16 mx-auto mb-6">
               <div className="absolute inset-0 border-4 border-primary/30 rounded-full"></div>
               <div className="absolute inset-0 border-4 border-t-primary border-transparent rounded-full animate-spin"></div>
@@ -852,7 +853,7 @@ export const EventMap = () => {
             <p className="text-lg font-semibold mb-2 bg-gradient-to-r from-primary via-accent to-primary-glow bg-clip-text text-transparent animate-pulse">
               Loading EVID
             </p>
-            <p className="text-sm text-muted-foreground mb-4">Loading historical events...</p>
+            <p className="text-sm text-muted-foreground mb-4">Preparing historical events...</p>
           </div>
         </div>
       )}
@@ -868,6 +869,9 @@ export const EventMap = () => {
             <p className="text-lg font-semibold mb-4 bg-gradient-to-r from-primary via-accent to-primary-glow bg-clip-text text-transparent">
               Loading Map
             </p>
+            <div className="w-full max-w-xs mx-auto">
+              <Progress value={undefined} className="h-2 animate-pulse" />
+            </div>
             <p className="text-xs text-muted-foreground mt-3">Initializing globe...</p>
           </div>
         </div>
