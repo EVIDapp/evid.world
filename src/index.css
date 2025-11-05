@@ -457,9 +457,8 @@ All colors MUST be HSL.
   .category-card {
     position: relative;
     overflow: hidden;
-    border-radius: 10px;
+    border-radius: 12px;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   }
 
   .category-card::before {
@@ -468,30 +467,28 @@ All colors MUST be HSL.
     inset: 0;
     background: linear-gradient(180deg, 
       transparent 0%,
-      transparent 30%,
+      transparent 45%,
       var(--category-gradient-color) 100%
     );
-    opacity: 0.35;
+    opacity: 0.25;
     transition: opacity 0.3s ease;
   }
 
   .dark .category-card::before {
     background: linear-gradient(180deg, 
       transparent 0%,
-      transparent 25%,
+      transparent 40%,
       var(--category-gradient-color) 100%
     );
-    opacity: 0.5;
+    opacity: 0.35;
   }
 
   .category-card:hover {
     transform: translateY(-2px);
-    border-color: var(--category-gradient-color) !important;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
   }
 
   .dark .category-card:hover {
-    box-shadow: 0 0 35px var(--category-glow-color), 0 4px 16px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 0 30px var(--category-glow-color);
   }
 
   .category-card.inactive::before {
@@ -500,15 +497,11 @@ All colors MUST be HSL.
       transparent 50%,
       hsl(225 25% 22%) 100%
     ) !important;
-    opacity: 0.15;
+    opacity: 0.2;
   }
 
   .dark .category-card.inactive::before {
-    opacity: 0.25;
-  }
-  
-  .category-card.inactive:hover {
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    opacity: 0.3;
   }
 
   .category-card-content {
