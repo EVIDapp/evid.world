@@ -2315,6 +2315,7 @@
     "desc": "Large explosion over the Podkamennaya Tunguska River.",
     "wiki": "https://en.wikipedia.org/wiki/Tunguska_event",
     "radiusKm": 60,
+    "year": 1908,
     "casualties": null
   },
   {
