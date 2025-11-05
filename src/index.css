@@ -467,28 +467,29 @@ All colors MUST be HSL.
     inset: 0;
     background: linear-gradient(180deg, 
       transparent 0%,
-      transparent 45%,
+      transparent 40%,
       var(--category-gradient-color) 100%
     );
-    opacity: 0.25;
+    opacity: 0.35;
     transition: opacity 0.3s ease;
   }
 
   .dark .category-card::before {
     background: linear-gradient(180deg, 
       transparent 0%,
-      transparent 40%,
+      transparent 35%,
       var(--category-gradient-color) 100%
     );
-    opacity: 0.35;
+    opacity: 0.5;
   }
 
   .category-card:hover {
     transform: translateY(-2px);
+    box-shadow: 0 2px 12px var(--category-glow-color);
   }
 
   .dark .category-card:hover {
-    box-shadow: 0 0 30px var(--category-glow-color);
+    box-shadow: 0 0 35px var(--category-glow-color), 0 2px 15px var(--category-glow-color);
   }
 
   .category-card.inactive::before {

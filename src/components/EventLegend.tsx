@@ -38,18 +38,18 @@ export const EventLegend = ({ selectedTypes, onTypeToggle }: EventLegendProps) =
 
   return (
     <div className="hidden md:block absolute right-3 bottom-6 md:right-4 md:bottom-8 z-20 
-                    backdrop-blur-strong border border-border/50 rounded-lg 
+                    backdrop-blur-strong border-2 border-primary/30 rounded-lg 
                     shadow-elevated animate-fade-in-up w-[180px] overflow-hidden
-                    bg-card/95">
-      <div className="flex items-center justify-between p-2 border-b border-border/30">
-        <h3 className="text-xs font-bold tracking-wide" 
+                    bg-card/98">
+      <div className="flex items-center justify-between p-2 border-b border-primary/20">
+        <h3 className="text-xs font-extrabold tracking-wide" 
             style={{
-              backgroundImage: 'linear-gradient(90deg, #00D9FF 0%, #5B7FFF 35%, rgba(91, 127, 255, 0.6) 70%, rgba(100, 100, 100, 0.2) 100%)',
+              backgroundImage: 'linear-gradient(90deg, #00EEFF 0%, #6B8FFF 30%, #5B7FFF 60%, rgba(91, 127, 255, 0.7) 85%, rgba(150, 150, 150, 0.3) 100%)',
               WebkitBackgroundClip: 'text',
               backgroundClip: 'text',
               color: 'transparent',
               WebkitTextFillColor: 'transparent',
-              textShadow: '0 0 20px rgba(0, 217, 255, 0.3)'
+              textShadow: '0 0 25px rgba(0, 238, 255, 0.5)'
             }}>
           Categories
         </h3>
@@ -81,10 +81,13 @@ export const EventLegend = ({ selectedTypes, onTypeToggle }: EventLegendProps) =
             >
               <div className="category-card-content p-2 flex items-center gap-2">
                 <div 
-                  className="w-3 h-3 rounded-sm border border-white/40 flex-shrink-0"
-                  style={{ backgroundColor: fill }}
+                  className="w-3 h-3 rounded-sm border-[1.5px] border-white/60 flex-shrink-0 shadow-sm"
+                  style={{ 
+                    backgroundColor: fill,
+                    boxShadow: `0 0 8px ${fill}40`
+                  }}
                 />
-                <span className="text-[10px] font-medium whitespace-nowrap leading-none">
+                <span className="text-[10px] font-semibold whitespace-nowrap leading-none text-foreground">
                   {label}
                 </span>
               </div>
