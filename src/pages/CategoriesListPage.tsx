@@ -55,9 +55,9 @@ const CategoriesListPage = () => {
   const categories: { type: EventType; slug: string; description: string }[] = [
     { type: 'war', slug: 'war', description: 'Military conflicts and battles throughout history' },
     { type: 'earthquake', slug: 'earthquake', description: 'Seismic events and natural disasters' },
-    { type: 'terror', slug: 'terror-attack', description: 'Terrorist attacks and incidents' },
+    { type: 'terror attack', slug: 'terror-attack', description: 'Terrorist attacks and incidents' },
     { type: 'discovery', slug: 'discovery', description: 'Archaeological discoveries and findings' },
-    { type: 'fire', slug: 'wildfire', description: 'Major fire incidents and disasters' },
+    { type: 'wildfire', slug: 'wildfire', description: 'Major fire incidents and disasters' },
     { type: 'disaster', slug: 'disaster', description: 'Various natural and man-made disasters' },
     { type: 'tsunami', slug: 'tsunami', description: 'Tsunami waves and related events' },
     { type: 'meteorite', slug: 'meteorite', description: 'Meteorite impacts and astronomical events' },

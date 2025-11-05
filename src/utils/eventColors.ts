@@ -3,9 +3,9 @@ import { EventType, EventColor } from '@/types/event';
 export const EVENT_COLORS: Record<EventType, EventColor> = {
   war: { stroke: '#dc2626', fill: '#ef4444', label: 'War' },
   earthquake: { stroke: '#ea580c', fill: '#f97316', label: 'Earthquake' },
-  terror: { stroke: '#18181b', fill: '#171717', label: 'Terror attack' },
+  'terror attack': { stroke: '#18181b', fill: '#171717', label: 'Terror attack' },
   discovery: { stroke: '#16a34a', fill: '#22c55e', label: 'Discovery' },
-  fire: { stroke: '#eab308', fill: '#fde047', label: 'Wildfire' },
+  wildfire: { stroke: '#eab308', fill: '#fde047', label: 'Wildfire' },
   disaster: { stroke: '#8b6f47', fill: '#a98467', label: 'Disaster' },
   tsunami: { stroke: '#005f8a', fill: '#0077b6', label: 'Tsunami' },
   meteorite: { stroke: '#2d4a33', fill: '#3a5a40', label: 'Meteorite' },
@@ -17,9 +17,9 @@ export const EVENT_COLORS: Record<EventType, EventColor> = {
 export const EVENT_TYPE_TO_URL: Record<EventType, string> = {
   war: 'war',
   earthquake: 'earthquake',
-  terror: 'terror-attack',
+  'terror attack': 'terror-attack',
   discovery: 'discovery',
-  fire: 'wildfire',
+  wildfire: 'wildfire',
   disaster: 'disaster',
   tsunami: 'tsunami',
   meteorite: 'meteorite',
@@ -31,9 +31,9 @@ export const EVENT_TYPE_TO_URL: Record<EventType, string> = {
 export const URL_TO_EVENT_TYPE: Record<string, EventType> = {
   'war': 'war',
   'earthquake': 'earthquake',
-  'terror-attack': 'terror',
+  'terror-attack': 'terror attack',
   'discovery': 'discovery',
-  'wildfire': 'fire',
+  'wildfire': 'wildfire',
   'disaster': 'disaster',
   'tsunami': 'tsunami',
   'meteorite': 'meteorite',
@@ -42,7 +42,7 @@ export const URL_TO_EVENT_TYPE: Record<string, EventType> = {
 };
 
 export const AREA_CATEGORIES = new Set<EventType>([
-  'war', 'earthquake', 'fire', 'tsunami', 'epidemic'
+  'war', 'earthquake', 'wildfire', 'tsunami', 'epidemic'
 ]);
 
 export const getEventColor = (type: EventType): EventColor => {

@@ -1,9 +1,9 @@
 export type EventType = 
   | 'war' 
   | 'earthquake' 
-  | 'terror' 
+  | 'terror attack' 
   | 'discovery' 
-  | 'fire' 
+  | 'wildfire' 
   | 'disaster' 
   | 'tsunami' 
   | 'meteorite' 
