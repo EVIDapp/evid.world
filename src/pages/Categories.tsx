@@ -29,6 +29,16 @@ const Categories = () => {
         
         console.log('📊 Total events loaded:', events.length);
         
+        // Log count per type
+        const typeCounts = new Map<string, number>();
+        events.forEach(event => {
+          typeCounts.set(event.type, (typeCounts.get(event.type) || 0) + 1);
+        });
+        console.log('📊 Events by type:');
+        typeCounts.forEach((count, type) => {
+          console.log(`  ${type}: ${count}`);
+        });
+        
         const categoryMap = new Map<EventType, CategoryStats>();
         
         events.forEach(event => {
