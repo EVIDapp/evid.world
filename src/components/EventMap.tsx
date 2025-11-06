@@ -43,6 +43,8 @@ export const EventMap = () => {
   const polygonsRef = useRef<string[]>([]);
   const activePolygonRef = useRef<string | null>(null);
   const searchInputRef = useRef<HTMLInputElement>(null);
+  const renderTimeoutRef = useRef<number | null>(null);
+  const zoomTimeoutRef = useRef<number | null>(null);
   
   const [events, setEvents] = useState<HistoricalEvent[]>([]);
   const [filteredEvents, setFilteredEvents] = useState<HistoricalEvent[]>([]);
@@ -253,11 +255,16 @@ export const EventMap = () => {
         ]
       });
 
-      // Track zoom changes for clustering
+      // Track zoom changes for clustering with debounce
       map.current.on('zoom', () => {
-        if (map.current) {
-          setCurrentZoom(map.current.getZoom());
+        if (map.current && zoomTimeoutRef.current !== null) {
+          clearTimeout(zoomTimeoutRef.current);
         }
+        zoomTimeoutRef.current = window.setTimeout(() => {
+          if (map.current) {
+            setCurrentZoom(map.current.getZoom());
+          }
+        }, 100); // Debounce zoom updates
       });
 
       // Add custom theme styling and mark map as loaded
@@ -297,6 +304,14 @@ export const EventMap = () => {
     }
 
     return () => {
+      // Cleanup timeouts
+      if (renderTimeoutRef.current !== null) {
+        cancelAnimationFrame(renderTimeoutRef.current);
+      }
+      if (zoomTimeoutRef.current !== null) {
+        clearTimeout(zoomTimeoutRef.current);
+      }
+      
       // Close all popups and remove all markers before removing map
       markersRef.current.forEach(marker => {
         if (marker.getPopup()) {
@@ -402,40 +417,31 @@ export const EventMap = () => {
     return () => clearInterval(interval);
   }, [isAnimating, yearRange]);
 
-  // Render markers when filtered events change
-  useEffect(() => {
-    if (!map.current || loading || !tokenSubmitted || !mapLoaded) return;
-    
-    if (onDemandMode && !searchQuery && selectedTypes.size === 0) {
-      clearMarkers();
-      return;
-    }
-
-    renderMarkers(filteredEvents);
-  }, [filteredEvents, onDemandMode, searchQuery, selectedTypes, loading, tokenSubmitted, mapLoaded]);
-
   const clearMarkers = useCallback(() => {
-    // Remove all markers
-    markersRef.current.forEach(marker => marker.remove());
-    markersRef.current = [];
+    // Use requestAnimationFrame for smooth clearing
+    requestAnimationFrame(() => {
+      // Remove all markers
+      markersRef.current.forEach(marker => marker.remove());
+      markersRef.current = [];
 
-    // Remove all polygon layers
-    if (map.current && map.current.isStyleLoaded()) {
-      polygonsRef.current.forEach(polygonId => {
-        try {
-          if (map.current?.getLayer(polygonId)) {
-            map.current.removeLayer(polygonId);
+      // Remove all polygon layers
+      if (map.current && map.current.isStyleLoaded()) {
+        polygonsRef.current.forEach(polygonId => {
+          try {
+            if (map.current?.getLayer(polygonId)) {
+              map.current.removeLayer(polygonId);
+            }
+            if (map.current?.getSource(polygonId)) {
+              map.current.removeSource(polygonId);
+            }
+          } catch (error) {
+            // Silently handle errors if style is being changed
           }
-          if (map.current?.getSource(polygonId)) {
-            map.current.removeSource(polygonId);
-          }
-        } catch (error) {
-          // Silently handle errors if style is being changed
-        }
-      });
-    }
-    polygonsRef.current = [];
-    activePolygonRef.current = null;
+        });
+      }
+      polygonsRef.current = [];
+      activePolygonRef.current = null;
+    });
   }, []);
 
   const showPolygon = useCallback((event: HistoricalEvent, index: number) => {
@@ -506,15 +512,25 @@ export const EventMap = () => {
   const renderMarkers = useCallback((eventsToRender: HistoricalEvent[]) => {
     if (!map.current || !map.current.isStyleLoaded()) return;
     
-    clearMarkers();
+    // Cancel any pending render
+    if (renderTimeoutRef.current !== null) {
+      cancelAnimationFrame(renderTimeoutRef.current);
+    }
     
-    // Adaptive marker limit for better mobile performance
-    const markerLimit = isMobile ? 300 : 500;
-    const limitedEvents = eventsToRender.slice(0, markerLimit);
-    
-    // Limit applied silently for performance
-
-    limitedEvents.forEach((event, index) => {
+    // Use requestAnimationFrame for smooth rendering
+    renderTimeoutRef.current = requestAnimationFrame(() => {
+      if (!map.current || !map.current.isStyleLoaded()) return;
+      
+      clearMarkers();
+      
+      // Adaptive marker limit for better mobile performance
+      const markerLimit = isMobile ? 300 : 500;
+      const limitedEvents = eventsToRender.slice(0, markerLimit);
+      
+      // Batch marker creation for better performance
+      const fragment = document.createDocumentFragment();
+      
+      limitedEvents.forEach((event, index) => {
       const color = getEventColor(event.type);
       
       // Create custom marker element with mobile optimization
@@ -735,7 +751,25 @@ export const EventMap = () => {
 
       markersRef.current.push(marker);
     });
-  }, [clearMarkers, toast, showPolygon, addToHistory]);
+    }); // Close requestAnimationFrame
+  }, [clearMarkers, toast, showPolygon, addToHistory, isMobile]);
+
+  // Render markers when filtered events change - with debounce
+  useEffect(() => {
+    if (!map.current || loading || !tokenSubmitted || !mapLoaded) return;
+    
+    if (onDemandMode && !searchQuery && selectedTypes.size === 0) {
+      clearMarkers();
+      return;
+    }
+
+    // Debounce marker rendering to avoid excessive updates
+    const timeoutId = setTimeout(() => {
+      renderMarkers(filteredEvents);
+    }, 150);
+
+    return () => clearTimeout(timeoutId);
+  }, [filteredEvents, onDemandMode, searchQuery, selectedTypes, loading, tokenSubmitted, mapLoaded, renderMarkers, clearMarkers]);
 
   const handleEventSelect = useCallback((event: HistoricalEvent) => {
     if (!map.current) return;
