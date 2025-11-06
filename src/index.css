@@ -337,11 +337,24 @@ All colors MUST be HSL.
   .custom-marker {
     cursor: pointer !important;
     transition: transform 0.2s ease;
+    will-change: transform;
+    -webkit-tap-highlight-color: transparent;
   }
   
   .custom-marker:hover {
     cursor: pointer !important;
     transform: scale(1.1);
+  }
+  
+  /* Disable hover scale on mobile to prevent layout shift */
+  @media (max-width: 768px) {
+    .custom-marker:hover {
+      transform: scale(1);
+    }
+    
+    .custom-marker:active {
+      transform: scale(0.95);
+    }
   }
   
   .mapboxgl-popup-content {
@@ -354,20 +367,35 @@ All colors MUST be HSL.
       0 2px 4px -1px rgba(0, 0, 0, 0.06),
       0 0 0 1px rgba(0, 0, 0, 0.05),
       0 20px 25px -5px rgba(0, 0, 0, 0.1) !important;
-    animation: popup-scale-in 0.3s ease-out !important;
-    max-width: 90vw !important; /* Mobile friendly */
+    animation: popup-scale-in 0.2s ease-out !important;
+    max-width: 90vw !important;
+    will-change: transform, opacity;
+  }
+  
+  /* Faster animation on mobile */
+  @media (max-width: 768px) {
+    .mapboxgl-popup-content {
+      animation: popup-scale-in 0.15s ease-out !important;
+      backdrop-filter: blur(8px) !important; /* Lighter blur for better mobile performance */
+    }
   }
   
   /* Mobile-specific popup styles */
   @media (max-width: 768px) {
     .mapboxgl-popup-content {
       max-width: calc(100vw - 2rem) !important;
-      max-height: 70vh !important;
+      max-height: 80vh !important;
       overflow-y: auto !important;
+      -webkit-overflow-scrolling: touch !important;
     }
     
     .popup-content {
       max-width: 100% !important;
+    }
+    
+    /* Optimize touch scrolling */
+    .popup-content img {
+      pointer-events: none; /* Prevent accidental image drag on mobile */
     }
   }
 
@@ -460,6 +488,15 @@ All colors MUST be HSL.
     border-radius: 12px;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     box-shadow: 0 0 15px var(--category-glow-color);
+    will-change: transform, opacity;
+    -webkit-tap-highlight-color: transparent;
+  }
+  
+  /* Reduce animations on mobile for better performance */
+  @media (max-width: 768px) {
+    .category-card {
+      transition: all 0.2s ease;
+    }
   }
 
   .category-card::before {

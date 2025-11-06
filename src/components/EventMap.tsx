@@ -517,30 +517,34 @@ export const EventMap = () => {
     limitedEvents.forEach((event, index) => {
       const color = getEventColor(event.type);
       
-      // Create custom marker element
+      // Create custom marker element with mobile optimization
       const el = document.createElement('div');
       el.className = 'custom-marker';
-      el.style.width = '28px';
-      el.style.height = '40px';
+      // Larger touch targets on mobile
+      const markerSize = isMobile ? 32 : 28;
+      const markerHeight = isMobile ? 44 : 40;
+      el.style.width = `${markerSize}px`;
+      el.style.height = `${markerHeight}px`;
       el.style.cursor = 'pointer';
       el.style.opacity = '0';
-      el.style.transition = 'opacity 0.2s ease-out';
+      el.style.transition = 'opacity 0.15s ease-out';
+      el.style.willChange = 'opacity';
       el.setAttribute('role', 'button');
       const eventYear = parseYear(event);
       el.setAttribute('aria-label', `${event.title} - ${event.type} event in ${event.country}, year ${eventYear}`);
       el.setAttribute('tabindex', '0');
       el.innerHTML = `
-        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="40" viewBox="0 0 24 34" aria-hidden="true">
+        <svg xmlns="http://www.w3.org/2000/svg" width="${markerSize}" height="${markerHeight}" viewBox="0 0 24 34" aria-hidden="true">
           <path d="M12 0c-5.3 0-9.5 4.2-9.5 9.5 0 7.1 9.5 24.5 9.5 24.5s9.5-17.4 9.5-24.5C21.5 4.2 17.3 0 12 0z" 
                 fill="${color.fill}" stroke="white" stroke-width="1.5"/>
           <circle cx="12" cy="9.5" r="3.8" fill="white"/>
         </svg>
       `;
       
-      // Fast fade-in animation
+      // Optimized fade-in: instant on mobile, staggered on desktop
       setTimeout(() => {
         el.style.opacity = '1';
-      }, Math.min(index * 2, 200)); // Much faster stagger, max 200ms delay
+      }, isMobile ? 0 : Math.min(index * 1, 100)); // Instant on mobile, faster on desktop
 
       // Create marker
       const marker = new mapboxgl.Marker(el)
@@ -554,22 +558,32 @@ export const EventMap = () => {
       
       const popupContent = document.createElement('div');
       popupContent.className = 'popup-content';
-      popupContent.style.cssText = 'max-width: 320px; padding: 16px; position: relative;';
+      // Mobile-optimized padding and max-width
+      const popupPadding = isMobile ? '20px' : '16px';
+      const popupMaxWidth = isMobile ? '90vw' : '320px';
+      popupContent.style.cssText = `max-width: ${popupMaxWidth}; padding: ${popupPadding}; position: relative;`;
       
       const closeBtn = document.createElement('button');
       closeBtn.className = 'popup-close-btn';
       closeBtn.innerHTML = '×';
       closeBtn.setAttribute('aria-label', 'Close popup');
       closeBtn.setAttribute('type', 'button');
-      closeBtn.style.cssText = `position: absolute; top: 12px; right: 12px; border: none; 
-                                 border-radius: 6px; width: 28px; height: 28px; cursor: pointer; 
+      // Larger touch target on mobile (min 44x44px)
+      const closeBtnSize = isMobile ? '44px' : '28px';
+      const closeFontSize = isMobile ? '24px' : '20px';
+      closeBtn.style.cssText = `position: absolute; top: 8px; right: 8px; border: none; 
+                                 border-radius: 8px; width: ${closeBtnSize}; height: ${closeBtnSize}; cursor: pointer; 
                                  display: flex; align-items: center; justify-content: center; 
-                                 font-size: 20px; transition: all 0.2s; z-index: 10;`;
+                                 font-size: ${closeFontSize}; transition: all 0.2s; z-index: 10;
+                                 touch-action: manipulation;`;
       closeBtn.onclick = closePopup;
       
       const title = document.createElement('h3');
       title.className = 'popup-title';
-      title.style.cssText = 'margin: 0 32px 12px 0; font-size: 17px; font-weight: 600; line-height: 1.3;';
+      // Larger text on mobile for readability
+      const titleFontSize = isMobile ? '18px' : '17px';
+      const titleMargin = isMobile ? '0 48px 14px 0' : '0 32px 12px 0';
+      title.style.cssText = `margin: ${titleMargin}; font-size: ${titleFontSize}; font-weight: 600; line-height: 1.3;`;
       title.textContent = event.title;
       
       popupContent.appendChild(closeBtn);
@@ -623,12 +637,15 @@ export const EventMap = () => {
       const buttonContainer = document.createElement('div');
       buttonContainer.style.cssText = 'display: flex; gap: 8px; margin-top: 12px; flex-wrap: wrap;';
       
-      // View Details button
+      // View Details button with touch-friendly sizing
       const detailsBtn = document.createElement('button');
       detailsBtn.className = 'popup-details-btn';
       detailsBtn.textContent = 'View Details';
       detailsBtn.setAttribute('aria-label', `View full details for ${event.title}`);
-      detailsBtn.style.cssText = 'flex: 1; min-width: 120px; padding: 8px 16px; border-radius: 6px; font-size: 14px; font-weight: 500; cursor: pointer; transition: all 0.2s; border: none;';
+      // Minimum 44px height for mobile touch targets
+      const btnPadding = isMobile ? '12px 20px' : '8px 16px';
+      const btnFontSize = isMobile ? '15px' : '14px';
+      detailsBtn.style.cssText = `flex: 1; min-width: 120px; padding: ${btnPadding}; border-radius: 8px; font-size: ${btnFontSize}; font-weight: 500; cursor: pointer; transition: all 0.2s; border: none; touch-action: manipulation; min-height: 44px;`;
       detailsBtn.onclick = (e) => {
         e.preventDefault();
         // Save current map state before navigating
@@ -650,7 +667,9 @@ export const EventMap = () => {
         link.target = '_blank';
         link.rel = 'noopener noreferrer';
         link.setAttribute('aria-label', `Read more about ${event.title} on Wikipedia`);
-        link.style.cssText = 'flex: 1; min-width: 120px; padding: 8px 16px; text-align: center; text-decoration: none; font-size: 14px; font-weight: 500; border-radius: 6px; transition: all 0.2s;';
+        const linkPadding = isMobile ? '12px 20px' : '8px 16px';
+        const linkFontSize = isMobile ? '15px' : '14px';
+        link.style.cssText = `flex: 1; min-width: 120px; padding: ${linkPadding}; text-align: center; text-decoration: none; font-size: ${linkFontSize}; font-weight: 500; border-radius: 8px; transition: all 0.2s; touch-action: manipulation; min-height: 44px; display: flex; align-items: center; justify-content: center;`;
         link.textContent = 'Wikipedia →';
         buttonContainer.appendChild(link);
       }
