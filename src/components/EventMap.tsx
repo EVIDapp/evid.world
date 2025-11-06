@@ -62,6 +62,7 @@ export const EventMap = () => {
   const [isAnimating, setIsAnimating] = useState(false);
   const [currentZoom, setCurrentZoom] = useState(2.2);
   const [isTimelineOpen, setIsTimelineOpen] = useState(false);
+  const [restoredEventId, setRestoredEventId] = useState<string | null>(null);
   const { history, addToHistory, clearHistory } = useEventHistory();
   
   const { toast } = useToast();
@@ -137,10 +138,12 @@ export const EventMap = () => {
     const savedState = sessionStorage.getItem('mapState');
     if (savedState) {
       try {
-        const { selectedTypes: savedTypes, searchQuery: savedQuery, selectedYearRange: savedYears } = JSON.parse(savedState);
+        const { selectedTypes: savedTypes, searchQuery: savedQuery, selectedYearRange: savedYears, eventId } = JSON.parse(savedState);
         if (savedTypes) setSelectedTypes(new Set(savedTypes));
         if (savedQuery) setSearchQuery(savedQuery);
-        if (savedYears) setSelectedYearRange(savedYears);
+        if (savedYears && savedYears[0] !== 0) setSelectedYearRange(savedYears);
+        if (eventId) setRestoredEventId(eventId);
+        
         sessionStorage.removeItem('mapState'); // Clear after restore
         return;
       } catch (e) {
@@ -750,6 +753,19 @@ export const EventMap = () => {
       }
     }, 1600);
   }, [filteredEvents, showPolygon, addToHistory]);
+
+  // Restore event focus after navigation back from event detail page
+  useEffect(() => {
+    if (restoredEventId && events.length > 0 && mapLoaded && markersRef.current.length > 0) {
+      const targetEvent = events.find(e => e.id === restoredEventId);
+      if (targetEvent) {
+        setTimeout(() => {
+          handleEventSelect(targetEvent);
+        }, 800);
+      }
+      setRestoredEventId(null); // Clear after use
+    }
+  }, [restoredEventId, events, mapLoaded, handleEventSelect]);
 
   const handleTypeToggle = (type: EventType) => {
     setSelectedTypes(prev => {
