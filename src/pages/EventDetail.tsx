@@ -142,7 +142,15 @@ const EventDetail = () => {
       {/* Header */}
       <header className="sticky top-0 z-10 border-b bg-card/95 backdrop-blur-md shadow-sm animate-fade-in">
         <div className="container max-w-6xl mx-auto px-4 py-3">
-          <Button variant="ghost" size="sm" onClick={() => navigate('/')} className="hover-scale">
+          <Button variant="ghost" size="sm" onClick={() => {
+            // Restore map state on return
+            const savedState = sessionStorage.getItem('mapState');
+            if (savedState) {
+              navigate('/');
+            } else {
+              navigate('/');
+            }
+          }} className="hover-scale">
             <ArrowLeft className="mr-2 h-4 w-4" />
             Back to Map
           </Button>
@@ -310,7 +318,16 @@ const EventDetail = () => {
                 <Button 
                   className="w-full mt-4" 
                   size="sm"
-                  onClick={() => navigate(`/?event=${event.id}`)}
+                  onClick={() => {
+                    // Save map state to focus on this event
+                    sessionStorage.setItem('mapState', JSON.stringify({
+                      selectedTypes: [],
+                      searchQuery: '',
+                      selectedYearRange: [0, 0],
+                      eventId: event.id
+                    }));
+                    navigate(`/?event=${event.id}`);
+                  }}
                 >
                   View on Map
                 </Button>

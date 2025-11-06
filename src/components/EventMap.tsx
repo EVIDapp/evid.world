@@ -129,10 +129,26 @@ export const EventMap = () => {
       });
   }, [toast]);
 
-  // Parse URL parameters on mount
+  // Parse URL parameters on mount and restore from session storage
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
     
+    // Try to restore from sessionStorage first (for back navigation)
+    const savedState = sessionStorage.getItem('mapState');
+    if (savedState) {
+      try {
+        const { selectedTypes: savedTypes, searchQuery: savedQuery, selectedYearRange: savedYears } = JSON.parse(savedState);
+        if (savedTypes) setSelectedTypes(new Set(savedTypes));
+        if (savedQuery) setSearchQuery(savedQuery);
+        if (savedYears) setSelectedYearRange(savedYears);
+        sessionStorage.removeItem('mapState'); // Clear after restore
+        return;
+      } catch (e) {
+        console.error('Failed to restore map state:', e);
+      }
+    }
+    
+    // Otherwise, parse from URL parameters
     const query = params.get('q');
     if (query) setSearchQuery(query);
     
@@ -612,6 +628,13 @@ export const EventMap = () => {
       detailsBtn.style.cssText = 'flex: 1; min-width: 120px; padding: 8px 16px; border-radius: 6px; font-size: 14px; font-weight: 500; cursor: pointer; transition: all 0.2s; border: none;';
       detailsBtn.onclick = (e) => {
         e.preventDefault();
+        // Save current map state before navigating
+        sessionStorage.setItem('mapState', JSON.stringify({
+          selectedTypes: Array.from(selectedTypes),
+          searchQuery,
+          selectedYearRange,
+          eventId: event.id
+        }));
         const slug = generateEventSlug(event.title, event.year);
         navigate(`/event/${slug}`);
       };
