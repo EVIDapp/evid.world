@@ -60,7 +60,7 @@ export const EventMap = () => {
   const [yearRange, setYearRange] = useState<[number, number]>([0, 0]);
   const [selectedYearRange, setSelectedYearRange] = useState<[number, number]>([0, 0]);
   const [isAnimating, setIsAnimating] = useState(false);
-  const [currentZoom, setCurrentZoom] = useState(2.2);
+  const [currentZoom, setCurrentZoom] = useState(1.3);
   const [isTimelineOpen, setIsTimelineOpen] = useState(false);
   const [restoredEventId, setRestoredEventId] = useState<string | null>(null);
   const { history, addToHistory, clearHistory } = useEventHistory();
@@ -239,7 +239,7 @@ export const EventMap = () => {
         : 'mapbox://styles/mapbox/streets-v12';
       
       // Adaptive zoom for mobile devices
-      const initialZoom = isMobile ? 0.6 : 2.2;
+      const initialZoom = isMobile ? 0.6 : 1.3;
       
       map.current = new mapboxgl.Map({
         container: mapContainer.current,
