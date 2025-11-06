@@ -812,9 +812,11 @@ export const EventMap = () => {
 
   const handleResetView = () => {
     if (map.current) {
+      // Reset to initial zoom level (same as on first load)
+      const resetZoom = isMobile ? 0.6 : 1.3;
       map.current.flyTo({
         center: [0, 20],
-        zoom: 2.2,
+        zoom: resetZoom,
         duration: 1500
       });
     }
