@@ -520,9 +520,9 @@ export const EventMap = () => {
       // Create custom marker element with mobile optimization
       const el = document.createElement('div');
       el.className = 'custom-marker';
-      // Larger touch targets on mobile
-      const markerSize = isMobile ? 32 : 28;
-      const markerHeight = isMobile ? 44 : 40;
+      // Optimized marker sizes
+      const markerSize = isMobile ? 20 : 24;
+      const markerHeight = isMobile ? 30 : 36;
       el.style.width = `${markerSize}px`;
       el.style.height = `${markerHeight}px`;
       el.style.cursor = 'pointer';
