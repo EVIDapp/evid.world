@@ -607,6 +607,7 @@ export const EventMap = () => {
                                  border-radius: 10px; margin: 10px 0;
                                  transition: transform 0.3s ease;`;
             img.onerror = function(this: HTMLImageElement) { 
+              console.log(`Failed to load image for ${event.title}`);
               this.style.display = 'none';
               imgContainer.style.display = 'none';
             };
@@ -621,9 +622,11 @@ export const EventMap = () => {
               this.style.transform = 'scale(1)';
             };
             imgContainer.appendChild(img);
+          } else {
+            console.log(`No image URL returned for ${event.title}`);
           }
-        }).catch(() => {
-          // Silently fail - no image
+        }).catch((error) => {
+          console.warn(`Error loading image for ${event.title}:`, error);
         });
       }
       
