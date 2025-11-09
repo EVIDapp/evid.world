@@ -62,8 +62,7 @@ export const getWikipediaImage = async (wikiUrl: string): Promise<string | null>
     // Extract article title from Wikipedia URL
     const match = wikiUrl.match(/\/wiki\/(.+)$/);
     if (!match) {
-      setCachedImage(wikiUrl, null);
-      return null;
+      return null; // Don't cache invalid URLs
     }
     
     const title = decodeURIComponent(match[1]);
@@ -85,8 +84,7 @@ export const getWikipediaImage = async (wikiUrl: string): Promise<string | null>
     
     if (!response.ok) {
       console.warn(`Wikipedia API error for ${title}: ${response.status}`);
-      setCachedImage(wikiUrl, null);
-      return null;
+      return null; // Don't cache API errors
     }
     
     const data = await response.json();
@@ -94,25 +92,25 @@ export const getWikipediaImage = async (wikiUrl: string): Promise<string | null>
     // Prefer thumbnail for faster loading (smaller file size)
     let imageUrl: string | null = null;
     if (data.thumbnail?.source) {
-      // Use high-res thumbnail instead of original to save bandwidth
-      imageUrl = data.thumbnail.source.replace(/\/\d+px-/, '/400px-');
+      // Use higher resolution thumbnail (400px) for better quality
+      const thumbnailUrl = data.thumbnail.source;
+      // Replace the size parameter in the URL to get 400px version
+      imageUrl = thumbnailUrl.replace(/\/\d+px-/, '/400px-');
     } else if (data.originalimage?.source) {
       imageUrl = data.originalimage.source;
     }
     
-    if (!imageUrl) {
-      console.log(`No image found for Wikipedia article: ${title}`);
+    // Only cache successful results (images found)
+    if (imageUrl) {
+      setCachedImage(wikiUrl, imageUrl);
     }
     
-    // Cache the result
-    setCachedImage(wikiUrl, imageUrl);
     return imageUrl;
   } catch (error) {
     // Silent fail for aborted requests (timeout)
     if (error instanceof Error && error.name !== 'AbortError') {
       console.error('Error fetching Wikipedia image:', error);
     }
-    setCachedImage(wikiUrl, null);
-    return null;
+    return null; // Don't cache errors
   }
 };
