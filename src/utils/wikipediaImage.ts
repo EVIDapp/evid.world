@@ -84,7 +84,6 @@ export const getWikipediaImage = async (wikiUrl: string): Promise<string | null>
     clearTimeout(timeoutId);
     
     if (!response.ok) {
-      console.warn(`Wikipedia API error for ${title}: ${response.status}`);
       setCachedImage(wikiUrl, null);
       return null;
     }
@@ -94,18 +93,17 @@ export const getWikipediaImage = async (wikiUrl: string): Promise<string | null>
     // Prefer thumbnail for faster loading (smaller file size)
     let imageUrl: string | null = null;
     if (data.thumbnail?.source) {
-      // Use high-res thumbnail instead of original to save bandwidth
-      imageUrl = data.thumbnail.source.replace(/\/\d+px-/, '/400px-');
+      // Use higher resolution thumbnail (400px) for better quality
+      const thumbnailUrl = data.thumbnail.source;
+      // Replace the size parameter in the URL to get 400px version
+      imageUrl = thumbnailUrl.replace(/\/\d+px-/, '/400px-');
     } else if (data.originalimage?.source) {
       imageUrl = data.originalimage.source;
     }
     
-    if (!imageUrl) {
-      console.log(`No image found for Wikipedia article: ${title}`);
-    }
-    
-    // Cache the result
+    // Cache the result (successful or not)
     setCachedImage(wikiUrl, imageUrl);
+    
     return imageUrl;
   } catch (error) {
     // Silent fail for aborted requests (timeout)
