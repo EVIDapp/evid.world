@@ -8,7 +8,8 @@ const wikiTextCache = new Map<string, string | null>();
 // Fallback: Try Wikimedia Action API if REST API fails
 const getWikimediaImage = async (title: string): Promise<string | null> => {
   try {
-    const apiUrl = `https://en.wikipedia.org/w/api.php?action=query&titles=${encodeURIComponent(title)}&prop=pageimages&format=json&pithumbsize=400&origin=*`;
+    // IMPORTANT: piprop=thumbnail|original tells API to return image URLs
+    const apiUrl = `https://en.wikipedia.org/w/api.php?action=query&titles=${encodeURIComponent(title)}&prop=pageimages&piprop=thumbnail|original&format=json&pithumbsize=400&origin=*`;
     
     const controller = new AbortController();
     const timeoutId = setTimeout(() => controller.abort(), 8000);
@@ -28,6 +29,11 @@ const getWikimediaImage = async (title: string): Promise<string | null> => {
     
     // Get first page (there should only be one)
     const page = Object.values(pages)[0] as any;
+    
+    // Check if page is missing or doesn't exist
+    if (page.missing !== undefined || page.pageid === undefined) {
+      return null;
+    }
     
     // Try thumbnail first, then original
     if (page.thumbnail?.source) {
