@@ -62,7 +62,8 @@ export const getWikipediaImage = async (wikiUrl: string): Promise<string | null>
     // Extract article title from Wikipedia URL
     const match = wikiUrl.match(/\/wiki\/(.+)$/);
     if (!match) {
-      return null; // Don't cache invalid URLs
+      setCachedImage(wikiUrl, null);
+      return null;
     }
     
     const title = decodeURIComponent(match[1]);
@@ -84,7 +85,8 @@ export const getWikipediaImage = async (wikiUrl: string): Promise<string | null>
     
     if (!response.ok) {
       console.warn(`Wikipedia API error for ${title}: ${response.status}`);
-      return null; // Don't cache API errors
+      setCachedImage(wikiUrl, null);
+      return null;
     }
     
     const data = await response.json();
@@ -100,10 +102,8 @@ export const getWikipediaImage = async (wikiUrl: string): Promise<string | null>
       imageUrl = data.originalimage.source;
     }
     
-    // Only cache successful results (images found)
-    if (imageUrl) {
-      setCachedImage(wikiUrl, imageUrl);
-    }
+    // Cache the result (successful or not)
+    setCachedImage(wikiUrl, imageUrl);
     
     return imageUrl;
   } catch (error) {
@@ -111,6 +111,7 @@ export const getWikipediaImage = async (wikiUrl: string): Promise<string | null>
     if (error instanceof Error && error.name !== 'AbortError') {
       console.error('Error fetching Wikipedia image:', error);
     }
-    return null; // Don't cache errors
+    setCachedImage(wikiUrl, null);
+    return null;
   }
 };
