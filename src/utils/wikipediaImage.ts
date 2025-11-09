@@ -1,4 +1,7 @@
-import { getCachedImage, setCachedImage } from './imageCache';
+import { getCachedImage, setCachedImage, clearImageCache } from './imageCache';
+
+// Clear cache on module load to prevent stale data
+clearImageCache();
 
 const wikiTextCache = new Map<string, string | null>();
 
@@ -55,6 +58,7 @@ export const getWikipediaImage = async (wikiUrl: string): Promise<string | null>
   // Check cache first - only return if we have a successful cached image
   const cached = getCachedImage(wikiUrl);
   if (cached) {
+    console.log('✓ Image loaded from cache:', wikiUrl);
     return cached;
   }
   
@@ -62,10 +66,12 @@ export const getWikipediaImage = async (wikiUrl: string): Promise<string | null>
     // Extract article title from Wikipedia URL
     const match = wikiUrl.match(/\/wiki\/(.+)$/);
     if (!match) {
+      console.log('✗ Invalid Wikipedia URL format:', wikiUrl);
       return null;
     }
     
     const title = decodeURIComponent(match[1]);
+    console.log('→ Fetching image for:', title);
     
     // Use Wikipedia REST API to get page summary with image
     const apiUrl = `https://en.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(title)}`;
@@ -83,6 +89,7 @@ export const getWikipediaImage = async (wikiUrl: string): Promise<string | null>
     clearTimeout(timeoutId);
     
     if (!response.ok) {
+      console.log('✗ Wikipedia API error:', response.status, title);
       return null;
     }
     
@@ -101,14 +108,17 @@ export const getWikipediaImage = async (wikiUrl: string): Promise<string | null>
     
     // Only cache successful image fetches
     if (imageUrl) {
+      console.log('✓ Image found and cached:', title);
       setCachedImage(wikiUrl, imageUrl);
+    } else {
+      console.log('✗ No image available for:', title);
     }
     
     return imageUrl;
   } catch (error) {
     // Silent fail for aborted requests (timeout)
     if (error instanceof Error && error.name !== 'AbortError') {
-      console.error('Error fetching Wikipedia image:', error);
+      console.error('✗ Error fetching Wikipedia image:', error);
     }
     return null;
   }
