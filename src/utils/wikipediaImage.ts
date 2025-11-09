@@ -5,6 +5,46 @@ clearImageCache();
 
 const wikiTextCache = new Map<string, string | null>();
 
+// Fallback: Try Wikimedia Action API if REST API fails
+const getWikimediaImage = async (title: string): Promise<string | null> => {
+  try {
+    const apiUrl = `https://en.wikipedia.org/w/api.php?action=query&titles=${encodeURIComponent(title)}&prop=pageimages&format=json&pithumbsize=400&origin=*`;
+    
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 8000);
+    
+    const response = await fetch(apiUrl, { 
+      signal: controller.signal,
+      headers: { 'Accept': 'application/json' }
+    });
+    clearTimeout(timeoutId);
+    
+    if (!response.ok) return null;
+    
+    const data = await response.json();
+    const pages = data.query?.pages;
+    
+    if (!pages) return null;
+    
+    // Get first page (there should only be one)
+    const page = Object.values(pages)[0] as any;
+    
+    // Try thumbnail first, then original
+    if (page.thumbnail?.source) {
+      return page.thumbnail.source;
+    } else if (page.original?.source) {
+      return page.original.source;
+    }
+    
+    return null;
+  } catch (error) {
+    if (error instanceof Error && error.name !== 'AbortError') {
+      console.error('Wikimedia API error:', error);
+    }
+    return null;
+  }
+};
+
 export const getWikipediaText = async (wikiUrl: string): Promise<string | null> => {
   // Check cache first
   const cached = wikiTextCache.get(wikiUrl);
@@ -73,50 +113,47 @@ export const getWikipediaImage = async (wikiUrl: string): Promise<string | null>
     const title = decodeURIComponent(match[1]);
     console.log('→ Fetching image for:', title);
     
-    // Use Wikipedia REST API to get page summary with image
+    // Try Wikipedia REST API first (faster, optimized)
     const apiUrl = `https://en.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(title)}`;
     
-    // Fetch with extended timeout for better reliability
     const controller = new AbortController();
-    const timeoutId = setTimeout(() => controller.abort(), 8000); // 8 second timeout
+    const timeoutId = setTimeout(() => controller.abort(), 8000);
     
     const response = await fetch(apiUrl, { 
       signal: controller.signal,
-      headers: {
-        'Accept': 'application/json'
-      }
+      headers: { 'Accept': 'application/json' }
     });
     clearTimeout(timeoutId);
     
-    if (!response.ok) {
-      console.log('✗ Wikipedia API error:', response.status, title);
-      return null;
-    }
-    
-    const data = await response.json();
-    
-    // Prefer thumbnail for faster loading (smaller file size)
     let imageUrl: string | null = null;
-    if (data.thumbnail?.source) {
-      // Use higher resolution thumbnail (400px) for better quality
-      const thumbnailUrl = data.thumbnail.source;
-      // Replace the size parameter in the URL to get 400px version
-      imageUrl = thumbnailUrl.replace(/\/\d+px-/, '/400px-');
-    } else if (data.originalimage?.source) {
-      imageUrl = data.originalimage.source;
+    
+    if (response.ok) {
+      const data = await response.json();
+      
+      if (data.thumbnail?.source) {
+        const thumbnailUrl = data.thumbnail.source;
+        imageUrl = thumbnailUrl.replace(/\/\d+px-/, '/400px-');
+      } else if (data.originalimage?.source) {
+        imageUrl = data.originalimage.source;
+      }
     }
     
-    // Only cache successful image fetches
+    // Fallback to Wikimedia Action API if REST API didn't return image
+    if (!imageUrl) {
+      console.log('→ Trying Wikimedia Action API fallback for:', title);
+      imageUrl = await getWikimediaImage(title);
+    }
+    
+    // Cache and return result
     if (imageUrl) {
       console.log('✓ Image found and cached:', title);
       setCachedImage(wikiUrl, imageUrl);
     } else {
-      console.log('✗ No image available for:', title);
+      console.log('✗ No image available from any source:', title);
     }
     
     return imageUrl;
   } catch (error) {
-    // Silent fail for aborted requests (timeout)
     if (error instanceof Error && error.name !== 'AbortError') {
       console.error('✗ Error fetching Wikipedia image:', error);
     }
