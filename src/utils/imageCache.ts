@@ -1,13 +1,18 @@
 // In-memory cache for Wikipedia images
 const imageCache = new Map<string, string | null>();
 const failedAttemptsCache = new Map<string, number>();
-const FAILED_CACHE_DURATION = 5 * 60 * 1000; // 5 minutes
+const FAILED_CACHE_DURATION = 30 * 1000; // 30 seconds - short duration for testing
 
 export const getCachedImage = (wikiUrl: string): string | null | undefined => {
   // Check if this was a recent failed attempt
   const failedTime = failedAttemptsCache.get(wikiUrl);
   if (failedTime && Date.now() - failedTime < FAILED_CACHE_DURATION) {
-    return null; // Return null for recent failures
+    return undefined; // Return undefined to skip cache and allow retry after timeout
+  }
+  
+  // If failed cache expired, remove it
+  if (failedTime) {
+    failedAttemptsCache.delete(wikiUrl);
   }
   
   return imageCache.get(wikiUrl);
