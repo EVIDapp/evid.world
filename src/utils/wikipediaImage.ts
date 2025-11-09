@@ -52,9 +52,9 @@ export const getWikipediaText = async (wikiUrl: string): Promise<string | null> 
 };
 
 export const getWikipediaImage = async (wikiUrl: string): Promise<string | null> => {
-  // Check cache first
+  // Check cache first - only return if we have a successful cached image
   const cached = getCachedImage(wikiUrl);
-  if (cached !== undefined) {
+  if (cached) {
     return cached;
   }
   
@@ -62,7 +62,6 @@ export const getWikipediaImage = async (wikiUrl: string): Promise<string | null>
     // Extract article title from Wikipedia URL
     const match = wikiUrl.match(/\/wiki\/(.+)$/);
     if (!match) {
-      setCachedImage(wikiUrl, null);
       return null;
     }
     
@@ -84,7 +83,6 @@ export const getWikipediaImage = async (wikiUrl: string): Promise<string | null>
     clearTimeout(timeoutId);
     
     if (!response.ok) {
-      setCachedImage(wikiUrl, null);
       return null;
     }
     
@@ -101,8 +99,10 @@ export const getWikipediaImage = async (wikiUrl: string): Promise<string | null>
       imageUrl = data.originalimage.source;
     }
     
-    // Cache the result (successful or not)
-    setCachedImage(wikiUrl, imageUrl);
+    // Only cache successful image fetches
+    if (imageUrl) {
+      setCachedImage(wikiUrl, imageUrl);
+    }
     
     return imageUrl;
   } catch (error) {
@@ -110,7 +110,6 @@ export const getWikipediaImage = async (wikiUrl: string): Promise<string | null>
     if (error instanceof Error && error.name !== 'AbortError') {
       console.error('Error fetching Wikipedia image:', error);
     }
-    setCachedImage(wikiUrl, null);
     return null;
   }
 };
