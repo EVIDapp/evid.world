@@ -22,6 +22,7 @@ import { Button } from '@/components/ui/button';
 import { Progress } from '@/components/ui/progress';
 import { Key, Plus, Minus, Globe as GlobeIcon, Map, Grid3x3 } from 'lucide-react';
 import { getWikipediaImage } from '@/utils/wikipediaImage';
+import { clearImageCache } from '@/utils/imageCache';
 import { useKeyboardShortcuts } from '@/hooks/useKeyboardShortcuts';
 import { useEventHistory } from '@/hooks/useEventHistory';
 import { generateEventSlug } from '@/utils/slugify';
@@ -230,6 +231,9 @@ export const EventMap = () => {
   useEffect(() => {
     if (!mapContainer.current || !tokenSubmitted || !mapboxToken) return;
     if (map.current) return; // Initialize only once
+
+    // Clear image cache on map initialization to fetch fresh images
+    clearImageCache();
 
     try {
       mapboxgl.accessToken = mapboxToken;

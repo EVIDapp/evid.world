@@ -8,3 +8,7 @@ export const getCachedImage = (wikiUrl: string): string | null | undefined => {
 export const setCachedImage = (wikiUrl: string, imageUrl: string | null): void => {
   imageCache.set(wikiUrl, imageUrl);
 };
+
+export const clearImageCache = (): void => {
+  imageCache.clear();
+};
