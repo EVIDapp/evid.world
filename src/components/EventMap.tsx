@@ -591,32 +591,28 @@ export const EventMap = () => {
       
       // Create image container for async loading (no loading spinner)
       const imgContainer = document.createElement('div');
-      imgContainer.style.cssText = 'display: none; min-height: 0;'; // Hidden until image loads
+      imgContainer.style.cssText = 'display: none;'; // Hidden until image loads
       popupContent.appendChild(imgContainer);
       
       // Fetch and display Wikipedia image asynchronously
       if (event.wiki) {
         getWikipediaImage(event.wiki).then(imageUrl => {
-          if (imageUrl && imgContainer.isConnected) {
-            // Check if container is still in DOM before adding image
+          if (imageUrl) {
             const img = document.createElement('img');
             img.src = imageUrl;
             const eventYear = parseYear(event);
             img.alt = `${event.title} ${event.type} map, ${event.country}, year ${eventYear} - historical event visualization`;
-            img.loading = 'eager'; // Load immediately since we need it for popup
+            img.loading = 'lazy';
             img.style.cssText = `width: 100%; max-height: 180px; object-fit: cover; 
                                  border-radius: 10px; margin: 10px 0;
-                                 transition: opacity 0.3s ease; opacity: 0;`;
+                                 transition: transform 0.3s ease;`;
             img.onerror = function(this: HTMLImageElement) { 
-              this.remove();
-              if (imgContainer.childNodes.length === 0) {
-                imgContainer.style.display = 'none';
-              }
+              console.log(`Failed to load image for ${event.title}`);
+              this.style.display = 'none';
+              imgContainer.style.display = 'none';
             };
-            img.onload = function(this: HTMLImageElement) {
-              // Smooth fade-in to prevent flickering
+            img.onload = function() {
               imgContainer.style.display = 'block';
-              this.style.opacity = '1';
             };
             // Add hover effect
             img.onmouseenter = function(this: HTMLImageElement) {
@@ -626,9 +622,11 @@ export const EventMap = () => {
               this.style.transform = 'scale(1)';
             };
             imgContainer.appendChild(img);
+          } else {
+            console.log(`No image URL returned for ${event.title}`);
           }
-        }).catch(() => {
-          // Silently fail - no image available
+        }).catch((error) => {
+          console.warn(`Error loading image for ${event.title}:`, error);
         });
       }
       
