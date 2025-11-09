@@ -1,7 +1,7 @@
 // In-memory cache for Wikipedia images
 const imageCache = new Map<string, string | null>();
 const failedAttemptsCache = new Map<string, number>();
-const FAILED_CACHE_DURATION = 30 * 1000; // 30 seconds - short duration for testing
+const FAILED_CACHE_DURATION = 2 * 60 * 1000; // 2 minutes retry timeout
 
 export const getCachedImage = (wikiUrl: string): string | null | undefined => {
   // Check if this was a recent failed attempt

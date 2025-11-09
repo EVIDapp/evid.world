@@ -84,7 +84,6 @@ export const getWikipediaImage = async (wikiUrl: string): Promise<string | null>
     clearTimeout(timeoutId);
     
     if (!response.ok) {
-      console.warn(`Wikipedia API error for ${title}: ${response.status}`);
       setCachedImage(wikiUrl, null);
       return null;
     }

@@ -596,9 +596,7 @@ export const EventMap = () => {
       
       // Fetch and display Wikipedia image asynchronously
       if (event.wiki) {
-        console.log(`Fetching image for: ${event.title}`);
         getWikipediaImage(event.wiki).then(imageUrl => {
-          console.log(`Image URL for ${event.title}:`, imageUrl);
           if (imageUrl && imgContainer.isConnected) {
             // Check if container is still in DOM before adding image
             const img = document.createElement('img');
@@ -608,18 +606,17 @@ export const EventMap = () => {
             img.loading = 'eager'; // Load immediately since we need it for popup
             img.style.cssText = `width: 100%; max-height: 180px; object-fit: cover; 
                                  border-radius: 10px; margin: 10px 0;
-                                 transition: transform 0.3s ease; opacity: 0;`;
+                                 transition: opacity 0.3s ease; opacity: 0;`;
             img.onerror = function(this: HTMLImageElement) { 
-              console.log(`Failed to load image for ${event.title}`);
-              this.style.display = 'none';
-              imgContainer.style.display = 'none';
+              this.remove();
+              if (imgContainer.childNodes.length === 0) {
+                imgContainer.style.display = 'none';
+              }
             };
             img.onload = function(this: HTMLImageElement) {
-              console.log(`Image loaded for ${event.title}`);
               // Smooth fade-in to prevent flickering
               imgContainer.style.display = 'block';
               this.style.opacity = '1';
-              this.style.transition = 'opacity 0.2s ease-in';
             };
             // Add hover effect
             img.onmouseenter = function(this: HTMLImageElement) {
@@ -629,11 +626,9 @@ export const EventMap = () => {
               this.style.transform = 'scale(1)';
             };
             imgContainer.appendChild(img);
-          } else {
-            console.log(`No image URL or container disconnected for ${event.title}`);
           }
-        }).catch((err) => {
-          console.error(`Error fetching image for ${event.title}:`, err);
+        }).catch(() => {
+          // Silently fail - no image available
         });
       }
       
