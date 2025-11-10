@@ -546,8 +546,8 @@ export const EventMap = () => {
         el.style.opacity = '1';
       }, isMobile ? 0 : Math.min(index * 1, 100)); // Instant on mobile, faster on desktop
 
-      // Create marker
-      const marker = new mapboxgl.Marker(el)
+      // Create marker with bottom anchor for pin shape
+      const marker = new mapboxgl.Marker({ element: el, anchor: 'bottom' })
         .setLngLat([event.pos.lng, event.pos.lat])
         .addTo(map.current!);
 
