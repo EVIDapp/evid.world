@@ -589,33 +589,41 @@ export const EventMap = () => {
       popupContent.appendChild(closeBtn);
       popupContent.appendChild(title);
       
-      // Create image container for async loading (no loading spinner)
+      // Create image container with placeholder
       const imgContainer = document.createElement('div');
-      imgContainer.style.cssText = 'display: none; min-height: 0;'; // Hidden until image loads
+      imgContainer.style.cssText = `min-height: 200px; width: 100%; background: linear-gradient(135deg, rgba(100, 100, 100, 0.1) 0%, rgba(150, 150, 150, 0.1) 100%); border-radius: 10px; margin: 10px 0; display: flex; align-items: center; justify-content: center; overflow: hidden;`;
+      
+      // Add placeholder text
+      const placeholder = document.createElement('div');
+      placeholder.style.cssText = 'color: rgba(128, 128, 128, 0.5); font-size: 14px; text-align: center;';
+      placeholder.textContent = 'Loading image...';
+      imgContainer.appendChild(placeholder);
+      
       popupContent.appendChild(imgContainer);
       
       // Fetch and display Wikipedia image asynchronously
       if (event.wiki) {
         getWikipediaImage(event.wiki).then(imageUrl => {
           if (imageUrl && imgContainer.isConnected) {
+            // Remove placeholder
+            imgContainer.innerHTML = '';
+            
             // Check if container is still in DOM before adding image
             const img = document.createElement('img');
             img.src = imageUrl;
             const eventYear = parseYear(event);
             img.alt = `${event.title} ${event.type} map, ${event.country}, year ${eventYear} - historical event visualization`;
             img.loading = 'eager'; // Load immediately since we need it for popup
-            img.style.cssText = `width: 100%; max-height: 180px; object-fit: cover; 
-                                 border-radius: 10px; margin: 10px 0;
-                                 transition: opacity 0.3s ease; opacity: 0;`;
+            img.style.cssText = `width: 100%; min-height: 200px; height: 100%; object-fit: cover; 
+                                 border-radius: 10px;
+                                 transition: opacity 0.3s ease, transform 0.2s ease; opacity: 0;`;
             img.onerror = function(this: HTMLImageElement) { 
-              this.remove();
-              if (imgContainer.childNodes.length === 0) {
-                imgContainer.style.display = 'none';
-              }
+              // Show error state
+              imgContainer.innerHTML = '';
+              imgContainer.style.display = 'none';
             };
             img.onload = function(this: HTMLImageElement) {
               // Smooth fade-in to prevent flickering
-              imgContainer.style.display = 'block';
               this.style.opacity = '1';
             };
             // Add hover effect
@@ -626,10 +634,17 @@ export const EventMap = () => {
               this.style.transform = 'scale(1)';
             };
             imgContainer.appendChild(img);
+          } else {
+            // No image found - hide container
+            imgContainer.style.display = 'none';
           }
         }).catch(() => {
-          // Silently fail - no image available
+          // Hide container on error
+          imgContainer.style.display = 'none';
         });
+      } else {
+        // No wiki link - hide container
+        imgContainer.style.display = 'none';
       }
       
       const desc = document.createElement('p');
