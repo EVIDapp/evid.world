@@ -199,39 +199,62 @@ export const getWikipediaImage = async (wikiUrl: string): Promise<string | null>
     const lang = urlMatch[1] || 'en';
     const title = decodeURIComponent(urlMatch[2]);
     
+    console.log(`[WikiImage] Fetching image for: ${title} (${lang})`);
+    
     // Try REST API first (more reliable with redirects)
     let imageUrl = await getWikipediaRestImage(title, lang);
-    
-    // Fallback to Action API
-    if (!imageUrl) {
-      imageUrl = await getWikipediaActionImage(title, lang);
-    }
-    
-    // Try English if different language and still no image
-    if (!imageUrl && lang !== 'en') {
-      imageUrl = await getWikipediaRestImage(title, 'en');
-      if (!imageUrl) {
-        imageUrl = await getWikipediaActionImage(title, 'en');
-      }
-    }
-    
-    // Try Russian as final fallback
-    if (!imageUrl && lang !== 'ru') {
-      imageUrl = await getWikipediaRestImage(title, 'ru');
-      if (!imageUrl) {
-        imageUrl = await getWikipediaActionImage(title, 'ru');
-      }
-    }
-    
-    // Only cache successful results
     if (imageUrl) {
+      console.log(`[WikiImage] ✓ Found via REST API (${lang})`);
       setCachedImage(wikiUrl, imageUrl);
       return imageUrl;
     }
     
+    // Fallback to Action API
+    imageUrl = await getWikipediaActionImage(title, lang);
+    if (imageUrl) {
+      console.log(`[WikiImage] ✓ Found via Action API (${lang})`);
+      setCachedImage(wikiUrl, imageUrl);
+      return imageUrl;
+    }
+    
+    // Try English if different language and still no image
+    if (lang !== 'en') {
+      imageUrl = await getWikipediaRestImage(title, 'en');
+      if (imageUrl) {
+        console.log(`[WikiImage] ✓ Found via REST API (en)`);
+        setCachedImage(wikiUrl, imageUrl);
+        return imageUrl;
+      }
+      
+      imageUrl = await getWikipediaActionImage(title, 'en');
+      if (imageUrl) {
+        console.log(`[WikiImage] ✓ Found via Action API (en)`);
+        setCachedImage(wikiUrl, imageUrl);
+        return imageUrl;
+      }
+    }
+    
+    // Try Russian as final fallback
+    if (lang !== 'ru') {
+      imageUrl = await getWikipediaRestImage(title, 'ru');
+      if (imageUrl) {
+        console.log(`[WikiImage] ✓ Found via REST API (ru)`);
+        setCachedImage(wikiUrl, imageUrl);
+        return imageUrl;
+      }
+      
+      imageUrl = await getWikipediaActionImage(title, 'ru');
+      if (imageUrl) {
+        console.log(`[WikiImage] ✓ Found via Action API (ru)`);
+        setCachedImage(wikiUrl, imageUrl);
+        return imageUrl;
+      }
+    }
+    
+    console.log(`[WikiImage] ✗ No image found for: ${title}`);
     return null;
   } catch (error) {
-    console.error('Error fetching Wikipedia image:', error);
+    console.error('[WikiImage] Error fetching image:', error);
     return null;
   }
 };
