@@ -520,9 +520,9 @@ export const EventMap = () => {
       // Create custom marker element with mobile optimization
       const el = document.createElement('div');
       el.className = 'custom-marker';
-      // Optimized marker sizes
-      const markerSize = isMobile ? 20 : 24;
-      const markerHeight = isMobile ? 30 : 36;
+      // Larger touch targets on mobile
+      const markerSize = isMobile ? 32 : 28;
+      const markerHeight = isMobile ? 44 : 40;
       el.style.width = `${markerSize}px`;
       el.style.height = `${markerHeight}px`;
       el.style.cursor = 'pointer';
@@ -546,8 +546,8 @@ export const EventMap = () => {
         el.style.opacity = '1';
       }, isMobile ? 0 : Math.min(index * 1, 100)); // Instant on mobile, faster on desktop
 
-      // Create marker with bottom anchor for pin shape
-      const marker = new mapboxgl.Marker({ element: el, anchor: 'bottom' })
+      // Create marker
+      const marker = new mapboxgl.Marker(el)
         .setLngLat([event.pos.lng, event.pos.lat])
         .addTo(map.current!);
 
@@ -589,42 +589,29 @@ export const EventMap = () => {
       popupContent.appendChild(closeBtn);
       popupContent.appendChild(title);
       
-      // Create image container with placeholder
+      // Create image container for async loading (no loading spinner)
       const imgContainer = document.createElement('div');
-      imgContainer.style.cssText = `min-height: 200px; width: 100%; background: linear-gradient(135deg, rgba(100, 100, 100, 0.1) 0%, rgba(150, 150, 150, 0.1) 100%); border-radius: 10px; margin: 10px 0; display: flex; align-items: center; justify-content: center; overflow: hidden;`;
-      
-      // Add placeholder text
-      const placeholder = document.createElement('div');
-      placeholder.style.cssText = 'color: rgba(128, 128, 128, 0.5); font-size: 14px; text-align: center;';
-      placeholder.textContent = 'Loading image...';
-      imgContainer.appendChild(placeholder);
-      
+      imgContainer.style.cssText = 'display: none;'; // Hidden until image loads
       popupContent.appendChild(imgContainer);
       
       // Fetch and display Wikipedia image asynchronously
       if (event.wiki) {
         getWikipediaImage(event.wiki).then(imageUrl => {
-          if (imageUrl && imgContainer.isConnected) {
-            // Remove placeholder
-            imgContainer.innerHTML = '';
-            
-            // Check if container is still in DOM before adding image
+          if (imageUrl) {
             const img = document.createElement('img');
             img.src = imageUrl;
             const eventYear = parseYear(event);
             img.alt = `${event.title} ${event.type} map, ${event.country}, year ${eventYear} - historical event visualization`;
-            img.loading = 'eager'; // Load immediately since we need it for popup
-            img.style.cssText = `width: 100%; min-height: 200px; height: 100%; object-fit: cover; 
-                                 border-radius: 10px;
-                                 transition: opacity 0.3s ease, transform 0.2s ease; opacity: 0;`;
+            img.loading = 'lazy';
+            img.style.cssText = `width: 100%; max-height: 180px; object-fit: cover; 
+                                 border-radius: 10px; margin: 10px 0;
+                                 transition: transform 0.3s ease;`;
             img.onerror = function(this: HTMLImageElement) { 
-              // Show error state
-              imgContainer.innerHTML = '';
+              this.style.display = 'none';
               imgContainer.style.display = 'none';
             };
-            img.onload = function(this: HTMLImageElement) {
-              // Smooth fade-in to prevent flickering
-              this.style.opacity = '1';
+            img.onload = function() {
+              imgContainer.style.display = 'block';
             };
             // Add hover effect
             img.onmouseenter = function(this: HTMLImageElement) {
@@ -634,17 +621,10 @@ export const EventMap = () => {
               this.style.transform = 'scale(1)';
             };
             imgContainer.appendChild(img);
-          } else {
-            // No image found - hide container
-            imgContainer.style.display = 'none';
           }
         }).catch(() => {
-          // Hide container on error
-          imgContainer.style.display = 'none';
+          // Silently fail - no image
         });
-      } else {
-        // No wiki link - hide container
-        imgContainer.style.display = 'none';
       }
       
       const desc = document.createElement('p');

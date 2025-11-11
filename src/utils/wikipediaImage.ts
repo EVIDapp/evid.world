@@ -2,139 +2,6 @@ import { getCachedImage, setCachedImage } from './imageCache';
 
 const wikiTextCache = new Map<string, string | null>();
 
-// Normalize URL to https and proper encoding
-const normalizeImageUrl = (url: string): string => {
-  if (!url) return '';
-  // Force HTTPS
-  let normalized = url.replace(/^http:/, 'https:');
-  // Ensure it's from upload.wikimedia.org
-  if (!normalized.includes('upload.wikimedia.org')) return '';
-  return normalized;
-};
-
-// REST API - more reliable with automatic redirects
-const getWikipediaRestImage = async (title: string, lang: string = 'en'): Promise<string | null> => {
-  try {
-    const encodedTitle = encodeURIComponent(title.replace(/_/g, ' '));
-    const apiUrl = `https://${lang}.wikipedia.org/api/rest_v1/page/summary/${encodedTitle}`;
-    
-    const controller = new AbortController();
-    const timeoutId = setTimeout(() => controller.abort(), 8000);
-    
-    const response = await fetch(apiUrl, { 
-      signal: controller.signal,
-      headers: { 'Accept': 'application/json' }
-    });
-    clearTimeout(timeoutId);
-    
-    if (!response.ok) return null;
-    
-    const data = await response.json();
-    
-    // Try originalimage first (higher quality), then thumbnail
-    let imageUrl: string | null = null;
-    if (data.originalimage?.source) {
-      imageUrl = normalizeImageUrl(data.originalimage.source);
-    } else if (data.thumbnail?.source) {
-      imageUrl = normalizeImageUrl(data.thumbnail.source);
-    }
-    
-    return imageUrl;
-  } catch (error) {
-    if (error instanceof Error && error.name !== 'AbortError') {
-      console.error('Wikipedia REST API error:', error);
-    }
-    return null;
-  }
-};
-
-// Main Wikipedia Action API call
-const getWikipediaActionImage = async (title: string, lang: string = 'en'): Promise<string | null> => {
-  try {
-    const normalizedTitle = title.replace(/ /g, '_');
-    const encodedTitle = encodeURIComponent(normalizedTitle);
-    
-    const apiUrl = `https://${lang}.wikipedia.org/w/api.php?action=query&prop=pageimages&piprop=thumbnail|original&pithumbsize=1200&redirects=1&format=json&formatversion=2&origin=*&titles=${encodedTitle}`;
-    
-    const controller = new AbortController();
-    const timeoutId = setTimeout(() => controller.abort(), 8000);
-    
-    const response = await fetch(apiUrl, { 
-      signal: controller.signal,
-      headers: { 'Accept': 'application/json' }
-    });
-    clearTimeout(timeoutId);
-    
-    if (!response.ok) return null;
-    
-    const data = await response.json();
-    const pages = data.query?.pages;
-    
-    if (!pages || pages.length === 0) return null;
-    
-    const page = pages[0];
-    
-    if (page.missing || !page.pageid) {
-      return null;
-    }
-    
-    // Use array syntax as per formatversion=2
-    let imageUrl: string | null = null;
-    if (page.thumbnail?.source) {
-      imageUrl = normalizeImageUrl(page.thumbnail.source);
-    } else if (page.original?.source) {
-      imageUrl = normalizeImageUrl(page.original.source);
-    }
-    
-    return imageUrl;
-  } catch (error) {
-    if (error instanceof Error && error.name !== 'AbortError') {
-      console.error('Wikipedia Action API error:', error);
-    }
-    return null;
-  }
-};
-
-// Fallback: Try Wikimedia Commons
-const getWikimediaCommonsImage = async (fileName: string): Promise<string | null> => {
-  try {
-    const normalizedFileName = fileName.startsWith('File:') ? fileName : `File:${fileName}`;
-    const encodedFileName = encodeURIComponent(normalizedFileName);
-    
-    const apiUrl = `https://commons.wikimedia.org/w/api.php?action=query&titles=${encodedFileName}&prop=imageinfo&iiprop=url|mime|extmetadata&iiurlwidth=1200&format=json&formatversion=2&origin=*`;
-    
-    const controller = new AbortController();
-    const timeoutId = setTimeout(() => controller.abort(), 8000);
-    
-    const response = await fetch(apiUrl, {
-      signal: controller.signal,
-      headers: { 'Accept': 'application/json' }
-    });
-    clearTimeout(timeoutId);
-    
-    if (!response.ok) return null;
-    
-    const data = await response.json();
-    const pages = data.query?.pages;
-    
-    if (!pages || pages.length === 0) return null;
-    
-    const page = pages[0];
-    const imageInfo = page.imageinfo?.[0];
-    
-    if (!imageInfo) return null;
-    
-    // Use thumburl if available, otherwise url
-    const imageUrl = imageInfo.thumburl || imageInfo.url;
-    return imageUrl ? normalizeImageUrl(imageUrl) : null;
-  } catch (error) {
-    if (error instanceof Error && error.name !== 'AbortError') {
-      console.error('Wikimedia Commons API error:', error);
-    }
-    return null;
-  }
-};
-
 export const getWikipediaText = async (wikiUrl: string): Promise<string | null> => {
   // Check cache first
   const cached = wikiTextCache.get(wikiUrl);
@@ -185,76 +52,57 @@ export const getWikipediaText = async (wikiUrl: string): Promise<string | null> 
 };
 
 export const getWikipediaImage = async (wikiUrl: string): Promise<string | null> => {
+  // Check cache first
   const cached = getCachedImage(wikiUrl);
-  if (cached) {
+  if (cached !== undefined) {
     return cached;
   }
   
   try {
-    const urlMatch = wikiUrl.match(/https?:\/\/([a-z]{2})\.wikipedia\.org\/wiki\/(.+)$/);
-    if (!urlMatch) {
+    // Extract article title from Wikipedia URL
+    const match = wikiUrl.match(/\/wiki\/(.+)$/);
+    if (!match) {
+      setCachedImage(wikiUrl, null);
       return null;
     }
     
-    const lang = urlMatch[1] || 'en';
-    const title = decodeURIComponent(urlMatch[2]);
+    const title = decodeURIComponent(match[1]);
     
-    console.log(`[WikiImage] Fetching image for: ${title} (${lang})`);
+    // Use Wikipedia REST API to get page summary with image
+    const apiUrl = `https://en.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(title)}`;
     
-    // Try REST API first (more reliable with redirects)
-    let imageUrl = await getWikipediaRestImage(title, lang);
-    if (imageUrl) {
-      console.log(`[WikiImage] ✓ Found via REST API (${lang})`);
-      setCachedImage(wikiUrl, imageUrl);
-      return imageUrl;
+    // Fetch with timeout for faster failures
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 5000); // 5 second timeout
+    
+    const response = await fetch(apiUrl, { signal: controller.signal });
+    clearTimeout(timeoutId);
+    
+    if (!response.ok) {
+      setCachedImage(wikiUrl, null);
+      return null;
     }
     
-    // Fallback to Action API
-    imageUrl = await getWikipediaActionImage(title, lang);
-    if (imageUrl) {
-      console.log(`[WikiImage] ✓ Found via Action API (${lang})`);
-      setCachedImage(wikiUrl, imageUrl);
-      return imageUrl;
+    const data = await response.json();
+    
+    // Prefer thumbnail for faster loading (smaller file size)
+    let imageUrl: string | null = null;
+    if (data.thumbnail?.source) {
+      // Use high-res thumbnail instead of original to save bandwidth
+      imageUrl = data.thumbnail.source.replace(/\/\d+px-/, '/400px-');
+    } else if (data.originalimage?.source) {
+      imageUrl = data.originalimage.source;
     }
     
-    // Try English if different language and still no image
-    if (lang !== 'en') {
-      imageUrl = await getWikipediaRestImage(title, 'en');
-      if (imageUrl) {
-        console.log(`[WikiImage] ✓ Found via REST API (en)`);
-        setCachedImage(wikiUrl, imageUrl);
-        return imageUrl;
-      }
-      
-      imageUrl = await getWikipediaActionImage(title, 'en');
-      if (imageUrl) {
-        console.log(`[WikiImage] ✓ Found via Action API (en)`);
-        setCachedImage(wikiUrl, imageUrl);
-        return imageUrl;
-      }
-    }
-    
-    // Try Russian as final fallback
-    if (lang !== 'ru') {
-      imageUrl = await getWikipediaRestImage(title, 'ru');
-      if (imageUrl) {
-        console.log(`[WikiImage] ✓ Found via REST API (ru)`);
-        setCachedImage(wikiUrl, imageUrl);
-        return imageUrl;
-      }
-      
-      imageUrl = await getWikipediaActionImage(title, 'ru');
-      if (imageUrl) {
-        console.log(`[WikiImage] ✓ Found via Action API (ru)`);
-        setCachedImage(wikiUrl, imageUrl);
-        return imageUrl;
-      }
-    }
-    
-    console.log(`[WikiImage] ✗ No image found for: ${title}`);
-    return null;
+    // Cache the result
+    setCachedImage(wikiUrl, imageUrl);
+    return imageUrl;
   } catch (error) {
-    console.error('[WikiImage] Error fetching image:', error);
+    // Silent fail for aborted requests (timeout)
+    if (error instanceof Error && error.name !== 'AbortError') {
+      console.error('Error fetching Wikipedia image:', error);
+    }
+    setCachedImage(wikiUrl, null);
     return null;
   }
 };

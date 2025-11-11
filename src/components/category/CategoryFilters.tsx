@@ -23,8 +23,7 @@ export const CategoryFilters = ({ events, onFilterChange }: CategoryFiltersProps
 
   const countries = Array.from(new Set(events.map(e => e.country))).sort();
 
-  // Auto-apply filters when selections change
-  useEffect(() => {
+  const applyFilters = () => {
     let filtered = events.filter(e => {
       const year = parseInt(e.year || '0');
       // Include events with invalid/missing years (year <= 0) in the results
@@ -33,7 +32,12 @@ export const CategoryFilters = ({ events, onFilterChange }: CategoryFiltersProps
       return inYearRange && inCountryFilter;
     });
     onFilterChange(filtered);
-  }, [yearRange, selectedCountries, events, onFilterChange]);
+  };
+
+  // Auto-apply filters when selections change
+  useEffect(() => {
+    applyFilters();
+  }, [yearRange]);
 
   const resetFilters = () => {
     setYearRange([minYear, maxYear]);
@@ -49,6 +53,18 @@ export const CategoryFilters = ({ events, onFilterChange }: CategoryFiltersProps
       newSet.add(country);
     }
     setSelectedCountries(newSet);
+    
+    // Auto-apply filters after country selection
+    setTimeout(() => {
+      let filtered = events.filter(e => {
+        const year = parseInt(e.year || '0');
+        // Include events with invalid/missing years (year <= 0) in the results
+        const inYearRange = year <= 0 || (year >= yearRange[0] && year <= yearRange[1]);
+        const inCountryFilter = newSet.size === 0 || newSet.has(e.country);
+        return inYearRange && inCountryFilter;
+      });
+      onFilterChange(filtered);
+    }, 0);
   };
 
   return (
@@ -110,6 +126,9 @@ export const CategoryFilters = ({ events, onFilterChange }: CategoryFiltersProps
               </div>
             </div>
 
+            <Button onClick={applyFilters} size="sm" className="w-full text-xs md:text-sm">
+              Apply Filters
+            </Button>
           </CardContent>
         </CollapsibleContent>
       </Card>

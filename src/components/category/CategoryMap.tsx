@@ -46,7 +46,7 @@ export const CategoryMap = ({ events, color }: CategoryMapProps) => {
         el.style.border = '2px solid white';
         el.style.boxShadow = '0 2px 4px rgba(0,0,0,0.3)';
 
-        const marker = new mapboxgl.Marker({ element: el, anchor: 'center' })
+        const marker = new mapboxgl.Marker(el)
           .setLngLat([event.pos.lng, event.pos.lat])
           .addTo(map.current!);
 
