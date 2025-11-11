@@ -12,10 +12,45 @@ const normalizeImageUrl = (url: string): string => {
   return normalized;
 };
 
+// REST API - more reliable with automatic redirects
+const getWikipediaRestImage = async (title: string, lang: string = 'en'): Promise<string | null> => {
+  try {
+    const encodedTitle = encodeURIComponent(title.replace(/_/g, ' '));
+    const apiUrl = `https://${lang}.wikipedia.org/api/rest_v1/page/summary/${encodedTitle}`;
+    
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 8000);
+    
+    const response = await fetch(apiUrl, { 
+      signal: controller.signal,
+      headers: { 'Accept': 'application/json' }
+    });
+    clearTimeout(timeoutId);
+    
+    if (!response.ok) return null;
+    
+    const data = await response.json();
+    
+    // Try originalimage first (higher quality), then thumbnail
+    let imageUrl: string | null = null;
+    if (data.originalimage?.source) {
+      imageUrl = normalizeImageUrl(data.originalimage.source);
+    } else if (data.thumbnail?.source) {
+      imageUrl = normalizeImageUrl(data.thumbnail.source);
+    }
+    
+    return imageUrl;
+  } catch (error) {
+    if (error instanceof Error && error.name !== 'AbortError') {
+      console.error('Wikipedia REST API error:', error);
+    }
+    return null;
+  }
+};
+
 // Main Wikipedia Action API call
 const getWikipediaActionImage = async (title: string, lang: string = 'en'): Promise<string | null> => {
   try {
-    // Normalize title: spaces to underscores, URL encode
     const normalizedTitle = title.replace(/ /g, '_');
     const encodedTitle = encodeURIComponent(normalizedTitle);
     
@@ -39,12 +74,11 @@ const getWikipediaActionImage = async (title: string, lang: string = 'en'): Prom
     
     const page = pages[0];
     
-    // Check if page exists
     if (page.missing || !page.pageid) {
       return null;
     }
     
-    // Try thumbnail first (higher resolution), then original
+    // Use array syntax as per formatversion=2
     let imageUrl: string | null = null;
     if (page.thumbnail?.source) {
       imageUrl = normalizeImageUrl(page.thumbnail.source);
@@ -151,14 +185,12 @@ export const getWikipediaText = async (wikiUrl: string): Promise<string | null> 
 };
 
 export const getWikipediaImage = async (wikiUrl: string): Promise<string | null> => {
-  // Check cache first
   const cached = getCachedImage(wikiUrl);
   if (cached) {
     return cached;
   }
   
   try {
-    // Extract article title and language from Wikipedia URL
     const urlMatch = wikiUrl.match(/https?:\/\/([a-z]{2})\.wikipedia\.org\/wiki\/(.+)$/);
     if (!urlMatch) {
       return null;
@@ -167,26 +199,36 @@ export const getWikipediaImage = async (wikiUrl: string): Promise<string | null>
     const lang = urlMatch[1] || 'en';
     const title = decodeURIComponent(urlMatch[2]);
     
-    // Step 1: Try Wikipedia Action API (primary method)
-    let imageUrl = await getWikipediaActionImage(title, lang);
+    // Try REST API first (more reliable with redirects)
+    let imageUrl = await getWikipediaRestImage(title, lang);
     
-    // Step 2: If lang is not 'en', try English Wikipedia
+    // Fallback to Action API
+    if (!imageUrl) {
+      imageUrl = await getWikipediaActionImage(title, lang);
+    }
+    
+    // Try English if different language and still no image
     if (!imageUrl && lang !== 'en') {
-      imageUrl = await getWikipediaActionImage(title, 'en');
+      imageUrl = await getWikipediaRestImage(title, 'en');
+      if (!imageUrl) {
+        imageUrl = await getWikipediaActionImage(title, 'en');
+      }
     }
     
-    // Step 3: If still no image, try Russian Wikipedia
+    // Try Russian as final fallback
     if (!imageUrl && lang !== 'ru') {
-      imageUrl = await getWikipediaActionImage(title, 'ru');
+      imageUrl = await getWikipediaRestImage(title, 'ru');
+      if (!imageUrl) {
+        imageUrl = await getWikipediaActionImage(title, 'ru');
+      }
     }
     
-    // Cache and return if successful
+    // Only cache successful results
     if (imageUrl) {
       setCachedImage(wikiUrl, imageUrl);
       return imageUrl;
     }
     
-    // Do NOT cache empty results
     return null;
   } catch (error) {
     console.error('Error fetching Wikipedia image:', error);
