@@ -18,34 +18,96 @@ events.forEach(event => {
 });
 events = Array.from(uniqueEvents.values());
 
-// Slugify function matching frontend
-const slugify = (text) => {
-  return text
-    .toLowerCase()
-    .trim()
-    .replace(/[\s_]+/g, '-')
-    .replace(/[^\w-]+/g, '')
-    .replace(/--+/g, '-')
-    .replace(/^-+|-+$/g, '');
-};
-
-// Extract year from title
-const extractYear = (title) => {
-  const yearMatch = title.match(/\b(\d{4})\b/);
-  return yearMatch ? yearMatch[1] : null;
-};
-
-// Generate event slug
-const generateEventSlug = (title, type, year) => {
-  let titleSlug = slugify(title);
-  const yearFromTitle = extractYear(title);
-  const finalYear = year || yearFromTitle;
+// Извлекает год или диапазон годов из конца строки
+const extractYearFromEnd = (text) => {
+  const normalized = text.replace(/[–—―−]/g, "-");
   
-  if (finalYear && !titleSlug.includes(finalYear)) {
-    titleSlug = `${titleSlug}-${finalYear}`;
+  // Паттерны для извлечения года из конца:
+  const yearPatterns = [
+    /\((\d{1,4}(?:-\d{1,4})?(?:-(?:bc|ad))?)\)\s*$/i,  // В скобках в конце
+    /,?\s*(\d{1,4}(?:-\d{1,4})?(?:-(?:bc|ad))?)\s*$/i, // Через запятую или просто в конце
+  ];
+  
+  for (const pattern of yearPatterns) {
+    const match = normalized.match(pattern);
+    if (match) {
+      const year = match[1].toLowerCase();
+      const cleanText = normalized.replace(pattern, '').trim();
+      return { text: cleanText, year };
+    }
   }
   
-  return `${type}/${titleSlug}`;
+  return { text: normalized, year: '' };
+};
+
+// Slugify function matching frontend
+const slugify = (text) => {
+  let slug = text.toLowerCase().trim();
+
+  // Нормализуем все типы дефисов к обычному "-"
+  slug = slug.replace(/[–—―−]/g, "-");
+
+  // Удаляем скобки и их содержимое
+  slug = slug.replace(/\s*\([^)]*\)/g, "");
+
+  // Удаляем "ongoing"/"present"/"current" в конце
+  slug = slug.replace(/-?(?:ongoing|present|current)$/i, "");
+
+  // Превращаем "400 bc"/"400bc" → "400-bc", "800 ad" → "800-ad"
+  slug = slug.replace(/\b(\d{1,4})\s*(bc|ad)\b/gi, "$1-$2");
+
+  // Пробелы/подчёркивания → дефисы
+  slug = slug.replace(/[\s_]+/g, "-");
+
+  // Оставляем только латиницу, цифры и дефисы
+  slug = slug.replace(/[^a-z0-9-]/g, "");
+
+  // Сжимаем повторные дефисы
+  slug = slug.replace(/-+/g, "-");
+
+  // Убираем дефисы по краям
+  slug = slug.replace(/^-+|-+$/g, "");
+
+  return slug;
+};
+
+// Generate event slug - БЕЗ category prefix, только /event/[slug]
+const generateEventSlug = (title, year) => {
+  // Извлекаем год из title, если он там есть
+  const { text: cleanTitle, year: extractedYear } = extractYearFromEnd(title);
+  
+  // Определяем финальный год
+  let finalYear = year ? String(year).trim() : extractedYear;
+  
+  // Нормализуем год
+  if (finalYear) {
+    finalYear = finalYear.toLowerCase()
+      .replace(/[–—―−]/g, "-")
+      .replace(/\s+/g, "");
+  }
+  
+  // Создаём slug из очищенного текста (без года)
+  const titleSlug = slugify(cleanTitle);
+  
+  // Если года нет, возвращаем только текст
+  if (!finalYear) return titleSlug;
+  
+  // Проверяем, не заканчивается ли titleSlug уже на этот год
+  const yearPattern = finalYear.replace(/[()-]/g, '\\$&');
+  const endsWithYear = new RegExp(`-${yearPattern}$`, 'i');
+  
+  if (endsWithYear.test(titleSlug)) {
+    return titleSlug;
+  }
+  
+  // Проверяем, не начинается ли titleSlug с года
+  const startsWithYear = new RegExp(`^${yearPattern}-`, 'i');
+  if (startsWithYear.test(titleSlug)) {
+    return titleSlug.replace(startsWithYear, '') + '-' + finalYear;
+  }
+  
+  // Добавляем год в конец
+  return `${titleSlug}-${finalYear}`;
 };
 
 // Get current date
@@ -97,9 +159,9 @@ events.forEach((event, index) => {
   if (index % 100 === 0) {
     console.log(`Processed ${index}/${events.length} events...`);
   }
-  const slug = generateEventSlug(event.title, event.type, event.year);
+  const slug = generateEventSlug(event.title, event.year);
   sitemap += `  <url>
-    <loc>https://evid.world/category/${slug}</loc>
+    <loc>https://evid.world/event/${slug}</loc>
     <lastmod>${today}</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>

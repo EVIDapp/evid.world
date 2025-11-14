@@ -1,2 +1,9 @@
 https://evid.world/* https://www.evid.world/:splat 301!
+
+# Redirect old category/event URLs to new event URLs
+/category/*/event/:slug /event/:slug 301!
+/category/:category/event/:slug /event/:slug 301!
+/category/:category/:slug /event/:slug 301!
+
+# Serve index.html for all other routes (SPA)
 /* /index.html 200
