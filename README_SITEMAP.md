@@ -1,28 +1,74 @@
 # Sitemap Generation
 
 ## Overview
-The sitemap has been updated to include individual event pages with SEO-friendly URLs.
+Карта сайта обновлена для использования новой SEO-оптимизированной структуры URL с правильной генерацией slug'ов без дублирования годов.
 
-## How to Generate Full Sitemap
+## URL Structure
 
-To generate a complete sitemap with all events from `events-clean.json`, run:
+EVID.world использует две основные структуры URL:
 
+### События (Events)
+```
+https://evid.world/event/[slug]
+```
+Где `slug` генерируется из названия события с годом в конце (без дублирования).
+
+**Примеры:**
+- `/event/first-opium-war-1839-1842`
+- `/event/battle-of-okinawa-1945`
+- `/event/sri-lanka-easter-bombings-2019`
+
+### Категории (Categories)
+```
+https://evid.world/category/[category-slug]
+```
+
+**Примеры:**
+- `/category/war`
+- `/category/earthquake`
+- `/category/disaster`
+
+## Генерация Sitemap
+
+Доступны три скрипта для генерации sitemap:
+
+### 1. Основной скрипт (рекомендуется)
 ```bash
 node scripts/generate-sitemap.js
 ```
 
-This will:
-1. Read all events from `public/events-clean.json`
-2. Generate SEO-friendly slugs for each event (e.g., `titanic-sinking-1912`)
-3. Create a complete `sitemap.xml` in the `public` folder
-4. Include all event pages with proper priority and change frequency
+### 2. Полный sitemap со всеми событиями
+```bash
+node scripts/generate-full-sitemap.js
+```
 
-## URL Structure
+### 3. Комплексный sitemap с категориями
+```bash
+node scripts/generate-complete-sitemap.js
+```
 
-Event pages follow this pattern:
-- `/event/[slug]` where slug is generated from event title + year
-- Example: `/event/titanic-sinking-1912`
-- Example: `/event/chernobyl-disaster-1986`
+Все скрипты используют единую логику генерации slug'ов из `src/utils/slugify.ts`.
+
+## Проверка корректности URL
+
+Для проверки событий с дублированием года в URL:
+
+```bash
+node scripts/find-duplicate-year-slugs.js
+```
+
+Скрипт найдёт события вида:
+- ❌ `2019-sri-lanka-easter-bombings-2019`
+- ✅ `sri-lanka-easter-bombings-2019`
+
+## Slug Generation Rules
+
+1. **Год всегда в конце** - год добавляется только один раз в конец slug
+2. **Нет дублирования** - если год уже есть в названии, он не дублируется
+3. **Нормализация** - все типы дефисов конвертируются в обычный дефис
+4. **Чистота** - удаляются скобки, спецсимволы, лишние пробелы
+
+Подробнее в [URL_STRUCTURE.md](../URL_STRUCTURE.md).
 
 ## SEO Features
 

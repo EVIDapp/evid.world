@@ -18,28 +18,44 @@ events.forEach(event => {
 });
 events = Array.from(uniqueEvents.values());
 
-// Generate slugs for each event - matching slugify.ts logic
+// Generate slugs for each event - matching NEW slugify.ts logic
+
+// Извлекает год или диапазон годов из конца строки
+const extractYearFromEnd = (text) => {
+  const normalized = text.replace(/[–—―−]/g, "-");
+  
+  // Паттерны для извлечения года из конца:
+  const yearPatterns = [
+    /\((\d{1,4}(?:-\d{1,4})?(?:-(?:bc|ad))?)\)\s*$/i,  // В скобках в конце
+    /,?\s*(\d{1,4}(?:-\d{1,4})?(?:-(?:bc|ad))?)\s*$/i, // Через запятую или просто в конце
+  ];
+  
+  for (const pattern of yearPatterns) {
+    const match = normalized.match(pattern);
+    if (match) {
+      const year = match[1].toLowerCase();
+      const cleanText = normalized.replace(pattern, '').trim();
+      return { text: cleanText, year };
+    }
+  }
+  
+  return { text: normalized, year: '' };
+};
+
 const slugify = (text) => {
   let slug = text.toLowerCase().trim();
 
-  // Нормализуем все типы дефисов к обычному "-" ДО обработки диапазонов
+  // Нормализуем все типы дефисов к обычному "-"
   slug = slug.replace(/[–—―−]/g, "-");
 
-  // Удаляем скобки и их содержимое (типа "(1816–1828)")
+  // Удаляем скобки и их содержимое
   slug = slug.replace(/\s*\([^)]*\)/g, "");
 
-  // Исправление: слипшиеся диапазоны лет уже после замены дефисов
-  // Паттерн: 4 цифры сразу после 4 цифр -> разделяем дефисом
-  slug = slug.replace(/(\d{4})(\d{4})/g, "$1-$2");
-
   // Удаляем "ongoing"/"present"/"current" в конце
-  slug = slug.replace(/-?(?:ongoing|present|current)$/g, "");
+  slug = slug.replace(/-?(?:ongoing|present|current)$/i, "");
 
   // Превращаем "400 bc"/"400bc" → "400-bc", "800 ad" → "800-ad"
-  slug = slug.replace(/\b(\d{1,4})\s*(bc|ad)\b/g, "$1-$2");
-
-  // Удаляем повторы годов типа "...-1812-1812"
-  slug = slug.replace(/(-\d{1,4})-\1\b/g, "$1");
+  slug = slug.replace(/\b(\d{1,4})\s*(bc|ad)\b/gi, "$1-$2");
 
   // Пробелы/подчёркивания → дефисы
   slug = slug.replace(/[\s_]+/g, "-");
@@ -57,16 +73,41 @@ const slugify = (text) => {
 };
 
 const generateSlug = (title, year) => {
-  const titleSlug = slugify(title);
-  const y = (year ?? "").trim();
-  if (!y) return titleSlug;
-
-  // Нормализуем год для slug (удаляем минус для BC лет)
-  const yearSlug = y.toLowerCase().replace(/^-/, "");
+  // Извлекаем год из title, если он там есть
+  const { text: cleanTitle, year: extractedYear } = extractYearFromEnd(title);
   
-  // если уже заканчивается на "-год" (в т.ч. "-405-bc", "-1980"), ничего не добавляем
-  const endsWithYear = new RegExp(`-${yearSlug.replace(/-/g, '\\-')}$`);
-  return endsWithYear.test(titleSlug) ? titleSlug : `${titleSlug}-${yearSlug}`;
+  // Определяем финальный год
+  let finalYear = year ? String(year).trim() : extractedYear;
+  
+  // Нормализуем год
+  if (finalYear) {
+    finalYear = finalYear.toLowerCase()
+      .replace(/[–—―−]/g, "-")
+      .replace(/\s+/g, "");
+  }
+  
+  // Создаём slug из очищенного текста (без года)
+  const titleSlug = slugify(cleanTitle);
+  
+  // Если года нет, возвращаем только текст
+  if (!finalYear) return titleSlug;
+  
+  // Проверяем, не заканчивается ли titleSlug уже на этот год
+  const yearPattern = finalYear.replace(/[()-]/g, '\\$&');
+  const endsWithYear = new RegExp(`-${yearPattern}$`, 'i');
+  
+  if (endsWithYear.test(titleSlug)) {
+    return titleSlug;
+  }
+  
+  // Проверяем, не начинается ли titleSlug с года
+  const startsWithYear = new RegExp(`^${yearPattern}-`, 'i');
+  if (startsWithYear.test(titleSlug)) {
+    return titleSlug.replace(startsWithYear, '') + '-' + finalYear;
+  }
+  
+  // Добавляем год в конец
+  return `${titleSlug}-${finalYear}`;
 };
 
 // Get current date
@@ -92,18 +133,8 @@ let sitemap = `<?xml version="1.0" encoding="UTF-8"?>
 
 // Add event pages
 events.forEach(event => {
-    // 🧹 Убираем года из title, чтобы не было дублей
-    const cleanTitle = event.title.replace(/\(?\b\d{3,4}(?:[–—-]\d{2,4})?\)?/g, '').trim();
-
-    // 🧮 Нормализуем и убираем повтор года
-    let year = String(event.year || '')
-      .replace(/[–—]/g, '-') // заменяем длинные тире на обычные
-      .replace(/^(\d{3,4})-\1$/, '$1') // если повтор, оставляем один (1812-1812 → 1812)
-      .replace(/^(\d{3,4})-\1-(\d{3,4})$/, '$1-$3') // если 1812-1812-1815 → 1812-1815
-      .trim();
-
-    // 🧩 Финальный slug без дублей годов
-    const slug = slugify(`${cleanTitle} ${year}`.trim());
+    const slug = generateSlug(event.title, event.year);
+    
   sitemap += `  <!-- ${event.title} -->
   <url>
     <loc>https://evid.world/event/${slug}</loc>

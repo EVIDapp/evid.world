@@ -18,15 +18,95 @@ events.forEach(event => {
 });
 events = Array.from(uniqueEvents.values());
 
+// Извлекает год или диапазон годов из конца строки
+const extractYearFromEnd = (text) => {
+  const normalized = text.replace(/[–—―−]/g, "-");
+  
+  // Паттерны для извлечения года из конца:
+  const yearPatterns = [
+    /\((\d{1,4}(?:-\d{1,4})?(?:-(?:bc|ad))?)\)\s*$/i,  // В скобках в конце
+    /,?\s*(\d{1,4}(?:-\d{1,4})?(?:-(?:bc|ad))?)\s*$/i, // Через запятую или просто в конце
+  ];
+  
+  for (const pattern of yearPatterns) {
+    const match = normalized.match(pattern);
+    if (match) {
+      const year = match[1].toLowerCase();
+      const cleanText = normalized.replace(pattern, '').trim();
+      return { text: cleanText, year };
+    }
+  }
+  
+  return { text: normalized, year: '' };
+};
+
+const slugify = (text) => {
+  let slug = text.toLowerCase().trim();
+
+  // Нормализуем все типы дефисов к обычному "-"
+  slug = slug.replace(/[–—―−]/g, "-");
+
+  // Удаляем скобки и их содержимое
+  slug = slug.replace(/\s*\([^)]*\)/g, "");
+
+  // Удаляем "ongoing"/"present"/"current" в конце
+  slug = slug.replace(/-?(?:ongoing|present|current)$/i, "");
+
+  // Превращаем "400 bc"/"400bc" → "400-bc", "800 ad" → "800-ad"
+  slug = slug.replace(/\b(\d{1,4})\s*(bc|ad)\b/gi, "$1-$2");
+
+  // Пробелы/подчёркивания → дефисы
+  slug = slug.replace(/[\s_]+/g, "-");
+
+  // Оставляем только латиницу, цифры и дефисы
+  slug = slug.replace(/[^a-z0-9-]/g, "");
+
+  // Сжимаем повторные дефисы
+  slug = slug.replace(/-+/g, "-");
+
+  // Убираем дефисы по краям
+  slug = slug.replace(/^-+|-+$/g, "");
+
+  return slug;
+};
+
 // Generate slugs for each event
 const generateSlug = (title, year) => {
-  const titleSlug = title
-    .toLowerCase()
-    .replace(/[^\w\s-]/g, '')
-    .replace(/\s+/g, '-')
-    .replace(/--+/g, '-')
-    .trim();
-  return year ? `${titleSlug}-${year}` : titleSlug;
+  // Извлекаем год из title, если он там есть
+  const { text: cleanTitle, year: extractedYear } = extractYearFromEnd(title);
+  
+  // Определяем финальный год
+  let finalYear = year ? String(year).trim() : extractedYear;
+  
+  // Нормализуем год
+  if (finalYear) {
+    finalYear = finalYear.toLowerCase()
+      .replace(/[–—―−]/g, "-")
+      .replace(/\s+/g, "");
+  }
+  
+  // Создаём slug из очищенного текста (без года)
+  const titleSlug = slugify(cleanTitle);
+  
+  // Если года нет, возвращаем только текст
+  if (!finalYear) return titleSlug;
+  
+  // Проверяем, не заканчивается ли titleSlug уже на этот год
+  const yearPattern = finalYear.replace(/[()-]/g, '\\$&');
+  const endsWithYear = new RegExp(`-${yearPattern}$`, 'i');
+  
+  if (endsWithYear.test(titleSlug)) {
+    return titleSlug;
+  }
+  
+  // Проверяем, не начинается ли titleSlug с года
+  const startsWithYear = new RegExp(`^${yearPattern}-`, 'i');
+  if (startsWithYear.test(titleSlug)) {
+    return titleSlug.replace(startsWithYear, '') + '-' + finalYear;
+  }
+  
+  // Добавляем год в конец
+  return `${titleSlug}-${finalYear}`;
 };
 
 // Get current date
