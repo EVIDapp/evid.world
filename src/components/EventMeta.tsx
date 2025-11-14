@@ -9,7 +9,7 @@ interface EventMetaProps {
 export const EventMeta = ({ event }: EventMetaProps) => {
   useEffect(() => {
     const slug = generateEventSlug(event.title, event.year);
-    const url = `https://evid.world/event/${slug}`;
+    const url = `https://www.evid.world/event/${slug}`;
     
     // Update title with better SEO format
     const yearDisplay = event.year ? `(${event.year})` : '';

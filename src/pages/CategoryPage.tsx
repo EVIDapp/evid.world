@@ -61,8 +61,8 @@ const CategoryPage = () => {
     updateMetaTag('name', 'keywords', `${categoryTitle}, ${eventType}, historical events, world history, ${categoryTitle} map, ${categoryTitle} database`);
     updateMetaTag('property', 'og:title', document.title);
     updateMetaTag('property', 'og:description', description);
-    updateMetaTag('property', 'og:url', `https://evid.world/category/${category}`);
-    updateLinkTag('canonical', `https://evid.world/category/${category}`);
+    updateMetaTag('property', 'og:url', `https://www.evid.world/category/${category}`);
+    updateLinkTag('canonical', `https://www.evid.world/category/${category}`);
 
     loadEvents();
   }, [category, eventType, categoryTitle]);
