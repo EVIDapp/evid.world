@@ -5,8 +5,8 @@ import { fileURLToPath } from 'url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const eventsPath = path.join(__dirname, '../public/events.json');
-const backupPath = path.join(__dirname, '../public/events-backup-images.json');
+const eventsPath = path.join(__dirname, '../public/events-clean.json');
+const backupPath = path.join(__dirname, '../public/events-clean-backup-images.json');
 
 // Delay helper to avoid rate limiting
 const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
