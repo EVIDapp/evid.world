@@ -9,7 +9,7 @@ import { Separator } from '@/components/ui/separator';
 import { ArrowLeft, MapPin, Calendar, Users, ExternalLink, Globe, Flame, AlertTriangle } from 'lucide-react';
 import { getEventColor } from '@/utils/eventColors';
 import { generateEventSlug, slugify } from '@/utils/slugify';
-import { getWikipediaImage, getWikipediaText } from '@/utils/wikipediaImage';
+import { getWikipediaText } from '@/utils/wikipediaImage';
 
 const EventDetail = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -17,7 +17,6 @@ const EventDetail = () => {
   const [event, setEvent] = useState<HistoricalEvent | null>(null);
   const [relatedEvents, setRelatedEvents] = useState<HistoricalEvent[]>([]);
   const [loading, setLoading] = useState(true);
-  const [wikiImage, setWikiImage] = useState<string | null>(null);
   const [wikiText, setWikiText] = useState<string | null>(null);
 
   useEffect(() => {
@@ -49,12 +48,8 @@ const EventDetail = () => {
         if (foundEvent) {
           setEvent(foundEvent);
           
-          // Load Wikipedia data if available
+          // Load Wikipedia text if available (but not images - use event.image instead)
           if (foundEvent.wiki) {
-            getWikipediaImage(foundEvent.wiki).then(imageUrl => {
-              if (imageUrl) setWikiImage(imageUrl);
-            }).catch(() => {});
-            
             getWikipediaText(foundEvent.wiki).then(text => {
               if (text) setWikiText(text);
             }).catch(() => {});
@@ -210,6 +205,18 @@ const EventDetail = () => {
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-4">
+                  {/* Event Image */}
+                  {event.image && (
+                    <div className="relative overflow-hidden rounded-lg border border-primary/10">
+                      <img 
+                        src={event.image} 
+                        alt={`${event.title} - Historical Event`}
+                        className="w-full h-auto max-h-96 object-cover"
+                        loading="lazy"
+                      />
+                    </div>
+                  )}
+                  
                   <p className="text-sm leading-relaxed">{event.desc}</p>
                   
                   {wikiText && (
