@@ -996,7 +996,7 @@
     "desc_long": "The Sahel conflict involves jihadist groups, state militaries, and international forces across Mali, Niger, Burkina Faso, and neighboring countries.",
     "wiki": "https://en.wikipedia.org/wiki/Northern_Mali_conflict",
     "radiusKm": 600,
-    "year": 2012,
+    "year": "2012-2026",
     "casualties": null
   },
   {
@@ -8474,7 +8474,7 @@
     "desc_long": "The An Lushan Rebellion was one of history's deadliest wars, killing millions and permanently weakening the Tang Dynasty.",
     "wiki": "https://en.wikipedia.org/wiki/An_Lushan_Rebellion",
     "radiusKm": 1500,
-    "year": "755",
+    "year": "755-763",
     "casualties": 13000000
   },
   {
