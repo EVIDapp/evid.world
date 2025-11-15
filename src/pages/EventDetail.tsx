@@ -22,7 +22,7 @@ const EventDetail = () => {
   useEffect(() => {
     const loadEvent = async () => {
       try {
-        const response = await fetch('/events.json');
+        const response = await fetch('/events-clean.json');
         const events: HistoricalEvent[] = await response.json();
         
         // Find event by slug match with multiple fallbacks

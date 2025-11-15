@@ -28,7 +28,7 @@ const CategoryPage = () => {
   useEffect(() => {
     const loadEvents = async () => {
       try {
-        const response = await fetch('/events.json');
+        const response = await fetch('/events-clean.json');
         
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
