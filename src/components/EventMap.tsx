@@ -425,37 +425,6 @@ export const EventMap = () => {
     setFilteredEvents(filtered);
   }, [events, searchQuery, selectedTypes, selectedYearRange]);
 
-  // Timeline animation
-  useEffect(() => {
-    if (!isAnimating || yearRange[0] === yearRange[1]) return;
-    
-    const yearStep = Math.ceil((yearRange[1] - yearRange[0]) / 100);
-    const interval = setInterval(() => {
-      setSelectedYearRange(prev => {
-        const newEnd = prev[1] + yearStep;
-        if (newEnd >= yearRange[1]) {
-          setIsAnimating(false);
-          return [yearRange[0], yearRange[1]];
-        }
-        return [yearRange[0], newEnd];
-      });
-    }, 100);
-
-    return () => clearInterval(interval);
-  }, [isAnimating, yearRange]);
-
-  // Render markers when filtered events change
-  useEffect(() => {
-    if (!map.current || loading || !tokenSubmitted || !mapLoaded) return;
-    
-    if (onDemandMode && !searchQuery && selectedTypes.size === 0) {
-      clearMarkers();
-      return;
-    }
-
-    renderMarkers(filteredEvents);
-  }, [filteredEvents, onDemandMode, searchQuery, selectedTypes, loading, tokenSubmitted, mapLoaded]);
-
   const clearMarkers = useCallback(() => {
     // Remove all markers
     markersRef.current.forEach(marker => marker.remove());
@@ -759,6 +728,37 @@ export const EventMap = () => {
       markersRef.current.push(marker);
     });
   }, [clearMarkers, toast, showPolygon, addToHistory]);
+
+  // Timeline animation
+  useEffect(() => {
+    if (!isAnimating || yearRange[0] === yearRange[1]) return;
+    
+    const yearStep = Math.ceil((yearRange[1] - yearRange[0]) / 100);
+    const interval = setInterval(() => {
+      setSelectedYearRange(prev => {
+        const newEnd = prev[1] + yearStep;
+        if (newEnd >= yearRange[1]) {
+          setIsAnimating(false);
+          return [yearRange[0], yearRange[1]];
+        }
+        return [yearRange[0], newEnd];
+      });
+    }, 100);
+
+    return () => clearInterval(interval);
+  }, [isAnimating, yearRange]);
+
+  // Render markers when filtered events change
+  useEffect(() => {
+    if (!map.current || loading || !tokenSubmitted || !mapLoaded) return;
+    
+    if (onDemandMode && !searchQuery && selectedTypes.size === 0) {
+      clearMarkers();
+      return;
+    }
+
+    renderMarkers(filteredEvents);
+  }, [filteredEvents, onDemandMode, searchQuery, selectedTypes, loading, tokenSubmitted, mapLoaded, renderMarkers, clearMarkers]);
 
   const handleEventSelect = useCallback((event: HistoricalEvent) => {
     if (!map.current) return;
