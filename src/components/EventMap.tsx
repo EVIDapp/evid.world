@@ -612,7 +612,15 @@ export const EventMap = () => {
       
       const desc = document.createElement('p');
       desc.className = 'popup-desc';
-      desc.style.cssText = 'line-height: 1.6; margin: 12px 0; font-size: 14px; color: var(--muted-foreground);';
+      desc.style.cssText = `
+        line-height: 1.6; 
+        margin: 12px 0; 
+        font-size: 14px; 
+        padding: 12px;
+        border-radius: 8px;
+        background: rgba(0, 0, 0, 0.05);
+        backdrop-filter: blur(8px);
+      `;
       // Truncate description to 2-3 sentences (approximately 150 characters)
       const description = event.desc_long || event.desc || '';
       const shortDescription = description.length > 150 
@@ -621,11 +629,18 @@ export const EventMap = () => {
       desc.textContent = shortDescription;
       popupContent.appendChild(desc);
       
-      // Add metadata line
+      // Add metadata line (without year)
       const meta = document.createElement('p');
       meta.className = 'popup-meta';
-      meta.style.cssText = 'font-size: 13px; color: var(--muted-foreground); margin: 8px 0 12px 0;';
-      meta.innerHTML = `<strong>${event.year || 'Unknown'}</strong> • ${event.country || 'Unknown'}${event.casualties ? ` • ${event.casualties.toLocaleString()} casualties` : ''}`;
+      meta.style.cssText = `
+        font-size: 13px; 
+        margin: 8px 0 12px 0;
+        padding: 8px 12px;
+        border-radius: 8px;
+        background: rgba(0, 0, 0, 0.05);
+        backdrop-filter: blur(8px);
+      `;
+      meta.innerHTML = `${event.country || 'Unknown'}${event.casualties ? ` • ${event.casualties.toLocaleString()} casualties` : ''}`;
       popupContent.appendChild(meta);
       
       // View Details button (single button, no Wikipedia link)
@@ -636,27 +651,32 @@ export const EventMap = () => {
       detailsBtn.className = 'popup-details-btn';
       detailsBtn.textContent = 'View Details';
       detailsBtn.setAttribute('aria-label', `View full details for ${event.title}`);
-      const btnPadding = isMobile ? '12px 20px' : '10px 20px';
-      const btnFontSize = isMobile ? '15px' : '14px';
+      const btnPadding = isMobile ? '12px 20px' : '12px 24px';
+      const btnFontSize = isMobile ? '15px' : '15px';
       detailsBtn.style.cssText = `
         width: 100%; 
         padding: ${btnPadding}; 
-        border-radius: 8px; 
+        border-radius: 10px; 
         font-size: ${btnFontSize}; 
-        font-weight: 500; 
+        font-weight: 600; 
         cursor: pointer; 
-        transition: all 0.2s; 
+        transition: all 0.3s; 
         border: none; 
         touch-action: manipulation; 
         min-height: 44px;
-        background: var(--primary);
-        color: var(--primary-foreground);
+        background: hsl(217 91% 59%);
+        color: white;
+        box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
       `;
       detailsBtn.onmouseenter = function(this: HTMLButtonElement) {
-        this.style.opacity = '0.9';
+        this.style.transform = 'translateY(-2px)';
+        this.style.boxShadow = '0 6px 16px rgba(59, 130, 246, 0.4)';
       };
       detailsBtn.onmouseleave = function(this: HTMLButtonElement) {
-        this.style.opacity = '1';
+        this.style.transform = 'translateY(0)';
+        this.style.boxShadow = '0 4px 12px rgba(59, 130, 246, 0.3)';
       };
       detailsBtn.onclick = (e) => {
         e.preventDefault();

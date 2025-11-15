@@ -610,21 +610,25 @@ All colors MUST be HSL.
   .popup-desc {
     position: relative;
     z-index: 10;
-    color: hsl(215 16% 47%) !important;
+    color: hsl(222 47% 11%) !important;
+    background: rgba(255, 255, 255, 0.5) !important;
   }
 
   .dark .popup-desc {
-    color: hsl(215 25% 70%) !important;
+    color: hsl(210 40% 98%) !important;
+    background: rgba(255, 255, 255, 0.08) !important;
   }
 
   .popup-meta {
     position: relative;
     z-index: 10;
-    color: hsl(215 16% 47%) !important;
+    color: hsl(222 47% 11%) !important;
+    background: rgba(255, 255, 255, 0.5) !important;
   }
 
   .dark .popup-meta {
-    color: hsl(215 25% 70%) !important;
+    color: hsl(210 40% 98%) !important;
+    background: rgba(255, 255, 255, 0.08) !important;
   }
 
   .popup-year,
@@ -679,24 +683,26 @@ All colors MUST be HSL.
 
   /* Popup action buttons */
   .popup-details-btn {
-    background: hsl(217 91% 59%);
-    color: white;
+    background: hsl(217 91% 59%) !important;
+    color: white !important;
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3) !important;
   }
 
   .dark .popup-details-btn {
-    background: hsl(217 91% 65%);
-    color: hsl(210 40% 98%);
+    background: hsl(217 91% 65%) !important;
+    color: white !important;
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.5) !important;
   }
 
   .popup-details-btn:hover {
-    background: hsl(217 91% 55%);
-    transform: translateY(-1px);
-    box-shadow: 0 4px 12px hsl(217 91% 59% / 0.3);
+    background: hsl(217 91% 55%) !important;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(59, 130, 246, 0.4) !important;
   }
 
   .dark .popup-details-btn:hover {
-    background: hsl(217 91% 70%);
-    box-shadow: 0 4px 12px hsl(217 91% 65% / 0.4);
+    background: hsl(217 91% 70%) !important;
+    box-shadow: 0 6px 16px rgba(59, 130, 246, 0.6) !important;
   }
 
   .popup-link {
