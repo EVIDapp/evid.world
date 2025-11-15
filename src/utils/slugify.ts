@@ -93,5 +93,11 @@ export const generateEventSlug = (title: string, year?: string | number): string
   }
   
   // Добавляем год в конец
-  return `${titleSlug}-${finalYear}`;
+  let finalSlug = `${titleSlug}-${finalYear}`;
+  
+  // Пост-обработка: убираем множественные дефисы и дефисы по краям
+  finalSlug = finalSlug.replace(/-{2,}/g, "-");
+  finalSlug = finalSlug.replace(/^-+|-+$/g, "");
+  
+  return finalSlug;
 };
