@@ -336,17 +336,7 @@ All colors MUST be HSL.
   /* Mapbox popup styling with blur background and micro-shadows */
   .custom-marker {
     cursor: pointer !important;
-    transition: transform 0.2s ease;
-    will-change: transform, opacity;
-    transform: translateZ(0); /* Force GPU acceleration */
-    backface-visibility: hidden; /* Prevent flickering */
-    -webkit-font-smoothing: antialiased;
     -webkit-tap-highlight-color: transparent;
-  }
-  
-  .custom-marker:hover {
-    cursor: pointer !important;
-    transform: scale(1.1);
   }
   
   /* Disable hover scale on mobile to prevent layout shift */

@@ -569,10 +569,6 @@ export const EventMap = () => {
       el.style.width = `${markerSize}px`;
       el.style.height = `${markerHeight}px`;
       el.style.cursor = 'pointer';
-      el.style.opacity = '0';
-      el.style.transition = 'opacity 0.15s ease-out';
-      el.style.willChange = 'transform, opacity'; // GPU acceleration
-      el.style.transform = 'translateZ(0)'; // Force GPU rendering
       el.setAttribute('role', 'button');
       const eventYear = parseYear(event);
       el.setAttribute('aria-label', `${event.title} - ${event.type} event in ${event.country}, year ${eventYear}`);
@@ -584,11 +580,6 @@ export const EventMap = () => {
           <circle cx="12" cy="9.5" r="3.8" fill="white"/>
         </svg>
       `;
-      
-      // Optimized fade-in: instant on mobile, staggered on desktop
-      setTimeout(() => {
-        el.style.opacity = '1';
-      }, isMobile ? 0 : Math.min(index * 1, 100)); // Instant on mobile, faster on desktop
 
       // Create marker
       const marker = new mapboxgl.Marker(el)
