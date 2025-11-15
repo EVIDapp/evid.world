@@ -102,7 +102,7 @@ export const EventMap = () => {
 
   // Load events data
   useEffect(() => {
-    fetch('/events.json')
+    fetch('/events-clean.json')
       .then(res => res.json())
       .then(data => {
         // Calculate year range

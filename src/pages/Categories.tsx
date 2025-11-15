@@ -24,7 +24,7 @@ const Categories = () => {
   useEffect(() => {
     const loadCategories = async () => {
       try {
-        const response = await fetch('/events.json');
+        const response = await fetch('/events-clean.json');
         const events: HistoricalEvent[] = await response.json();
         
         console.log('📊 Total events loaded:', events.length);

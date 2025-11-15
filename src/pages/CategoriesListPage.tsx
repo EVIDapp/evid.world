@@ -40,7 +40,7 @@ const CategoriesListPage = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch('/events.json')
+    fetch('/events-clean.json')
       .then(res => res.json())
       .then(data => {
         setEvents(data);
