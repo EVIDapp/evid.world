@@ -271,35 +271,23 @@ export const EventMap = () => {
         }
       });
 
-      // Optimize marker visibility during map movement for smooth scrolling
-      let isDragging = false;
-      let moveTimeout: NodeJS.Timeout;
-      
+      // Disable pointer events during map movement for better performance
       map.current.on('movestart', () => {
-        isDragging = true;
-        // Reduce marker opacity during movement for better performance
         markersRef.current.forEach(marker => {
           const el = marker.getElement();
           if (el) {
-            el.style.transition = 'none';
-            el.style.opacity = '0.3';
+            el.style.pointerEvents = 'none';
           }
         });
       });
       
       map.current.on('moveend', () => {
-        isDragging = false;
-        clearTimeout(moveTimeout);
-        moveTimeout = setTimeout(() => {
-          // Restore marker opacity after movement stops
-          markersRef.current.forEach(marker => {
-            const el = marker.getElement();
-            if (el) {
-              el.style.transition = 'opacity 0.15s ease-out';
-              el.style.opacity = '1';
-            }
-          });
-        }, 100);
+        markersRef.current.forEach(marker => {
+          const el = marker.getElement();
+          if (el) {
+            el.style.pointerEvents = 'auto';
+          }
+        });
       });
 
       // Add custom theme styling and mark map as loaded
@@ -528,7 +516,7 @@ export const EventMap = () => {
     limitedEvents.forEach((event, index) => {
       const color = getEventColor(event.type);
       
-      // Create custom marker element with mobile optimization
+      // Create custom marker element with mobile optimization and GPU acceleration
       const el = document.createElement('div');
       el.className = 'custom-marker';
       // Optimized marker sizes for better visibility
@@ -537,6 +525,10 @@ export const EventMap = () => {
       el.style.width = `${markerSize}px`;
       el.style.height = `${markerHeight}px`;
       el.style.cursor = 'pointer';
+      // GPU acceleration for smooth movement
+      el.style.willChange = 'transform';
+      el.style.transform = 'translate3d(0,0,0)';
+      el.style.backfaceVisibility = 'hidden';
       el.setAttribute('role', 'button');
       const eventYear = parseYear(event);
       el.setAttribute('aria-label', `${event.title} - ${event.type} event in ${event.country}, year ${eventYear}`);
