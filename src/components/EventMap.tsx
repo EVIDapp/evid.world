@@ -612,26 +612,54 @@ export const EventMap = () => {
       
       const desc = document.createElement('p');
       desc.className = 'popup-desc';
-      desc.style.cssText = 'line-height: 1.6; margin: 12px 0; font-size: 14px;';
-      desc.textContent = event.desc_long || event.desc;
+      desc.style.cssText = 'line-height: 1.6; margin: 12px 0; font-size: 14px; color: var(--muted-foreground);';
+      // Truncate description to 2-3 sentences (approximately 150 characters)
+      const description = event.desc_long || event.desc || '';
+      const shortDescription = description.length > 150 
+        ? description.substring(0, 150).trim() + '...' 
+        : description;
+      desc.textContent = shortDescription;
       popupContent.appendChild(desc);
       
-      // Add button container with View Details and Wikipedia link
-      const buttonContainer = document.createElement('div');
-      buttonContainer.style.cssText = 'display: flex; gap: 8px; margin-top: 12px; flex-wrap: wrap;';
+      // Add metadata line
+      const meta = document.createElement('p');
+      meta.className = 'popup-meta';
+      meta.style.cssText = 'font-size: 13px; color: var(--muted-foreground); margin: 8px 0 12px 0;';
+      meta.innerHTML = `<strong>${event.year || 'Unknown'}</strong> • ${event.country || 'Unknown'}${event.casualties ? ` • ${event.casualties.toLocaleString()} casualties` : ''}`;
+      popupContent.appendChild(meta);
       
-      // View Details button with touch-friendly sizing
+      // View Details button (single button, no Wikipedia link)
+      const buttonContainer = document.createElement('div');
+      buttonContainer.style.cssText = 'margin-top: 16px;';
+      
       const detailsBtn = document.createElement('button');
       detailsBtn.className = 'popup-details-btn';
       detailsBtn.textContent = 'View Details';
       detailsBtn.setAttribute('aria-label', `View full details for ${event.title}`);
-      // Minimum 44px height for mobile touch targets
-      const btnPadding = isMobile ? '12px 20px' : '8px 16px';
+      const btnPadding = isMobile ? '12px 20px' : '10px 20px';
       const btnFontSize = isMobile ? '15px' : '14px';
-      detailsBtn.style.cssText = `flex: 1; min-width: 120px; padding: ${btnPadding}; border-radius: 8px; font-size: ${btnFontSize}; font-weight: 500; cursor: pointer; transition: all 0.2s; border: none; touch-action: manipulation; min-height: 44px;`;
+      detailsBtn.style.cssText = `
+        width: 100%; 
+        padding: ${btnPadding}; 
+        border-radius: 8px; 
+        font-size: ${btnFontSize}; 
+        font-weight: 500; 
+        cursor: pointer; 
+        transition: all 0.2s; 
+        border: none; 
+        touch-action: manipulation; 
+        min-height: 44px;
+        background: var(--primary);
+        color: var(--primary-foreground);
+      `;
+      detailsBtn.onmouseenter = function(this: HTMLButtonElement) {
+        this.style.opacity = '0.9';
+      };
+      detailsBtn.onmouseleave = function(this: HTMLButtonElement) {
+        this.style.opacity = '1';
+      };
       detailsBtn.onclick = (e) => {
         e.preventDefault();
-        // Save current map state before navigating
         sessionStorage.setItem('mapState', JSON.stringify({
           selectedTypes: Array.from(selectedTypes),
           searchQuery,
@@ -642,21 +670,6 @@ export const EventMap = () => {
         navigate(`/event/${slug}`);
       };
       buttonContainer.appendChild(detailsBtn);
-      
-      if (event.wiki) {
-        const link = document.createElement('a');
-        link.className = 'popup-link';
-        link.href = event.wiki;
-        link.target = '_blank';
-        link.rel = 'noopener noreferrer';
-        link.setAttribute('aria-label', `Read more about ${event.title} on Wikipedia`);
-        const linkPadding = isMobile ? '12px 20px' : '8px 16px';
-        const linkFontSize = isMobile ? '15px' : '14px';
-        link.style.cssText = `flex: 1; min-width: 120px; padding: ${linkPadding}; text-align: center; text-decoration: none; font-size: ${linkFontSize}; font-weight: 500; border-radius: 8px; transition: all 0.2s; touch-action: manipulation; min-height: 44px; display: flex; align-items: center; justify-content: center;`;
-        link.textContent = 'Wikipedia →';
-        buttonContainer.appendChild(link);
-      }
-      
       popupContent.appendChild(buttonContainer);
 
       const popup = new mapboxgl.Popup({ 
