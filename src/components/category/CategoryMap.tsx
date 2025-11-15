@@ -39,8 +39,8 @@ export const CategoryMap = ({ events, color }: CategoryMapProps) => {
         const el = document.createElement('div');
         el.className = 'category-map-marker';
         el.style.backgroundColor = color;
-        el.style.width = '12px';
-        el.style.height = '12px';
+        el.style.width = '8px';
+        el.style.height = '8px';
         el.style.borderRadius = '50%';
         el.style.cursor = 'pointer';
         el.style.border = '2px solid white';
