@@ -662,7 +662,7 @@ export const EventMap = () => {
       const popup = new mapboxgl.Popup({ 
         offset: 25,
         closeButton: false,
-        closeOnClick: true,
+        closeOnClick: false,
         className: 'event-popup'
       })
         .setDOMContent(popupContent)
