@@ -21,7 +21,6 @@ import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Progress } from '@/components/ui/progress';
 import { Key, Plus, Minus, Globe as GlobeIcon, Map, Grid3x3 } from 'lucide-react';
-import { getWikipediaImage } from '@/utils/wikipediaImage';
 import { useKeyboardShortcuts } from '@/hooks/useKeyboardShortcuts';
 import { useEventHistory } from '@/hooks/useEventHistory';
 import { generateEventSlug } from '@/utils/slugify';
@@ -624,42 +623,30 @@ export const EventMap = () => {
       popupContent.appendChild(closeBtn);
       popupContent.appendChild(title);
       
-      // Create image container for async loading (no loading spinner)
-      const imgContainer = document.createElement('div');
-      imgContainer.style.cssText = 'display: none;'; // Hidden until image loads
-      popupContent.appendChild(imgContainer);
-      
-      // Fetch and display Wikipedia image asynchronously
-      if (event.wiki) {
-        getWikipediaImage(event.wiki).then(imageUrl => {
-          if (imageUrl) {
-            const img = document.createElement('img');
-            img.src = imageUrl;
-            const eventYear = parseYear(event);
-            img.alt = `${event.title} ${event.type} map, ${event.country}, year ${eventYear} - historical event visualization`;
-            img.loading = 'lazy';
-            img.style.cssText = `width: 100%; max-height: 180px; object-fit: cover; 
-                                 border-radius: 10px; margin: 10px 0;
-                                 transition: transform 0.3s ease;`;
-            img.onerror = function(this: HTMLImageElement) { 
-              this.style.display = 'none';
-              imgContainer.style.display = 'none';
-            };
-            img.onload = function() {
-              imgContainer.style.display = 'block';
-            };
-            // Add hover effect
-            img.onmouseenter = function(this: HTMLImageElement) {
-              this.style.transform = 'scale(1.02)';
-            };
-            img.onmouseleave = function(this: HTMLImageElement) {
-              this.style.transform = 'scale(1)';
-            };
-            imgContainer.appendChild(img);
-          }
-        }).catch(() => {
-          // Silently fail - no image
-        });
+      // Display event image if available
+      if (event.image) {
+        const imgContainer = document.createElement('div');
+        const img = document.createElement('img');
+        img.src = event.image;
+        const eventYear = parseYear(event);
+        img.alt = `${event.title} ${event.type} map, ${event.country}, year ${eventYear} - historical event visualization`;
+        img.loading = 'lazy';
+        img.style.cssText = `width: 100%; max-height: 180px; object-fit: cover; 
+                             border-radius: 10px; margin: 10px 0;
+                             transition: transform 0.3s ease;`;
+        img.onerror = function(this: HTMLImageElement) { 
+          this.style.display = 'none';
+          imgContainer.style.display = 'none';
+        };
+        // Add hover effect
+        img.onmouseenter = function(this: HTMLImageElement) {
+          this.style.transform = 'scale(1.02)';
+        };
+        img.onmouseleave = function(this: HTMLImageElement) {
+          this.style.transform = 'scale(1)';
+        };
+        imgContainer.appendChild(img);
+        popupContent.appendChild(imgContainer);
       }
       
       const desc = document.createElement('p');
