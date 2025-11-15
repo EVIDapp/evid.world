@@ -196,7 +196,8 @@ export const EventMap = () => {
             center: [targetEvent.pos.lng, targetEvent.pos.lat],
             zoom: zoomLevel,
             duration: 2000,
-            essential: true
+            essential: true,
+            easing: (t) => t * (2 - t) // Smooth easing function
           });
           
           // Find and open the marker's popup
@@ -250,14 +251,56 @@ export const EventMap = () => {
         maxBounds: [
           [WORLD_BOUNDS.west, WORLD_BOUNDS.south],
           [WORLD_BOUNDS.east, WORLD_BOUNDS.north]
-        ]
+        ],
+        // Performance optimizations for smooth scrolling
+        antialias: false, // Disable antialiasing for better performance
+        fadeDuration: 0, // Instant tile transitions
+        pitchWithRotate: false,
+        dragRotate: false,
+        touchPitch: false,
+        performanceMetricsCollection: false
       });
 
-      // Track zoom changes for clustering
+      // Track zoom changes for clustering with throttle for performance
+      let zoomTimeout: NodeJS.Timeout;
       map.current.on('zoom', () => {
         if (map.current) {
-          setCurrentZoom(map.current.getZoom());
+          clearTimeout(zoomTimeout);
+          zoomTimeout = setTimeout(() => {
+            setCurrentZoom(map.current!.getZoom());
+          }, 50);
         }
+      });
+
+      // Optimize marker visibility during map movement for smooth scrolling
+      let isDragging = false;
+      let moveTimeout: NodeJS.Timeout;
+      
+      map.current.on('movestart', () => {
+        isDragging = true;
+        // Reduce marker opacity during movement for better performance
+        markersRef.current.forEach(marker => {
+          const el = marker.getElement();
+          if (el) {
+            el.style.transition = 'none';
+            el.style.opacity = '0.3';
+          }
+        });
+      });
+      
+      map.current.on('moveend', () => {
+        isDragging = false;
+        clearTimeout(moveTimeout);
+        moveTimeout = setTimeout(() => {
+          // Restore marker opacity after movement stops
+          markersRef.current.forEach(marker => {
+            const el = marker.getElement();
+            if (el) {
+              el.style.transition = 'opacity 0.15s ease-out';
+              el.style.opacity = '1';
+            }
+          });
+        }, 100);
       });
 
       // Add custom theme styling and mark map as loaded
@@ -528,7 +571,8 @@ export const EventMap = () => {
       el.style.cursor = 'pointer';
       el.style.opacity = '0';
       el.style.transition = 'opacity 0.15s ease-out';
-      el.style.willChange = 'opacity';
+      el.style.willChange = 'transform, opacity'; // GPU acceleration
+      el.style.transform = 'translateZ(0)'; // Force GPU rendering
       el.setAttribute('role', 'button');
       const eventYear = parseYear(event);
       el.setAttribute('aria-label', `${event.title} - ${event.type} event in ${event.country}, year ${eventYear}`);
@@ -721,7 +765,8 @@ export const EventMap = () => {
           center: [event.pos.lng, event.pos.lat],
           zoom: zoomLevel,
           duration: 1500,
-          essential: true
+          essential: true,
+          easing: (t) => t * (2 - t) // Smooth easing function
         });
         
         // Show polygon if event has area coverage
@@ -751,7 +796,8 @@ export const EventMap = () => {
       center: [event.pos.lng, event.pos.lat],
       zoom: zoomLevel,
       duration: 1500,
-      essential: true
+      essential: true,
+      easing: (t) => t * (2 - t) // Smooth easing function
     });
     
     // Find and open the marker's popup
@@ -817,7 +863,8 @@ export const EventMap = () => {
       map.current.flyTo({
         center: [0, 20],
         zoom: resetZoom,
-        duration: 1500
+        duration: 1500,
+        easing: (t) => t * (2 - t) // Smooth easing function
       });
     }
   };

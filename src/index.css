@@ -337,7 +337,10 @@ All colors MUST be HSL.
   .custom-marker {
     cursor: pointer !important;
     transition: transform 0.2s ease;
-    will-change: transform;
+    will-change: transform, opacity;
+    transform: translateZ(0); /* Force GPU acceleration */
+    backface-visibility: hidden; /* Prevent flickering */
+    -webkit-font-smoothing: antialiased;
     -webkit-tap-highlight-color: transparent;
   }
   
@@ -558,11 +561,13 @@ All colors MUST be HSL.
     text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
   }
 
-  /* Globe container effects - enhanced borders */
+  /* Globe container effects - enhanced borders with GPU acceleration */
   .mapboxgl-canvas-container {
     filter: drop-shadow(0 4px 20px rgba(0, 0, 0, 0.15))
             drop-shadow(0 8px 40px rgba(0, 0, 0, 0.08));
     border-radius: 8px;
+    transform: translateZ(0); /* Force GPU acceleration */
+    will-change: transform;
   }
   
   /* Globe container glow effect for dark mode */
@@ -572,9 +577,16 @@ All colors MUST be HSL.
             drop-shadow(0 4px 20px rgba(0, 0, 0, 0.4));
   }
 
-  /* Enhance map visibility */
+  /* Enhance map visibility and performance */
   .dark .mapboxgl-canvas {
     opacity: 1 !important;
+  }
+  
+  /* Optimize canvas rendering */
+  .mapboxgl-canvas {
+    transform: translateZ(0); /* Force GPU acceleration */
+    image-rendering: optimizeSpeed; /* Faster rendering */
+    will-change: transform;
   }
 
   /* Popup text styling for light and dark themes */
