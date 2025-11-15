@@ -629,20 +629,6 @@ export const EventMap = () => {
       desc.textContent = shortDescription;
       popupContent.appendChild(desc);
       
-      // Add metadata line (without year)
-      const meta = document.createElement('p');
-      meta.className = 'popup-meta';
-      meta.style.cssText = `
-        font-size: 13px; 
-        margin: 8px 0 12px 0;
-        padding: 8px 12px;
-        border-radius: 8px;
-        background: rgba(0, 0, 0, 0.05);
-        backdrop-filter: blur(8px);
-      `;
-      meta.innerHTML = `${event.country || 'Unknown'}${event.casualties ? ` • ${event.casualties.toLocaleString()} casualties` : ''}`;
-      popupContent.appendChild(meta);
-      
       // View Details button (single button, no Wikipedia link)
       const buttonContainer = document.createElement('div');
       buttonContainer.style.cssText = 'margin-top: 16px;';
@@ -722,32 +708,40 @@ export const EventMap = () => {
 
       marker.setPopup(popup);
 
-      // Add click handler to zoom to event
+      // Add click handler to open popup first, then zoom
       el.addEventListener('click', () => {
         if (!map.current) return;
         
         // Add to history
         addToHistory(event);
         
-        const zoomLevel = event.radiusKm && AREA_CATEGORIES.has(event.type) 
-          ? Math.min(9, Math.max(5, 11 - Math.log2(event.radiusKm / 10)))
-          : 10;
+        // First open the popup
+        marker.togglePopup();
         
-        map.current.flyTo({
-          center: [event.pos.lng, event.pos.lat],
-          zoom: zoomLevel,
-          duration: 1500,
-          essential: true,
-          easing: (t) => t * (2 - t) // Smooth easing function
-        });
-        
-        // Show polygon if event has area coverage
-        if (event.radiusKm && AREA_CATEGORIES.has(event.type)) {
-          const eventIndex = limitedEvents.indexOf(event);
-          if (eventIndex !== -1) {
-            showPolygon(event, eventIndex);
+        // Then zoom after a short delay to allow popup to render
+        setTimeout(() => {
+          if (marker.getPopup()?.isOpen() && map.current) {
+            const zoomLevel = event.radiusKm && AREA_CATEGORIES.has(event.type) 
+              ? Math.min(9, Math.max(5, 11 - Math.log2(event.radiusKm / 10)))
+              : 10;
+            
+            map.current.flyTo({
+              center: [event.pos.lng, event.pos.lat],
+              zoom: zoomLevel,
+              duration: 1500,
+              essential: true,
+              easing: (t) => t * (2 - t) // Smooth easing function
+            });
+            
+            // Show polygon if event has area coverage
+            if (event.radiusKm && AREA_CATEGORIES.has(event.type)) {
+              const eventIndex = limitedEvents.indexOf(event);
+              if (eventIndex !== -1) {
+                showPolygon(event, eventIndex);
+              }
+            }
           }
-        }
+        }, 150);
       });
 
       markersRef.current.push(marker);
