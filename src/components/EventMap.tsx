@@ -519,6 +519,7 @@ export const EventMap = () => {
       // Create custom marker element with mobile optimization and GPU acceleration
       const el = document.createElement('div');
       el.className = 'custom-marker';
+      el.dataset.eventId = event.id; // Set event ID for navigation
       // Optimized marker sizes for better visibility
       const markerSize = isMobile ? 22 : 18;
       const markerHeight = isMobile ? 30 : 26;
@@ -553,10 +554,10 @@ export const EventMap = () => {
       
       const popupContent = document.createElement('div');
       popupContent.className = 'popup-content';
-      // Mobile-optimized padding and max-width
+      // Desktop: horizontal layout with wider popup, Mobile: vertical with full width
       const popupPadding = isMobile ? '20px' : '16px';
-      const popupMaxWidth = isMobile ? '90vw' : '320px';
-      popupContent.style.cssText = `max-width: ${popupMaxWidth}; padding: ${popupPadding}; position: relative;`;
+      const popupMaxWidth = isMobile ? '90vw' : '520px';
+      popupContent.style.cssText = `max-width: ${popupMaxWidth}; padding: ${popupPadding}; position: relative; ${!isMobile ? 'display: flex; flex-direction: row; gap: 16px; align-items: flex-start;' : ''}`;
       
       const closeBtn = document.createElement('button');
       closeBtn.className = 'popup-close-btn';
@@ -573,6 +574,11 @@ export const EventMap = () => {
                                  touch-action: manipulation;`;
       closeBtn.onclick = closePopup;
       
+      // Create content wrapper for desktop horizontal layout
+      const contentWrapper = document.createElement('div');
+      contentWrapper.className = 'popup-content-wrapper';
+      contentWrapper.style.cssText = isMobile ? '' : 'flex: 1; display: flex; flex-direction: column;';
+      
       const title = document.createElement('h3');
       title.className = 'popup-title';
       // Larger text on mobile for readability
@@ -582,19 +588,25 @@ export const EventMap = () => {
       title.textContent = event.title;
       
       popupContent.appendChild(closeBtn);
-      popupContent.appendChild(title);
+      contentWrapper.appendChild(title);
       
       // Display event image if available
       if (event.image) {
         const imgContainer = document.createElement('div');
+        imgContainer.className = 'popup-image-container';
+        // Desktop: fixed width on left, Mobile: full width on top
+        imgContainer.style.cssText = isMobile 
+          ? 'width: 100%; margin: 10px 0;' 
+          : 'flex-shrink: 0; width: 200px; margin-right: 0;';
+        
         const img = document.createElement('img');
         img.src = event.image;
         const eventYear = parseYear(event);
         img.alt = `${event.title} ${event.type} map, ${event.country}, year ${eventYear} - historical event visualization`;
         img.loading = 'lazy';
-        img.style.cssText = `width: 100%; max-height: 180px; object-fit: cover; 
-                             border-radius: 10px; margin: 10px 0;
-                             transition: transform 0.3s ease;`;
+        img.style.cssText = isMobile
+          ? `width: 100%; max-height: 180px; object-fit: cover; border-radius: 10px; transition: transform 0.3s ease;`
+          : `width: 100%; height: 140px; object-fit: cover; border-radius: 10px; transition: transform 0.3s ease;`;
         img.onerror = function(this: HTMLImageElement) { 
           this.style.display = 'none';
           imgContainer.style.display = 'none';
@@ -607,7 +619,14 @@ export const EventMap = () => {
           this.style.transform = 'scale(1)';
         };
         imgContainer.appendChild(img);
-        popupContent.appendChild(imgContainer);
+        
+        if (isMobile) {
+          // Mobile: add image to content wrapper
+          contentWrapper.appendChild(imgContainer);
+        } else {
+          // Desktop: add image first (left side)
+          popupContent.appendChild(imgContainer);
+        }
       }
       
       const desc = document.createElement('p');
@@ -627,7 +646,7 @@ export const EventMap = () => {
         ? description.substring(0, 150).trim() + '...' 
         : description;
       desc.textContent = shortDescription;
-      popupContent.appendChild(desc);
+      contentWrapper.appendChild(desc);
       
       // View Details button (single button, no Wikipedia link)
       const buttonContainer = document.createElement('div');
@@ -676,7 +695,10 @@ export const EventMap = () => {
         navigate(`/event/${slug}`);
       };
       buttonContainer.appendChild(detailsBtn);
-      popupContent.appendChild(buttonContainer);
+      contentWrapper.appendChild(buttonContainer);
+      
+      // Add contentWrapper to popupContent (on desktop it's on the right, on mobile it contains everything)
+      popupContent.appendChild(contentWrapper);
 
       const popup = new mapboxgl.Popup({ 
         offset: 25,
