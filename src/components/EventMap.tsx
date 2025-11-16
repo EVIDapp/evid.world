@@ -535,7 +535,7 @@ export const EventMap = () => {
       el.setAttribute('aria-label', `${event.title} - ${event.type} event in ${event.country}, year ${eventYear}`);
       el.setAttribute('tabindex', '0');
       el.innerHTML = `
-        <svg xmlns="http://www.w3.org/2000/svg" width="${markerSize}" height="${markerHeight}" viewBox="0 0 24 34" aria-hidden="true">
+        <svg xmlns="http://www.w3.org/2000/svg" width="${markerSize}" height="${markerHeight}" viewBox="0 0 24 34" aria-hidden="true" style="pointer-events: none;">
           <path d="M12 0c-5.3 0-9.5 4.2-9.5 9.5 0 7.1 9.5 24.5 9.5 24.5s9.5-17.4 9.5-24.5C21.5 4.2 17.3 0 12 0z" 
                 fill="${color.fill}" stroke="white" stroke-width="1.5"/>
           <circle cx="12" cy="9.5" r="3.8" fill="white"/>
@@ -554,64 +554,81 @@ export const EventMap = () => {
       
       const popupContent = document.createElement('div');
       popupContent.className = 'popup-content';
-      // Desktop: horizontal layout with wider popup, Mobile: vertical with full width
-      const popupPadding = isMobile ? '20px' : '16px';
-      const popupMaxWidth = isMobile ? '90vw' : '520px';
-      popupContent.style.cssText = `max-width: ${popupMaxWidth}; padding: ${popupPadding}; position: relative; ${!isMobile ? 'display: flex; flex-direction: row; gap: 16px; align-items: flex-start;' : ''}`;
+      // Clean structure with proper padding and max-width
+      const popupPadding = isMobile ? '16px' : '16px';
+      const popupMaxWidth = isMobile ? '90vw' : '400px';
+      popupContent.style.cssText = `
+        max-width: ${popupMaxWidth}; 
+        padding: ${popupPadding}; 
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        max-height: ${isMobile ? '80vh' : '500px'};
+        overflow-y: auto;
+      `;
       
       const closeBtn = document.createElement('button');
       closeBtn.className = 'popup-close-btn';
       closeBtn.innerHTML = '×';
       closeBtn.setAttribute('aria-label', 'Close popup');
       closeBtn.setAttribute('type', 'button');
-      // Larger touch target on mobile (min 44x44px)
-      const closeBtnSize = isMobile ? '44px' : '28px';
-      const closeFontSize = isMobile ? '24px' : '20px';
-      closeBtn.style.cssText = `position: absolute; top: 8px; right: 8px; border: none; 
-                                 border-radius: 8px; width: ${closeBtnSize}; height: ${closeBtnSize}; cursor: pointer; 
-                                 display: flex; align-items: center; justify-content: center; 
-                                 font-size: ${closeFontSize}; transition: all 0.2s; z-index: 10;
-                                 touch-action: manipulation;`;
+      const closeBtnSize = isMobile ? '40px' : '32px';
+      const closeFontSize = isMobile ? '24px' : '22px';
+      closeBtn.style.cssText = `
+        position: absolute; 
+        top: 8px; 
+        right: 8px; 
+        border: none; 
+        border-radius: 8px; 
+        width: ${closeBtnSize}; 
+        height: ${closeBtnSize}; 
+        cursor: pointer; 
+        display: flex; 
+        align-items: center; 
+        justify-content: center; 
+        font-size: ${closeFontSize}; 
+        transition: all 0.2s; 
+        z-index: 100;
+        touch-action: manipulation;
+      `;
       closeBtn.onclick = closePopup;
-      
-      // Create content wrapper for desktop horizontal layout
-      const contentWrapper = document.createElement('div');
-      contentWrapper.className = 'popup-content-wrapper';
-      contentWrapper.style.cssText = isMobile ? '' : 'flex: 1; display: flex; flex-direction: column;';
+      popupContent.appendChild(closeBtn);
       
       const title = document.createElement('h3');
       title.className = 'popup-title';
-      // Larger text on mobile for readability
-      const titleFontSize = isMobile ? '18px' : '17px';
-      const titleMargin = isMobile ? '0 48px 14px 0' : '0 32px 12px 0';
-      title.style.cssText = `margin: ${titleMargin}; font-size: ${titleFontSize}; font-weight: 600; line-height: 1.3;`;
+      const titleFontSize = isMobile ? '18px' : '16px';
+      title.style.cssText = `
+        margin: 0 40px 8px 0; 
+        font-size: ${titleFontSize}; 
+        font-weight: 700; 
+        line-height: 1.3;
+      `;
       title.textContent = event.title;
-      
-      popupContent.appendChild(closeBtn);
-      contentWrapper.appendChild(title);
+      popupContent.appendChild(title);
       
       // Display event image if available
       if (event.image) {
         const imgContainer = document.createElement('div');
         imgContainer.className = 'popup-image-container';
-        // Desktop: fixed width on left, Mobile: full width on top
-        imgContainer.style.cssText = isMobile 
-          ? 'width: 100%; margin: 10px 0;' 
-          : 'flex-shrink: 0; width: 200px; margin-right: 0;';
+        imgContainer.style.cssText = 'width: 100%; margin: 0;';
         
         const img = document.createElement('img');
         img.src = event.image;
         const eventYear = parseYear(event);
         img.alt = `${event.title} ${event.type} map, ${event.country}, year ${eventYear} - historical event visualization`;
         img.loading = 'lazy';
-        img.style.cssText = isMobile
-          ? `width: 100%; max-height: 180px; object-fit: cover; border-radius: 10px; transition: transform 0.3s ease;`
-          : `width: 100%; height: 140px; object-fit: cover; border-radius: 10px; transition: transform 0.3s ease;`;
+        img.style.cssText = `
+          width: 100%; 
+          height: ${isMobile ? '200px' : '220px'}; 
+          object-fit: cover; 
+          border-radius: 12px; 
+          transition: transform 0.3s ease;
+        `;
         img.onerror = function(this: HTMLImageElement) { 
           this.style.display = 'none';
           imgContainer.style.display = 'none';
         };
-        // Add hover effect
         img.onmouseenter = function(this: HTMLImageElement) {
           this.style.transform = 'scale(1.02)';
         };
@@ -619,21 +636,14 @@ export const EventMap = () => {
           this.style.transform = 'scale(1)';
         };
         imgContainer.appendChild(img);
-        
-        if (isMobile) {
-          // Mobile: add image to content wrapper
-          contentWrapper.appendChild(imgContainer);
-        } else {
-          // Desktop: add image first (left side)
-          popupContent.appendChild(imgContainer);
-        }
+        popupContent.appendChild(imgContainer);
       }
       
       const desc = document.createElement('p');
       desc.className = 'popup-desc';
       desc.style.cssText = `
         line-height: 1.6; 
-        margin: 12px 0; 
+        margin: 0; 
         font-size: 14px; 
         padding: 12px;
         border-radius: 8px;
@@ -646,29 +656,25 @@ export const EventMap = () => {
         ? description.substring(0, 150).trim() + '...' 
         : description;
       desc.textContent = shortDescription;
-      contentWrapper.appendChild(desc);
+      popupContent.appendChild(desc);
       
-      // View Details button (single button, no Wikipedia link)
-      const buttonContainer = document.createElement('div');
-      buttonContainer.style.cssText = 'margin-top: 16px;';
-      
+      // View Details button
       const detailsBtn = document.createElement('button');
       detailsBtn.className = 'popup-details-btn';
       detailsBtn.textContent = 'View Details';
       detailsBtn.setAttribute('aria-label', `View full details for ${event.title}`);
-      const btnPadding = isMobile ? '12px 20px' : '12px 24px';
-      const btnFontSize = isMobile ? '15px' : '15px';
+      const btnPadding = isMobile ? '14px 20px' : '12px 24px';
       detailsBtn.style.cssText = `
         width: 100%; 
         padding: ${btnPadding}; 
         border-radius: 10px; 
-        font-size: ${btnFontSize}; 
-        font-weight: 600; 
+        font-size: 15px; 
+        font-weight: 700; 
         cursor: pointer; 
         transition: all 0.3s; 
         border: none; 
         touch-action: manipulation; 
-        min-height: 44px;
+        min-height: 48px;
         background: hsl(217 91% 59%);
         color: white;
         box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
@@ -685,6 +691,7 @@ export const EventMap = () => {
       };
       detailsBtn.onclick = (e) => {
         e.preventDefault();
+        e.stopPropagation();
         sessionStorage.setItem('mapState', JSON.stringify({
           selectedTypes: Array.from(selectedTypes),
           searchQuery,
@@ -694,11 +701,7 @@ export const EventMap = () => {
         const slug = generateEventSlug(event.title, event.year);
         navigate(`/event/${slug}`);
       };
-      buttonContainer.appendChild(detailsBtn);
-      contentWrapper.appendChild(buttonContainer);
-      
-      // Add contentWrapper to popupContent (on desktop it's on the right, on mobile it contains everything)
-      popupContent.appendChild(contentWrapper);
+      popupContent.appendChild(detailsBtn);
 
       const popup = new mapboxgl.Popup({ 
         offset: 25,
@@ -730,14 +733,22 @@ export const EventMap = () => {
 
       marker.setPopup(popup);
 
-      // Add click handler to open popup first, then zoom
-      el.addEventListener('click', () => {
+      // Add click handler to open popup and prevent event bubbling
+      el.addEventListener('click', (e) => {
+        e.stopPropagation();
         if (!map.current) return;
+        
+        // Close all other popups first
+        markersRef.current.forEach(m => {
+          if (m !== marker && m.getPopup()?.isOpen()) {
+            m.togglePopup();
+          }
+        });
         
         // Add to history
         addToHistory(event);
         
-        // First open the popup
+        // Open this popup
         marker.togglePopup();
         
         // Then zoom after a short delay to allow popup to render
