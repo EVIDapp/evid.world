@@ -738,43 +738,48 @@ export const EventMap = () => {
         e.stopPropagation();
         if (!map.current) return;
         
+        const isOpen = marker.getPopup()?.isOpen();
+        
         // Close all other popups first
         markersRef.current.forEach(m => {
-          if (m !== marker && m.getPopup()?.isOpen()) {
-            m.togglePopup();
+          if (m.getPopup()?.isOpen()) {
+            m.getPopup()?.remove();
           }
         });
         
-        // Add to history
-        addToHistory(event);
+        // If this popup was not open, open it now
+        if (!isOpen) {
+          // Add to history
+          addToHistory(event);
+          
+          // Open this popup
+          popup.addTo(map.current);
         
-        // Open this popup
-        marker.togglePopup();
-        
-        // Then zoom after a short delay to allow popup to render
-        setTimeout(() => {
-          if (marker.getPopup()?.isOpen() && map.current) {
-            const zoomLevel = event.radiusKm && AREA_CATEGORIES.has(event.type) 
-              ? Math.min(9, Math.max(5, 11 - Math.log2(event.radiusKm / 10)))
-              : 10;
-            
-            map.current.flyTo({
-              center: [event.pos.lng, event.pos.lat],
-              zoom: zoomLevel,
-              duration: 1500,
-              essential: true,
-              easing: (t) => t * (2 - t) // Smooth easing function
-            });
-            
-            // Show polygon if event has area coverage
-            if (event.radiusKm && AREA_CATEGORIES.has(event.type)) {
-              const eventIndex = limitedEvents.indexOf(event);
-              if (eventIndex !== -1) {
-                showPolygon(event, eventIndex);
+          // Then zoom after a short delay to allow popup to render
+          setTimeout(() => {
+            if (marker.getPopup()?.isOpen() && map.current) {
+              const zoomLevel = event.radiusKm && AREA_CATEGORIES.has(event.type) 
+                ? Math.min(9, Math.max(5, 11 - Math.log2(event.radiusKm / 10)))
+                : 10;
+              
+              map.current.flyTo({
+                center: [event.pos.lng, event.pos.lat],
+                zoom: zoomLevel,
+                duration: 1500,
+                essential: true,
+                easing: (t) => t * (2 - t) // Smooth easing function
+              });
+              
+              // Show polygon if event has area coverage
+              if (event.radiusKm && AREA_CATEGORIES.has(event.type)) {
+                const eventIndex = limitedEvents.indexOf(event);
+                if (eventIndex !== -1) {
+                  showPolygon(event, eventIndex);
+                }
               }
             }
-          }
-        }, 150);
+          }, 150);
+        }
       });
 
       markersRef.current.push(marker);
