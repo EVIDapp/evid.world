@@ -526,6 +526,8 @@ export const EventMap = () => {
       el.style.width = `${markerSize}px`;
       el.style.height = `${markerHeight}px`;
       el.style.cursor = 'pointer';
+      el.style.pointerEvents = 'auto';
+      el.style.zIndex = '1';
       // GPU acceleration for smooth movement
       el.style.willChange = 'transform';
       el.style.transform = 'translate3d(0,0,0)';
@@ -733,29 +735,27 @@ export const EventMap = () => {
 
       marker.setPopup(popup);
 
-      // Add click handler to open popup and prevent event bubbling
+      // Add click handler to open popup
       el.addEventListener('click', (e) => {
         e.stopPropagation();
+        e.preventDefault();
         if (!map.current) return;
         
-        const isOpen = marker.getPopup()?.isOpen();
-        
-        // Close all other popups first
+        // Close all other popups
         markersRef.current.forEach(m => {
-          if (m.getPopup()?.isOpen()) {
+          if (m !== marker && m.getPopup()?.isOpen()) {
             m.getPopup()?.remove();
           }
         });
         
-        // If this popup was not open, open it now
-        if (!isOpen) {
-          // Add to history
-          addToHistory(event);
-          
-          // Open this popup
-          popup.addTo(map.current);
+        // Add to history
+        addToHistory(event);
         
-          // Then zoom after a short delay to allow popup to render
+        // Open popup using marker method
+        if (!marker.getPopup()?.isOpen()) {
+          marker.togglePopup();
+          
+          // Then zoom after popup opens
           setTimeout(() => {
             if (marker.getPopup()?.isOpen() && map.current) {
               const zoomLevel = event.radiusKm && AREA_CATEGORIES.has(event.type) 
@@ -767,7 +767,7 @@ export const EventMap = () => {
                 zoom: zoomLevel,
                 duration: 1500,
                 essential: true,
-                easing: (t) => t * (2 - t) // Smooth easing function
+                easing: (t) => t * (2 - t)
               });
               
               // Show polygon if event has area coverage
