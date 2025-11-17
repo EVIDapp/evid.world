@@ -735,10 +735,9 @@ export const EventMap = () => {
 
       marker.setPopup(popup);
 
-      // Add click handler to open popup
-      el.addEventListener('click', (e) => {
+      // Add click handler using marker's element (Mapbox wraps our element)
+      marker.getElement().addEventListener('click', (e) => {
         e.stopPropagation();
-        e.preventDefault();
         if (!map.current) return;
         
         // Close all other popups
@@ -751,7 +750,7 @@ export const EventMap = () => {
         // Add to history
         addToHistory(event);
         
-        // Open popup using marker method
+        // Open popup
         if (!marker.getPopup()?.isOpen()) {
           marker.togglePopup();
           
