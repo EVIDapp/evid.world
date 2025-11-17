@@ -549,6 +549,53 @@ export const EventMap = () => {
         .setLngLat([event.pos.lng, event.pos.lat])
         .addTo(map.current!);
 
+      // Add click handler to element BEFORE creating popup
+      el.addEventListener('click', (e) => {
+        e.stopPropagation();
+        console.log('Marker clicked:', event.title);
+        if (!map.current) return;
+        
+        // Close all other popups
+        markersRef.current.forEach(m => {
+          if (m !== marker && m.getPopup()?.isOpen()) {
+            m.getPopup()?.remove();
+          }
+        });
+        
+        // Add to history
+        addToHistory(event);
+        
+        // Open popup
+        if (!marker.getPopup()?.isOpen()) {
+          marker.togglePopup();
+          
+          // Then zoom after popup opens
+          setTimeout(() => {
+            if (marker.getPopup()?.isOpen() && map.current) {
+              const zoomLevel = event.radiusKm && AREA_CATEGORIES.has(event.type) 
+                ? Math.min(9, Math.max(5, 11 - Math.log2(event.radiusKm / 10)))
+                : 10;
+              
+              map.current.flyTo({
+                center: [event.pos.lng, event.pos.lat],
+                zoom: zoomLevel,
+                duration: 1500,
+                essential: true,
+                easing: (t) => t * (2 - t)
+              });
+              
+              // Show polygon if event has area coverage
+              if (event.radiusKm && AREA_CATEGORIES.has(event.type)) {
+                const eventIndex = limitedEvents.indexOf(event);
+                if (eventIndex !== -1) {
+                  showPolygon(event, eventIndex);
+                }
+              }
+            }
+          }, 150);
+        }
+      });
+
       // Create popup with close button
       const closePopup = () => {
         marker.getPopup()?.remove();
@@ -734,52 +781,6 @@ export const EventMap = () => {
         });
 
       marker.setPopup(popup);
-
-      // Add click handler using marker's element (Mapbox wraps our element)
-      marker.getElement().addEventListener('click', (e) => {
-        e.stopPropagation();
-        if (!map.current) return;
-        
-        // Close all other popups
-        markersRef.current.forEach(m => {
-          if (m !== marker && m.getPopup()?.isOpen()) {
-            m.getPopup()?.remove();
-          }
-        });
-        
-        // Add to history
-        addToHistory(event);
-        
-        // Open popup
-        if (!marker.getPopup()?.isOpen()) {
-          marker.togglePopup();
-          
-          // Then zoom after popup opens
-          setTimeout(() => {
-            if (marker.getPopup()?.isOpen() && map.current) {
-              const zoomLevel = event.radiusKm && AREA_CATEGORIES.has(event.type) 
-                ? Math.min(9, Math.max(5, 11 - Math.log2(event.radiusKm / 10)))
-                : 10;
-              
-              map.current.flyTo({
-                center: [event.pos.lng, event.pos.lat],
-                zoom: zoomLevel,
-                duration: 1500,
-                essential: true,
-                easing: (t) => t * (2 - t)
-              });
-              
-              // Show polygon if event has area coverage
-              if (event.radiusKm && AREA_CATEGORIES.has(event.type)) {
-                const eventIndex = limitedEvents.indexOf(event);
-                if (eventIndex !== -1) {
-                  showPolygon(event, eventIndex);
-                }
-              }
-            }
-          }, 150);
-        }
-      });
 
       markersRef.current.push(marker);
     });
